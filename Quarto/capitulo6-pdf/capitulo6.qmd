@@ -117,7 +117,7 @@ $$
 \end{aligned}
 $$
 
-em que $G_i$ é Mulher ou Negra, em dois modelos separados, e $\beta_7$ é o coeficiente de interesse. A unidade é o candidato, não o par candidato-município (ver nota metodológica abaixo). A especificação inclui efeitos fixos de partido e de UF, com erros-padrão clusterizados nas mesmas duas dimensões; ambos são pré-determinados, escolhidos antes da campanha, e não consequência da estratégia de gasto. Uma especificação adicional (Seção @sec-resultados-incumbencia) inclui incumbência, também pré-determinada, como controle de decomposição. Essa mesma estrutura de efeitos fixos e clusterização vale para as especificações do Modelo 2 e de H5 apresentadas a seguir.
+em que $G_i$ é Mulher ou Negra, em dois modelos separados, e $\beta_7$ é o coeficiente de interesse. A unidade é o candidato, não o par candidato-município (ver nota metodológica abaixo). A especificação inclui efeitos fixos de partido e de UF, com erros-padrão clusterizados nas mesmas duas dimensões; ambos são pré-determinados, escolhidos antes da campanha, e não consequência da estratégia de gasto. Uma especificação adicional inclui incumbência, também pré-determinada, como controle de decomposição. Essa mesma estrutura de efeitos fixos e clusterização vale para as especificações do Modelo 2 e de H5 apresentadas a seguir.
 
 #### Modelo 2: sobreposição especificamente com correligionários incumbentes
 
