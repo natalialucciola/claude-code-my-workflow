@@ -85,3 +85,20 @@ scripts/R/_outputs/
 # Output artifacts — uncomment lines below based on your preference
 # *.rds
 # output/**/*.rds
+
+# Thesis data — migrated incrementally from a separate, ungitted R analysis
+# project; raw/processed data files are never tracked in this fork.
+data/raw/**
+data/processed/**
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/README.md
+
+# TSE bulk downloads cached locally (multi-hundred-MB zips/CSVs) — never tracked.
+explorations/base-territorial-partidos/output/raw_tse_orgaos/
+
+# Quarto book rendered output (regenerable)
+Quarto/thesis/_book/
+
+/.quarto/
+**/*.quarto_ipynb

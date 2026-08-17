@@ -1,45 +1,62 @@
 # CLAUDE.MD -- Academic Project Development with Claude Code
 
 <!-- HOW TO USE: Replace [BRACKETED PLACEHOLDERS] with your project info.
-     Customize Beamer environments and CSS classes for your theme.
      Keep this file under ~150 lines — Claude loads it every session.
      See the guide at docs/workflow-guide.html for full documentation. -->
 
-**Project:** [YOUR PROJECT NAME]
-**Institution:** [YOUR INSTITUTION]
+**Project:** Tese Nat — Sub-representação de Gênero/Raça na Política Brasileira (codename: `tese_nat`)
+**Institution:** IESP-UERJ (Instituto de Estudos Sociais e Políticos, Universidade do Estado do Rio de Janeiro)
 **Branch:** main
+
+## Sobre o Projeto
+
+Tese de doutorado em Ciência Política sobre os determinantes da sub-representação de gênero e raça na política brasileira e a inefetividade de políticas de representação afirmativa, com métodos quantitativos ligados à geografia do financiamento de campanha e à geografia do voto (candidaturas a Deputado Federal e Estadual, eleições 2014/2018/2022). Artefato principal: um Quarto book (`Quarto/thesis/`), prosa em português.
 
 ---
 
 ## Core Principles
 
 - **Plan first** -- enter plan mode before non-trivial tasks; save plans to `quality_reports/plans/`
-- **Verify after** -- compile/render and confirm output at the end of every task
-- **Single source of truth** -- Beamer `.tex` is authoritative; Quarto `.qmd` derives from it
+- **Verify after** -- render and confirm output at the end of every task
+- **Single source of truth** -- `Quarto/thesis/` is authoritative for the manuscript; `Thesis_Template/` (IESP-UERJ LaTeX class) is a reference copy, not yet wired into any build
 - **Quality gates** -- nothing ships below 80/100
-- **[LEARN] tags** -- when corrected, save `[LEARN:category] wrong → right` to [MEMORY.md](MEMORY.md)
+- **[LEARN] tags** -- when corrected, save `[LEARN:category] wrong → right` to [MEMORY.md](MEMORY.md) (generic patterns only) or `.claude/state/personal-memory.md` (project-specific, gitignored)
 
 Cross-session context lives in [MEMORY.md](MEMORY.md); past plans, specs, and session logs are in [quality_reports/](quality_reports/).
+
+---
+
+## Working Preferences
+
+- **Rigor over speed** — structured, precise collaboration even if slower; don't shortcut verification.
+- **Publication-ready visuals** — every figure meets a publication-polish bar, no default-theme placeholders in anything shared.
+- **Memory discipline** — corrections become `[LEARN]` entries; don't ask the same decision twice.
+- **Autonomy after plan approval** — once a plan is approved, work independently ("contractor mode"); only surface genuine ambiguity or decisions.
+- **Check-in cadence** — more frequent check-ins during the first few sessions while the workflow is new, tapering as it becomes familiar.
 
 ---
 
 ## Folder Structure
 
 ```
-[YOUR-PROJECT]/
-├── CLAUDE.MD                    # This file
+tese_nat/
+├── CLAUDE.md
 ├── .claude/                     # Rules, skills, agents, hooks
 ├── Bibliography_base.bib        # Centralized bibliography
-├── Figures/                     # Figures and images
-├── Preambles/header.tex         # LaTeX headers
-├── Slides/                      # Beamer .tex files
-├── Quarto/                      # RevealJS .qmd files + theme
+├── Figures/                     # Legacy Beamer figures (unused by the book — see note below)
+├── Quarto/
+│   ├── thesis/                  # PRIMARY ARTIFACT — Quarto book (chapters, _quarto.yml)
+│   │   └── Figures/[NN-chapter]/  # Chapter figures — MUST live inside the project tree (see note below)
+│   └── theme-template.scss      # Slide theme (retained; not used by the book)
+├── Thesis_Template/              # IESP-UERJ official LaTeX class (reference; not wired into the book build yet)
+├── data/                        # Migrated .rds data — incremental, on-demand, gitignored
+├── scripts/R/                   # R analysis scripts — migrated incrementally
+├── master_supporting_docs/      # Literature PDFs, existing papers
 ├── docs/                        # GitHub Pages (auto-generated)
-├── scripts/                     # Utility scripts + R code
 ├── quality_reports/             # Plans, session logs, merge reports, decision records
 ├── explorations/                # Research sandbox (see rules)
 ├── templates/                   # Session log, quality report templates
-└── master_supporting_docs/      # Papers and existing slides
+└── Slides/, Preambles/          # Legacy Beamer infra — kept, currently unused by the thesis
 ```
 
 ---
@@ -47,26 +64,18 @@ Cross-session context lives in [MEMORY.md](MEMORY.md); past plans, specs, and se
 ## Commands
 
 ```bash
-# LaTeX (3-pass, XeLaTeX only)
-cd Slides && TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
-BIBINPUTS=..:$BIBINPUTS bibtex file
-TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
-TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
-
-# Deploy Quarto to GitHub Pages
-./scripts/sync_to_docs.sh LectureN
+# Render the thesis Quarto book
+quarto render Quarto/thesis
+quarto preview Quarto/thesis
 
 # Quality score
-python scripts/quality_score.py Quarto/file.qmd
-
-# Palette sync (LaTeX ↔ SCSS)
-./scripts/check-palette-sync.sh
+python scripts/quality_score.py Quarto/thesis/chapters/file.qmd
 
 # Surface-count sync (README ↔ CLAUDE.md ↔ guide ↔ landing page)
 ./scripts/check-surface-sync.sh
 ```
 
-**Palette contract:** color names in `Preambles/header.tex` must match SCSS variables in `Quarto/theme-template.scss`. See [`Preambles/README.md`](Preambles/README.md).
+**Data/scripts migration policy:** R scripts and data migrate from the author's separate analysis project incrementally, one analysis at a time as it's actively used — never referenced by absolute path (`.claude/rules/content-invariants.md` INV-10). Migrated files land in `scripts/R/` and `data/`. See `data/README.md`.
 
 ---
 
@@ -86,40 +95,34 @@ Enforced by `/commit` (halts + asks for override) **and** — once you run `./sc
 
 The full table of all skills lives in [README.md](README.md#skills-claudeskills). Most-used, by workflow:
 
-- **Slides / teaching:** `/create-lecture` `/compile-latex` `/deploy` `/qa-quarto` `/slide-excellence` `/syllabus` `/teach-from-paper` `/scaffold-exercises`
-- **Papers / review:** `/review-paper` (`--peer`) `/seven-pass-review` `/respond-to-referees` `/verify-claims` `/proofread` `/humanize` `/submission-disclosures`
-- **Data / reproducibility:** `/data-analysis` `/did-event-study` `/simulation-study` `/audit-reproducibility` `/diagnose` `/replication-package` `/capture-environment` `/power-analysis` `/disclosure-check`
-- **Research / writing:** `/interview-me` `/lit-review` `/research-ideation` `/preregister` `/grant-proposal` `/data-management-plan`
-- **Meta / workflow:** `/commit` `/learn` `/new-skill` `/checkpoint` `/context-status` `/deep-audit` `/coauthor-brief` `/triage-inbox`
+- **Writing / manuscript:** `/review-paper` (`--peer`) `/seven-pass-review` `/verify-claims` `/proofread` `/humanize` `/deploy`
+- **Data / reproducibility:** `/data-analysis` `/audit-reproducibility` `/diagnose` `/review-r` `/capture-environment`
+- **Research / literature:** `/interview-me` `/lit-review` `/research-ideation` `/validate-bib`
+- **Meta / workflow:** `/commit` `/learn` `/new-skill` `/checkpoint` `/context-status` `/deep-audit` `/coauthor-brief`
 
-Stata (`/stata-replication`), R packages (`/r-package-check`), TikZ (`/extract-tikz`, `/new-diagram`), and more — see the README for the complete index.
-
----
-
-<!-- CUSTOMIZE: Replace placeholder rows ([your-env], [.your-class]) with your own.
-     Delete the rows marked "(example — delete)" once you've added yours. -->
-
-## Beamer Custom Environments
-
-| Environment | Effect | Use Case |
-| --- | --- | --- |
-| `[your-env]` | [Description] | [When to use] |
-| `keybox` | Gold background box | Key points *(example — delete)* |
-| `definitionbox[Title]` | Blue-bordered titled box | Formal definitions *(example — delete)* |
-
-## Quarto CSS Classes
-
-| Class | Effect | Use Case |
-| --- | --- | --- |
-| `[.your-class]` | [Description] | [When to use] |
-| `.smaller` | 85% font | Dense content *(example — delete)* |
-| `.positive` | Green bold | Good annotations *(example — delete)* |
+R packages (`/r-package-check`) and more — see the README for the complete index. Slide-oriented skills (`/create-lecture`, `/compile-latex`, `/slide-excellence`) remain available for a future defense/qualifying-exam deck, but aren't part of the thesis-writing workflow.
 
 ---
 
-## Current Project State
+## Quarto Book Conventions
 
-| Lecture | Beamer | Quarto | Key Content |
+- Cross-reference chapters/sections with `@sec-...` labels, not hardcoded numbers. Give section labels a chapter-specific prefix (e.g. `#sec-metodos-[chapter-slug]`) — a generic label like `#sec-dados-metodos` will collide once Chapter 2 is actually written.
+- Use `.callout-note` / `.callout-important` for methodological asides instead of ad hoc formatting.
+- One `.qmd` per chapter under `Quarto/thesis/chapters/`, numbered by intended order (`00-`, `01-`, ...).
+- **Figures MUST live inside the Quarto project tree** (`Quarto/thesis/Figures/[NN-chapter-slug]/`), not the repo-root `Figures/`. Confirmed empirically (2026-08-15, Chapter 6): Quarto's book HTML build only copies and path-adjusts image resources that live inside the project directory (where `_quarto.yml` sits) — an image referenced from outside it (e.g. repo-root `Figures/`) renders as a broken link with no build error or warning. From a chapter file, reference as `../Figures/[NN-chapter-slug]/file.png`.
+- PDF output via the IESP-UERJ class (`Thesis_Template/repUERJ.cls`) is not yet wired up — the book currently renders to HTML only. See `Thesis_Template/README.md`.
+
+---
+
+## Estado Atual — Capítulos
+
+| Capítulo | Arquivo | Status | Conteúdo-chave |
 | --- | --- | --- | --- |
-| HelloWorld *(sample — delete when ready)* | `HelloWorld.tex` | `HelloWorld.qmd` | Minimal deck to verify setup |
-| 1: [Topic] | `Lecture01_Topic.tex` | `Lecture1_Topic.qmd` | [Brief description] |
+| 0: Introdução | `chapters/00-introducao.qmd` | placeholder | — |
+| 1: Revisão de Literatura | `chapters/01-revisao-literatura.qmd` | placeholder | — |
+| 2: Dados e Métodos | `chapters/02-dados-metodos.qmd` | placeholder | — |
+| 3: [empírico, provisório] | `chapters/03-indice-g-concentracao-geografica.qmd` | placeholder | Concentração geográfica (Índice G / QL) |
+| 4: [empírico, provisório] | `chapters/04-alinhamento-espacial-gasto-voto.qmd` | placeholder | Alinhamento espacial gasto-voto |
+| 5: [empírico, provisório] | `chapters/05-gasto-base-territorial-partido.qmd` | placeholder | Gasto na base territorial do partido |
+| 6: Coordenação Territorial de Listas Partidárias | `chapters/06-sobreposicao-territorial-partido.qmd` | **rascunho** (graduado de `explorations/base-territorial-partidos/`) | Mecanismo central: lideranças partidárias protegem candidatos tradicionais (proxy: incumbência) enquanto aproveitam o incentivo da EC 111/2021 para mulheres/negros. Amostra: universo completo de partidos (34 legendas, 37.158 candidatos) — sem filtro de partidos, que não tinha justificativa teórica. Achados descritivos (H1/H2, gênero e raça) robustos em todas as células. Evidência causal (H3/H4/H5) fraca: no máximo marginal para gênero, nula para raça. Literatura e hipóteses centradas no mecanismo de proteção; inclui história legislativa da EC 111 (Gatto 2025); citações verificadas por CoVe |
+| 7: Conclusão | `chapters/99-conclusao.qmd` | placeholder | — |

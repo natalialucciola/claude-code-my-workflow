@@ -1,0 +1,5 @@
+cargo,ANO_ELEICAO,taxa_overlap_pct_Capital,taxa_overlap_pct_Não-capital,n_Capital,n_Não-capital
+Estadual,2018,99,47.9,8100,22645
+Estadual,2022,99.7,60,9784,30379
+Federal,2018,94.8,43.6,4021,20248
+Federal,2022,99,55.8,6437,29122

@@ -1,0 +1,7 @@
+df <- readRDS("C:/Users/natlu/OneDrive - FINANCIADORA DE ESTUDOS E PROJETOS - FINEP/Tese/Votacao/2014/votos_mun_2014_df.rds")
+cat("nrow:", nrow(df), " ncol:", ncol(df), "\n")
+cat(paste(names(df), collapse = ", "), "\n")
+print(head(df, 3))
+cat("\nDS_SIT_TOT_TURNO presente?", "DS_SIT_TOT_TURNO" %in% names(df), "\n")
+cat("VOTOS_CAND_TOTAL presente?", "VOTOS_CAND_TOTAL" %in% names(df), "\n")
+if ("DS_SIT_TOT_TURNO" %in% names(df)) print(table(df$DS_SIT_TOT_TURNO, useNA = "always"))

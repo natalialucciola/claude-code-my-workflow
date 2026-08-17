@@ -1,0 +1,5 @@
+modelo_label,grupo,especificacao,estimate_pp,conf.low_pp,conf.high_pp,p.value,sig
+Modelo 1 (amplo),Mulher,Amostra completa,-2.92,-5.93,0.09,0.05658570622473299,ns
+Modelo 2 (incumbente),Mulher,Não incumbentes,-1.36,-4.42,1.7,0.3676049046290868,ns
+Modelo 1 (amplo),Negra,Amostra completa,0.75,-3.49,4.99,0.7194170570114354,ns
+Modelo 2 (incumbente),Negra,Não incumbentes,-0.48,-4.12,3.15,0.7875371380607832,ns

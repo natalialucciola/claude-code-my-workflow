@@ -1,0 +1,9 @@
+cargo,ANO_ELEICAO,incumbente,taxa_overlap_pct,n
+Estadual,2018,TRUE,46.3,6049
+Estadual,2018,FALSE,65.1,24696
+Estadual,2022,TRUE,55.8,6551
+Estadual,2022,FALSE,72.4,33612
+Federal,2018,TRUE,43,7397
+Federal,2018,FALSE,56.1,16872
+Federal,2022,TRUE,51.9,8196
+Federal,2022,FALSE,67.1,27363

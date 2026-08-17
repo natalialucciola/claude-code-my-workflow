@@ -1,0 +1,5 @@
+cargo,ANO_ELEICAO,n_municipios_com_ql1,n_municipios_overlap,taxa_overlap_mun_pct
+Estadual,2018,16486,4616,28
+Estadual,2022,18915,6741,35.6
+Federal,2018,15625,4005,25.6
+Federal,2022,19444,6493,33.4

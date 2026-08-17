@@ -1,0 +1,5 @@
+library(dplyr)
+f18 <- readRDS("data/raw/ql_gasto_eleit_2018.rds")
+cat("DF rows in ql_gasto_eleit_2018:", sum(f18$SG_UF == "DF"), "\n")
+cat("Distinct COD_MUN_TSE for DF:\n")
+print(f18 |> filter(SG_UF == "DF") |> distinct(COD_MUN_TSE))

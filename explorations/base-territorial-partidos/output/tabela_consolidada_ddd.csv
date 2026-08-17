@@ -1,0 +1,5 @@
+grupo,especificacao,estimate_pp,conf.low_pp,conf.high_pp,p.value,sig
+Mulher,Principal (sem controles),-2.9,-5.9,0.1,0.05658570622473299,ns
+Mulher,+ Incumbência,-2.8,-5.8,0.2,0.06793611386087552,ns
+Negra,Principal (sem controles),0.7,-3.5,5,0.7194170570114354,ns
+Negra,+ Incumbência,0.7,-3.5,4.9,0.7299713491559043,ns

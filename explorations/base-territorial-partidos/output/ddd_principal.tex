@@ -1,0 +1,47 @@
+
+\begingroup
+\centering
+\begin{tabular}{lcc}
+   \tabularnewline \midrule \midrule
+   Dependent Variable: & \multicolumn{2}{c}{taxa\_sobreposicao}\\
+   Model:                                     & (1)             & (2)\\  
+   \midrule
+   \emph{Variables}\\
+   federal                                    & -0.0829$^{***}$ & -0.0798$^{***}$\\   
+                                              & (0.0204)        & (0.0149)\\   
+   ano2022                                    & 0.0845$^{***}$  & 0.0732$^{***}$\\   
+                                              & (0.0140)        & (0.0151)\\   
+   mulher                                     & 0.0587$^{***}$  &   \\   
+                                              & (0.0108)        &   \\   
+   federal $\times$ ano2022                   & 0.0268          & 0.0379$^{***}$\\   
+                                              & (0.0171)        & (0.0110)\\   
+   federal $\times$ mulher                    & 0.0346$^{**}$   &   \\   
+                                              & (0.0135)        &   \\   
+   ano2022 $\times$ mulher                    & -0.0409$^{**}$  &   \\   
+                                              & (0.0147)        &   \\   
+   federal $\times$ ano2022 $\times$ mulher   & -0.0285         &   \\   
+                                              & (0.0162)        &   \\   
+   negra                                      &                 & 0.0617$^{***}$\\   
+                                              &                 & (0.0069)\\   
+   federal $\times$ negra                     &                 & 0.0298$^{***}$\\   
+                                              &                 & (0.0042)\\   
+   ano2022 $\times$ negra                     &                 & -0.0134\\   
+                                              &                 & (0.0080)\\   
+   federal $\times$ ano2022 $\times$ negra    &                 & -0.0543$^{***}$\\   
+                                              &                 & (0.0120)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   partido\_harm                              & Yes             & Yes\\  
+   SG\_UF                                     & Yes             & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations                               & 14,752          & 14,635\\  
+   R$^2$                                      & 0.08735         & 0.08977\\  
+   Within R$^2$                               & 0.03243         & 0.03461\\  
+   \midrule \midrule
+   \multicolumn{3}{l}{\emph{Clustered (partido\_harm \& SG\_UF) standard-errors in parentheses}}\\
+   \multicolumn{3}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}
+\par\endgroup
+
+

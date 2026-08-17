@@ -1,0 +1,39 @@
+
+\begingroup
+\centering
+\begin{tabular}{lcc}
+   \tabularnewline \midrule \midrule
+   Dependent Variable: & \multicolumn{2}{c}{taxa\_sobreposicao\_incumbente}\\
+   Model:                                     & (1)             & (2)\\  
+   \midrule
+   \emph{Variables}\\
+   federal                                    & -0.0731$^{***}$ & -0.0804$^{***}$\\   
+                                              & (0.0188)        & (0.0189)\\   
+   ano2022                                    & 0.0102          & 0.0143\\   
+                                              & (0.0220)        & (0.0209)\\   
+   mulher                                     & 0.0458$^{***}$  & 0.0472$^{***}$\\   
+                                              & (0.0112)        & (0.0110)\\   
+   federal $\times$ ano2022                   & 0.0235          & 0.0239$^{*}$\\   
+                                              & (0.0144)        & (0.0132)\\   
+   federal $\times$ mulher                    & -0.0005         & 0.0049\\   
+                                              & (0.0159)        & (0.0163)\\   
+   ano2022 $\times$ mulher                    & -0.0283$^{**}$  & -0.0305$^{**}$\\   
+                                              & (0.0131)        & (0.0129)\\   
+   federal $\times$ ano2022 $\times$ mulher   & -0.0136         & -0.0118\\   
+                                              & (0.0149)        & (0.0153)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   partido\_harm                              & Yes             & Yes\\  
+   SG\_UF                                     & Yes             & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations                               & 34,347          & 36,610\\  
+   R$^2$                                      & 0.20564         & 0.19827\\  
+   Within R$^2$                               & 0.00960         & 0.01130\\  
+   \midrule \midrule
+   \multicolumn{3}{l}{\emph{Clustered (partido\_harm \& SG\_UF) standard-errors in parentheses}}\\
+   \multicolumn{3}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}
+\par\endgroup
+
+

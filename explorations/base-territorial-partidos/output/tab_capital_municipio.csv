@@ -1,0 +1,9 @@
+cargo,ANO_ELEICAO,tipo_mun,n_municipios_com_ql1,n_municipios_overlap,taxa_overlap_mun_pct
+Estadual,2018,Capital,735,653,88.8
+Estadual,2018,Não-capital,15751,3963,25.2
+Estadual,2022,Capital,596,568,95.3
+Estadual,2022,Não-capital,18319,6173,33.7
+Federal,2018,Capital,728,519,71.3
+Federal,2018,Não-capital,14897,3486,23.4
+Federal,2022,Capital,623,556,89.2
+Federal,2022,Não-capital,18821,5937,31.5

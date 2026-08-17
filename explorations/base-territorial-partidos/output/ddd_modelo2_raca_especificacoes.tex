@@ -1,0 +1,39 @@
+
+\begingroup
+\centering
+\begin{tabular}{lcc}
+   \tabularnewline \midrule \midrule
+   Dependent Variable: & \multicolumn{2}{c}{taxa\_sobreposicao\_incumbente}\\
+   Model:                                    & (1)             & (2)\\  
+   \midrule
+   \emph{Variables}\\
+   federal                                   & -0.0665$^{***}$ & -0.0716$^{***}$\\   
+                                             & (0.0171)        & (0.0171)\\   
+   ano2022                                   & 0.0115          & 0.0165\\   
+                                             & (0.0271)        & (0.0255)\\   
+   negra                                     & 0.0383$^{**}$   & 0.0427$^{**}$\\   
+                                             & (0.0154)        & (0.0157)\\   
+   federal $\times$ ano2022                  & 0.0207          & 0.0202\\   
+                                             & (0.0208)        & (0.0202)\\   
+   federal $\times$ negra                    & -0.0099         & -0.0118\\   
+                                             & (0.0193)        & (0.0205)\\   
+   ano2022 $\times$ negra                    & -0.0243         & -0.0274\\   
+                                             & (0.0187)        & (0.0182)\\   
+   federal $\times$ ano2022 $\times$ negra   & -0.0048         & -0.0005\\   
+                                             & (0.0176)        & (0.0188)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   partido\_harm                             & Yes             & Yes\\  
+   SG\_UF                                    & Yes             & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations                              & 33,929          & 36,182\\  
+   R$^2$                                     & 0.20523         & 0.19772\\  
+   Within R$^2$                              & 0.00861         & 0.01033\\  
+   \midrule \midrule
+   \multicolumn{3}{l}{\emph{Clustered (partido\_harm \& SG\_UF) standard-errors in parentheses}}\\
+   \multicolumn{3}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}
+\par\endgroup
+
+

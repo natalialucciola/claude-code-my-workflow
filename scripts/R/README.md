@@ -70,3 +70,7 @@ list.files("scripts/R/_outputs/")
 ## Removing this template
 
 Once you have your own analysis, the scripts 01–05 become yours. Delete this README (or rewrite it for your project). Keep `00_run_all.R` — the convention is the part that matters.
+
+## Note for multi-analysis projects
+
+This numbered-pipeline convention (`01_load` → `05_figures`) assumes a single linear analysis. A project migrating several independent analyses incrementally (e.g., one script per research question, brought in on demand rather than all at once) may not fit this shape well. Decide the actual destination convention (e.g., one subfolder per analysis) at the moment of the *first* real migration — don't speculate about it ahead of time.
