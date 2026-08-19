@@ -14,6 +14,8 @@ format:
     fontsize: 11pt
 ---
 
+<!-- Este arquivo é derivado do capítulo do livro (Quarto/thesis/chapters/06-sobreposicao-territorial-partido.qmd). NÃO inclui a seção "Limitações" por design -- essa seção existe só nas versões dentro da tese. Ao propagar edições, o capítulo do livro é a fonte; este arquivo é atualizado a partir dele, exceto Limitações. -->
+
 ## Introdução
 
 Esta tese investiga os limites das políticas de ação afirmativa para ampliar a representação de mulheres e negros na política brasileira. De forma específica, pretende-se contribuir para compreender melhor por que essas políticas aumentam a presença de candidaturas na disputa e até os recursos financeiros a que esses grupos têm acesso, mas não se traduzem, na mesma medida, em mais cadeiras conquistadas. Os capítulos anteriores abordam essa pergunta por um caminho específico, a geografia da campanha eleitoral. Isso inclui o quanto o gasto de um candidato se concentra territorialmente, o quanto esse gasto se alinha espacialmente com sua própria votação, e o quanto se sobrepõe à base histórica do partido construída na eleição anterior. Este capítulo desloca a unidade de análise mais uma vez, mantendo o mesmo objetivo de fundo. Em vez de perguntar como um candidato se relaciona com o território, o capítulo pergunta como candidatos do mesmo partido, cargo e ano se relacionam entre si dentro desse território, e o que essa relação revela sobre o papel da coordenação partidária na efetividade da ação afirmativa.
