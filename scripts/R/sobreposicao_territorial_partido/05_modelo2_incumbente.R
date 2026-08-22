@@ -1,9 +1,22 @@
 # ==============================================================================
 # Modelo 2: sobreposição territorial especificamente com correligionários
 # INCUMBENTES (proxy de "candidato tradicional/estabelecido" do partido) — e
-# alcance territorial total (H7).
+# alcance territorial total (H5).
 #
-# Mecanismo testado (H6): lideranças partidárias aproveitam o incentivo
+# Autor: Natália Lucciola
+# Entradas: cand_mun_ql1.rds, incumbencia_completa_candidato.rds,
+#           taxa_sobreposicao_candidato.rds (output/ de 01_overlap_partido.R
+#           e 03_ddd_incentivo_2022.R)
+# Saídas: taxa_sobreposicao_incumbente_candidato.rds, cand_mun_incumbente.rds,
+#         modelo2_genero_suporte_celula.rds, modelo2_raca_suporte_celula.rds,
+#         alcance_total_candidato.rds, ddd_modelo2_genero_incumbente.rds,
+#         ddd_modelo2_raca_incumbente.rds,
+#         ddd_modelo2_genero_incumbente_completa.rds,
+#         ddd_modelo2_raca_incumbente_completa.rds, ddd_alcance_genero.rds,
+#         ddd_alcance_raca.rds, ddd_modelo2_genero_especificacoes.tex,
+#         ddd_modelo2_raca_especificacoes.tex
+#
+# Mecanismo testado (H4): lideranças partidárias aproveitam o incentivo
 # financeiro de 2022 (EC 111/2021, art. 2º) para fazer candidatas mulheres e
 # candidatos negros buscarem mais votos SEM deixá-los competir com os
 # candidatos tradicionais/consolidados do partido. Se isso for verdade, a
@@ -12,17 +25,17 @@
 # (Modelo 2, aqui) do que contra qualquer correligionário (Modelo 1, em
 # 03_ddd_incentivo_2022.R) — a queda é direcionada, não difusa.
 #
-# H7 (secundária, "cresce sem confrontar"): ao mesmo tempo, o alcance
+# H5 (secundária, "cresce sem confrontar"): ao mesmo tempo, o alcance
 # territorial total de mulheres/negros (nº de municípios QL>1) deveria CRESCER
 # de forma federal-específica em 2022 — a assinatura conjunta de "expandir sem
-# ameaçar" que H6 e H7 testam em conjunto.
+# ameaçar" que H4 e H5 testam em conjunto.
 #
-# Amostra principal do Modelo 2 (H6): candidatos NÃO incumbentes — a pergunta
+# Amostra principal do Modelo 2 (H4): candidatos NÃO incumbentes — a pergunta
 # é sobre desafiantes evitando o território de líderes já estabelecidos; um
 # incumbente sobrepor-se a outro incumbente é uma pergunta diferente, fora do
 # escopo do mecanismo. Amostra completa entra como robustez.
 #
-# H7 usa a amostra completa (o sujeito de interesse é o crescimento do próprio
+# H5 usa a amostra completa (o sujeito de interesse é o crescimento do próprio
 # candidato incentivado, incumbente ou não).
 #
 # Pré-requisito: rodar R/01_overlap_partido.R e R/03_ddd_incentivo_2022.R antes
@@ -30,10 +43,15 @@
 # taxa_sobreposicao_candidato.rds, todos salvos em output/ por esses scripts).
 # ==============================================================================
 
+# ==============================================================================
+# 0. SETUP
+# ==============================================================================
+
 library(tidyverse)
 library(fixest)
 
 out_dir <- "explorations/base-territorial-partidos/output"
+dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
 
 # ==============================================================================
 # 1. BASE — candidato-município (QL>1) com incumbência do correligionário
@@ -46,7 +64,8 @@ cand_inc <- cand_mun_ql1 |>
   left_join(incumbencia, by = c("sq_candidato", "cargo", "ANO_ELEICAO"))
 
 message("Linhas candidato-município (QL>1): ", nrow(cand_inc),
-        " | sem incumbência identificada: ", sum(is.na(cand_inc$incumbente)))
+        " | sem incumbência identificada: ",
+        sum(is.na(cand_inc$incumbente), na.rm = FALSE))
 
 cand_inc <- cand_inc |> filter(!is.na(incumbente))
 
@@ -69,8 +88,10 @@ cand_mun_incumbente <- cand_inc |>
   mutate(
     n_incumbentes_ql1     = replace_na(n_incumbentes_ql1, 0L),
     n_outros_incumbentes  = n_incumbentes_ql1 - incumbente,
-    overlap_incumbente    = n_outros_incumbentes >= 1
+    overlap_incumbente    = n_outros_incumbentes >= 1L
   )
+
+saveRDS(cand_mun_incumbente, file.path(out_dir, "cand_mun_incumbente.rds"))
 
 # ==============================================================================
 # 2. NÍVEL CANDIDATO — taxa_sobreposicao_incumbente
@@ -79,7 +100,7 @@ cand_mun_incumbente <- cand_inc |>
 taxa_incumbente <- cand_mun_incumbente |>
   summarise(
     n_mun_ql1                    = n(),
-    n_mun_overlap_incumbente     = sum(overlap_incumbente),
+    n_mun_overlap_incumbente     = sum(overlap_incumbente, na.rm = FALSE),
     taxa_sobreposicao_incumbente = n_mun_overlap_incumbente / n_mun_ql1,
     .by = c(sq_candidato, cargo, ANO_ELEICAO, partido_harm, SG_UF, genero, raca2, incumbente)
   )
@@ -91,7 +112,7 @@ message("  dos quais NÃO incumbentes (amostra principal do Modelo 2): ",
 saveRDS(taxa_incumbente, file.path(out_dir, "taxa_sobreposicao_incumbente_candidato.rds"))
 
 # ==============================================================================
-# 3. MODELO 2 (H6) — DDD sobre taxa_sobreposicao_incumbente
+# 3. MODELO 2 (H4) — DDD sobre taxa_sobreposicao_incumbente
 #    Amostra principal: candidatos NÃO incumbentes
 # ==============================================================================
 
@@ -108,30 +129,32 @@ nao_incumbentes <- base_modelo2 |> filter(incumbente == 0)
 # ---- Gênero ----
 df_m2_genero <- nao_incumbentes |> filter(genero %in% c("FEMININO", "MASCULINO"))
 
-message("\n--- Suporte por célula (Modelo 2, gênero, não incumbentes) ---")
-print(df_m2_genero |> summarise(n = n(), .by = c(cargo, ANO_ELEICAO, mulher)) |>
-        arrange(cargo, ANO_ELEICAO, mulher))
+suporte_celula_m2_genero <- df_m2_genero |>
+  summarise(n = n(), .by = c(cargo, ANO_ELEICAO, mulher)) |>
+  arrange(cargo, ANO_ELEICAO, mulher)
+saveRDS(suporte_celula_m2_genero,
+        file.path(out_dir, "modelo2_genero_suporte_celula.rds"))
 
 modelo2_genero <- feols(
   taxa_sobreposicao_incumbente ~ federal * ano2022 * mulher | partido_harm + SG_UF,
   data = df_m2_genero, cluster = ~ partido_harm + SG_UF
 )
-message("\n=== Modelo 2 (H6) — Gênero, não incumbentes ===")
-print(summary(modelo2_genero))
+message("Modelo 2 (H4) — Gênero, não incumbentes: estimado.")
 
 # ---- Raça ----
 df_m2_raca <- nao_incumbentes |> filter(raca2 %in% c("BRANCA", "NEGRA"))
 
-message("\n--- Suporte por célula (Modelo 2, raça, não incumbentes) ---")
-print(df_m2_raca |> summarise(n = n(), .by = c(cargo, ANO_ELEICAO, negra)) |>
-        arrange(cargo, ANO_ELEICAO, negra))
+suporte_celula_m2_raca <- df_m2_raca |>
+  summarise(n = n(), .by = c(cargo, ANO_ELEICAO, negra)) |>
+  arrange(cargo, ANO_ELEICAO, negra)
+saveRDS(suporte_celula_m2_raca,
+        file.path(out_dir, "modelo2_raca_suporte_celula.rds"))
 
 modelo2_raca <- feols(
   taxa_sobreposicao_incumbente ~ federal * ano2022 * negra | partido_harm + SG_UF,
   data = df_m2_raca, cluster = ~ partido_harm + SG_UF
 )
-message("\n=== Modelo 2 (H6) — Raça, não incumbentes ===")
-print(summary(modelo2_raca))
+message("Modelo 2 (H4) — Raça, não incumbentes: estimado.")
 
 # ---- Robustez: amostra completa (incumbentes + não incumbentes) ----
 df_m2_genero_full <- base_modelo2 |> filter(genero %in% c("FEMININO", "MASCULINO"))
@@ -139,19 +162,17 @@ modelo2_genero_full <- feols(
   taxa_sobreposicao_incumbente ~ federal * ano2022 * mulher | partido_harm + SG_UF,
   data = df_m2_genero_full, cluster = ~ partido_harm + SG_UF
 )
-message("\n=== Modelo 2 (H6) — Gênero, amostra completa (robustez) ===")
-print(summary(modelo2_genero_full))
+message("Modelo 2 (H4) — Gênero, amostra completa (robustez): estimado.")
 
 df_m2_raca_full <- base_modelo2 |> filter(raca2 %in% c("BRANCA", "NEGRA"))
 modelo2_raca_full <- feols(
   taxa_sobreposicao_incumbente ~ federal * ano2022 * negra | partido_harm + SG_UF,
   data = df_m2_raca_full, cluster = ~ partido_harm + SG_UF
 )
-message("\n=== Modelo 2 (H6) — Raça, amostra completa (robustez) ===")
-print(summary(modelo2_raca_full))
+message("Modelo 2 (H4) — Raça, amostra completa (robustez): estimado.")
 
 # ==============================================================================
-# 4. H7 — ALCANCE TERRITORIAL TOTAL (amostra completa)
+# 4. H5 — ALCANCE TERRITORIAL TOTAL (amostra completa)
 #    alcance_total_i = nº de municípios com QL>1 (já computado como n_mun_ql1
 #    em taxa_sobreposicao_candidato.rds, gerado por 01_overlap_partido.R)
 # ==============================================================================
@@ -178,16 +199,14 @@ modelo_alcance_genero <- feols(
   alcance_total ~ federal * ano2022 * mulher | partido_harm + SG_UF,
   data = df_alcance_genero, cluster = ~ partido_harm + SG_UF
 )
-message("\n=== H7 — Alcance territorial total, Gênero ===")
-print(summary(modelo_alcance_genero))
+message("H5 — Alcance territorial total, Gênero: estimado.")
 
 df_alcance_raca <- alcance_total |> filter(raca2 %in% c("BRANCA", "NEGRA"))
 modelo_alcance_raca <- feols(
   alcance_total ~ federal * ano2022 * negra | partido_harm + SG_UF,
   data = df_alcance_raca, cluster = ~ partido_harm + SG_UF
 )
-message("\n=== H7 — Alcance territorial total, Raça ===")
-print(summary(modelo_alcance_raca))
+message("H5 — Alcance territorial total, Raça: estimado.")
 
 # ==============================================================================
 # 5. SALVAR
@@ -205,4 +224,4 @@ etable(modelo2_genero, modelo2_genero_full,
 etable(modelo2_raca, modelo2_raca_full,
        file = file.path(out_dir, "ddd_modelo2_raca_especificacoes.tex"), replace = TRUE)
 
-message("\n=== Modelo 2 (H6) + Alcance total (H7) concluído — modelos salvos em ", out_dir, " ===")
+message("\n=== Modelo 2 (H4) + Alcance total (H5) concluído — modelos salvos em ", out_dir, " ===")

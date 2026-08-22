@@ -1,5 +1,7 @@
 # ==============================================================================
-# Extensões à exploração de sobreposição territorial (ver README.md):
+# Title: Extensões à exploração de sobreposição territorial partidária
+# Author: [nome]
+# Purpose: Três extensões à Tabela A de 01_overlap_partido.R (ver README.md):
 #   B. Capital vs. não-capital — a falta de exclusividade está concentrada
 #      nas capitais estaduais?
 #   C. Resultado eleitoral NO ANO DO GASTO (eleito / competitivo / não
@@ -8,19 +10,38 @@
 #      ANTERIOR (2018→2014, 2022→2018) têm padrão diferente de
 #      não-incumbentes?
 #
-# Pré-requisito: rodar R/01_overlap_partido.R antes (gera
-# output/cand_mun_ql1.rds, usado aqui como ponto de partida).
+# Inputs:
+#   - Pré-requisito: rodar 01_overlap_partido.R antes (gera
+#     output/cand_mun_ql1.rds, usado aqui como ponto de partida).
+#   - explorations/base-territorial-partidos/output/cand_mun_ql1.rds
+#   - explorations/base-territorial-partidos/output/overlap_municipio_partido.rds
+#   - data/raw/capitais.rds
+#   - data/raw/candidatos2014.rds, eleitos_2014_df.rds
+#   - data/raw/candidatos2018.rds, ql_gasto_eleit_2018.rds
+#   - data/raw/candidatos_estadual_2014.rds, eleitos_e_compet_est_2014_df.rds
+#   - data/raw/candidatos_estadual_2018.rds, eleitos_e_compet_est_2018_df.rds
+#   - data/raw/candidatos2022.rds, candidatos_estadual_2022.rds
+#   Candidaturas e eleitos de Deputado Federal 2014 (necessários para a
+#   incumbência 2018→2014 no cargo Federal) foram preparados via
+#   `electionsBR::elections_tse(2014, type = "candidate")` — ver
+#   explorations/base-territorial-partidos/scripts/08_baixar_candidatos_federal_2014.R
+#   — cobrindo as 4 células completas (Federal e Estadual, 2018 e 2022).
 #
-# Candidaturas e eleitos de Deputado Federal 2014 (necessários para a
-# incumbência 2018→2014 no cargo Federal) foram preparados via
-# `electionsBR::elections_tse(2014, type = "candidate")` — ver
-# scripts/08_baixar_candidatos_federal_2014.R — cobrindo as 4 células
-# completas (Federal e Estadual, 2018 e 2022).
+# Outputs (em explorations/base-territorial-partidos/output/):
+#   - tab_capital_municipio.rds/.csv, tab_capital.rds/.csv
+#   - teste_t_capital_genero.rds/.csv, teste_t_capital_raca.rds/.csv
+#   - tab_capital_genero.rds/.csv, tab_capital_raca.rds/.csv
+#   - tab_resultado_eleitoral.rds/.csv, tab_resultado_eleitoral_genero.rds/.csv
+#   - tab_incumbencia.rds/.csv
+#   - incumbencia_map_candidato.rds
+#
+# Requires: tidyverse, broom
 # ==============================================================================
 
 library(tidyverse)
 
 out_dir <- "explorations/base-territorial-partidos/output"
+dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
 
 cand_mun_ql1 <- readRDS(file.path(out_dir, "cand_mun_ql1.rds"))
 
@@ -46,20 +67,22 @@ tab_capital_municipio <- mun_partido_cap |>
   summarise(
     n_municipios_com_ql1 = n(),
     n_municipios_overlap = sum(overlap),
-    taxa_overlap_mun_pct = round(100 * mean(overlap), 1),
+    taxa_overlap_mun_pct = round(100 * mean(overlap, na.rm = FALSE), 1),
     .by = c(cargo, ANO_ELEICAO, tipo_mun)
   ) |>
   arrange(cargo, ANO_ELEICAO, tipo_mun)
 
-message("\n--- Tabela B0: % de MUNICÍPIOS com 2+ candidatos do partido acima do QL",
-        " (mesma definição da Tabela A), por tipo de município ---")
-print(tab_capital_municipio, n = Inf)
+# Nota: só as capitais distintas que efetivamente entram na conta (de 26
+# capitais possíveis; múltiplos partidos por capital contam separadamente).
+n_capitais_total <- mun_partido_cap |>
+  filter(capital_flag) |>
+  pull(COD_MUN_TSE) |>
+  n_distinct()
 
-n_capitais_total <- n_distinct(mun_partido_cap$COD_MUN_TSE[mun_partido_cap$capital_flag])
-n_naocapitais_total <- n_distinct(mun_partido_cap$COD_MUN_TSE[!mun_partido_cap$capital_flag])
-message("Nota: só ", n_capitais_total, " município(s)-capital distintos entram na conta",
-        " (de 26 capitais possíveis; múltiplos partidos por capital contam separadamente),",
-        " contra ", n_naocapitais_total, " não-capitais distintos.")
+n_naocapitais_total <- mun_partido_cap |>
+  filter(!capital_flag) |>
+  pull(COD_MUN_TSE) |>
+  n_distinct()
 
 # ---- B1 (candidato-município, framing de EXPOSIÇÃO — não é contagem de
 #      municípios). Cada candidato entra 1x por município em que concentrou
@@ -69,22 +92,14 @@ cand_mun_ql1_cap <- cand_mun_ql1 |>
   mutate(capital_flag = replace_na(capital_flag, FALSE),
          tipo_mun = if_else(capital_flag, "Capital", "Não-capital"))
 
-message("\nPares candidato-município QL>1 que são capital: ", sum(cand_mun_ql1_cap$capital_flag),
-        " de ", nrow(cand_mun_ql1_cap),
-        " (", round(100 * mean(cand_mun_ql1_cap$capital_flag), 1), "%)")
-
 tab_capital <- cand_mun_ql1_cap |>
   summarise(
     n = n(),
-    taxa_overlap_pct = round(100 * mean(overlap), 1),
+    taxa_overlap_pct = round(100 * mean(overlap, na.rm = FALSE), 1),
     .by = c(cargo, ANO_ELEICAO, tipo_mun)
   ) |>
   pivot_wider(names_from = tipo_mun, values_from = c(taxa_overlap_pct, n)) |>
   arrange(cargo, ANO_ELEICAO)
-
-message("\n--- Tabela B1: taxa de sobreposição PONDERADA POR CANDIDATO",
-        " (não é % de municípios — ver B0 para isso) ---")
-print(tab_capital)
 
 # B2/B3. Dentro de cada tipo de município, o gap de gênero/raça se mantém?
 # IMPORTANTE: recalculamos taxa_sobreposicao por candidato SEPARADAMENTE dentro
@@ -110,10 +125,6 @@ tab_capital_genero <- taxa_sobreposicao_por_tipo |>
   pivot_wider(names_from = genero, values_from = c(taxa_media_pct, n)) |>
   mutate(gap_pp = taxa_media_pct_FEMININO - taxa_media_pct_MASCULINO)
 
-message("\n--- Tabela B2: gap de gênero (taxa pessoal por candidato, mesma unidade",
-        " do 1o round), por tipo de município (agregado cargo/ano) ---")
-print(tab_capital_genero)
-
 tab_capital_raca <- taxa_sobreposicao_por_tipo |>
   filter(raca2 %in% c("BRANCA", "NEGRA")) |>
   summarise(
@@ -123,10 +134,6 @@ tab_capital_raca <- taxa_sobreposicao_por_tipo |>
   ) |>
   pivot_wider(names_from = raca2, values_from = c(taxa_media_pct, n)) |>
   mutate(gap_pp = taxa_media_pct_NEGRA - taxa_media_pct_BRANCA)
-
-message("\n--- Tabela B3: gap de raça (taxa pessoal por candidato, mesma unidade",
-        " do 1o round), por tipo de município (agregado cargo/ano) ---")
-print(tab_capital_raca)
 
 # Testes t para B2/B3 (a mesma correção de unidade exige re-checar significância)
 teste_capital_genero <- taxa_sobreposicao_por_tipo |>
@@ -151,14 +158,31 @@ teste_capital_raca <- taxa_sobreposicao_por_tipo |>
   unnest(teste) |>
   select(tipo_mun, p.value)
 
-message("\np-valores B2 (FEMININO vs MASCULINO, por tipo de município):")
-print(teste_capital_genero)
-message("p-valores B3 (NEGRA vs BRANCA, por tipo de município):")
-print(teste_capital_raca)
+message(
+  "\n=== Seção B (capital vs. não-capital) concluída ===\n",
+  "  tab_capital_municipio: ", nrow(tab_capital_municipio), " linhas (",
+  n_capitais_total, " capitais distintas, ", n_naocapitais_total,
+  " não-capitais distintas) -> ", file.path(out_dir, "tab_capital_municipio.rds/.csv"), "\n",
+  "  cand_mun_ql1_cap: ", nrow(cand_mun_ql1_cap), " pares candidato-município, ",
+  sum(cand_mun_ql1_cap$capital_flag), " (",
+  round(100 * mean(cand_mun_ql1_cap$capital_flag, na.rm = FALSE), 1), "%) em capitais\n",
+  "  tab_capital: ", nrow(tab_capital), " linhas -> ",
+  file.path(out_dir, "tab_capital.rds/.csv"), "\n",
+  "  tab_capital_genero: ", nrow(tab_capital_genero), " linhas -> ",
+  file.path(out_dir, "tab_capital_genero.rds/.csv"), "\n",
+  "  tab_capital_raca: ", nrow(tab_capital_raca), " linhas -> ",
+  file.path(out_dir, "tab_capital_raca.rds/.csv"), "\n",
+  "  teste_capital_genero: ", nrow(teste_capital_genero), " linhas -> ",
+  file.path(out_dir, "teste_t_capital_genero.rds/.csv"), "\n",
+  "  teste_capital_raca: ", nrow(teste_capital_raca), " linhas -> ",
+  file.path(out_dir, "teste_t_capital_raca.rds/.csv")
+)
 
 # ==============================================================================
 # C. RESULTADO ELEITORAL NO ANO DO GASTO (eleito / competitivo / não competitivo)
 # ==============================================================================
+
+niveis_resultado <- c("Eleito", "Competitivo, não eleito", "Não competitivo")
 
 cand_mun_ql1_res <- cand_mun_ql1 |>
   mutate(resultado = case_when(
@@ -171,31 +195,31 @@ cand_mun_ql1_res <- cand_mun_ql1 |>
 tab_resultado <- cand_mun_ql1_res |>
   filter(!is.na(resultado)) |>
   summarise(
-    taxa_overlap_pct = round(100 * mean(overlap), 1),
+    taxa_overlap_pct = round(100 * mean(overlap, na.rm = FALSE), 1),
     n = n(),
     .by = c(cargo, ANO_ELEICAO, resultado)
   ) |>
-  arrange(cargo, ANO_ELEICAO,
-          factor(resultado, levels = c("Eleito", "Competitivo, não eleito", "Não competitivo")))
-
-message("\n--- Tabela C: taxa de sobreposição por resultado eleitoral (cargo x ano) ---")
-print(tab_resultado, n = Inf)
+  arrange(cargo, ANO_ELEICAO, factor(resultado, levels = niveis_resultado))
 
 # Gênero dentro de "Eleito" apenas — mulheres eleitas também têm mais sobreposição?
 tab_resultado_genero <- cand_mun_ql1_res |>
   filter(!is.na(resultado), genero %in% c("FEMININO", "MASCULINO")) |>
   summarise(
-    taxa_overlap_pct = round(100 * mean(overlap), 1),
+    taxa_overlap_pct = round(100 * mean(overlap, na.rm = FALSE), 1),
     n = n(),
     .by = c(cargo, ANO_ELEICAO, resultado, genero)
   ) |>
   pivot_wider(names_from = genero, values_from = c(taxa_overlap_pct, n)) |>
   mutate(gap_pp = taxa_overlap_pct_FEMININO - taxa_overlap_pct_MASCULINO) |>
-  arrange(cargo, ANO_ELEICAO,
-          factor(resultado, levels = c("Eleito", "Competitivo, não eleito", "Não competitivo")))
+  arrange(cargo, ANO_ELEICAO, factor(resultado, levels = niveis_resultado))
 
-message("\n--- Tabela C2: gap de gênero dentro de cada resultado eleitoral (cargo x ano) ---")
-print(tab_resultado_genero, n = Inf)
+message(
+  "\n=== Seção C (resultado eleitoral) concluída ===\n",
+  "  tab_resultado: ", nrow(tab_resultado), " linhas -> ",
+  file.path(out_dir, "tab_resultado_eleitoral.rds/.csv"), "\n",
+  "  tab_resultado_genero: ", nrow(tab_resultado_genero), " linhas -> ",
+  file.path(out_dir, "tab_resultado_eleitoral_genero.rds/.csv")
+)
 
 # ==============================================================================
 # D. INCUMBÊNCIA (eleito no MESMO cargo na eleição anterior)
@@ -214,8 +238,6 @@ eleito_fed_2014 <- readRDS("data/raw/eleitos_2014_df.rds") |>
   distinct(cpfCand) |>
   pull(cpfCand)
 
-message("\nCPFs de deputados federais eleitos em 2014: ", length(eleito_fed_2014))
-
 # Federal: eleito em 2018 (para checar incumbência de candidatos 2022)
 cand2018_cpf <- readRDS("data/raw/candidatos2018.rds") |>
   select(sq_candidato, cpfCand)
@@ -226,8 +248,6 @@ eleito_fed_2018 <- readRDS("data/raw/ql_gasto_eleit_2018.rds") |>
   filter(eleito == 1) |>
   distinct(cpfCand) |>
   pull(cpfCand)
-
-message("CPFs de deputados federais eleitos em 2018: ", length(eleito_fed_2018))
 
 # Estadual: eleito em 2014 (para checar incumbência de candidatos 2018)
 cand_est_2014_cpf <- readRDS("data/raw/candidatos_estadual_2014.rds") |>
@@ -240,8 +260,6 @@ eleito_est_2014 <- readRDS("data/raw/eleitos_e_compet_est_2014_df.rds") |>
   distinct(cpfCand) |>
   pull(cpfCand)
 
-message("CPFs de deputados estaduais eleitos em 2014: ", length(eleito_est_2014))
-
 # Estadual: eleito em 2018 (para checar incumbência de candidatos 2022)
 cand_est_2018_cpf <- readRDS("data/raw/candidatos_estadual_2018.rds") |>
   select(sq_candidato, cpfCand)
@@ -253,12 +271,13 @@ eleito_est_2018 <- readRDS("data/raw/eleitos_e_compet_est_2018_df.rds") |>
   distinct(cpfCand) |>
   pull(cpfCand)
 
-message("CPFs de deputados estaduais eleitos em 2018: ", length(eleito_est_2018))
-
 # ---- D2. cpfCand dos candidatos na base de análise (2018 e 2022) ----
 
-cand2022_cpf      <- readRDS("data/raw/candidatos2022.rds")        |> select(sq_candidato, cpfCand)
-cand_est_2022_cpf <- readRDS("data/raw/candidatos_estadual_2022.rds") |> select(sq_candidato, cpfCand)
+cand2022_cpf <- readRDS("data/raw/candidatos2022.rds") |>
+  select(sq_candidato, cpfCand)
+
+cand_est_2022_cpf <- readRDS("data/raw/candidatos_estadual_2022.rds") |>
+  select(sq_candidato, cpfCand)
 
 # ---- D3. Flag de incumbência por linha de cand_mun_ql1 — 4 células completas ----
 
@@ -277,20 +296,30 @@ incumbencia_map <- bind_rows(
   )) |>
   select(sq_candidato, cargo, ANO_ELEICAO, incumbente)
 
+saveRDS(incumbencia_map, file.path(out_dir, "incumbencia_map_candidato.rds"))
+
 cand_mun_ql1_inc <- cand_mun_ql1 |>
   left_join(incumbencia_map, by = c("sq_candidato", "cargo", "ANO_ELEICAO"))
 
 tab_incumbencia <- cand_mun_ql1_inc |>
   filter(!is.na(incumbente)) |>
   summarise(
-    taxa_overlap_pct = round(100 * mean(overlap), 1),
+    taxa_overlap_pct = round(100 * mean(overlap, na.rm = FALSE), 1),
     n = n(),
     .by = c(cargo, ANO_ELEICAO, incumbente)
   ) |>
   arrange(cargo, ANO_ELEICAO, desc(incumbente))
 
-message("\n--- Tabela D: taxa de sobreposição por incumbência (cargo x ano) — 4 células completas ---")
-print(tab_incumbencia, n = Inf)
+message(
+  "\n=== Seção D (incumbência) concluída ===\n",
+  "  CPFs elegíveis: ", length(eleito_fed_2014), " fed. 2014, ",
+  length(eleito_fed_2018), " fed. 2018, ", length(eleito_est_2014), " est. 2014, ",
+  length(eleito_est_2018), " est. 2018\n",
+  "  incumbencia_map: ", nrow(incumbencia_map), " linhas -> ",
+  file.path(out_dir, "incumbencia_map_candidato.rds"), "\n",
+  "  tab_incumbencia: ", nrow(tab_incumbencia), " linhas -> ",
+  file.path(out_dir, "tab_incumbencia.rds/.csv")
+)
 
 # ==============================================================================
 # SALVAR
@@ -308,6 +337,8 @@ saveRDS(tab_incumbencia,       file.path(out_dir, "tab_incumbencia.rds"))
 
 write_csv(tab_capital_municipio, file.path(out_dir, "tab_capital_municipio.csv"))
 write_csv(tab_capital,          file.path(out_dir, "tab_capital.csv"))
+write_csv(teste_capital_genero, file.path(out_dir, "teste_t_capital_genero.csv"))
+write_csv(teste_capital_raca,   file.path(out_dir, "teste_t_capital_raca.csv"))
 write_csv(tab_capital_genero,   file.path(out_dir, "tab_capital_genero.csv"))
 write_csv(tab_capital_raca,     file.path(out_dir, "tab_capital_raca.csv"))
 write_csv(tab_resultado,        file.path(out_dir, "tab_resultado_eleitoral.csv"))

@@ -1,10 +1,17 @@
 # ==============================================================================
-# Exploração: Coordenação territorial de listas partidárias
-#
-# Hipótese: partidos coordenam a alocação territorial do gasto entre seus
-# próprios candidatos, gerando SOBREPOSIÇÃO (mais de um candidato do mesmo
-# partido, cargo e ano com QL_gasto_eleit > 1 no mesmo município) — em vez de
-# cada candidato "ocupar" um território próprio dentro da legenda.
+# Script: 01_overlap_partido.R
+# Purpose: Sobreposição território-partido — nível município e candidato
+#          (pipeline do Capítulo 6, "Coordenação territorial de listas
+#          partidárias")
+# Inputs:  data/raw/ql_gasto_eleit_{2018,2022}.rds,
+#          data/raw/ql_gasto_eleit_est_{2018,2022}.rds
+# Outputs: cand_mun_ql1.rds, taxa_sobreposicao_candidato.rds,
+#          overlap_municipio_partido.rds, tab_overlap_municipio.rds/.csv,
+#          tab_taxa_sobreposicao_{genero,raca,genero_raca}.rds/.csv,
+#          teste_t_{genero,raca}.rds
+# Status: PRODUÇÃO — alimenta 06-sobreposicao-territorial-partido.qmd.
+#         Histórico investigativo em
+#         explorations/base-territorial-partidos/SESSION_LOG.md.
 #
 # Perguntas:
 #   1. Há diferença na taxa de sobreposição entre Federal e Estadual?
@@ -12,8 +19,10 @@
 #   3. Mulheres estão mais/menos expostas à sobreposição do que homens?
 #   4. Candidatos negros estão mais/menos expostos do que brancos?
 #
-# Status: EXPLORATÓRIO — nada aqui é definitivo. Ver README.md.
-# Rodar a partir da raiz do repositório: Rscript explorations/base-territorial-partidos/R/01_overlap_partido.R
+# Rodar a partir da raiz do repositório:
+#   Rscript scripts/R/sobreposicao_territorial_partido/01_overlap_partido.R
+#
+# 0. SETUP
 # ==============================================================================
 
 library(tidyverse)
@@ -27,6 +36,9 @@ source("explorations/base-territorial-partidos/R/harmonizar_partido.R")
 
 out_dir <- "explorations/base-territorial-partidos/output"
 dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
+
+generos_validos <- c("FEMININO", "MASCULINO")
+racas_validas   <- c("BRANCA", "NEGRA")
 
 # ==============================================================================
 # 1. CARREGAR E EMPILHAR AS 4 BASES (Federal/Estadual x 2018/2022)
@@ -56,8 +68,8 @@ est_2022 <- readRDS("data/raw/ql_gasto_eleit_est_2022.rds") |>
 
 dados <- bind_rows(fed_2018, fed_2022, est_2018, est_2022)
 
-message("Total de linhas (candidato-município), universo completo de partidos: ", nrow(dados))
-message("Candidatos distintos: ", n_distinct(dados$sq_candidato))
+message("Dados carregados: ", nrow(dados), " linhas (candidato-município), ",
+        n_distinct(dados$sq_candidato), " candidatos distintos (universo completo de partidos).")
 rm(fed_2018, fed_2022, est_2018, est_2022)
 
 # ==============================================================================
@@ -78,14 +90,14 @@ mun_partido <- dados |>
 tab_overlap_mun <- mun_partido |>
   summarise(
     n_municipios_com_ql1 = n(),
-    n_municipios_overlap = sum(overlap),
-    taxa_overlap_mun_pct = round(100 * mean(overlap), 1),
+    n_municipios_overlap = sum(overlap, na.rm = FALSE),
+    taxa_overlap_mun_pct = round(100 * mean(overlap, na.rm = FALSE), 1),
     .by = c(cargo, ANO_ELEICAO)
   ) |>
   arrange(cargo, ANO_ELEICAO)
 
-message("\n--- Tabela A: taxa de sobreposição a nível de município (cargo x ano) ---")
-print(tab_overlap_mun)
+message("Tabela A (taxa de sobreposição por município, cargo x ano) calculada: ",
+        nrow(tab_overlap_mun), " linhas.")
 
 # ==============================================================================
 # 3. NÍVEL CANDIDATO: dos municípios em que o candidato tem QL_gasto_eleit > 1,
@@ -107,7 +119,7 @@ saveRDS(cand_mun_ql1, file.path(out_dir, "cand_mun_ql1.rds"))
 taxa_sobreposicao <- cand_mun_ql1 |>
   summarise(
     n_mun_ql1     = n(),
-    n_mun_overlap = sum(overlap),
+    n_mun_overlap = sum(overlap, na.rm = FALSE),
     taxa_sobreposicao = n_mun_overlap / n_mun_ql1,
     .by = c(sq_candidato, cargo, ANO_ELEICAO, partido_harm, genero, raca2)
   )
@@ -123,7 +135,7 @@ saveRDS(mun_partido, file.path(out_dir, "overlap_municipio_partido.rds"))
 
 # ---- B: por gênero, dentro de cargo x ano (+ teste t) ----
 tab_genero <- taxa_sobreposicao |>
-  filter(genero %in% c("FEMININO", "MASCULINO")) |>
+  filter(genero %in% generos_validos) |>
   summarise(
     taxa_media_pct = round(100 * mean(taxa_sobreposicao, na.rm = TRUE), 1),
     n = n(),
@@ -134,7 +146,7 @@ tab_genero <- taxa_sobreposicao |>
   arrange(cargo, ANO_ELEICAO)
 
 teste_genero <- taxa_sobreposicao |>
-  filter(genero %in% c("FEMININO", "MASCULINO")) |>
+  filter(genero %in% generos_validos) |>
   nest(.by = c(cargo, ANO_ELEICAO)) |>
   mutate(
     teste = map(data, ~ tryCatch(
@@ -144,16 +156,14 @@ teste_genero <- taxa_sobreposicao |>
   ) |>
   select(cargo, ANO_ELEICAO, teste) |>
   unnest(teste) |>
-  select(cargo, ANO_ELEICAO, p.value)
+  select(cargo, ANO_ELEICAO, estimate, conf.low, conf.high, p.value)
 
-message("\n--- Tabela B: taxa de sobreposição por gênero (cargo x ano) ---")
-print(tab_genero)
-message("p-valores (teste t, FEMININO vs MASCULINO):")
-print(teste_genero)
+message("Tabela B (gênero, cargo x ano) e teste t (FEMININO vs MASCULINO) calculados: ",
+        nrow(tab_genero), " linhas, ", nrow(teste_genero), " testes.")
 
 # ---- C: por raça, dentro de cargo x ano (+ teste t) ----
 tab_raca <- taxa_sobreposicao |>
-  filter(raca2 %in% c("BRANCA", "NEGRA")) |>
+  filter(raca2 %in% racas_validas) |>
   summarise(
     taxa_media_pct = round(100 * mean(taxa_sobreposicao, na.rm = TRUE), 1),
     n = n(),
@@ -164,7 +174,7 @@ tab_raca <- taxa_sobreposicao |>
   arrange(cargo, ANO_ELEICAO)
 
 teste_raca <- taxa_sobreposicao |>
-  filter(raca2 %in% c("BRANCA", "NEGRA")) |>
+  filter(raca2 %in% racas_validas) |>
   nest(.by = c(cargo, ANO_ELEICAO)) |>
   mutate(
     teste = map(data, ~ tryCatch(
@@ -174,17 +184,15 @@ teste_raca <- taxa_sobreposicao |>
   ) |>
   select(cargo, ANO_ELEICAO, teste) |>
   unnest(teste) |>
-  select(cargo, ANO_ELEICAO, p.value)
+  select(cargo, ANO_ELEICAO, estimate, conf.low, conf.high, p.value)
 
-message("\n--- Tabela C: taxa de sobreposição por raça (cargo x ano) ---")
-print(tab_raca)
-message("p-valores (teste t, NEGRA vs BRANCA):")
-print(teste_raca)
+message("Tabela C (raça, cargo x ano) e teste t (NEGRA vs BRANCA) calculados: ",
+        nrow(tab_raca), " linhas, ", nrow(teste_raca), " testes.")
 
 # ---- D: gênero x raça, dentro de cargo x ano (descritivo, sem teste) ----
 tab_genero_raca <- taxa_sobreposicao |>
-  filter(genero %in% c("FEMININO", "MASCULINO"),
-         raca2 %in% c("BRANCA", "NEGRA")) |>
+  filter(genero %in% generos_validos,
+         raca2 %in% racas_validas) |>
   summarise(
     taxa_media_pct = round(100 * mean(taxa_sobreposicao, na.rm = TRUE), 1),
     n = n(),
@@ -192,8 +200,7 @@ tab_genero_raca <- taxa_sobreposicao |>
   ) |>
   arrange(cargo, ANO_ELEICAO, genero, raca2)
 
-message("\n--- Tabela D: taxa de sobreposição por gênero x raça (cargo x ano) ---")
-print(tab_genero_raca, n = Inf)
+message("Tabela D (gênero x raça, cargo x ano) calculada: ", nrow(tab_genero_raca), " linhas.")
 
 # ==============================================================================
 # 5. SALVAR TABELAS
