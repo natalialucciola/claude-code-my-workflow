@@ -97,6 +97,16 @@ data/processed/**
 # TSE bulk downloads cached locally (multi-hundred-MB zips/CSVs) — never tracked.
 explorations/base-territorial-partidos/output/raw_tse_orgaos/
 
+# senadoras-2026 — dados baixados/tratados e outputs gerados não vão pro git
+explorations/senadoras-2026/dados/brutos/*
+explorations/senadoras-2026/dados/processados/*
+explorations/senadoras-2026/outputs/figuras/*
+explorations/senadoras-2026/outputs/tabelas/*
+!explorations/senadoras-2026/dados/brutos/.gitkeep
+!explorations/senadoras-2026/dados/processados/.gitkeep
+!explorations/senadoras-2026/outputs/figuras/.gitkeep
+!explorations/senadoras-2026/outputs/tabelas/.gitkeep
+
 # Quarto book rendered output (regenerable)
 Quarto/thesis/_book/
 

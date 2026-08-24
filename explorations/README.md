@@ -26,3 +26,8 @@ explorations/
     ├── completed_[name]/   # Graduated to production
     └── abandoned_[name]/   # Documented why stopped
 ```
+
+## Active Projects
+
+- `base-territorial-partidos/` — sandbox de tese; graduou para `Quarto/thesis/chapters/06-sobreposicao-territorial-partido.qmd`, permanece como registro do processo investigativo.
+- `senadoras-2026/` — **projeto independente da tese** (artigo próprio, submissão à Revista Dados). Vive aqui só para reusar a infraestrutura de skills/agents; não vai "graduar" para um capítulo. Ver `senadoras-2026/README.md`.
