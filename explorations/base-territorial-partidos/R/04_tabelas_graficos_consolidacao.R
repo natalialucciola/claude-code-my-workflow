@@ -218,6 +218,81 @@ ggsave(file.path(out_dir, "grafico_sobreposicao_raca.pdf"), g_raca, width = 6, h
 ggsave(file.path(out_dir, "grafico_sobreposicao_raca.png"), g_raca, width = 6, height = 4.5, dpi = 300)
 
 # ==============================================================================
+# 3b. GRÁFICO — lacuna (gap) de sobreposição por ano, gênero e raça em separado
+#
+# A pedido da autora: em vez de mostrar o nível de cada subgrupo (gráficos
+# dumbbell acima), mostrar diretamente a lacuna (gap_pp, já calculada em
+# tab_r1_consolidada) por ano, com Federal e Estadual como duas linhas. Um
+# gráfico por grupo (gênero, raça), não um único gráfico combinado.
+# ==============================================================================
+
+cor_federal  <- "#D55E00"  # vermelhão (Okabe-Ito)
+cor_estadual <- "#56B4E9"  # azul-céu (Okabe-Ito)
+
+tema_lacuna <- theme_minimal(base_size = 12) +
+  theme(
+    panel.grid.minor      = element_blank(),
+    panel.grid.major.x    = element_blank(),
+    legend.position        = "top",
+    legend.justification   = "center",
+    plot.caption           = element_text(hjust = 0, size = 8, margin = margin(t = 10))
+  )
+
+plot_lacuna_genero_df <- tab_r1_consolidada |>
+  filter(grupo == "Gênero") |>
+  mutate(ano_fct = factor(ANO_ELEICAO, levels = c("2018", "2022")))
+
+g_lacuna_genero <- ggplot(
+  plot_lacuna_genero_df,
+  aes(x = ano_fct, y = gap_pp, color = cargo, group = cargo)
+) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey50", linewidth = 0.4) +
+  geom_line(linewidth = 0.8) +
+  geom_point(size = 3.5, stroke = 1.2) +
+  scale_color_manual(values = c("Federal" = cor_federal, "Estadual" = cor_estadual), name = "Cargo") +
+  scale_y_continuous(labels = \(x) paste0(x, " p.p.")) +
+  labs(
+    x = NULL, y = "Lacuna de gênero (feminino menos masculino)",
+    title = "Lacuna de sobreposição territorial por gênero, cargo e ano",
+    caption = "Lacuna = taxa de sobreposição de mulheres menos a de homens, em pontos percentuais."
+  ) +
+  tema_lacuna
+
+ggsave(file.path(out_dir, "grafico_lacuna_genero.pdf"), g_lacuna_genero, width = 5.5, height = 4)
+ggsave(
+  file.path(out_dir, "grafico_lacuna_genero.png"), g_lacuna_genero,
+  width = 5.5, height = 4, dpi = 300
+)
+
+plot_lacuna_raca_df <- tab_r1_consolidada |>
+  filter(grupo == "Raça") |>
+  mutate(ano_fct = factor(ANO_ELEICAO, levels = c("2018", "2022")))
+
+g_lacuna_raca <- ggplot(
+  plot_lacuna_raca_df,
+  aes(x = ano_fct, y = gap_pp, color = cargo, group = cargo)
+) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey50", linewidth = 0.4) +
+  geom_line(linewidth = 0.8) +
+  geom_point(size = 3.5, stroke = 1.2) +
+  scale_color_manual(values = c("Federal" = cor_federal, "Estadual" = cor_estadual), name = "Cargo") +
+  scale_y_continuous(labels = \(x) paste0(x, " p.p.")) +
+  labs(
+    x = NULL, y = "Lacuna de raça (negra menos branca)",
+    title = "Lacuna de sobreposição territorial por raça, cargo e ano",
+    caption = "Lacuna = taxa de sobreposição de candidatos negros menos a de brancos, em pontos percentuais."
+  ) +
+  tema_lacuna
+
+ggsave(file.path(out_dir, "grafico_lacuna_raca.pdf"), g_lacuna_raca, width = 5.5, height = 4)
+ggsave(
+  file.path(out_dir, "grafico_lacuna_raca.png"), g_lacuna_raca,
+  width = 5.5, height = 4, dpi = 300
+)
+
+message("Gráficos de lacuna por ano salvos: grafico_lacuna_{genero,raca}.{pdf,png}")
+
+# ==============================================================================
 # 4. GRÁFICO — coefficient plot, tripla interação DDD (gênero e raça)
 # ==============================================================================
 
