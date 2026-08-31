@@ -20,6 +20,8 @@ book:
 
 bibliography: ../../Bibliography_base.bib
 
+tbl-cap-location: bottom
+
 format:
   html:
     theme: cosmo

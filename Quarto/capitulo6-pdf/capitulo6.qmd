@@ -5,6 +5,7 @@ author: "Natália Lucciola"
 date: last-modified
 lang: pt
 bibliography: ../../Bibliography_base.bib
+tbl-cap-location: bottom
 format:
   pdf:
     documentclass: article
@@ -186,48 +187,20 @@ Dentro das capitais, nem a lacuna de gênero (0,1 p.p., p = 0,262) nem a de raç
 
 ### Efeitos do incentivo da EC 111
 
-@tbl-modelo1, @tbl-modelo2 e @tbl-modelo3 apresentam os coeficientes completos da tripla interação entre Federal, 2022 e Grupo (H3), um modelo por tabela: Modelo 1, com qualquer correligionário; Modelo 2 (H4), com correligionário incumbente; Modelo 3 (H4), com correligionário líder do partido. Cada tabela reporta as duas variáveis dependentes de interesse, candidaturas femininas e candidaturas negras, lado a lado. @fig-modelo1-modelo2-modelo3 visualiza a estimativa da tripla diferença, o coeficiente de interesse em cada modelo, com intervalo de confiança de 95%.
+As @tbl-modelo1, @tbl-modelo2 e @tbl-modelo3 apresentam os coeficientes completos da análise de diferenças em diferenças, com foco na tripla interação entre cargo, ano e grupo, cada uma delas referente a um dos modelos descritos na seção anterior. Cada tabela reporta as duas variáveis dependentes de interesse, candidaturas femininas e candidaturas negras, lado a lado. A @fig-modelo1-modelo2-modelo3, por sua vez, apresenta uma visualização única com as estimativas do coeficiente de interesse em cada modelo, com intervalo de confiança de 95%.
 
 | | Mulher | Negra |
 |---|---:|---:|
 | Deputado Federal | −9,1\*\*\*<br>(2,0) | −7,0\*\*\*<br>(1,8) |
 | Ano 2022 | 6,3\*\*\*<br>(1,3) | 5,4\*\*\*<br>(1,3) |
-| Grupo | 7,5\*\*\*<br>(1,0) | 7,4\*\*\*<br>(0,8) |
+| Mulher/Negra | 7,5\*\*\*<br>(1,0) | 7,4\*\*\*<br>(0,8) |
 | Deputado Federal × Ano 2022 | 4,1\*\*<br>(1,8) | 2,8\*<br>(1,6) |
-| Deputado Federal × Grupo | 3,1\*\*\*<br>(0,9) | −2,0<br>(1,4) |
-| Ano 2022 × Grupo | −4,5\*\*\*<br>(1,1) | −1,7\*<br>(0,9) |
-| Deputado Federal × Ano 2022 × Grupo | −2,9\*<br>(1,5) | 0,7<br>(2,1) |
+| Deputado Federal × Mulher/Negra | 3,1\*\*\*<br>(0,9) | −2,0<br>(1,4) |
+| Ano 2022 × Mulher/Negra | −4,5\*\*\*<br>(1,1) | −1,7\*<br>(0,9) |
+| Deputado Federal × Ano 2022 × Mulher/Negra | −2,9\*<br>(1,5) | 0,7<br>(2,1) |
 | N | 36.610 | 36.182 |
 
 : Modelo 1 — sobreposição com qualquer correligionário, amostra completa. Coeficientes em pontos percentuais; erro-padrão clusterizado (partido, estado) entre parênteses. \* p < 0,1; \*\* p < 0,05; \*\*\* p < 0,01. {#tbl-modelo1}
-
-| | Mulher | Negra |
-|---|---:|---:|
-| Deputado Federal | −7,3\*\*\*<br>(1,9) | −6,7\*\*\*<br>(1,7) |
-| Ano 2022 | 1,0<br>(2,2) | 1,2<br>(2,7) |
-| Grupo | 4,6\*\*\*<br>(1,1) | 3,8\*\*<br>(1,5) |
-| Deputado Federal × Ano 2022 | 2,4<br>(1,4) | 2,1<br>(2,1) |
-| Deputado Federal × Grupo | −0,1<br>(1,6) | −1,0<br>(1,9) |
-| Ano 2022 × Grupo | −2,8\*\*<br>(1,3) | −2,4<br>(1,9) |
-| Deputado Federal × Ano 2022 × Grupo | −1,4<br>(1,5) | −0,5<br>(1,8) |
-| N | 34.347 | 33.929 |
-
-: Modelo 2 — sobreposição com correligionário incumbente, amostra restrita a não incumbentes. Coeficientes em pontos percentuais; erro-padrão clusterizado (partido, estado) entre parênteses. \* p < 0,1; \*\* p < 0,05; \*\*\* p < 0,01. {#tbl-modelo2}
-
-| | Mulher | Negra |
-|---|---:|---:|
-| Deputado Federal | 4,4\*\*<br>(2,1) | 7,4\*\*\*<br>(1,9) |
-| Ano 2022 | −1,7<br>(1,4) | −0,6<br>(1,5) |
-| Grupo | 3,7\*\*\*<br>(0,8) | 5,8\*\*<br>(2,1) |
-| Deputado Federal × Ano 2022 | 4,3<br>(2,7) | 0,5<br>(2,9) |
-| Deputado Federal × Grupo | 2,7\*\*<br>(1,2) | −5,1<br>(3,6) |
-| Ano 2022 × Grupo | −0,9<br>(1,0) | −3,2<br>(2,3) |
-| Deputado Federal × Ano 2022 × Grupo | −4,2\*\*\*<br>(0,9) | 5,8\*<br>(3,3) |
-| N | 33.707 | 33.300 |
-
-: Modelo 3 — sobreposição com correligionário líder do partido, amostra restrita a não líderes. Coeficientes em pontos percentuais; erro-padrão clusterizado (partido, estado) entre parênteses. \* p < 0,1; \*\* p < 0,05; \*\*\* p < 0,01. {#tbl-modelo3}
-
-![Modelo 1 (amplo) vs. Modelo 2 (incumbente) vs. Modelo 3 (líder do partido)](../thesis/Figures/06-sobreposicao-territorial-partido/grafico_comparativo_modelo1_modelo2_modelo3.png){#fig-modelo1-modelo2-modelo3 width="90%"}
 
 Para raça, H3 não se sustenta. O sinal do Modelo 1 é positivo, o oposto do que a hipótese previa, e não é estatisticamente distinguível de zero (p = 0,719). Não há evidência de que o incentivo financeiro de 2022 tenha reduzido a sobreposição territorial de candidatos negros especificamente nas eleições para deputado federal, além do que cargo, ano e raça isoladamente já explicam.
 
@@ -237,15 +210,43 @@ O teste seguinte verifica se esse sinal marginal, presente para gênero e ausent
 
 Descritivamente, candidatos incumbentes, isto é, eleitos no mesmo cargo na eleição anterior, têm território sistematicamente mais exclusivo nas quatro combinações de cargo e ano: nas eleições estaduais de 2018, a taxa de sobreposição é de 46,3% contra 65,1%; nas estaduais de 2022, de 55,8% contra 72,4%; nas eleições para deputado federal de 2018, de 43,0% contra 56,1%; nas federais de 2022, de 51,9% contra 67,1%. É esse padrão que o Modelo 2 testa causalmente, perguntando se a queda de sobreposição especificamente com incumbentes se concentra nas eleições para deputado federal.
 
+| | Mulher | Negra |
+|---|---:|---:|
+| Deputado Federal | −7,3\*\*\*<br>(1,9) | −6,7\*\*\*<br>(1,7) |
+| Ano 2022 | 1,0<br>(2,2) | 1,2<br>(2,7) |
+| Mulher/Negra | 4,6\*\*\*<br>(1,1) | 3,8\*\*<br>(1,5) |
+| Deputado Federal × Ano 2022 | 2,4<br>(1,4) | 2,1<br>(2,1) |
+| Deputado Federal × Mulher/Negra | −0,1<br>(1,6) | −1,0<br>(1,9) |
+| Ano 2022 × Mulher/Negra | −2,8\*\*<br>(1,3) | −2,4<br>(1,9) |
+| Deputado Federal × Ano 2022 × Mulher/Negra | −1,4<br>(1,5) | −0,5<br>(1,8) |
+| N | 34.347 | 33.929 |
+
+: Modelo 2 — sobreposição com correligionário incumbente, amostra restrita a não incumbentes. Coeficientes em pontos percentuais; erro-padrão clusterizado (partido, estado) entre parênteses. \* p < 0,1; \*\* p < 0,05; \*\*\* p < 0,01. {#tbl-modelo2}
+
 Para mulheres, o Modelo 2 dá um resultado menor em magnitude do que o Modelo 1 (−1,4 contra −2,9 p.p.) e mais distante da significância convencional (p = 0,368 contra 0,057). O sinal marginal do Modelo 1 se dilui, em vez de se concentrar, quando a atenção se volta especificamente para incumbentes: o oposto do que o mecanismo de proteção previa. Para candidatos negros, o resultado permanece nulo (p = 0,788, contra p = 0,719 no Modelo 1), sem mudança de padrão relevante.
 
 O Modelo 2 diluiu o sinal em vez de concentrá-lo. Isso é compatível com dois cenários opostos. O mecanismo de proteção de lideranças simplesmente não existe, ou existe mas a incumbência é uma medida ruidosa demais de "candidato protegido" para captá-lo. O Modelo 3, que usa liderança formal do partido em vez de incumbência, ajuda a distinguir entre essas duas leituras.
 
 Descritivamente, candidatos que ocupam cargo de liderança formal do partido também têm território mais exclusivo: nas eleições estaduais de 2018, a taxa de sobreposição é de 62,6% contra 76,5%; nas estaduais de 2022, de 69,2% contra 80,4%; nas eleições para deputado federal de 2018, de 39,2% contra 70,7%; nas federais de 2022, de 61,3% contra 75,6%. É esse padrão que o Modelo 3 testa causalmente, perguntando se a queda de sobreposição especificamente com líderes formais se concentra nas eleições para deputado federal.
 
+| | Mulher | Negra |
+|---|---:|---:|
+| Deputado Federal | 4,4\*\*<br>(2,1) | 7,4\*\*\*<br>(1,9) |
+| Ano 2022 | −1,7<br>(1,4) | −0,6<br>(1,5) |
+| Mulher/Negra | 3,7\*\*\*<br>(0,8) | 5,8\*\*<br>(2,1) |
+| Deputado Federal × Ano 2022 | 4,3<br>(2,7) | 0,5<br>(2,9) |
+| Deputado Federal × Mulher/Negra | 2,7\*\*<br>(1,2) | −5,1<br>(3,6) |
+| Ano 2022 × Mulher/Negra | −0,9<br>(1,0) | −3,2<br>(2,3) |
+| Deputado Federal × Ano 2022 × Mulher/Negra | −4,2\*\*\*<br>(0,9) | 5,8\*<br>(3,3) |
+| N | 33.707 | 33.300 |
+
+: Modelo 3 — sobreposição com correligionário líder do partido, amostra restrita a não líderes. Coeficientes em pontos percentuais; erro-padrão clusterizado (partido, estado) entre parênteses. \* p < 0,1; \*\* p < 0,05; \*\*\* p < 0,01. {#tbl-modelo3}
+
 Para candidatos negros, o Modelo 3 confirma o padrão dos dois anteriores. Não há evidência do mecanismo, e aqui o coeficiente é ainda o de sinal oposto ao previsto, embora não estatisticamente distinguível de zero a 5% (p = 0,089). Três especificações diferentes de "candidato protegido" convergem em não encontrar o mecanismo para raça.
 
 Para mulheres, o resultado é qualitativamente diferente dos dois anteriores. O Modelo 3 não dilui o sinal do Modelo 1, ele o fortalece de forma substancial, com a estimativa passando de marginal (p = 0,057) para muito além do limiar convencional (p < 0,001), e robusto à amostra completa, líderes mais não líderes (−4,25 p.p., p < 0,001). Decompor a tripla diferença em suas partes explica por que os Modelos 2 e 3 divergem tanto. No Modelo 2, a queda na taxa de sobreposição com incumbente para mulheres, entre 2018 e 2022, é parecida nos dois cargos: cai 5,6 pontos percentuais em relação a homens nas eleições para deputado federal e 4,0 nas estaduais. É exatamente por essa queda não ser restrita ao nível federal que a tripla diferença se anula, já que uma mudança que acontece onde o incentivo financeiro não vale não pode ser atribuída a ele. No Modelo 3, o padrão é o oposto. Nas eleições estaduais, a diferença de gênero na taxa de sobreposição com líder do partido muda muito pouco entre 2018 e 2022 (0,7 p.p.); nas federais, ela se abre 5,9 pontos percentuais, com mulheres se afastando de líderes do partido (31,5% para 28,9% de seus municípios QL>1) enquanto homens se aproximam (24,6% para 27,9%). É essa queda restrita ao nível federal, presente no Modelo 3 e ausente no Modelo 2, que torna o coeficiente da tripla interação grande e preciso.
+
+![Modelo 1 (amplo) vs. Modelo 2 (incumbente) vs. Modelo 3 (líder do partido)](../thesis/Figures/06-sobreposicao-territorial-partido/grafico_comparativo_modelo1_modelo2_modelo3.png){#fig-modelo1-modelo2-modelo3 width="90%"}
 
 A leitura mais direta é que a incumbência, no Modelo 2, estava misturando um efeito real, específico do mecanismo de proteção de lideranças, com uma tendência geral e alheia à EC 111 de incumbentes de qualquer cargo ficarem mais "protegidos" ao longo do tempo. Esse ruído é suficiente para mascarar o sinal. Ao trocar para liderança formal, medida sobre o partido atual do candidato e não contaminada pela troca de partido entre ciclos, esse ruído desaparece e o padrão restrito ao nível federal, previsto pela hipótese, aparece com força, ao menos para mulheres.
 
@@ -253,7 +254,7 @@ A leitura mais direta é que a incumbência, no Modelo 2, estava misturando um e
 
 Três testes compõem a evidência causal deste capítulo — a tripla diferença ampla (H3) e os dois testes diretos do mecanismo de proteção (H4, Modelos 2 e 3) —, e só o mais preciso deles distingue com clareza os dois grupos. A tripla diferença que testa se a queda de sobreposição entre 2018 e 2022 ocorre especificamente nas eleições para deputado federal (H3) encontra apenas um sinal marginal para mulheres e nenhum sinal para candidatos negros. O primeiro teste direto do mecanismo, que restringe a sobreposição a correligionários incumbentes (H4, Modelo 2), não confirma a hipótese para nenhum dos dois grupos; para mulheres, essa restrição chega a enfraquecer o sinal do Modelo 1. O segundo teste direto, que restringe a sobreposição a correligionários que ocupam cargo formal de liderança no partido (H4, Modelo 3), é o único que separa os dois grupos: para mulheres, o sinal deixa de ser marginal e se torna preciso; para candidatos negros, permanece nulo, com o coeficiente na direção oposta à prevista. Esse padrão confirma o mecanismo de proteção de lideranças para mulheres, mas não para candidatos negros. A diferença entre os dois grupos só fica visível quando a medida de "candidato protegido" é suficientemente precisa. O padrão descritivo, por trás desses três testes, é mais simples e sem exceção. Mulheres e candidatos negros apresentam sobreposição territorial mais alta do que seus grupos de referência em todas as combinações de cargo e ano (H1, H2).
 
-A evidência causal deste capítulo para o mecanismo de proteção de lideranças é, portanto, assimétrica entre os dois grupos. Para mulheres, o Modelo 3 mostra que a queda de sobreposição territorial entre 2018 e 2022, com correligionários que formalmente decidem sobre o partido, é específica do cargo Federal, onde vale o incentivo da EC 111, e não aparece no Estadual, onde ele não vale. Essa é exatamente a assinatura que a hipótese de proteção de lideranças previa. Para candidatos negros, os três testes convergem em não encontrar esse padrão, e o Modelo 3, a especificação mais precisa, aponta inclusive na direção contrária. @CheibubSin2020_preference_vote já mostravam que a coordenação partidária brasileira é seletiva no sentido eleitoral, protegendo especificamente candidatos próximos do limiar de eleição, não qualquer correligionário. O achado do Modelo 3 estende essa seletividade para uma dimensão distinta, de poder formal dentro do partido, que os próprios autores não testam. Não é só quem está perto de se eleger que é protegido, mas também, e de forma mais nítida neste capítulo, quem já ocupa cargo de decisão no partido. Essa seletividade, porém, neste ciclo e nesta política, operou sobre a dimensão de gênero e não sobre a de raça.
+A evidência causal deste capítulo para o mecanismo de proteção de lideranças é, portanto, assimétrica entre os dois grupos. Para mulheres, o Modelo 3 mostra que a queda de sobreposição territorial entre 2018 e 2022, com correligionários que formalmente decidem sobre o partido, é específica do cargo de deputado federal, onde vale o incentivo da EC 111, e não aparece na disputa estadual, onde ele não vale. Este é precisamente o mecanismo previsto pela hipótese de proteção a lideranças. Para candidatos negros, os três testes convergem em não encontrar esse padrão, e o Modelo 3, a especificação mais precisa, aponta inclusive na direção contrária. @CheibubSin2020_preference_vote já mostravam que a coordenação partidária brasileira é seletiva no sentido eleitoral, protegendo especificamente candidatos próximos do limiar de eleição, não qualquer correligionário. O achado do Modelo 3 estende essa seletividade para uma dimensão distinta, de poder formal dentro do partido, que os próprios autores não testam. Não é só quem está perto de se eleger que é protegido, mas também, e de forma mais nítida neste capítulo, quem já ocupa cargo de decisão no partido. Essa seletividade, porém, neste ciclo e nesta política, operou sobre a dimensão de gênero e não sobre a de raça.
 
 Esse padrão de grupo dialoga com @FonsecaThomeGuedesNeto2026_money_talks, que usam o mesmo desenho de identificação, Federal versus Estadual, sobre a mesma política, e encontram aumento significativo de votos para mulheres, sem efeito significativo sobre cadeiras conquistadas por elas, e nenhum efeito significativo, nem de votos nem de cadeiras, para candidatos negros. A direção é a mesma nos dois estudos, sinal para mulheres e ausência de sinal para candidatos negros, e agora também a força. O Modelo 3 deste capítulo encontra, como os autores, um efeito de gênero estatisticamente sólido. Isso sugere que os dois estudos captam a mesma dinâmica por caminhos diferentes. Fonseca, Thomé e Guedes-Neto medem a alocação agregada de votos e recursos ao nível do partido; este capítulo mede a posição relativa de um candidato frente aos correligionários que decidem sobre esses recursos. A proteção de lideranças, quando medida com precisão suficiente, aparenta ser um mecanismo real.
 
@@ -265,7 +266,7 @@ Partidos brasileiros coordenam mal a distribuição territorial do gasto entre s
 
 Quando o capítulo testa diretamente se a queda dessa sobreposição entre 2018 e 2022 reflete o incentivo financeiro da EC 111/2021 e, mais especificamente, lideranças partidárias protegendo seus quadros consolidados, a evidência causal é assimétrica entre os dois grupos, e essa assimetria só aparece quando o proxy de "candidato protegido" é preciso o suficiente. Para mulheres, dois dos três testes (H3, Modelo 1 amplo; H4, Modelo 2 com incumbência) dão apenas sinal marginal ou nulo, mas o terceiro (H4, Modelo 3, com liderança formal do partido) encontra um efeito grande e estatisticamente robusto, restrito às eleições para deputado federal, com p < 0,001 mesmo na amostra completa. Para candidatos negros, os três testes convergem em não encontrar o mecanismo, e o mais preciso deles (Modelo 3) aponta, ainda que sem significância convencional, na direção oposta à prevista.
 
-A hipótese de proteção geográfica de lideranças, motivada pela literatura sobre coordenação partidária seletiva, sobre alocação territorial não aleatória e sobre gatekeeping em ações afirmativas anteriores, incluindo a história legislativa da própria Emenda Constitucional 111/2021, é bem fundamentada teoricamente e, para mulheres, encontra neste capítulo o suporte causal que a evidência qualitativa sobre o desenho da política já sugeria — uma vez que a proxy de candidato protegido passa de incumbência (uma medida indireta e sujeita a ruído da troca de partido) para liderança formal do partido (uma medida direta de poder de decisão sobre a alocação de recursos). Para candidatos negros, a mesma troca de proxy não muda a conclusão. A hipótese não encontra suporte causal em nenhuma das três especificações. Para a pergunta mais ampla desta tese, sobre por que ações afirmativas aumentam a presença e os recursos de mulheres e negros sem produzir equilíbrio equivalente de representação, este capítulo oferece uma resposta parcial e assimétrica. Para mulheres, há um mecanismo causal identificado com razoável confiança: lideranças partidárias protegem especificamente seus quadros com poder formal do avanço territorial das candidaturas incentivadas. Para candidatos negros, a desigualdade territorial é igualmente real e mensurável, mas este capítulo não consegue atribuí-la, com confiança causal, ao incentivo financeiro específico estudado aqui. Capítulos futuros, com dados diretos sobre a distribuição do fundo eleitoral por candidato, poderiam testar esse mecanismo de forma ainda mais direta, e investigar por que ele parece operar sobre gênero e não sobre raça.
+A hipótese de proteção geográfica de lideranças, motivada pela literatura sobre coordenação partidária seletiva, sobre alocação territorial não aleatória e sobre gatekeeping em ações afirmativas anteriores, incluindo a história legislativa da própria Emenda Constitucional 111/2021, é bem fundamentada teoricamente e, para mulheres, encontra neste capítulo o suporte causal que a evidência qualitativa sobre o desenho da política já sugeria — uma vez que a proxy de candidato protegido passa de incumbência (uma medida indireta e sujeita a ruído da troca de partido) para liderança formal do partido (uma medida direta de poder de decisão sobre a alocação de recursos). Para candidatos negros, a mesma troca de proxy não muda a conclusão. A hipótese não encontra suporte causal em nenhuma das três especificações. Para a pergunta mais ampla desta tese, sobre por que ações afirmativas aumentam a presença e os recursos de mulheres e negros sem produzir equilíbrio equivalente de representação, este capítulo oferece uma resposta parcial e assimétrica. Para mulheres, há um mecanismo causal identificado com razoável confiança: lideranças partidárias protegem especificamente seus quadros com poder formal do avanço territorial das candidaturas incentivadas. Para candidatos negros, a desigualdade territorial é igualmente real e mensurável, mas este capítulo não consegue atribuí-la, com confiança causal, ao incentivo financeiro específico estudado aqui.
 
 {{< pagebreak >}}
 
