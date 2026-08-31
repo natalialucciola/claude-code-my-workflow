@@ -193,7 +193,6 @@ g_comparativo <- ggplot(
   labs(
     x = "Efeito da tripla interação (Federal x 2022 x Grupo), pontos percentuais",
     y = NULL,
-    title = "Modelo 1 (amplo) vs. Modelo 2 (incumbente) vs. Modelo 3 (líder do partido)",
     caption = paste0(
       "Barras: IC 95%. Linha tracejada: efeito nulo. Modelos 2 e 3 restritos a candidatos\n",
       "não incumbentes / não líderes, respectivamente; Modelo 1 usa a amostra completa\n",

@@ -369,8 +369,7 @@ g_lacuna_genero <- ggplot(
   scale_color_manual(values = c("Federal" = cor_federal, "Estadual" = cor_estadual), name = "Cargo") +
   scale_y_continuous(labels = \(x) paste0(x, " p.p.")) +
   labs(
-    x = NULL, y = "Lacuna de gênero (feminino menos masculino)",
-    title = "Lacuna de sobreposição territorial por gênero, cargo e ano",
+    x = NULL, y = "Lacuna de sobreposição territorial por gênero (feminino menos masculino)",
     caption = "Lacuna = taxa de sobreposição de mulheres menos a de homens, em pontos percentuais."
   ) +
   tema_lacuna
@@ -395,8 +394,7 @@ g_lacuna_raca <- ggplot(
   scale_color_manual(values = c("Federal" = cor_federal, "Estadual" = cor_estadual), name = "Cargo") +
   scale_y_continuous(labels = \(x) paste0(x, " p.p.")) +
   labs(
-    x = NULL, y = "Lacuna de raça (negra menos branca)",
-    title = "Lacuna de sobreposição territorial por raça, cargo e ano",
+    x = NULL, y = "Lacuna de sobreposição territorial por raça (negra menos branca)",
     caption = "Lacuna = taxa de sobreposição de candidatos negros menos a de brancos, em pontos percentuais."
   ) +
   tema_lacuna

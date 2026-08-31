@@ -95,7 +95,7 @@ Além do gasto e da sobreposição, o capítulo usa quatro variáveis de classif
 
 Incumbente é o candidato eleito no mesmo cargo na eleição anterior — 2014 para candidatos de 2018, 2018 para candidatos de 2022 —, identificado por correspondência de CPF ao vencedor do pleito anterior, independentemente do partido atual do candidato (Limitação 8). Líder partidário, usado apenas no Modelo 3, é o candidato que ocupa cargo de presidência, vice-presidência ou secretaria de finanças no diretório nacional ou estadual/distrital do partido no momento da eleição, vinculado ao registro de liderança pelo título eleitoral.
 
-Todos os dados vêm de fontes públicas do TSE, coletadas diretamente no site de dados abertos (`dadosabertos.tse.jus.br`) ou pelo pacote `electionsBR`, a partir de quatro conjuntos. O conjunto de candidaturas fornece gênero, raça, cargo, partido e estado de cada candidato. O conjunto de resultados eleitorais fornece quem foi eleito em cada pleito, usado para construir a variável de incumbência — o pleito de 2014, Federal e Estadual, entra apenas para determinar a incumbência dos candidatos de 2018, sem entrar na análise de sobreposição em si. O conjunto de órgãos partidários fornece o histórico de quem ocupou cada cargo de liderança em cada partido, usado no Modelo 3: um registro completo, com datas de início e fim de mandato, que permite reconstruir a composição da liderança de qualquer partido em qualquer momento passado, não apenas a atual. Dois partidos da amostra, porém — PMB e PMN —, não têm nenhum registro de órgão partidário no sistema do TSE sob nenhum nome, histórico ou atual; seus candidatos (3,3% da amostra) são tratados como dado ausente na variável de liderança formal, não como não-líderes, e excluídos do Modelo 3. O quarto conjunto, de prestação de contas eleitorais, fornece o gasto de campanha no nível candidato-município usado para calcular o QL. As bases usadas na análise foram construídas por mim a partir dessas quatro fontes originais.
+Todos os dados vêm de fontes públicas do TSE, coletadas diretamente no site de dados abertos (`dadosabertos.tse.jus.br`) ou pelo pacote `electionsBR`, a partir de quatro conjuntos. O conjunto de candidaturas fornece gênero, raça, cargo, partido e estado de cada candidato. O conjunto de resultados eleitorais fornece quem foi eleito em cada pleito, usado para construir a variável de incumbência — o pleito de 2014, Federal e Estadual, entra apenas para determinar a incumbência dos candidatos de 2018, sem entrar na análise de sobreposição em si. O conjunto de órgãos partidários fornece o histórico de quem ocupou cada cargo de liderança em cada partido, usado no Modelo 3: um registro completo, com datas de início e fim de mandato, que permite reconstruir a composição da liderança de qualquer partido em qualquer momento passado, não apenas a atual. O quarto conjunto, de prestação de contas eleitorais, fornece o gasto de campanha no nível candidato-município usado para calcular o QL. As bases usadas na análise foram construídas por mim a partir dessas quatro fontes originais.
 
 ### Amostra
 
@@ -112,7 +112,7 @@ A amostra selecionada para este estudo é composta pelas candidaturas para deput
 
 Mulheres e candidatos negros são minoria nas quatro combinações de cargo e ano, mas a diferença se estreita de 2018 para 2022 nos dois cargos.
 
-Os dados de gasto e de Quociente Locacional (QL), a base sobre a qual a sobreposição territorial é calculada, não aparecem diretamente na @tbl-amostra-descritiva porque estão num nível de observação diferente, candidato-município, não candidato. Cobrem, porém, os mesmos 37.158 candidatos: todo candidato da amostra tem pelo menos um registro de gasto de campanha e, dentro dele, pelo menos um município com QL do gasto acima de 1, condição necessária para entrar na métrica de sobreposição (`taxa_sobreposicao`) usada ao longo do capítulo.
+Os dados de gasto e de Quociente Locacional (QL), a base sobre a qual a sobreposição territorial é calculada, não aparecem diretamente na @tbl-amostra-descritiva porque estão num nível de observação diferente, de candidato-município. Cobrem, porém, os mesmos 37.158 candidatos, já que todos os candidatos da amostra têm pelo menos um registro de gasto de campanha e pelo menos um município com QL do gasto acima de 1, condição necessária para entrar na métrica de sobreposição usada ao longo do capítulo.
 
 A amostra efetivamente usada em cada especificação da tripla diferença (@sec-estrategia-inferencia) varia — Modelo 2 e Modelo 3 restringem a amostra principal a não incumbentes e a não líderes, respectivamente — e é sempre menor que os 37.158 candidatos, porque os modelos de gênero e de raça são restritos às categorias válidas de cada variável (feminino/masculino; branca/negra), excluindo candidatos com outra categoria ou sem essa informação.
 
@@ -120,17 +120,17 @@ A amostra efetivamente usada em cada especificação da tripla diferença (@sec-
 |---|---|---:|---:|
 | Modelo 1 (H3) | Completa | 36.610 | 36.182 |
 | Modelo 2 (H4, incumbência) | Não incumbentes | 34.347 | 33.929 |
-| Modelo 2 (robustez) | Completa | 36.610 | 36.182 |
 | Modelo 3 (H4, liderança) | Não líderes | 33.707 | 33.300 |
-| Modelo 3 (robustez) | Completa | 35.217 | 34.796 |
 
 : N de candidatos por especificação e amostra {#tbl-amostra-especificacoes}
 
+Dois partidos da amostra, porém — PMB e PMN —, não têm nenhum registro de órgão partidário no sistema do TSE sob nenhum nome, histórico ou atual; seus candidatos (3,3% da amostra) são tratados como dado ausente na variável de liderança formal, não como não-líderes, e excluídos do Modelo 3.
+
 ### Estratégia de inferência {#sec-estrategia-inferencia}
 
-Para estimar o efeito da criação do incentivo financeiro ao voto de mulheres e candidatos negros sobre a estratégia adotada pelos partidos, é usado o método de diferenças em diferenças (DiD), seguindo a mesma lógica de identificação usada por @FonsecaThomeGuedesNeto2026_money_talks para testar o efeito da própria EC 111. A lógica de uma diferença em diferenças é comparar a mudança de um resultado ao longo do tempo, antes e depois de uma intervenção, entre um grupo afetado por ela e um grupo de comparação não afetado. A diferença entre essas duas mudanças isola o efeito da intervenção, sob o pressuposto de que, na ausência dela, os dois grupos teriam evoluído de forma parecida. Essa é a hipótese de tendências paralelas [@AngristPischke2009_mostly_harmless]. Aqui, a intervenção é o incentivo financeiro de 2022 criado pela EC 111/2021, art. 2º, que vale apenas para Deputado Federal. Deputado Estadual, sujeito aos mesmos partidos e ao mesmo contexto político-eleitoral, mas não ao incentivo, funciona como grupo de comparação. 2018 e 2022 servem como o antes e o depois.
+Para estimar o efeito da criação do incentivo financeiro ao voto em candidaturas de mulheres e pessoas negras sobre a estratégia adotada pelos partidos, é usado o método de diferenças em diferenças (DiD), seguindo a mesma lógica de identificação usada por @FonsecaThomeGuedesNeto2026_money_talks. A lógica de uma diferença em diferenças é comparar a mudança de um resultado ao longo do tempo, antes e depois de uma intervenção, entre um grupo afetado por ela e um grupo de comparação não afetado. A diferença entre essas duas mudanças isola o efeito da intervenção, sob o pressuposto de que, na ausência dela, os dois grupos teriam evoluído de forma parecida. Essa é a hipótese de tendências paralelas [@AngristPischke2009_mostly_harmless]. Aqui, a intervenção é o incentivo financeiro de 2022 criado pela EC 111/2021, art. 2º, que vale apenas para Deputado Federal. Deputado Estadual, sujeito aos mesmos partidos e ao mesmo contexto político-eleitoral, mas não ao incentivo, funciona como grupo de comparação e os anos de 2018 e 2022 servem como os períodos observados antes e o depois da intervenção.
 
-Este capítulo estende essa lógica para uma terceira dimensão de comparação, entre grupos de candidatos (mulher e homem, negra e branca), testando se o efeito é específico ao grupo que o incentivo beneficia. Por isso, é chamado de tripla diferença (ou *difference-in-differences-in-differences*, DDD). O coeficiente de interesse é a interação tripla entre Federal, Ano 2022 e Grupo. Esse coeficiente mede o quanto a queda de sobreposição territorial entre 2018 e 2022 é maior, ou menor, para o grupo incentivado especificamente no cargo Federal, além do que cargo, ano e grupo explicam isoladamente ou em pares. Formalmente, o modelo estimado é:
+Este capítulo estende essa lógica para uma terceira dimensão de comparação, entre grupos de candidatos (mulher e homem, negra e branca), testando se o efeito é específico ao grupo que o incentivo beneficia. Por isso, é chamado de tripla diferença (ou *difference-in-differences-in-differences*, DDD). O coeficiente de interesse é a interação tripla entre o cargo em disputa (Federal x Estadual), o ano do pleito eleitoral (2022 x 2018) e o grupo do candidato (de acordo com gênero ou raça autodeclarados). Esse coeficiente mede o quanto a variação de sobreposição territorial entre 2018 e 2022 é maior ou menor para o grupo incentivado especificamente na disputa para deputado federal, além do que cargo, ano e grupo explicam isoladamente ou em pares sobre esta variação. Formalmente, o modelo estimado é:
 
 $$
 \begin{aligned}
@@ -140,7 +140,7 @@ Y_i = \ & \beta_0 + \beta_1 \text{Federal}_i + \beta_2 \text{Ano2022}_i + \beta_
 \end{aligned}
 $$
 
-em que $G_i$ é Mulher ou Negra, em dois modelos separados. $Y_i$ é a variável de sobreposição relevante para cada especificação, apresentada a seguir, e $\beta_7$ é o coeficiente de interesse. A unidade é o candidato, não o par candidato-município. A especificação inclui efeitos fixos de partido e de estado, com erros-padrão clusterizados nas mesmas duas dimensões. Ambos são pré-determinados, escolhidos antes da campanha, e não consequência da estratégia de gasto. Uma especificação adicional inclui incumbência, também pré-determinada, como controle de decomposição. Essa mesma estrutura de efeitos fixos, clusterização e forma de regressão vale para as três especificações a seguir. O que muda entre elas é a variável dependente $Y_i$ e, em dois casos, a amostra.
+em que $G_i$ é Mulher ou Negra, em dois modelos separados. $Y_i$ é a variável de sobreposição relevante para cada especificação, apresentada a seguir, e $\beta_7$ é o coeficiente de interesse. A unidade é o candidato, não o par candidato-município. A especificação inclui efeitos fixos de partido e de estado, com erros-padrão clusterizados nas mesmas duas dimensões. Ambos são pré-determinados, escolhidos antes da campanha, e não consequência da estratégia de gasto. Essa mesma estrutura de efeitos fixos, clusterização e forma de regressão vale para as três especificações a seguir. O que muda entre elas é a variável dependente $Y_i$ e, em dois casos, a amostra.
 
 Em cada especificação, $Y_i$ é a proporção dos municípios de $i$ com QL do gasto acima de 1 que são compartilhados com um correligionário de um tipo específico:
 
@@ -150,59 +150,66 @@ $$
 
 A primeira especificação (Modelo 1, H3) mede a sobreposição de forma geral, com qualquer correligionário do mesmo partido, cargo e ano (X = qualquer correligionário). É uma medida ampla que não distingue se o correligionário sobreposto é um candidato protegido pelo partido ou outro candidato também marginal. A segunda (Modelo 2, H4) restringe X a correligionários incumbentes, isto é, eleitos no mesmo cargo na eleição anterior (2014 para candidatos de 2018, 2018 para candidatos de 2022). É a mesma variável já usada como decomposição na análise de incumbência apresentada mais adiante, testando o mecanismo de proteção de lideranças com mais precisão. A terceira (Modelo 3, também H4), mais robusta e mais alinhada à hipótese de coordenação partidária deste capítulo, restringe X a correligionários que ocupam cargo de liderança formal do partido (presidência, vice-presidência ou secretaria de finanças, no diretório nacional ou estadual/distrital). É uma medida direta de poder de decisão sobre a alocação de recursos do partido que, ao contrário da incumbência, não depende de o candidato ter permanecido no mesmo partido entre uma eleição e outra.
 
-A diferença entre as três especificações está, portanto, na definição de correligionário protegido usada no numerador e, nas duas últimas, também na amostra. A amostra do Modelo 1 é completa. A amostra principal do Modelo 2 é restrita a candidatos não incumbentes, pois o mecanismo testado é sobre desafiantes evitando o território de líderes já estabelecidos, uma pergunta distinta de saber se um incumbente se sobrepõe a outro incumbente. A amostra completa entra como robustez. Pelo mesmo racional, a amostra principal do Modelo 3 é restrita a candidatos que não são eles mesmos líderes do partido, com a amostra completa como robustez. Incumbência, porém, é uma medida indireta de "candidato protegido". Identifica quem já ocupou o cargo, não quem tem poder de decisão dentro do partido, e é definida por correspondência de CPF ao vencedor do pleito anterior, sem checar se o candidato permanece no mesmo partido. É um problema relevante, dado que a troca de partido entre eleições, a chamada janela partidária, é comum na política brasileira (Limitação 8). É essa limitação que motiva o Modelo 3, cuja medida de liderança formal, definida sobre o partido atual do candidato, não a herda. Um candidato é considerado líder do partido em determinado ciclo eleitoral se seu mandato em um dos três cargos se sobrepõe ao ano civil da eleição (2018 ou 2022). A liderança nacional conta para o candidato em qualquer estado em que concorra, enquanto a liderança estadual ou distrital conta apenas no estado correspondente. O vínculo entre o registro de liderança e o candidato é feito pelo título eleitoral, com cobertura completa (100%) na amostra deste capítulo.
-
 ## Resultados
 
 A Análise Descritiva a seguir usa o Modelo 1, mais amplo, de sobreposição com qualquer correligionário. A seção seguinte, sobre os efeitos do incentivo da EC 111, também usa o Modelo 2 e o Modelo 3, referentes a H4, de sobreposição especificamente com incumbentes e com líderes formais do partido.
 
 ### Análise Descritiva
 
-Entre 26% e 36% dos municípios em que ao menos um candidato de um partido concentrou gasto (QL > 1) têm dois ou mais candidatos do mesmo partido acima do QL simultaneamente. A coordenação territorial da lista partidária é fraca de forma consistente nas quatro combinações de cargo e ano.
+Entre 26% e 36% dos municípios em que ao menos um candidato de um partido concentrou gasto (QL > 1) têm dois ou mais candidatos do mesmo partido acima do QL simultaneamente. A coordenação territorial da lista partidária aparenta ser fraca de forma consistente nas quatro combinações de cargo e ano consideradas neste estudo.
 
-@fig-lacuna-genero e @fig-lacuna-raca mostram a lacuna de sobreposição territorial, em pontos percentuais, entre mulheres e homens e entre candidatos negros e brancos, por cargo e ano. Um teste t de Welch, calculado separadamente para cada combinação de cargo, ano e grupo mas não representado nas figuras, confirma que essa diferença de médias é estatisticamente significativa em todas as oito combinações, com p < 0,001, e que nenhuma das duas lacunas desaparece em nenhuma delas. As duas lacunas caem entre 2018 e 2022 nos dois cargos, mas em ritmos diferentes. A de gênero cai mais acentuadamente, de 7,5 para 3,1 pontos percentuais nas eleições estaduais e de 10,7 para 3,1 nas eleições para deputado federal. A de raça cai de forma mais moderada, de 7,6 para 6,0 nas estaduais e de 5,8 para 3,8 nas federais, permanecendo maior em magnitude ao final do período nos dois cargos.
+O baixo nível de coordenação intrapartidário é explicado, em certa medida, pelo papel das capitais, municípios que concentram, por vezes, a maior parte do eleitorado do estado e que têm maior capacidade de influência sobre as demais localidades. Seria razoável supor que haveria nelas uma alocação de recursos desproporcional, concentrada. Capitais de fato têm taxa de sobreposição muito mais alta, de 71,3% a 95,3% dos municípios-capital com pelo menos um candidato acima do QL têm dois ou mais, contra 23,4% a 33,7% fora delas. Esse efeito, porém, é praticamente universal e não discrimina por grupo.
+
+A respeito das Hipóteses 1 e 2, que previam uma taxa de sobreposição maior para candidaturas de mulheres e pessoas negras, @fig-lacuna-genero e @fig-lacuna-raca confirmam a relação esperada. A distância entre estes grupos diminui entre 2018 e 2022 nos dois cargos, mas em ritmos diferentes. A de gênero cai mais acentuadamente, de 7,5 para 3,1 pontos percentuais nas eleições estaduais e de 10,7 para 3,1 nas eleições para deputado federal. A de raça cai de forma mais moderada, de 7,6 para 6,0 nas estaduais e de 5,8 para 3,8 nas federais, permanecendo maior em magnitude ao final do período nos dois cargos. Um teste t de Welch, calculado separadamente para cada combinação de cargo, ano e grupo mas não representado nas figuras, confirma que essa diferença de médias é estatisticamente significativa em todas as oito combinações, com p < 0,001, e que nenhuma das duas lacunas desaparece em nenhuma delas.
 
 ![Lacuna de sobreposição territorial por gênero, cargo e ano](../Figures/06-sobreposicao-territorial-partido/grafico_lacuna_genero.png){#fig-lacuna-genero width="70%"}
 
 ![Lacuna de sobreposição territorial por raça, cargo e ano](../Figures/06-sobreposicao-territorial-partido/grafico_lacuna_raca.png){#fig-lacuna-raca width="70%"}
 
-Uma pergunta natural é se esse padrão está concentrado nas capitais estaduais — municípios que concentram, por vezes, a maior parte do eleitorado do estado e que têm maior capacidade de influência sobre as demais localidades, o que tornaria esperável uma alocação de recursos desproporcional, concentrada nelas. A resposta é que sim. Capitais têm taxa de sobreposição muito mais alta: de 71,3% a 95,3% dos municípios-capital com pelo menos um candidato acima do QL têm dois ou mais, contra 23,4% a 33,7% fora delas. Esse efeito, porém, é praticamente universal e não discrimina por grupo. Dentro das capitais, nem a lacuna de gênero (0,1 p.p., p = 0,262) nem a de raça (−0,1 p.p., p = 0,663) são estatisticamente significativas.
-
-As lacunas documentadas acima são, portanto, um fenômeno de município não-capital. Recalculando a taxa pessoal de sobreposição restrita aos municípios não-capital de cada candidato, tanto a lacuna de gênero (61,8% contra 56,8%, ou 5,0 p.p., p < 0,001) quanto a de raça (59,3% contra 57,7%, ou 1,6 p.p., p = 0,002) permanecem robustas. Os dois grupos enfrentam mais sobreposição fora das capitais, ainda que a lacuna de gênero seja consideravelmente maior em magnitude.
-
-Candidatos incumbentes, isto é, eleitos no mesmo cargo na eleição anterior, têm território sistematicamente mais exclusivo nas quatro combinações de cargo e ano. Nas eleições estaduais de 2018, a taxa é de 46,3% contra 65,1%. Nas estaduais de 2022, de 55,8% contra 72,4%. Nas eleições para deputado federal de 2018, de 43,0% contra 56,1%. Nas federais de 2022, de 51,9% contra 67,1%. No modelo de tripla diferença com controle de incumbência, o coeficiente de `incumbente` é grande e altamente significativo nas duas especificações, de aproximadamente −16,5 p.p., com p < 0,0001. Incumbentes se sobrepõem muito menos a correligionários do que não incumbentes, controlando por gênero ou raça, partido e estado.
-
-Candidatos eleitos seguem o mesmo padrão. A sobreposição cresce com o desempenho eleitoral pior na maioria das células cargo por ano: eleito é menor que competitivo não eleito, que por sua vez é menor que não competitivo, como nas eleições para deputado federal de 2022, com 54,5%, 55,4% e 69,2%. A única exceção é nas federais de 2018, em que competitivo não eleito (41,0%) fica ligeiramente abaixo de eleito (43,7%). Candidatos eleitos tendem, portanto, a ter menor taxa de sobreposição do que candidatos que não se elegem. Esse padrão reforça a expectativa de que existe uma relação positiva entre a exclusividade territorial da campanha e o desempenho eleitoral: quanto menos um candidato compartilha seu território de gasto com correligionários, melhor tende a ser seu resultado nas urnas, o mesmo padrão que a incumbência já sugeria, agora replicado no desempenho do próprio ciclo.
+Dentro das capitais, nem a lacuna de gênero (0,1 p.p., p = 0,262) nem a de raça (−0,1 p.p., p = 0,663) são estatisticamente significativas. As lacunas documentadas acima são, portanto, um fenômeno de município não-capital. Recalculando a taxa pessoal de sobreposição restrita aos municípios não-capital de cada candidato, tanto a lacuna de gênero (61,8% contra 56,8%, ou 5,0 p.p., p < 0,001) quanto a de raça (59,3% contra 57,7%, ou 1,6 p.p., p = 0,002) permanecem robustas. Os dois grupos enfrentam mais sobreposição fora das capitais, ainda que a lacuna de gênero seja consideravelmente maior em magnitude.
 
 ### Efeitos do incentivo da EC 111
 
-@tbl-modelo123-mulher e @tbl-modelo123-negra apresentam os coeficientes completos da tripla interação entre Federal, 2022 e Grupo (H3), nos três modelos de sobreposição: Modelo 1, com qualquer correligionário; Modelo 2 (H4), com correligionário incumbente; Modelo 3 (H4), com correligionário líder do partido. @fig-modelo1-modelo2-modelo3 visualiza a estimativa da tripla diferença, o coeficiente de interesse em cada modelo, com intervalo de confiança de 95%.
+@tbl-modelo1, @tbl-modelo2 e @tbl-modelo3 apresentam os coeficientes completos da tripla interação entre Federal, 2022 e Grupo (H3), um modelo por tabela: Modelo 1, com qualquer correligionário; Modelo 2 (H4), com correligionário incumbente; Modelo 3 (H4), com correligionário líder do partido. Cada tabela reporta as duas variáveis dependentes de interesse, candidaturas femininas e candidaturas negras, lado a lado. @fig-modelo1-modelo2-modelo3 visualiza a estimativa da tripla diferença, o coeficiente de interesse em cada modelo, com intervalo de confiança de 95%.
 
-| | Modelo 1 | Modelo 2 | Modelo 3 |
-|---|---:|---:|---:|
-| Deputado Federal | −9,1\*\*\*<br>(2,0) | −7,3\*\*\*<br>(1,9) | 4,4\*\*<br>(2,1) |
-| Ano 2022 | 6,3\*\*\*<br>(1,3) | 1,0<br>(2,2) | −1,7<br>(1,4) |
-| Mulher | 7,5\*\*\*<br>(1,0) | 4,6\*\*\*<br>(1,1) | 3,7\*\*\*<br>(0,8) |
-| Deputado Federal × Ano 2022 | 4,1\*\*<br>(1,8) | 2,4<br>(1,4) | 4,3<br>(2,7) |
-| Deputado Federal × Mulher | 3,1\*\*\*<br>(0,9) | −0,1<br>(1,6) | 2,7\*\*<br>(1,2) |
-| Ano 2022 × Mulher | −4,5\*\*\*<br>(1,1) | −2,8\*\*<br>(1,3) | −0,9<br>(1,0) |
-| Deputado Federal × Ano 2022 × Mulher | −2,9\*<br>(1,5) | −1,4<br>(1,5) | −4,2\*\*\*<br>(0,9) |
-| N | 36.610 | 34.347 | 33.707 |
+| | Mulher | Negra |
+|---|---:|---:|
+| Deputado Federal | −9,1\*\*\*<br>(2,0) | −7,0\*\*\*<br>(1,8) |
+| Ano 2022 | 6,3\*\*\*<br>(1,3) | 5,4\*\*\*<br>(1,3) |
+| Grupo | 7,5\*\*\*<br>(1,0) | 7,4\*\*\*<br>(0,8) |
+| Deputado Federal × Ano 2022 | 4,1\*\*<br>(1,8) | 2,8\*<br>(1,6) |
+| Deputado Federal × Grupo | 3,1\*\*\*<br>(0,9) | −2,0<br>(1,4) |
+| Ano 2022 × Grupo | −4,5\*\*\*<br>(1,1) | −1,7\*<br>(0,9) |
+| Deputado Federal × Ano 2022 × Grupo | −2,9\*<br>(1,5) | 0,7<br>(2,1) |
+| N | 36.610 | 36.182 |
 
-: Tripla diferença (Federal × 2022 × Mulher) sobre a taxa de sobreposição, por modelo. Coeficientes em pontos percentuais; erro-padrão clusterizado (partido, estado) entre parênteses. \* p < 0,1; \*\* p < 0,05; \*\*\* p < 0,01. Modelo 1: qualquer correligionário, amostra completa. Modelo 2: correligionário incumbente, amostra restrita a não incumbentes. Modelo 3: correligionário líder do partido, amostra restrita a não líderes. {#tbl-modelo123-mulher}
+: Modelo 1 — sobreposição com qualquer correligionário, amostra completa. Coeficientes em pontos percentuais; erro-padrão clusterizado (partido, estado) entre parênteses. \* p < 0,1; \*\* p < 0,05; \*\*\* p < 0,01. {#tbl-modelo1}
 
-| | Modelo 1 | Modelo 2 | Modelo 3 |
-|---|---:|---:|---:|
-| Deputado Federal | −7,0\*\*\*<br>(1,8) | −6,7\*\*\*<br>(1,7) | 7,4\*\*\*<br>(1,9) |
-| Ano 2022 | 5,4\*\*\*<br>(1,3) | 1,2<br>(2,7) | −0,6<br>(1,5) |
-| Negra | 7,4\*\*\*<br>(0,8) | 3,8\*\*<br>(1,5) | 5,8\*\*<br>(2,1) |
-| Deputado Federal × Ano 2022 | 2,8\*<br>(1,6) | 2,1<br>(2,1) | 0,5<br>(2,9) |
-| Deputado Federal × Negra | −2,0<br>(1,4) | −1,0<br>(1,9) | −5,1<br>(3,6) |
-| Ano 2022 × Negra | −1,7\*<br>(0,9) | −2,4<br>(1,9) | −3,2<br>(2,3) |
-| Deputado Federal × Ano 2022 × Negra | 0,7<br>(2,1) | −0,5<br>(1,8) | 5,8\*<br>(3,3) |
-| N | 36.182 | 33.929 | 33.300 |
+| | Mulher | Negra |
+|---|---:|---:|
+| Deputado Federal | −7,3\*\*\*<br>(1,9) | −6,7\*\*\*<br>(1,7) |
+| Ano 2022 | 1,0<br>(2,2) | 1,2<br>(2,7) |
+| Grupo | 4,6\*\*\*<br>(1,1) | 3,8\*\*<br>(1,5) |
+| Deputado Federal × Ano 2022 | 2,4<br>(1,4) | 2,1<br>(2,1) |
+| Deputado Federal × Grupo | −0,1<br>(1,6) | −1,0<br>(1,9) |
+| Ano 2022 × Grupo | −2,8\*\*<br>(1,3) | −2,4<br>(1,9) |
+| Deputado Federal × Ano 2022 × Grupo | −1,4<br>(1,5) | −0,5<br>(1,8) |
+| N | 34.347 | 33.929 |
 
-: Tripla diferença (Federal × 2022 × Negra) sobre a taxa de sobreposição, por modelo. Coeficientes em pontos percentuais; erro-padrão clusterizado (partido, estado) entre parênteses. \* p < 0,1; \*\* p < 0,05; \*\*\* p < 0,01. Modelo 1: qualquer correligionário, amostra completa. Modelo 2: correligionário incumbente, amostra restrita a não incumbentes. Modelo 3: correligionário líder do partido, amostra restrita a não líderes. {#tbl-modelo123-negra}
+: Modelo 2 — sobreposição com correligionário incumbente, amostra restrita a não incumbentes. Coeficientes em pontos percentuais; erro-padrão clusterizado (partido, estado) entre parênteses. \* p < 0,1; \*\* p < 0,05; \*\*\* p < 0,01. {#tbl-modelo2}
+
+| | Mulher | Negra |
+|---|---:|---:|
+| Deputado Federal | 4,4\*\*<br>(2,1) | 7,4\*\*\*<br>(1,9) |
+| Ano 2022 | −1,7<br>(1,4) | −0,6<br>(1,5) |
+| Grupo | 3,7\*\*\*<br>(0,8) | 5,8\*\*<br>(2,1) |
+| Deputado Federal × Ano 2022 | 4,3<br>(2,7) | 0,5<br>(2,9) |
+| Deputado Federal × Grupo | 2,7\*\*<br>(1,2) | −5,1<br>(3,6) |
+| Ano 2022 × Grupo | −0,9<br>(1,0) | −3,2<br>(2,3) |
+| Deputado Federal × Ano 2022 × Grupo | −4,2\*\*\*<br>(0,9) | 5,8\*<br>(3,3) |
+| N | 33.707 | 33.300 |
+
+: Modelo 3 — sobreposição com correligionário líder do partido, amostra restrita a não líderes. Coeficientes em pontos percentuais; erro-padrão clusterizado (partido, estado) entre parênteses. \* p < 0,1; \*\* p < 0,05; \*\*\* p < 0,01. {#tbl-modelo3}
 
 ![Modelo 1 (amplo) vs. Modelo 2 (incumbente) vs. Modelo 3 (líder do partido)](../Figures/06-sobreposicao-territorial-partido/grafico_comparativo_modelo1_modelo2_modelo3.png){#fig-modelo1-modelo2-modelo3 width="90%"}
 
@@ -212,9 +219,13 @@ Para gênero, H3 encontra apenas um sinal marginal no Modelo 1: negativo, como e
 
 O teste seguinte verifica se esse sinal marginal, presente para gênero e ausente para raça, é especificamente uma queda de sobreposição com candidatos protegidos pelo partido, ou se é difuso. O Modelo 1 mostrou um sinal marginal, restrito às eleições para deputado federal, para mulheres, e nenhum sinal para candidatos negros. O Modelo 2 pergunta se o sinal de gênero é, especificamente, uma queda na sobreposição com correligionários incumbentes, o teste direto do mecanismo de proteção de lideranças, H4.
 
+Descritivamente, candidatos incumbentes, isto é, eleitos no mesmo cargo na eleição anterior, têm território sistematicamente mais exclusivo nas quatro combinações de cargo e ano: nas eleições estaduais de 2018, a taxa de sobreposição é de 46,3% contra 65,1%; nas estaduais de 2022, de 55,8% contra 72,4%; nas eleições para deputado federal de 2018, de 43,0% contra 56,1%; nas federais de 2022, de 51,9% contra 67,1%. É esse padrão que o Modelo 2 testa causalmente, perguntando se a queda de sobreposição especificamente com incumbentes se concentra nas eleições para deputado federal.
+
 Para mulheres, o Modelo 2 dá um resultado menor em magnitude do que o Modelo 1 (−1,4 contra −2,9 p.p.) e mais distante da significância convencional (p = 0,368 contra 0,057). O sinal marginal do Modelo 1 se dilui, em vez de se concentrar, quando a atenção se volta especificamente para incumbentes: o oposto do que o mecanismo de proteção previa. Para candidatos negros, o resultado permanece nulo (p = 0,788, contra p = 0,719 no Modelo 1), sem mudança de padrão relevante.
 
 O Modelo 2 diluiu o sinal em vez de concentrá-lo. Isso é compatível com dois cenários opostos. O mecanismo de proteção de lideranças simplesmente não existe, ou existe mas a incumbência é uma medida ruidosa demais de "candidato protegido" para captá-lo (Limitação 8). O Modelo 3, que usa liderança formal do partido em vez de incumbência, ajuda a distinguir entre essas duas leituras.
+
+Descritivamente, candidatos que ocupam cargo de liderança formal do partido também têm território mais exclusivo: nas eleições estaduais de 2018, a taxa de sobreposição é de 62,6% contra 76,5%; nas estaduais de 2022, de 69,2% contra 80,4%; nas eleições para deputado federal de 2018, de 39,2% contra 70,7%; nas federais de 2022, de 61,3% contra 75,6%. É esse padrão que o Modelo 3 testa causalmente, perguntando se a queda de sobreposição especificamente com líderes formais se concentra nas eleições para deputado federal.
 
 Para candidatos negros, o Modelo 3 confirma o padrão dos dois anteriores. Não há evidência do mecanismo, e aqui o coeficiente é ainda o de sinal oposto ao previsto, embora não estatisticamente distinguível de zero a 5% (p = 0,089). Três especificações diferentes de "candidato protegido" convergem em não encontrar o mecanismo para raça.
 
