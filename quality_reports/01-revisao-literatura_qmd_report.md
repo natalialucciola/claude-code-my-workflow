@@ -72,4 +72,15 @@ Todas as 12 chaves de citação usadas no capítulo foram checadas contra `Bibli
 - **15 issues Minor** (7–21) — formatação de itálico, siglas, repetição de estilo, frases longas.
 - Nenhum erro de sintaxe de citação pandoc, colchetes desbalanceados, hierarquia de headers ou chave de citação inexistente.
 
-Nenhum arquivo foi editado — este é só o relatório, conforme o protocolo `/proofread`.
+Nenhum arquivo foi editado no momento deste relatório, conforme o protocolo `/proofread`.
+
+---
+
+## Atualização (2026-09-01): todas as 21 correções aplicadas
+
+A pedido da autora, todas as correções acima (6 major + 15 minor) foram aplicadas diretamente em `Quarto/thesis/chapters/01-revisao-literatura.qmd`. Destaques:
+
+- **Issue 2 corrigida:** "23 anos" → "21 anos" nas duas ocorrências (Trajetória Legal e Síntese).
+- **Issue 4 corrigida:** primeira menção de "pretas e pardas" agora explica que é a categoria oficial de autodeclaração do IBGE, com nota de que o capítulo passa a usar "candidaturas negras" — e "candidatos afro-brasileiros" (na frase da EC 111) foi alinhado para "candidatos negros".
+- Demais issues (1, 3, 5, 6 e as 15 minor) aplicadas conforme a proposta de correção de cada uma.
+- Verificação pós-edição: todas as 12 chaves de citação continuam existindo em `Bibliography_base.bib`; colchetes e marcadores de itálico permanecem balanceados no arquivo.
