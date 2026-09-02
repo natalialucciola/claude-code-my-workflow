@@ -40,6 +40,16 @@ Tentativa de teste pequeno (`candidate_fed(year=2022, uf="DF")` e `elections_tse
 
 **Decisão:** seguir com o caminho manual já implementado em `scripts/utils_tse.R` (baixar zips pelo navegador em `dadosabertos.tse.jus.br`, salvar em `dados/brutos/`). O fallback automático via `electionsBR` fica documentado como não-funcional nesta rede por ora; reavaliar só se houver sinal de que o TSE mudou a política de bot-blocking.
 
+## Pesquisa externa sobre o bloqueio do TSE (2026-08-20)
+
+Buscado na internet (GitHub, fóruns, redes sociais) se havia discussão pública sobre esse bloqueio, antes de assumir o caminho manual como definitivo.
+
+- **Mesmo bug documentado por outro usuário, ainda sem solução:** [issue #52](https://github.com/silvadenisson/electionsBR/issues/52) do repositório oficial do `electionsBR` (aberta em 03/2025 por `hugocmachado`, ainda aberta, sem resposta de mantenedor) reporta o mesmo erro exato — `"erro 1 na extração a partir de arquivo zip"` em `elections_tse()` — para múltiplos anos (2000, 2002) e tipos de dado. Confirma que não é peculiaridade da nossa rede: é um problema recorrente e não resolvido do pacote/TSE, com >1 ano de existência. Issues relacionadas também abertas e sem solução: [#37](https://github.com/silvadenisson/electionsBR/issues/37) (2021, falha de download do TSE) e [#53](https://github.com/silvadenisson/electionsBR/issues/53) (09/2025, `elections_cepesp()` não funciona — a fonte alternativa CEPESPdata citada no plano de pesquisa também está com problema). O projeto parece pouco mantido atualmente (única issue de 2026, #54/maio, é um bug trivial no Windows sem relação).
+- **Nenhuma discussão pública em fóruns/Twitter/comunidades de ciência de dados eleitoral** encontrada sobre esse bloqueio especificamente. Hipótese: o pacote falha silenciosamente (retorna data.frame vazio em vez de erro fatal), então é fácil um usuário não perceber que o download falhou — explicaria por que a issue #52 ficou sem atenção de mantenedor.
+- **Corroboração independente do 403:** tentativas de `WebFetch` (infraestrutura de busca web, rede diferente da nossa) em duas páginas institucionais do próprio TSE — `dadosabertos.tse.jus.br/about` e a notícia de 03/2026 "Portal de Dados Abertos amplia acesso a informações eleitorais" — **também retornaram HTTP 403**. Segunda fonte independente (rede diferente da usuária e desta sessão) confirmando que `tse.jus.br`/`dadosabertos.tse.jus.br` bloqueia agressivamente clientes não-navegador de forma ampla, não pontual.
+- Nota lateral: a documentação do portal (via busca) menciona limite de 100 requisições/segundo por IP com bloqueio de 10 min se excedido — não bate com o padrão observado (bloqueio persistente em requisição única, não por taxa), então não parece ser a causa aqui.
+- **Conclusão:** não há solução alternativa pronta circulando publicamente. O workaround manual (`utils_tse.R`) continua sendo o caminho mais confiável; não vale reinvestir tempo tentando contornar via `electionsBR`/`httr` sem sinal de mudança na política do TSE.
+
 ## Next Steps
 
 - [x] **Reteste do bloqueio TSE** (2026-08-20) — confirmado que persiste, ver acima. Não retestar de novo sem motivo (ex. notícia de mudança na política do TSE).
