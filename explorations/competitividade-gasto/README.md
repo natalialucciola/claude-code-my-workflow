@@ -1,0 +1,65 @@
+# Competitividade da candidatura medida pelo gasto
+
+**Status:** exploração ativa (etapa 1 concluída em 2026-09-28)
+
+## Objetivo
+
+Repetir parte das análises da tese com uma medida de competitividade da **candidatura** que não dependa do resultado (votos), e sim do **volume de gasto de campanha**. Pergunta de fundo: o aumento de votos das mulheres candidatas a deputada (federal e estadual) entre 2018 e 2022 foi maior entre candidaturas mais ou menos competitivas?
+
+Requisito: a medida precisa ser comparável entre Deputado Federal e Deputado Estadual, em todas as UFs.
+
+## Medidas
+
+| Variável | Definição | Compara cargos? | Compara UFs? | Compara anos? |
+|---|---|---|---|---|
+| `pct_teto` | gasto / limite legal do cargo | sim | **não** (limite igual em todas as UFs) | **não** (gasto real cresceu muito em 2022) |
+| `razao_min` | gasto / menor gasto entre eleitos (ano × cargo × UF) | sim | sim | sim |
+| `razao_p10` | gasto / p10 do gasto dos eleitos (ano × cargo × UF) | sim | sim | sim |
+| `pctl_uf` | percentil do gasto (ano × cargo × UF) | sim | sim | sim |
+
+- **Gasto** = despesas contratadas da prestação final do TSE, **excluindo** "Doações financeiras a outros candidatos/partidos". Candidatura apta sem despesa entra com gasto 0.
+- **Limites legais** (iguais em todas as UFs): 2018 — R$ 2,5 mi (federal) e R$ 1,0 mi (estadual), Lei 13.488/2017; 2022 — R$ 3.176.572,53 e R$ 1.270.629,01, Portaria TSE 647/2022 (2018 + IPCA).
+- `razao_min` transpõe para o gasto o critério de Wylie, dos Santos & Marcelino (2019), que usam votos < 1% do "quociente mínimo" (votos do eleito menos votado no distrito).
+
+## Achados da etapa 1
+
+1. `pct_teto` não serve como medida principal: a mediana de gasto dos eleitos (federal, 2022) varia de 11% a 71% do limite entre UFs, e sobe de 25% (2018) para 40% (2022) do limite com o limite só corrigido pelo IPCA.
+2. `razao_min` é instável: há eleitos sem despesa e, em 14 combinações ano × cargo × UF, o eleito que menos gastou ficou abaixo de 0,5% do limite.
+3. `razao_p10` é a medida mais estável entre cargos e anos. Corte 0,5 → 87–92% das competitivas pelo voto acima; 78–89% das não competitivas abaixo. `pctl_uf ≥ 75` tem desempenho parecido (robustez).
+4. As mulheres gastam proporcionalmente mais que os homens em todos os grupos de resultado — inclusive entre as não competitivas pelo voto (estadual 2022: mediana 1,6% vs. 0,9% do limite). Uma medida pelo gasto classifica como competitivas mais mulheres sem votos (provável efeito da cota do FEFC); isso precisa ser discutido.
+5. Repasses a outras candidaturas vêm sobretudo de homens competitivos a federal (44% dos eleitos em 2018 repassaram; 12% do gasto bruto). Entre mulheres não competitivas os repasses são pequenos (2–3% do gasto).
+
+## Achados da etapa 2 — distribuição por gênero, raça e resultado (script 02)
+
+Régua: `razao_p10`; patamar de referência 0,5× o p10 do gasto dos eleitos na UF. Sem médias: quantis, distribuições acumuladas e % acima do patamar (IC de Wilson). "Resultado" continua sendo a classificação **pelo voto** (≥ 10% do QE), usada só para descrever.
+
+1. **Mulheres e candidaturas negras se aproximaram do patamar entre 2018 e 2022**, sobretudo por raça e no estadual. Lacuna no % acima de 0,5× (pp): gênero — federal −7,2 → −4,4; estadual −2,3 → −0,3. Raça — federal −13,4 → −9,1; estadual −16,4 → −7,5.
+2. Maior avanço: mulheres negras (federal 12% → 17%; estadual 23% → 31%) e homens negros no estadual (20% → 28%). Homens brancos recuaram levemente (federal 31% → 29%; estadual 40% → 38%).
+3. Parte da aproximação ocorre **entre não competitivas pelo voto**: a mediana de `razao_p10` das mulheres não competitivas dobrou (federal 0,033 → 0,084; estadual 0,088 → 0,17), mais que a dos homens. Mais gasto sem voto correspondente (provável efeito da cota do FEFC).
+4. Entre eleitos e competitivos, a distribuição se comprimiu em 2022 para todos os grupos (a vantagem relativa de gasto das mulheres eleitas caiu: estadual, mediana 6,3 → 3,5).
+
+## Literatura consultada (2026-09-28)
+
+- Nenhum trabalho encontrado mede competitividade **da candidatura** pelo gasto comparando federal e estadual. A literatura brasileira classifica por voto: Wylie, dos Santos & Marcelino (2019, *Opinião Pública* 25(1)); Fabris et al. (2020, *RBPP*, 10% do QE); Fonseca, Thomé & Guedes-Neto (2026, *Electoral Studies* 101, também por % da votação).
+- Número efetivo de candidatos calculado com receitas: Thomsen (2022, *APSR* 117(2)) — nível da disputa, EUA.
+- Avelino & Biderman: sem medida de competitividade por gasto; o mais próximo é Avelino, Biderman & Desposato (2021, *BPSR* 16(1)), incumbência com regressão descontínua.
+- Teto de gastos como denominador: Avis, Ferraz, Finan & Varjão (2022, *AEJ: Applied* 14(4)).
+
+## Como rodar
+
+A partir da raiz do repositório, nesta ordem:
+
+```
+Rscript explorations/competitividade-gasto/R/01_competitividade_gasto.R
+Rscript explorations/competitividade-gasto/R/02_distribuicao_gasto_grupos.R
+```
+
+Entradas em `data/raw/` (copiadas do projeto de análise da tese; não versionadas): `despesas_categorizadas_dep_{2018,2022}.rds` (gerado por `Analise_Despesas_Genero_Raca.R`), `candidatos{2018,2022}.rds`, `candidatos_estadual_{2018,2022}.rds`, `eleitos_e_compet_{2018,2022}_df.rds`, `eleitos_e_compet_est_{2018,2022}_df.rds`.
+
+Saídas: `output/` (tabelas `.csv` e figuras `.png`/`.pdf`) e `data/processed/competitividade_gasto_cand.rds` (uma linha por candidatura apta, sem CPF; não versionado).
+
+## Próximos passos
+
+- [ ] Escolher o corte de `razao_p10` (entre 0,25 e 0,5) e fixar `pctl_uf` como robustez
+- [ ] Modelar a variação dos votos das mulheres 2018 → 2022 por faixa de competitividade pelo gasto
+- [ ] Comparar com a classificação por voto (≥ 10% do QE) já usada na tese
