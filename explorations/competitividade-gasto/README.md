@@ -48,6 +48,21 @@ Voto medido como participação nos votos nominais do cargo (soma das UFs). Part
 3. Entre as novas candidatas de 2022, as que gastaram ≥ 0,5× o patamar são 17% (federal) e 30% (estadual) delas, mas concentram 77% e 82% da votação das novas.
 4. Associação, não efeito: partidos dirigem recursos a candidaturas que já esperam ser viáveis.
 
+## Achados da etapa 4 — DiD federal × estadual, 2018 → 2022 (scripts 04–06)
+
+Desenho de Fonseca, Thomé & Guedes-Neto (2026): tratado = Deputado Federal (votos em dobro, EC 111/2021); controle = Estadual, mesma UF. Unidade: lista partido × UF (1.219 listas, painel balanceado, sem DF). DiD 2×2 via `did` (DR sem covariáveis = TWFE, checado no código). Plano: `quality_reports/plans/2026-09-28_competitividade-gasto-did.md`.
+
+Medidas e patamar de viabilidade: m2 = % do limite (≥ 5%); m6 = recursos do partido ÷ divisão igualitária entre as candidaturas do partido no cargo e UF (≥ 1×); m8 = gasto ÷ menor gasto dos eleitos com gasto ≥ 1% do limite (≥ 50%).
+
+Efeitos (pp, listas sem ponderação; ponderado por votos da lista em 2018 no CSV):
+
+- **Mulheres — recursos:** % dos recursos do partido para mulheres +15,7 (IC 11,2 a 20,2); % dos recursos para mulheres **viáveis** +9,3 a +13,9 nas três medidas (todos significativos; ponderado: +14 a +18).
+- **Mulheres — candidaturas viáveis:** % das candidaturas que são mulheres viáveis ≈ 0 (m2 +1,1; m6 +1,1; m8 −2,4, n.s.). → Mais dinheiro para as mulheres já viáveis, não mais mulheres viáveis.
+- **Mulheres — votos:** % dos votos da lista +5,2 (IC 1,7 a 8,7), mesma direção de Fonseca et al. (+4,4). Por faixa (m8): o ganho vem das faixas baixas (< 10%: +2,0; 10–25%: +2,3); na faixa ≥ 100%, +0,0. Ponderado pelo tamanho da lista, o ganho desloca para ≥ 100% (+3,7, n.s.).
+- **Negras/os:** sem efeito sobre votos (+2,0, n.s.) nem sobre recursos (+4,0, n.s.); a parcela de candidaturas negras viáveis caiu no federal em relação ao estadual (m8: −6,7) e os votos migraram da faixa ≥ 100% (−4,7) para < 10% (+4,7).
+- **Leitura:** o incentivo aumentou os recursos para mulheres, concentrados nas já viáveis; o ganho de votos da lista típica veio de mulheres pouco competitivas (como em Fonseca et al.). Não há evidência de que o ganho de votos se deva a mais mulheres terem se tornado viáveis pelos recursos.
+- **Limites:** só 2 períodos (sem teste de pré-tendência; placebo com 2014 pendente); tratamento no nível do cargo; muitos resultados (comparações múltiplas); faixas são resultado, não condição.
+
 ## Literatura consultada (2026-09-28)
 
 - Nenhum trabalho encontrado mede competitividade **da candidatura** pelo gasto comparando federal e estadual. A literatura brasileira classifica por voto: Wylie, dos Santos & Marcelino (2019, *Opinião Pública* 25(1)); Fabris et al. (2020, *RBPP*, 10% do QE); Fonseca, Thomé & Guedes-Neto (2026, *Electoral Studies* 101, também por % da votação).
@@ -63,6 +78,9 @@ A partir da raiz do repositório, nesta ordem:
 Rscript explorations/competitividade-gasto/R/01_competitividade_gasto.R
 Rscript explorations/competitividade-gasto/R/02_distribuicao_gasto_grupos.R
 Rscript explorations/competitividade-gasto/R/03_voto_por_faixa_gasto.R
+Rscript explorations/competitividade-gasto/R/04_receitas_partido.R      # requer data/raw/prestacao_de_contas_eleitorais_candidatos_{2018,2022}.zip
+Rscript explorations/competitividade-gasto/R/05_medidas_perfil_decomposicao.R
+Rscript explorations/competitividade-gasto/R/06_did_recursos_votos.R    # requer pacotes did e DRDID
 ```
 
 Entradas em `data/raw/` (copiadas do projeto de análise da tese; não versionadas): `despesas_categorizadas_dep_{2018,2022}.rds` (gerado por `Analise_Despesas_Genero_Raca.R`), `candidatos{2018,2022}.rds`, `candidatos_estadual_{2018,2022}.rds`, `eleitos_e_compet_{2018,2022}_df.rds`, `eleitos_e_compet_est_{2018,2022}_df.rds`.
