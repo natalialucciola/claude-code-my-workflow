@@ -119,7 +119,7 @@ R packages (`/r-package-check`) and more — see the README for the complete ind
 | Capítulo | Arquivo | Status | Conteúdo-chave |
 | --- | --- | --- | --- |
 | 0: Introdução | `chapters/00-introducao.qmd` | placeholder | — |
-| 1: Revisão de Literatura | `chapters/01-revisao-literatura.qmd` | placeholder | — |
+| 1: Revisão de Literatura | `chapters/01-revisao-literatura.qmd` | **rascunho** | 4 blocos: (I) fundamentos e tipologia de ação afirmativa por quê/como/onde (Pitkin, Htun, Krook, Dahlerup & Freidenvall, paridade latino-americana via Piscopo) + outras dimensões (raça, deficiência, povos indígenas, LGBTQIA+); (II) evidência comparada (Colômbia, Índia, Ruanda) e sínteses sistemáticas (Clayton, Schotte, Su & Chen); (III) trajetória legal brasileira de 30 anos (5 estações) e desenho eleitoral (lista aberta, Wylie & Santos). Reestruturado e revisado a partir dos 15+6 comentários em PDF da autora (02-05/09). Pendente: CoVe nas citações novas, decisão sobre termos em inglês remanescentes (*fast track*, *standing for*/*acting for*), proofread pós-reestruturação |
 | 2: Dados e Métodos | `chapters/02-dados-metodos.qmd` | placeholder | — |
 | 3: [empírico, provisório] | `chapters/03-indice-g-concentracao-geografica.qmd` | placeholder | Concentração geográfica (Índice G / QL) |
 | 4: [empírico, provisório] | `chapters/04-alinhamento-espacial-gasto-voto.qmd` | placeholder | Alinhamento espacial gasto-voto |
