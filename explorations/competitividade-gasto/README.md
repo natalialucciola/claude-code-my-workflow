@@ -60,7 +60,8 @@ Efeitos (pp, listas sem ponderação; ponderado por votos da lista em 2018 no CS
 - **Mulheres — candidaturas viáveis:** % das candidaturas que são mulheres viáveis ≈ 0 (m2 +1,1; m6 +1,1; m8 −2,4, n.s.). → Mais dinheiro para as mulheres já viáveis, não mais mulheres viáveis.
 - **Mulheres — votos:** % dos votos da lista +5,2 (IC 1,7 a 8,7), mesma direção de Fonseca et al. (+4,4). Por faixa (m8): o ganho vem das faixas baixas (< 10%: +2,0; 10–25%: +2,3); na faixa ≥ 100%, +0,0. Ponderado pelo tamanho da lista, o ganho desloca para ≥ 100% (+3,7, n.s.).
 - **Negras/os:** sem efeito sobre votos (+2,0, n.s.) nem sobre recursos (+4,0, n.s.); a parcela de candidaturas negras viáveis caiu no federal em relação ao estadual (m8: −6,7) e os votos migraram da faixa ≥ 100% (−4,7) para < 10% (+4,7).
-- **Leitura (revista após o placebo da etapa 5):** os recursos para mulheres cresceram mais no federal e se concentraram nas já viáveis, mas esse resultado **não passa no placebo** e não pode ser atribuído à EC 111. O ganho de votos passa no placebo; na lista típica veio de mulheres pouco competitivas (como em Fonseca et al.). Não há evidência de que o ganho de votos se deva a mais mulheres terem se tornado viáveis pelos recursos.
+- **Recursos por fonte (etapa 6, 2018 → 2022):** parcela dos recursos da lista destinada a mulheres — todas as receitas **+7,5** (IC 3,8 a 11,1; base 25%), recursos públicos FEFC + FP **+9,6**, transferências do partido **+15,7**; para mulheres viáveis, todas as receitas +3,0 a +6,1 (m8 n.s. sem ponderação), públicos +5,3 a +8,3, partido +9,3 a +13,9. O efeito cresce quanto mais a fonte é controlada pelo partido. Negras/os: todas as receitas +2,7 (n.s.), públicos +4,9, partido +4,0 (n.s.); para negras/os viáveis (m8), −4,2 a −7,0. Comparável a Fonseca et al. (+12,3% na parcela do orçamento de campanha para mulheres; sem efeito para negras/os).
+- **Leitura:** o incentivo está associado a mais recursos para mulheres, inclusive para as já viáveis, sobretudo nos recursos que o partido controla, mas não a mais mulheres viáveis; o ganho de votos da lista típica veio de mulheres pouco competitivas (como em Fonseca et al.). Não há evidência de que o ganho de votos se deva a mais mulheres terem se tornado viáveis pelos recursos. Para recursos não há teste de pré-tendência válido (ver etapa 5).
 - **Limites:** placebo com 2014 na etapa 5; tratamento no nível do cargo; muitos resultados (comparações múltiplas); faixas são resultado, não condição.
 
 ## Achados da etapa 5 — placebo com 2014 (script 07)
@@ -83,7 +84,7 @@ DiD com três eleições (`did`, base variável): placebo = federal × estadual 
 
 **Consequências para as conclusões da etapa 4:**
 1. O aumento dos votos das mulheres no federal (+5,2 pp) resiste ao placebo.
-2. O aumento dos recursos para mulheres (inclusive viáveis) **não** resiste: entre 2014 e 2018 a parcela das mulheres caiu muito mais no federal que no estadual, e 2018→2022 é em boa parte reversão. Ressalva: 2018 já tinha a regra dos 30% do FEFC (nos dois cargos, com possível intensidade diferente) e em 2014 os "recursos do partido" incluíam doação empresarial — o placebo de recursos compara regimes diferentes.
+2. **Decisão da autora (2026-09-28): 2014 não serve de referência de tendência para recursos.** O fim da doação empresarial (2015) é uma mudança muito maior que a cota de recursos públicos; o placebo de recursos (−22,6 pp) compara regimes de financiamento diferentes e não é interpretado. Os resultados de recursos ficam como DiD 2×2 sem pré-teste (etapa 4).
 3. Para candidaturas negras, a queda de viáveis no federal (−6,6) e dos recursos para viáveis (−6,3) resiste ao placebo; o deslocamento de votos entre faixas, não.
 
 ## Literatura consultada (2026-09-28)

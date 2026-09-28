@@ -3,8 +3,9 @@
 #
 # Extrai de data/raw/prestacao_de_contas_eleitorais_candidatos_{ano}.zip (TSE) as
 # receitas de Deputado Federal e Estadual e resume, por candidatura:
-#   receita_total, receita_partido (origem "Recursos de partido político"),
-#   e, dentro dela, FEFC e Fundo Partidário.
+#   receita_total (todas as fontes), receita_partido (origem "Recursos de partido
+#   político"; dentro dela, FEFC e Fundo Partidário) e receita_publica (FEFC + Fundo
+#   Partidário de qualquer origem).
 # A medida 6 (parcela dos recursos do partido na lista) é calculada no script 05.
 #
 # Rodar a partir da raiz do repositório:
@@ -58,6 +59,8 @@ por_cand <- rec |>
                                                str_detect(DS_FONTE_RECEITA, "(?i)especial")], na.rm = TRUE),
             partido_fp      = sum(VR_RECEITA[eh_partido(DS_ORIGEM_RECEITA) &
                                                str_detect(DS_FONTE_RECEITA, "(?i)partid")], na.rm = TRUE),
+            # recursos públicos: FEFC + Fundo Partidário de qualquer origem (partido ou outros candidatos)
+            receita_publica = sum(VR_RECEITA[str_detect(DS_FONTE_RECEITA, "(?i)especial|partid")], na.rm = TRUE),
             .by = c(ANO, DS_CARGO, SG_UF, SQ_CANDIDATO))
 saveRDS(por_cand, file.path(proc_dir, "receitas_cand_dep.rds"))
 

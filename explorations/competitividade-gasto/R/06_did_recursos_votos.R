@@ -6,12 +6,15 @@
 #
 # Unidade: lista = partido (siglas de 2018 harmonizadas para 2022) × UF × cargo.
 # Tratado: Deputado Federal; controle: Deputado Estadual (mesma UF). Períodos 2018 e
-# 2022 → Callaway & Sant'Anna com 2 períodos = DiD 2×2 (sem teste de pré-tendência;
-# placebo com 2014 fica para a próxima rodada). Painel balanceado de listas.
+# 2022 → Callaway & Sant'Anna com 2 períodos = DiD 2×2 (sem teste de pré-tendência:
+# 2014 não serve de referência para recursos — fim da doação empresarial em 2015).
+# Painel balanceado de listas.
 #
 # Resultados (pontos percentuais; g = mulheres ou negras/os):
-#   Recursos:  rec_g            % dos recursos do partido na lista destinados a g
-#              rec_viavel_g_m   % dos recursos da lista para g viáveis pela medida m
+#   Recursos (f = total: todas as receitas; publico: FEFC + Fundo Partidário de
+#   qualquer origem; partido: transferências do partido):
+#              rec_f_g          % dos recursos f da lista destinados a g
+#              rec_viavel_f_g_m % dos recursos f da lista para g viáveis pela medida m
 #              cand_viavel_g_m  % das candidaturas da lista que são g e viáveis por m
 #   Votos:     voto_g           % dos votos da lista obtidos por g
 #              voto_g_m_b       % dos votos da lista obtidos por g na faixa b da medida m
@@ -39,6 +42,10 @@ rotulo_medida <- c(m2 = "% do limite legal", m6 = "Recursos do partido",
 viavel_rotulo <- c(m2 = "≥ 5% do limite", m6 = "≥ 1× a divisão igualitária",
                    m8 = "≥ 50% do menor gasto dos eleitos")
 
+fontes <- c(total = "receita_total", publico = "receita_publica", partido = "receita_partido")
+rotulo_fonte <- c(total = "Todas as receitas", publico = "Recursos públicos (FEFC + FP)",
+                  partido = "Transferências do partido")
+
 cand <- readRDS("data/processed/base_did_candidatos.rds")
 faixas <- map(set_names(medidas), \(m) levels(cand[[paste0("faixa_", m)]]))
 
@@ -47,17 +54,22 @@ faixas <- map(set_names(medidas), \(m) levels(cand[[paste0("faixa_", m)]]))
 # ------------------------------------------------------------------------------
 pp <- \(num, den) if_else(den > 0, 100 * num / den, NA_real_)
 resumir_lista <- function(d) {
-  V <- sum(d$VOTOS_CAND_TOTAL); R <- sum(d$receita_partido); N <- nrow(d)
-  out <- list(n_cand = N, votos_lista = V, recursos_lista = R)
+  V <- sum(d$VOTOS_CAND_TOTAL); N <- nrow(d)
+  out <- list(n_cand = N, votos_lista = V)
   for (g in c("mulher", "negra")) {
     gi <- d[[g]]
     out[[paste0("cand_", g)]] <- 100 * mean(gi)
     out[[paste0("voto_", g)]] <- pp(sum(d$VOTOS_CAND_TOTAL[gi]), V)
-    out[[paste0("rec_", g)]]  <- pp(sum(d$receita_partido[gi]), R)
+    for (f in names(fontes)) {
+      x <- d[[fontes[[f]]]]
+      out[[paste0("rec_", f, "_", g)]] <- pp(sum(x[gi]), sum(x))
+      for (m in medidas) {
+        out[[paste0("rec_viavel_", f, "_", g, "_", m)]] <- pp(sum(x[gi & d[[paste0("viavel_", m)]]]), sum(x))
+      }
+    }
     for (m in medidas) {
       vi <- d[[paste0("viavel_", m)]]
       out[[paste0("cand_viavel_", g, "_", m)]] <- 100 * mean(gi & vi)
-      out[[paste0("rec_viavel_", g, "_", m)]]  <- pp(sum(d$receita_partido[gi & vi]), R)
       fx <- d[[paste0("faixa_", m)]]
       for (k in seq_along(faixas[[m]])) {
         out[[paste0("voto_", g, "_", m, "_b", k)]] <- pp(sum(d$VOTOS_CAND_TOTAL[gi & fx == faixas[[m]][k]]), V)
@@ -118,6 +130,7 @@ res <- res |>
          medida = str_extract(resultado, "m\\d"),
          faixa_k = as.integer(str_extract(resultado, "(?<=_b)\\d")),
          faixa = map2_chr(medida, faixa_k, \(m, k) if (is.na(k)) NA_character_ else faixas[[m]][k]),
+         fonte = str_match(resultado, "^rec_(?:viavel_)?(total|publico|partido)_")[, 2],
          tipo = case_when(str_detect(resultado, "^rec_viavel") ~ "Recursos para viáveis",
                           str_detect(resultado, "^rec_") ~ "Recursos (total)",
                           str_detect(resultado, "^cand_viavel") ~ "Candidaturas viáveis",
@@ -153,19 +166,35 @@ coef_plot <- function(d, y, titulo, subtitulo, nome, h) {
   salvar(p, nome, 10, h)
 }
 
-# 3a. Efeito pretendido: recursos e candidaturas viáveis
+# 3a. Efeito pretendido: parcela dos recursos (três fontes) para o grupo e para o grupo viável
 d_rec <- res |>
-  filter(!ponderado, tipo != "Votos por faixa") |>
-  mutate(rotulo = case_when(
-    tipo == "Recursos (total)" ~ "% dos recursos do partido destinados ao grupo",
-    tipo == "Votos (total)" ~ "% dos votos da lista obtidos pelo grupo",
-    tipo == "Recursos para viáveis" ~ paste0("% dos recursos para o grupo viável (", viavel_rotulo[medida], ")"),
-    tipo == "Candidaturas viáveis" ~ paste0("% das candidaturas: grupo viável (", viavel_rotulo[medida], ")")),
-    rotulo = fct_rev(fct_inorder(rotulo)))
-coef_plot(d_rec, "rotulo",
-          "Efeito do incentivo da EC 111 sobre recursos, candidaturas viáveis e votos",
+  filter(!ponderado, tipo %in% c("Recursos (total)", "Recursos para viáveis")) |>
+  mutate(rotulo = if_else(tipo == "Recursos (total)", "Para o grupo (todas as candidaturas)",
+                          paste0("Para o grupo viável: ", viavel_rotulo[medida])),
+         rotulo = fct_rev(fct_inorder(rotulo)),
+         fonte = factor(rotulo_fonte[fonte], levels = rotulo_fonte))
+p <- ggplot(d_rec, aes(x = att, y = rotulo, colour = grupo)) +
+  geom_vline(xintercept = 0, colour = "grey50", linewidth = 0.4) +
+  geom_pointrange(aes(xmin = ic_inf, xmax = ic_sup), position = position_dodge(width = 0.55),
+                  size = 0.35, linewidth = 0.6) +
+  facet_wrap(~fonte, ncol = 1) +
+  scale_colour_manual(values = cores_gr, name = NULL) +
+  labs(title = "Efeito do incentivo da EC 111 sobre a parcela dos recursos da lista destinada ao grupo",
+       subtitle = paste("Diferença-em-diferenças: variação de 2018 para 2022 no federal menos a variação",
+                        "no estadual, por fonte de recursos."),
+       x = "Efeito estimado (pontos percentuais)", y = NULL, caption = fonte) + tema
+salvar(p, "did_recursos_viaveis", 10, 8)
+
+# 3c. Candidaturas viáveis e votos (total)
+d_cv <- res |>
+  filter(!ponderado, tipo %in% c("Candidaturas viáveis", "Votos (total)")) |>
+  mutate(rotulo = if_else(tipo == "Votos (total)", "% dos votos da lista obtidos pelo grupo",
+                          paste0("% das candidaturas: grupo viável (", viavel_rotulo[medida], ")")),
+         rotulo = fct_rev(fct_inorder(rotulo)))
+coef_plot(d_cv, "rotulo",
+          "Efeito do incentivo da EC 111 sobre candidaturas viáveis e votos",
           "Diferença-em-diferenças: variação de 2018 para 2022 no federal menos a variação no estadual.",
-          "did_recursos_viaveis", 7)
+          "did_candidaturas_votos", 4.5)
 
 # 3b. Votos por faixa de competitividade (análogo à Figura 3 de Fonseca et al.)
 d_vot <- res |>

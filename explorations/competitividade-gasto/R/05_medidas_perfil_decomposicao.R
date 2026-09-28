@@ -41,12 +41,14 @@ rotulo_medida <- c(m2 = "% do limite legal", m6 = "Recursos do partido",
 # 1. Base de candidaturas com as três medidas
 # ------------------------------------------------------------------------------
 rec <- readRDS("data/processed/receitas_cand_dep.rds") |>
-  select(ANO, DS_CARGO, sq_candidato = SQ_CANDIDATO, receita_partido, partido_fefc, partido_fp)
+  select(ANO, DS_CARGO, sq_candidato = SQ_CANDIDATO, receita_total, receita_publica, receita_partido,
+         partido_fefc, partido_fp)
 
 cand <- readRDS("data/processed/competitividade_gasto_cand.rds") |>
   filter(uf != "DF") |>                                   # DF não tem eleição estadual (controle)
   left_join(rec, by = c("ANO", "DS_CARGO", "sq_candidato")) |>
-  mutate(across(c(receita_partido, partido_fefc, partido_fp), \(x) replace_na(x, 0)),
+  mutate(across(c(receita_total, receita_publica, receita_partido, partido_fefc, partido_fp),
+                \(x) replace_na(x, 0)),
          partido_lista = if_else(partido %in% names(partido_map_2018_2022),
                                  unname(partido_map_2018_2022[partido]), partido),
          mulher = genero == "Mulheres",
