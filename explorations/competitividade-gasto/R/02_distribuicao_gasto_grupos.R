@@ -5,8 +5,8 @@
 # patamar de gasto de uma candidatura competitiva?
 #
 # Régua: razao_p10 = gasto da candidatura / p10 do gasto dos eleitos no mesmo
-# ano × cargo × UF (01_competitividade_gasto.R). O p10 é o valor de gasto abaixo do
-# qual está 1 em cada 10 eleitos da disputa (ex.: 70 eleitos → entre o 7º e o 8º menor gasto).
+# ano × cargo × UF (01_competitividade_gasto.R). O p10 é o valor de gasto que separa os
+# eleitos da disputa: 10% gastaram menos que ele e 90% gastaram mais (ex.: 70 eleitos → ~7 abaixo).
 # razao_p10 = 1 significa que a candidatura gastou tanto quanto esse eleito.
 # É comparável entre UFs, cargos e anos, ao contrário do % do limite legal.
 #
