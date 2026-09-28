@@ -18,13 +18,13 @@ print(count(b, DS_CARGO, ANO, DS_SIT_TOT_TURNO) |> as.data.frame())
 
 b <- b |> mutate(forma = if_else(str_detect(DS_SIT_TOT_TURNO, "QP"), "Eleito por QP", "Eleito por média"),
                  votos_proprios = if_else(VOTOS_CAND_TOTAL >= QE, "Votos >= QE", "Votos < QE"))
-cat("\nA) Por forma de eleição (TSE):\n")
+writeLines(""); cat("A) Por forma de eleição (TSE):\n")
 print(b |> summarise(eleitos = n(), abaixo_1pct = sum(pct_teto < 1), .by = c(DS_CARGO, ANO, forma)) |>
   arrange(DS_CARGO, ANO, forma) |> as.data.frame())
-cat("\nB) Por votos próprios vs. quociente eleitoral:\n")
+writeLines(""); cat("B) Por votos próprios vs. quociente eleitoral:\n")
 print(b |> summarise(eleitos = n(), abaixo_1pct = sum(pct_teto < 1), .by = c(DS_CARGO, ANO, votos_proprios)) |>
   arrange(DS_CARGO, ANO, votos_proprios) |> as.data.frame())
-cat("\nCasos abaixo de 1% do limite:\n")
+writeLines(""); cat("Casos abaixo de 1% do limite:\n")
 print(b |> filter(pct_teto < 1) |>
   transmute(ANO, DS_CARGO, uf, partido, forma, gasto = round(gasto), votos = VOTOS_CAND_TOTAL,
             QE = round(QE), votos_sobre_QE = round(VOTOS_CAND_TOTAL / QE, 2)) |>

@@ -10,6 +10,6 @@ r |> filter(str_detect(tipo, "^Recursos")) |> txt() |>
   mutate(item = if_else(is.na(medida), "grupo", paste("viável", medida)), pond = if_else(ponderado, "pond", "nao_pond")) |>
   select(grupo, fonte, item, pond, txt) |> pivot_wider(names_from = pond, values_from = txt) |>
   arrange(grupo, fonte, item) |> as.data.frame() |> print(right = FALSE)
-cat("\nCANDIDATURAS VIÁVEIS e VOTOS\n")
+writeLines(""); cat("CANDIDATURAS VIÁVEIS e VOTOS\n")
 r |> filter(tipo %in% c("Candidaturas viáveis", "Votos (total)"), !ponderado) |> txt() |>
   select(grupo, tipo, medida, txt, n_listas) |> as.data.frame() |> print(right = FALSE)

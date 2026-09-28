@@ -14,9 +14,9 @@ cat("DESPESAS por tipo (R$ mi):\n")
 print(d[, .(n = .N, mi = round(sum(v, na.rm = TRUE) / 1e6, 1)), by = `Tipo despesa`][order(-mi)], nrows = 80)
 r <- ler("receitas_candidatos_2014_brasil.txt", c("Cargo", "Tipo receita", "Fonte recurso", "Valor receita"))
 r[, v := as.numeric(sub(",", ".", `Valor receita`, fixed = TRUE))]
-cat("\nRECEITAS por tipo e fonte (R$ mi):\n")
+writeLines(""); cat("RECEITAS por tipo e fonte (R$ mi):\n")
 print(r[, .(n = .N, mi = round(sum(v, na.rm = TRUE) / 1e6, 1)), by = .(`Tipo receita`, `Fonte recurso`)][order(-mi)])
-cat("\nSiglas por ano:\n")
+writeLines(""); cat("Siglas por ano:\n")
 for (f in c("candidatos2014.rds", "candidatos2018.rds", "candidatos2022.rds")) {
-  cat(f, ":", paste(sort(unique(readRDS(file.path("data/raw", f))$partido)), collapse = " | "), "\n")
+  cat(f, ":", paste(sort(unique(readRDS(file.path("data/raw", f))$partido)), collapse = " | ")); writeLines("")
 }
