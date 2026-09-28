@@ -60,8 +60,31 @@ Efeitos (pp, listas sem ponderação; ponderado por votos da lista em 2018 no CS
 - **Mulheres — candidaturas viáveis:** % das candidaturas que são mulheres viáveis ≈ 0 (m2 +1,1; m6 +1,1; m8 −2,4, n.s.). → Mais dinheiro para as mulheres já viáveis, não mais mulheres viáveis.
 - **Mulheres — votos:** % dos votos da lista +5,2 (IC 1,7 a 8,7), mesma direção de Fonseca et al. (+4,4). Por faixa (m8): o ganho vem das faixas baixas (< 10%: +2,0; 10–25%: +2,3); na faixa ≥ 100%, +0,0. Ponderado pelo tamanho da lista, o ganho desloca para ≥ 100% (+3,7, n.s.).
 - **Negras/os:** sem efeito sobre votos (+2,0, n.s.) nem sobre recursos (+4,0, n.s.); a parcela de candidaturas negras viáveis caiu no federal em relação ao estadual (m8: −6,7) e os votos migraram da faixa ≥ 100% (−4,7) para < 10% (+4,7).
-- **Leitura:** o incentivo aumentou os recursos para mulheres, concentrados nas já viáveis; o ganho de votos da lista típica veio de mulheres pouco competitivas (como em Fonseca et al.). Não há evidência de que o ganho de votos se deva a mais mulheres terem se tornado viáveis pelos recursos.
-- **Limites:** só 2 períodos (sem teste de pré-tendência; placebo com 2014 pendente); tratamento no nível do cargo; muitos resultados (comparações múltiplas); faixas são resultado, não condição.
+- **Leitura (revista após o placebo da etapa 5):** os recursos para mulheres cresceram mais no federal e se concentraram nas já viáveis, mas esse resultado **não passa no placebo** e não pode ser atribuído à EC 111. O ganho de votos passa no placebo; na lista típica veio de mulheres pouco competitivas (como em Fonseca et al.). Não há evidência de que o ganho de votos se deva a mais mulheres terem se tornado viáveis pelos recursos.
+- **Limites:** placebo com 2014 na etapa 5; tratamento no nível do cargo; muitos resultados (comparações múltiplas); faixas são resultado, não condição.
+
+## Achados da etapa 5 — placebo com 2014 (script 07)
+
+DiD com três eleições (`did`, base variável): placebo = federal × estadual de 2014 para 2018 (antes da EC 111); efeito = de 2018 para 2022. 1.116 listas presentes nas três eleições (739 com recursos do partido nas três). Só m6 e m8 (sem limite legal em 2014). Prestação de contas de 2014: `prestacao_final_2014.zip` (TSE, baixado pelo navegador; o CDN recusa clientes que não sejam navegador).
+
+| Resultado (pp) | Placebo 2014→2018 | Efeito 2018→2022 | Leitura |
+|---|---|---|---|
+| Mulheres: votos da lista | −0,8 (n.s.) | **+5,2*** | passa no placebo — efeito sobre votos é crível |
+| Mulheres: recursos do partido | **−22,6*** | +15,5* | **falha** — tendência oposta antes; efeito não atribuível à EC 111 |
+| Mulheres: recursos para viáveis (m6/m8) | −22,2* / −19,7* | +13,0* / +11,1* | **falha** (idem) |
+| Mulheres: candidaturas viáveis (m6/m8) | −3,5* / −1,9 | +1,9 / −1,7 | sem efeito |
+| Mulheres: votos m8 10–25% | −0,9* | +2,4* | ganho em faixa baixa; placebo pequeno, de sinal oposto |
+| Negras/os: votos da lista | −1,6 (n.s.) | +1,9 (n.s.) | sem efeito |
+| Negras/os: candidaturas viáveis m8 | −0,7 (n.s.) | **−6,6*** | passa no placebo — queda crível |
+| Negras/os: recursos para viáveis m8 | +1,1 (n.s.) | **−6,3*** | passa no placebo |
+| Negras/os: votos m8 < 10% / ≥ 100% | −5,7* / +4,0 | +4,2* / −5,0* | **falha** — padrão de reversão, não efeito |
+
+(* IC 95% não inclui zero.)
+
+**Consequências para as conclusões da etapa 4:**
+1. O aumento dos votos das mulheres no federal (+5,2 pp) resiste ao placebo.
+2. O aumento dos recursos para mulheres (inclusive viáveis) **não** resiste: entre 2014 e 2018 a parcela das mulheres caiu muito mais no federal que no estadual, e 2018→2022 é em boa parte reversão. Ressalva: 2018 já tinha a regra dos 30% do FEFC (nos dois cargos, com possível intensidade diferente) e em 2014 os "recursos do partido" incluíam doação empresarial — o placebo de recursos compara regimes diferentes.
+3. Para candidaturas negras, a queda de viáveis no federal (−6,6) e dos recursos para viáveis (−6,3) resiste ao placebo; o deslocamento de votos entre faixas, não.
 
 ## Literatura consultada (2026-09-28)
 
@@ -81,6 +104,7 @@ Rscript explorations/competitividade-gasto/R/03_voto_por_faixa_gasto.R
 Rscript explorations/competitividade-gasto/R/04_receitas_partido.R      # requer data/raw/prestacao_de_contas_eleitorais_candidatos_{2018,2022}.zip
 Rscript explorations/competitividade-gasto/R/05_medidas_perfil_decomposicao.R
 Rscript explorations/competitividade-gasto/R/06_did_recursos_votos.R    # requer pacotes did e DRDID
+Rscript explorations/competitividade-gasto/R/07_placebo_2014.R          # requer data/raw/prestacao_final_2014.zip e bases de 2014
 ```
 
 Entradas em `data/raw/` (copiadas do projeto de análise da tese; não versionadas): `despesas_categorizadas_dep_{2018,2022}.rds` (gerado por `Analise_Despesas_Genero_Raca.R`), `candidatos{2018,2022}.rds`, `candidatos_estadual_{2018,2022}.rds`, `eleitos_e_compet_{2018,2022}_df.rds`, `eleitos_e_compet_est_{2018,2022}_df.rds`.
