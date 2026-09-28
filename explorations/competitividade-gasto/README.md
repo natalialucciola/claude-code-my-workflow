@@ -38,6 +38,15 @@ Régua: `razao_p10`; patamar de referência 0,5× o p10 do gasto dos eleitos na 
 3. Parte da aproximação ocorre **entre não competitivas pelo voto**: a mediana de `razao_p10` das mulheres não competitivas dobrou (federal 0,033 → 0,084; estadual 0,088 → 0,17), mais que a dos homens. Mais gasto sem voto correspondente (provável efeito da cota do FEFC).
 4. Entre eleitos e competitivos, a distribuição se comprimiu em 2022 para todos os grupos (a vantagem relativa de gasto das mulheres eleitas caiu: estadual, mediana 6,3 → 3,5).
 
+## Achados da etapa 3 — de onde veio o crescimento da votação das mulheres (script 03)
+
+Voto medido como participação nos votos nominais do cargo (soma das UFs). Participação das mulheres: federal 16,2% → 21,1% (+4,9 pp); estadual 18,7% → 20,3% (+1,6 pp).
+
+1. **Todo o ganho veio de mulheres com gasto ≥ 0,5× o patamar.** Federal: faixa ≥ 1× +3,9 pp e 0,5–1× +1,1 pp; faixas abaixo de 0,1× perderam participação. Estadual: ≥ 1× +1,1 pp; 0,5–1× +0,6 pp.
+2. **O ganho veio da renovação, não de candidatas que repetiram a disputa aumentando o gasto.** Federal: novas +12,9 pp, saíram −6,9 pp, permaneceram −1,1 pp (as que "cruzaram o patamar" contribuíram ~0 — são só 34). Estadual: novas +11,9, saíram −10,4, permaneceram +0,1.
+3. Entre as novas candidatas de 2022, as que gastaram ≥ 0,5× o patamar são 17% (federal) e 30% (estadual) delas, mas concentram 77% e 82% da votação das novas.
+4. Associação, não efeito: partidos dirigem recursos a candidaturas que já esperam ser viáveis.
+
 ## Literatura consultada (2026-09-28)
 
 - Nenhum trabalho encontrado mede competitividade **da candidatura** pelo gasto comparando federal e estadual. A literatura brasileira classifica por voto: Wylie, dos Santos & Marcelino (2019, *Opinião Pública* 25(1)); Fabris et al. (2020, *RBPP*, 10% do QE); Fonseca, Thomé & Guedes-Neto (2026, *Electoral Studies* 101, também por % da votação).
@@ -52,6 +61,7 @@ A partir da raiz do repositório, nesta ordem:
 ```
 Rscript explorations/competitividade-gasto/R/01_competitividade_gasto.R
 Rscript explorations/competitividade-gasto/R/02_distribuicao_gasto_grupos.R
+Rscript explorations/competitividade-gasto/R/03_voto_por_faixa_gasto.R
 ```
 
 Entradas em `data/raw/` (copiadas do projeto de análise da tese; não versionadas): `despesas_categorizadas_dep_{2018,2022}.rds` (gerado por `Analise_Despesas_Genero_Raca.R`), `candidatos{2018,2022}.rds`, `candidatos_estadual_{2018,2022}.rds`, `eleitos_e_compet_{2018,2022}_df.rds`, `eleitos_e_compet_est_{2018,2022}_df.rds`.
