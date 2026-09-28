@@ -17,6 +17,7 @@ Requisito: a medida precisa ser comparável entre Deputado Federal e Deputado Es
 | `razao_p10` | gasto / p10 do gasto dos eleitos (ano × cargo × UF) | sim | sim | sim |
 | `pctl_uf` | percentil do gasto (ano × cargo × UF) | sim | sim | sim |
 
+- **p10 do gasto dos eleitos**: ordenando os eleitos de uma disputa (ano × cargo × UF) do menor para o maior gasto, é o valor abaixo do qual está 1 em cada 10 deles. Ex.: federal SP 2022, 70 eleitos → entre o 7º e o 8º menor gasto (R$ 534 mil). `razao_p10 = 0,5` = gastou metade disso.
 - **Gasto** = despesas contratadas da prestação final do TSE, **excluindo** "Doações financeiras a outros candidatos/partidos". Candidatura apta sem despesa entra com gasto 0.
 - **Limites legais** (iguais em todas as UFs): 2018 — R$ 2,5 mi (federal) e R$ 1,0 mi (estadual), Lei 13.488/2017; 2022 — R$ 3.176.572,53 e R$ 1.270.629,01, Portaria TSE 647/2022 (2018 + IPCA).
 - `razao_min` transpõe para o gasto o critério de Wylie, dos Santos & Marcelino (2019), que usam votos < 1% do "quociente mínimo" (votos do eleito menos votado no distrito).
