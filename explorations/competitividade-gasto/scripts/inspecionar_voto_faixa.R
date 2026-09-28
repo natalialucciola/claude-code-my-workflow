@@ -1,0 +1,12 @@
+# Inspeção das tabelas do script 03 (rodar da raiz do repositório)
+suppressMessages(library(tidyverse))
+options(width = 200)
+o <- "explorations/competitividade-gasto/output"
+rd <- \(f) suppressMessages(read_csv2(file.path(o, f), show_col_types = FALSE))
+cat("PARTICIPAÇÃO NO VOTO\n"); print(rd("participacao_votacao_genero.csv") |> mutate(across(where(is.numeric), \(x) round(x, 2))) |> as.data.frame())
+writeLines(""); cat("VARIAÇÃO POR FAIXA (mulheres e homens)\n")
+print(rd("variacao_votacao_por_faixa_gasto.csv") |> mutate(across(where(is.numeric), \(x) round(x, 2))) |> as.data.frame())
+writeLines(""); cat("COMPOSIÇÃO (mulheres)\n")
+print(rd("votacao_por_faixa_gasto_genero.csv") |> filter(genero == "Mulheres") |> mutate(across(where(is.numeric), \(x) round(x, 2))) |> as.data.frame())
+writeLines(""); cat("DECOMPOSIÇÃO\n")
+print(rd("decomposicao_variacao_votacao.csv") |> mutate(across(where(is.numeric), \(x) round(x, 2))) |> as.data.frame())
