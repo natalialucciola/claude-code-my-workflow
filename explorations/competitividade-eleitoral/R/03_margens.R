@@ -18,7 +18,11 @@
 library(data.table)
 library(parallel)
 
-n_nucleos <- max(1L, min(6L, detectCores() - 2L))
+# Poucos núcleos para não pressionar a memória; cada distrito é salvo ao terminar
+# (dir_cache), e uma nova execução pula os distritos já calculados.
+n_nucleos <- max(1L, min(3L, detectCores() - 2L))
+dir_cache <- file.path("data", "processed", "margens_por_distrito")
+dir.create(dir_cache, recursive = TRUE, showWarnings = FALSE)
 src_fun   <- file.path("explorations", "competitividade-eleitoral", "R", "funcoes_margem.R")
 source(src_fun)
 cand      <- readRDS(file.path("data", "processed", "margem_cand.rds"))
@@ -35,7 +39,7 @@ insumos_distrito <- function(a, u, cg) {
   v   <- as.numeric(cd$votos)
   extra <- vl - vapply(seq_along(ids), function(l) sum(v[lst == l & cd$apta]), numeric(1))
   v[!cd$apta] <- 0
-  list(cd = cd, v = v, lst = lst, apta = cd$apta, extra = extra,
+  list(sq = cd$sq_candidato, v = v, lst = lst, apta = cd$apta, extra = extra,
        M = distritos[ano == a & uf == u & cd_cargo == cg, cadeiras],
        validos = sum(vl))
 }
@@ -46,26 +50,35 @@ lista_insumos <- lapply(seq_len(nrow(distritos)), function(k) {
 # maiores distritos primeiro, para equilibrar os núcleos
 lista_insumos <- lista_insumos[order(-vapply(lista_insumos, function(x) length(x$v), 1L))]
 
+arq_cache <- function(x) file.path(dir_cache, sprintf("%d_%s_%d.rds", x$ano, x$uf, x$cd_cargo))
 calcular <- function(x) {
   r <- margens_distrito(x$v, x$lst, x$apta, x$extra, x$M, as.character(x$ano))
-  data.table(ano = x$ano, uf = x$uf, cd_cargo = x$cd_cargo, sq_candidato = x$cd$sq_candidato,
-             eleito = r$eleito, margem = r$margem,
-             v_l = primeiro_nao_eleito(x$v, x$lst, x$apta, r$eleito),
-             qe = quociente_eleitoral(x$validos, x$M))
+  out <- data.table(ano = x$ano, uf = x$uf, cd_cargo = x$cd_cargo, sq_candidato = x$sq,
+                    eleito = r$eleito, margem = r$margem,
+                    v_l = primeiro_nao_eleito(x$v, x$lst, x$apta, r$eleito),
+                    qe = quociente_eleitoral(x$validos, x$M))
+  saveRDS(out, arq_cache(x))
+  NULL
 }
 
-cl <- makeCluster(n_nucleos)
-invisible(clusterEvalQ(cl, library(data.table)))
-clusterExport(cl, "src_fun"); invisible(clusterEvalQ(cl, source(src_fun)))
-t0 <- Sys.time()
-res <- rbindlist(parLapplyLB(cl, lista_insumos, calcular))
-stopCluster(cl)
-message("Tempo: ", format(round(difftime(Sys.time(), t0, units = "mins"), 1)))
+pendentes <- Filter(function(x) !file.exists(arq_cache(x)), lista_insumos)
+message("Distritos: ", length(lista_insumos), " | pendentes: ", length(pendentes))
+if (length(pendentes)) {
+  cl <- makeCluster(n_nucleos)
+  invisible(clusterEvalQ(cl, library(data.table)))
+  clusterExport(cl, c("src_fun", "dir_cache", "arq_cache"))
+  invisible(clusterEvalQ(cl, source(src_fun)))
+  t0 <- Sys.time()
+  invisible(parLapplyLB(cl, pendentes, calcular))
+  stopCluster(cl)
+  message("Tempo: ", format(round(difftime(Sys.time(), t0, units = "mins"), 1)))
+}
+res <- rbindlist(lapply(lista_insumos, function(x) readRDS(arq_cache(x))))
 
 res <- merge(cand, res, by = c("ano", "uf", "cd_cargo", "sq_candidato"))
 res <- merge(res, distritos[, .(ano, uf, cd_cargo, cadeiras, eleitorado)],
              by = c("ano", "uf", "cd_cargo"))
-stopifnot(identical(res$eleito, res$eleito_tse))
+stopifnot(nrow(res) == nrow(cand), all(res$eleito == res$eleito_tse))
 res[, `:=`(margem_qe = margem / qe,
            rv_lss    = margem / eleitorado,
            rv_abd    = margem / (votos + v_l))]
