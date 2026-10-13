@@ -52,6 +52,11 @@ rotulo_y <- c(cand = "1. Candidaturas (% da lista)", gasto = "2. Gasto (% do gas
               compshare = "4c. Parcela do grupo entre as competitivas da lista",
               eleita = "5. Eleitas (% das candidaturas da lista)",
               cadeira = "5b. Cadeiras (% dos eleitos da UF)")
+# No nível UF × cargo as parcelas são do grupo no total da disputa
+rotulo_uf <- c(cand = "1. Candidaturas (% das candidaturas da UF)",
+               voto = "4a. Votos (% dos votos nominais da UF)",
+               compet = "4c. Parcela do grupo entre as competitivas da UF",
+               cadeira = "5. Cadeiras (% dos eleitos da UF)")
 
 # ------------------------------------------------------------------------------
 # 1. Estimação
@@ -125,10 +130,7 @@ saveRDS(map(fits, "att_gt"), "data/processed/did_2026_att_gt.rds")
 res <- map(fits, "res") |> list_rbind() |>
   mutate(grupo = unname(grupos[str_extract(resultado, "(mulher|negra|todos)$")]),
          medida = str_remove(resultado, "_(mulher|negra|todos)$"),
-         rotulo = rotulo_y[if_else(nivel == "disputa" & medida != "cadeira",
-                                   paste0(medida), medida)],
-         rotulo = if_else(nivel == "disputa" & medida != "cadeira",
-                          paste0(rotulo, " — nível UF"), rotulo))
+         rotulo = if_else(nivel == "disputa", unname(rotulo_uf[medida]), unname(rotulo_y[medida])))
 write_excel_csv2(res, file.path(out_dir, "did_2026_resultados.csv"))
 
 # Replicação da etapa anterior (2018→2022, painel de 2 eleições): votos das mulheres
@@ -167,12 +169,15 @@ salvar <- function(p, nome, w, h) {
   ggsave(file.path(out_dir, paste0(nome, ".png")), p, width = w, height = h, dpi = 300, bg = "white")
   ggsave(file.path(out_dir, paste0(nome, ".pdf")), p, width = w, height = h)
 }
-fonte <- paste0("Fonte: TSE. DiD (Callaway & Sant'Anna, pacote did): Deputado Federal (EC 111) × Estadual, ",
-                "base fixa 2018; listas partido × UF balanceadas, sem DF.\nBarra fina: IC 95% uniforme ",
-                "(bootstrap, EP agrupados por lista); barra grossa: IC 95% pontual. ",
-                "2026: recursos e gasto da prestação parcial (TSE, 13/10/2026).")
+fonte_lista <- paste0("Fonte: TSE. DiD (Callaway & Sant'Anna, pacote did): Deputado Federal (EC 111) × ",
+                      "Estadual, base fixa 2018; listas partido × UF balanceadas, sem DF.\nBarra fina: IC 95% ",
+                      "uniforme (bootstrap, EP agrupados por lista); barra grossa: IC 95% pontual. ",
+                      "2026: recursos e gasto da prestação parcial (TSE, 13/10/2026).")
+fonte_uf <- paste0("Fonte: TSE. DiD (Callaway & Sant'Anna, pacote did): Deputado Federal (EC 111) × ",
+                   "Estadual, base fixa 2018; unidade = UF × cargo (26 UFs, sem DF).\nBarra fina: IC 95% ",
+                   "uniforme (bootstrap, EP agrupados por UF × cargo); barra grossa: IC 95% pontual.")
 
-evento <- function(d, titulo, subtitulo, nome, ncol, h) {
+evento <- function(d, titulo, subtitulo, nome, ncol, h, fonte = fonte_lista) {
   d <- d |>
     filter(periodo != "Média 2022–2026") |>
     bind_rows(d |> distinct(resultado, nivel, rotulo, grupo) |>
@@ -208,6 +213,6 @@ evento(base_fig |> filter(nivel == "lista", anos == "2018–2026"),
 evento(base_fig |> filter(nivel == "disputa"),
        "EC 111 no nível da disputa (UF × cargo): cadeiras, candidaturas, votos e competitivas",
        "26 UFs × 2 cargos. Diferença em relação a 2018 no federal menos a do estadual.",
-       "did_2026_evento_disputas", 2, 7)
+       "did_2026_evento_disputas", 2, 7, fonte = fonte_uf)
 
 message("DiD 2026: resultados em ", out_dir)
