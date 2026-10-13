@@ -1,0 +1,19 @@
+cargo,ANO_ELEICAO,resultado,taxa_overlap_pct_FEMININO,taxa_overlap_pct_MASCULINO,n_FEMININO,n_MASCULINO,gap_pp
+Estadual,2018,Eleito,85.9,84.5,6121,38000,1.4000000000000057
+Estadual,2018,"Competitivo, não eleito",81.8,85.8,6151,33604,-4
+Estadual,2018,Não competitivo,89.9,87.6,76190,161627,2.3000000000000114
+Estadual,2022,Eleito,94.3,93.4,8009,37212,0.8999999999999915
+Estadual,2022,"Competitivo, não eleito",92.6,91.1,7533,32412,1.5
+Estadual,2022,Não competitivo,91.2,89.7,81246,160370,1.5
+Estadual,2026,Eleito,95.3,94,9340,36459,1.2999999999999972
+Estadual,2026,"Competitivo, não eleito",92,91.8,8578,31212,0.20000000000000284
+Estadual,2026,Não competitivo,90.2,89.6,68427,113811,0.6000000000000085
+Federal,2018,Eleito,68.4,76.9,3443,31406,-8.5
+Federal,2018,"Competitivo, não eleito",66.6,75.6,3239,23026,-9
+Federal,2018,Não competitivo,86.4,85.1,67334,127353,1.3000000000000114
+Federal,2022,Eleito,90.8,92.1,4379,30721,-1.2999999999999972
+Federal,2022,"Competitivo, não eleito",81.9,90.6,4451,22812,-8.699999999999989
+Federal,2022,Não competitivo,88.6,88.6,86043,159889,0
+Federal,2026,Eleito,84.9,89.9,5983,29740,-5
+Federal,2026,"Competitivo, não eleito",91.9,89.6,4535,20753,2.3000000000000114
+Federal,2026,Não competitivo,88.6,88.8,74596,122055,-0.20000000000000284
