@@ -38,7 +38,7 @@ candidato vieram de `~/Desktop/Lab Eleições - Geografia Eleitoral/dados/brutos
   municípios-base de gasto pelo voto → problema é o tamanho da base, não a localização.
 - **Calibração** (`05b_calibracao_base_voto.R`, só 2018/2022): base = QL_voto > 1 E fatia do
   município nos votos do candidato ≥ s, grade s ∈ {0; 2,5; 5; 10}%. Erro absoluto médio das 8
-  lacunas vs. capítulo: 5,7 / **1,5** / 1,9 / 2,6 p.p. → **s = 2,5% principal** (mediana 3
+  lacunas vs. capítulo: 6,4 / **1,5** / 1,9 / 2,6 p.p. (`output/calibracao_erro_medio.csv`; 5,7 informado antes no chat era conta manual errada) → **s = 2,5% principal** (mediana 3
   municípios, correlação 0,38–0,45), 5% robustez, 0 referência. Congelado antes de olhar 2026.
   Parametrizado em `R/config.R`; saídas em `output/fatia_025|050|000/`.
 
@@ -72,3 +72,17 @@ Python instalado nesta máquina (só o alias da Microsoft Store); hook de pre-co
 ~03/11) — o pipeline do capítulo é o alvo; esta versão é preliminar/robustez; (2) Modelo 3
 (liderança) não refeito; (3) investigar EP do Modelo 2 raça 2026; (4) decidir se/como entra
 no texto do Cap. 6 (nada foi alterado no `.qmd`).
+
+## 2026-10-13 — capítulo novo (pedido da autora)
+
+- Autora quer **manter o Cap. 6 original** (gasto) para incluir o QL do gasto de 2026 depois;
+  a análise com QL do voto vira **capítulo anterior**. Criado
+  `Quarto/thesis/chapters/05b-sobreposicao-territorial-voto.qmd` (entre o 05 e o 06 no
+  `_quarto.yml`), por ora com a seção Dados e Métodos completa (por que o voto; QL do voto;
+  base B_i com piso de 2,5% + callout de validação; dados 2026; estratégia) e TODOs nas demais.
+  `06-sobreposicao-territorial-partido.qmd` não foi tocado.
+- Referências cruzadas no formato `Capítulo [-@sec-...]` (o livro não define `lang: pt`, então
+  `@sec-` puro renderizaria "Chapter").
+- `05b_calibracao_base_voto.R` agora grava `calibracao_erro_medio.csv`: erro médio sem piso é
+  6,44 p.p. (não 5,7 — conta manual errada corrigida acima).
+- Livro renderiza sem avisos; todas as xrefs do capítulo novo resolvem.

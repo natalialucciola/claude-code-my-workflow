@@ -93,8 +93,17 @@ lacunas <- bind_rows(
   mutate(across(c(gap_pp, gap_gasto), \(x) round(x, 1))) |>
   arrange(dimensao, cargo, ANO_ELEICAO, limiar)
 
+# Critério de escolha: erro absoluto médio das 8 lacunas (gênero e raça ×
+# Federal/Estadual × 2018/2022) contra as do capítulo
+erro_medio <- lacunas |>
+  summarise(erro_abs_medio_pp = round(mean(abs(gap_pp - gap_gasto)), 2),
+            n_lacunas = n(), .by = limiar) |>
+  arrange(erro_abs_medio_pp)
+
 print(calibracao, n = 40)
 print(lacunas, n = 40)
+print(erro_medio)
 
 write_csv(calibracao, file.path(out_dir, "calibracao_base_voto.csv"))
 write_csv(lacunas,    file.path(out_dir, "calibracao_lacunas.csv"))
+write_csv(erro_medio, file.path(out_dir, "calibracao_erro_medio.csv"))
