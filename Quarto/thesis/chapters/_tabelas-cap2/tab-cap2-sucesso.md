@@ -1,0 +1,36 @@
+| Cargo | Ano | Grupo | Candidaturas | Taxa de sucesso | Competitivas | Votos (mediana) |
+|---|---|---|---:|---:|---:|---:|
+| Deputado Federal | 2014 | Mulher negra | 742 | 1,3 | 3,4 | 338 |
+| Deputado Federal | 2014 | Mulher branca | 961 | 4,3 | 8,3 | 458 |
+| Deputado Federal | 2014 | Homem negro | 1.587 | 5,8 | 13,8 | 1.330 |
+| Deputado Federal | 2014 | Homem branco | 2.526 | 14,6 | 26,4 | 3.010 |
+| Deputado Federal | 2018 | Mulher negra | 1.039 | 1,3 | 4,2 | 507 |
+| Deputado Federal | 2018 | Mulher branca | 1.340 | 4,7 | 8,8 | 810 |
+| Deputado Federal | 2018 | Homem negro | 2.077 | 5,3 | 12,2 | 1.369 |
+| Deputado Federal | 2018 | Homem branco | 3.083 | 10,5 | 21,9 | 2.846 |
+| Deputado Federal | 2022 | Mulher negra | 1.712 | 1,8 | 5,1 | 575 |
+| Deputado Federal | 2022 | Mulher branca | 1.554 | 3,6 | 8,4 | 903 |
+| Deputado Federal | 2022 | Homem negro | 2.780 | 3,8 | 9,1 | 1.019 |
+| Deputado Federal | 2022 | Homem branco | 3.185 | 9,8 | 19,6 | 2.516 |
+| Deputado Federal | 2026 | Mulher negra | 1.298 | 2,6 | 6,6 | 638 |
+| Deputado Federal | 2026 | Mulher branca | 1.286 | 5,7 | 11,2 | 1.140 |
+| Deputado Federal | 2026 | Homem negro | 1.958 | 5,2 | 11,3 | 1.004 |
+| Deputado Federal | 2026 | Homem branco | 2.403 | 12,5 | 24,8 | 3.082 |
+| Deputado Estadual | 2014 | Mulher negra | 1.879 | 1,9 | 4,5 | 148 |
+| Deputado Estadual | 2014 | Mulher branca | 2.165 | 3,6 | 9,6 | 242 |
+| Deputado Estadual | 2014 | Homem negro | 4.528 | 5,3 | 14,6 | 654 |
+| Deputado Estadual | 2014 | Homem branco | 5.522 | 12,3 | 26,2 | 1.566 |
+| Deputado Estadual | 2018 | Mulher negra | 2.436 | 2,0 | 5,0 | 212 |
+| Deputado Estadual | 2018 | Mulher branca | 2.487 | 4,4 | 10,1 | 381 |
+| Deputado Estadual | 2018 | Homem negro | 5.315 | 4,6 | 12,5 | 650 |
+| Deputado Estadual | 2018 | Homem branco | 5.621 | 11,2 | 24,3 | 1.710 |
+| Deputado Estadual | 2022 | Mulher negra | 2.720 | 2,7 | 6,3 | 289 |
+| Deputado Estadual | 2022 | Mulher branca | 2.154 | 5,2 | 11,9 | 500 |
+| Deputado Estadual | 2022 | Homem negro | 4.955 | 5,9 | 14,5 | 691 |
+| Deputado Estadual | 2022 | Homem branco | 4.700 | 11,9 | 25,8 | 2.062 |
+| Deputado Estadual | 2026 | Mulher negra | 1.927 | 3,8 | 8,8 | 307 |
+| Deputado Estadual | 2026 | Mulher branca | 1.661 | 8,2 | 17,8 | 668 |
+| Deputado Estadual | 2026 | Homem negro | 3.224 | 7,8 | 18,3 | 646 |
+| Deputado Estadual | 2026 | Homem branco | 3.472 | 16,3 | 34,0 | 3.020 |
+
+: Taxa de sucesso (eleitos/candidaturas, %), candidaturas competitivas (%) e votação mediana, por gênero e raça {#tbl-cap2-sucesso}

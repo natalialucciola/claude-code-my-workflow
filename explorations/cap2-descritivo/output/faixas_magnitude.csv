@@ -1,0 +1,7 @@
+cargo,faixa_magnitude,ufs,vagas_min,vagas_max
+Federal,Pequena,11,8,8
+Federal,Média,8,9,18
+Federal,Grande,8,22,70
+Estadual,Pequena,10,24,24
+Estadual,Média,10,27,49
+Estadual,Grande,6,54,94

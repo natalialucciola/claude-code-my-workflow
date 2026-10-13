@@ -29,7 +29,7 @@ Aplicado ao voto, o limiar QL > 1 usado para o gasto não basta para delimitar a
 
 $$B_i = \left\{ m : \text{QL}^{\text{voto}}_{im} > 1 \ \text{ e } \ \frac{\text{votos}_{im}}{\text{votos}_i} \geq 0{,}025 \right\}$$
 
-Um município entra na base quando o candidato é ali proporcionalmente mais forte do que o conjunto da disputa e quando o município responde por pelo menos 2,5% da votação do candidato. A sobreposição territorial e as taxas de sobreposição por candidato seguem exatamente as definições do Capítulo [-@sec-sobreposicao-territorial], com $B_i$ no lugar do conjunto de municípios com QL do gasto acima de 1.
+Um município entra na base quando o candidato é ali proporcionalmente mais forte do que o conjunto da disputa e quando o município responde por pelo menos 2,5% da votação do candidato. A distribuição dessa base por gênero e raça entre 2014 e 2026 está descrita no Capítulo [-@sec-analise-descritiva]. A sobreposição territorial e as taxas de sobreposição por candidato seguem exatamente as definições do Capítulo [-@sec-sobreposicao-territorial], com $B_i$ no lugar do conjunto de municípios com QL do gasto acima de 1.
 
 ::: {.callout-note}
 ## Escolha e validação do piso de 2,5%
