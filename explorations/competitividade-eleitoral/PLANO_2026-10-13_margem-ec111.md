@@ -1,7 +1,7 @@
 # Plano — EC 111 e a competitividade das candidaturas femininas e negras pela margem de votos (2014–2026)
 
-**Status:** DRAFT (aguardando aprovação) · **Data:** 2026-10-13
-**Exploração:** `explorations/competitividade-eleitoral/` · **Relacionado:** `explorations/competitividade-gasto/`
+**Status:** APPROVED (2026-10-13; retificado: só votação, sem a dimensão de gasto)
+**Exploração:** `explorations/competitividade-eleitoral/`
 
 ## Pergunta
 
@@ -17,8 +17,9 @@ votos, não cadeiras; H_b é a previsão do mecanismo do Cap. 6.
 - **Desenho principal:** tripla diferença no nível da candidatura (mulher × Federal × pós). O
   painel de listas partido × UF × cargo entra como complemento.
 - **Incluir 2026.**
+- **Só votação:** a dimensão de gasto/dinheiro fica fora deste plano.
 
-## Desenho com 2026
+## Desenho
 
 Quatro eleições: **2014 e 2018 (antes)**, **2022 e 2026 (depois; a EC vale até 2030)**.
 Referência: 2018. Estudo de evento em tripla diferença:
@@ -44,10 +45,10 @@ $$Y_i = \sum_{t \neq 2018} \beta_t\,(\text{Mulher}_i \times \text{Federal}_i \ti
 | Ameaça | Por que importa | Tratamento |
 | --- | --- | --- |
 | Mudança de regras: coligações (2014/18), federações (2022/26), sobras abertas (2018), 80/20% do QE (2022), 3ª fase aberta a todos os partidos (ADIs 7228/7263/7325, a partir de 2024) | Mudam a margem de todos | Valem nos dois cargos, então a tripla diferença elimina o nível comum. A interação com a magnitude (pesa mais no Federal) fica como robustez: controle de magnitude, excluir UFs pequenas |
-| Outras políticas de financiamento entre 2022 e 2026 (EC 117/2022 para mulheres; EC 133/2024 para pessoas negras — **a confirmar texto e vigência**) | Podem mudar recursos dos dois cargos | Valem para Federal e Estadual; documentar e checar se há componente específico de cargo |
+| Outras políticas entre 2022 e 2026 (EC 117/2022 para mulheres; EC 133/2024 para pessoas negras — **a confirmar texto e vigência**) | Podem mudar a competição nos dois cargos | Valem para Federal e Estadual; documentar e checar se há componente específico de cargo |
 | Composição (mais candidatas, inclusive de fachada) | A proporção de competitivas pode cair com o número subindo | Reportar número e proporção; separar entrada × intensidade |
 | Identidade de listas e partidos (fusões, federações) | O painel de listas precisa ser estável | `partido_harm`; a margem é calculada na lista que disputa cadeiras |
-| Medida *ex post* | Mede onde a candidata terminou, não sua viabilidade prévia | Cruzar com as medidas de gasto (*ex ante*) |
+| Medida *ex post* | Mede onde a candidata terminou, não sua viabilidade prévia | Interpretar sempre como proximidade do limiar no resultado |
 
 ## Dados — inventário (conferido em 2026-10-13)
 
@@ -56,74 +57,34 @@ $$Y_i = \sum_{t \neq 2018} \beta_t\,(\text{Mulher}_i \times \text{Federal}_i \ti
 | 2014 | Lab `dados/brutos/votacao_candidato_munzona_2014.zip` | Lab `votacao_partido_munzona_2014.zip` (raiz) | Lab `perfil_eleitorado_2014.zip` | `data/raw/candidatos_*2014.rds` |
 | 2018 | idem `_2018` | Lab `votacao_partido_munzona_2018.zip` (raiz) | idem `_2018` | `data/raw/candidatos_*2018.rds` |
 | 2022 | idem `_2022` | Lab `dados/brutos/votacao_partido_munzona_2022.zip` | idem `_2022` | `data/raw/candidatos_*2022.rds` |
-| 2026 | **FALTA** `votacao_candidato_munzona_2026` | Downloads `votacao_partido_munzona_2026.zip` (gerado em 13/10/2026) | Downloads `perfil_eleitorado_2026.zip` | Downloads `consulta_cand_2026.zip` (24/09: tem gênero/raça e federação, mas a situação ainda é `#NULO`) |
+| 2026 | `votacao_candidato_munzona_2026` (baixar do TSE) | Downloads `votacao_partido_munzona_2026.zip` (gerado em 13/10/2026) | Downloads `perfil_eleitorado_2026.zip` | Downloads `consulta_cand_2026.zip` (24/09: tem gênero/raça e federação; a situação vem do arquivo de votação) |
 
-Lab = `Desktop/Lab Eleições - Geografia Eleitoral/`. Cópias dos arquivos de 2026 (todos de
-24/09/2026) também em `OneDrive FINEP/Tese/Dados_TSE/2026/`, que tem ainda
-`prestacao_de_contas_eleitorais_candidatos_2026.zip`, provavelmente a prestação **parcial**, de
-antes da eleição, a conferir. Também em Downloads: `consulta_vagas_2026`
-(cadeiras), `consulta_coligacao_2026` (federações), `extrato_bancario_candidato_2026`.
-Os arquivos de votação por candidato trazem `SQ_COLIGACAO`, federação e `DS_SIT_TOT_TURNO`, o
-que dispensa o `consulta_cand` para a composição das listas e para os eleitos.
+Lab = `Desktop/Lab Eleições - Geografia Eleitoral/`. Cópias dos arquivos de 2026 também em
+`OneDrive FINEP/Tese/Dados_TSE/2026/`. Os arquivos de votação por candidato trazem
+`SQ_COLIGACAO`, federação e `DS_SIT_TOT_TURNO`, o que dispensa o `consulta_cand` para a
+composição das listas e para os eleitos.
 
-**Pendências de dados:**
-1. `votacao_candidato_munzona_2026.zip`, dados abertos do TSE (posso baixar, se autorizado).
-2. Prestação de contas de 2026: o prazo da final é 30 dias após a eleição, por volta de
-   03/11/2026, e o TSE publica depois. **A medida em dinheiro de 2026 fica para depois.**
-
-Migração (INV-10): copiar/extrair para `data/raw/` (gitignored), só Deputado Federal e Estadual,
-em `.rds`; nunca ler por caminho absoluto.
-
-## Medida em dinheiro: "quanto dinheiro faltou"?
-
-**É viável, mas com uma diferença de natureza.** A margem em votos é *contábil*: refazendo a
-distribuição, sabe-se exatamente quantos votos mudariam o resultado. Já "quanto dinheiro faltou"
-exige um **preço do voto**, isto é, quantos votos um real a mais compra. Isso não se observa; é
-uma suposição ou uma estimativa. Proponho três versões, da mais transparente à mais modelada:
-
-- **D1 — preço médio observado (referência transparente).**
-  Δ$_i = margem_votos_i × c, onde c = gasto ÷ votos dos eleitos marginais da mesma lista (ou do
-  distrito). É "quanto custaria aos preços pagos por quem se elegeu por pouco". Subestima o custo
-  se os retornos forem decrescentes.
-- **D2 — elasticidade voto–gasto (principal).**
-  Com log V = a + ε·log G, o gasto que fecharia a margem é G\*_i = G_i·((V_i + Δ_i)/V_i)^{1/ε};
-  daí Δ$_i = G\*_i − G_i. ε é estimado por gênero × cargo × ano (× incumbência), com faixa de
-  sensibilidade a partir da literatura (Speck & Mancuso 2014: retorno maior para desafiantes
-  mulheres). Para candidaturas com poucos votos, Δ$ explode, e isso é informativo: dinheiro
-  sozinho não as elegeria.
-  **Ressalva central:** ε observacional é endógeno (quem é forte arrecada mais), então tende a
-  superestimar o retorno e subestimar o dinheiro faltante. Reportar como conversão sob
-  suposição explícita, não como efeito causal.
-- **D3 — distância de gasto ao limiar (sem votos, *ex ante*).**
-  Gasto da candidata ÷ gasto do eleito marginal da lista ou do menor gasto entre os eleitos do
-  distrito. É a mesma família de `razao_min`/`razao_p10` da exploração de gasto, agora ancorada
-  no eleito marginal da lista, como a margem de ABD.
-
-**Uso no desenho:** Δ$ (D1/D2) e D3 entram como desfechos da mesma tripla diferença para 2014–
-2022, e para 2026 quando a prestação final sair. Pergunta: a EC reduziu o dinheiro que faltava
-às mulheres? Dá para cruzar com o achado de que os recursos subiram sem mais mulheres viáveis.
+Migração (INV-10): copiar os zips para `data/raw/tse/` (gitignored) e extrair só Deputado
+Federal e Estadual para `.rds`; os scripts nunca leem por caminho absoluto.
 
 ## Etapas
 
-1. **Dados** — scripts `01_importar_votacao.R` e `02_eleitorado_vagas.R`: base candidato × lista
-   × cargo × UF × ano, com votos nominais, votos de legenda da lista, vagas, QE e eleitorado.
-2. **Validar a distribuição** — `03_validar_distribuicao.R`: reproduzir 100% dos eleitos do TSE
+1. **Dados** — `01_importar_votacao.R`: base candidato × lista × cargo × UF × ano, com votos
+   nominais, votos de legenda da lista, vagas, QE, eleitorado, gênero e raça.
+2. **Validar a distribuição** — `02_validar_distribuicao.R`: reproduzir 100% dos eleitos do TSE
    em cada UF × cargo × ano. Cada divergência é investigada (votos *sub judice*/anulados, 3ª
    fase, empates) antes de seguir. **Critério de parada:** nenhuma margem é calculada sem 100%
    de acerto.
-3. **Margens** — `04_margens.R`: margem por busca para todas as candidaturas, normalizações
-   ÷ QE, LSS e ABD. Otimizar a alocação (pré-ordenação, paralelizar por UF), já que são cerca de
-   110 mil candidaturas. Validar contra a `rv` de ABD (2014, Federal) por
-   `uf + nome + numero_partido`.
-4. **Descritivo** — `05_descritivo_margens.R`: distribuição da margem/QE por gênero, raça,
+3. **Margens** — `03_margens.R`: margem por busca para todas as candidaturas, normalizações
+   ÷ QE, LSS e ABD. Otimizar a alocação, já que são cerca de 110 mil candidaturas. Validar contra
+   a `rv` de ABD (2014, Federal) por `uf + nome + numero_partido`.
+4. **Descritivo** — `04_descritivo_margens.R`: distribuição da margem/QE por gênero, raça,
    cargo e ano; figuras no padrão de publicação da tese.
-5. **Estimação** — `06_ddd_margem.R`: estudo de evento em tripla diferença, painel de listas,
+5. **Estimação** — `05_ddd_margem.R`: estudo de evento em tripla diferença, painel de listas,
    placebo de 2014, *wild bootstrap*, robustez (LSS/ABD, bandas, excluir incumbentes,
    magnitude).
-6. **Dinheiro** — `07_margem_dinheiro.R`: D1, D2 e D3 para 2014–2022; 2026 quando houver a
-   prestação final.
-7. **Registro** — atualizar o README e o SESSION_LOG; nota de resultados para decidir o capítulo
-   de destino (Cap. 4/5 ou uma seção do Cap. 6).
+6. **Registro** — atualizar o README e o SESSION_LOG; nota de resultados para decidir o capítulo
+   de destino.
 
 ## Verificação
 
