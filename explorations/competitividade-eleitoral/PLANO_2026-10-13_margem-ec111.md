@@ -58,7 +58,10 @@ $$Y_i = \sum_{t \neq 2018} \beta_t\,(\text{Mulher}_i \times \text{Federal}_i \ti
 | 2022 | idem `_2022` | Lab `dados/brutos/votacao_partido_munzona_2022.zip` | idem `_2022` | `data/raw/candidatos_*2022.rds` |
 | 2026 | **FALTA** `votacao_candidato_munzona_2026` | Downloads `votacao_partido_munzona_2026.zip` (gerado em 13/10/2026) | Downloads `perfil_eleitorado_2026.zip` | Downloads `consulta_cand_2026.zip` (24/09: tem gênero/raça e federação, mas a situação ainda é `#NULO`) |
 
-Lab = `Desktop/Lab Eleições - Geografia Eleitoral/`. Também em Downloads: `consulta_vagas_2026`
+Lab = `Desktop/Lab Eleições - Geografia Eleitoral/`. Cópias dos arquivos de 2026 (todos de
+24/09/2026) também em `OneDrive FINEP/Tese/Dados_TSE/2026/`, que tem ainda
+`prestacao_de_contas_eleitorais_candidatos_2026.zip`, provavelmente a prestação **parcial**, de
+antes da eleição, a conferir. Também em Downloads: `consulta_vagas_2026`
 (cadeiras), `consulta_coligacao_2026` (federações), `extrato_bancario_candidato_2026`.
 Os arquivos de votação por candidato trazem `SQ_COLIGACAO`, federação e `DS_SIT_TOT_TURNO`, o
 que dispensa o `consulta_cand` para a composição das listas e para os eleitos.
