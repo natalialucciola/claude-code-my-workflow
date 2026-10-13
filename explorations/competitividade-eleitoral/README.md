@@ -38,8 +38,15 @@ Detalhes que importam para replicar:
 
 1. **O denominador é a soma, não a média.** O texto diz "average of candidate i's votes and the
    first loser's vote", mas a fórmula traz $(V_{i,j} + V_{L,j})$ sem ½. A base de replicação
-   confirma a soma: `rv` dos eleitos vai de 0 a 1,0 (com ½ iria até 2). Isso muda o sentido da
-   banda de "20%" usada no artigo.
+   confirma a soma: `rv` dos eleitos vai de 0 a 1,0 (com ½ iria até 2). A "banda de 20%" do
+   artigo é **|rv| < 0,1**, ou seja, 20% da *média* (V + V_L)/2. Conferido: |rv| < 0,1 dá
+   exatamente os 1.324 candidatos da Tabela 03 (258 inter, 1.066 intra), e o `.do` tabula
+   `abs(rv)<0.1` nesse ponto.
+8. **Bandas na estimação:** as estimativas principais usam a banda ótima de `rdrobust`
+   (Imbens & Kalyanaraman 2012; Calonico et al.), regressão local linear (`p(1)`), kernel
+   uniforme e erros agrupados por UF. Como robustez, há `h(1)` (todos os candidatos) e
+   polinômios de grau 2 e 3. Na heterogeneidade por magnitude, aparecem bandas fixas de 2%, 4%,
+   10% e 20%. As bandas ótimas do teste de balanço (Tabela 05) ficam entre 11,9% e 32,4%.
 2. **Inconsistência no exemplo:** para Antonio (Tabela 02), o limiar interpartidário é "just 01
    vote" na p. 12 (o empate) e "02" na p. 15 (vitória estrita). A convenção de empate não é dita.
 3. **Erro na nota 10:** "the only relevant threshold is the intraparty threshold" para partido
