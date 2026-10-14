@@ -15,6 +15,17 @@
 #   rec_publico_g % dos recursos públicos (FEFC + FP) da lista recebidos por g 2018–2026
 #   rec_total_g   % de todas as receitas da lista recebidas por g              2018–2026
 #   Disputa: cadeira_g = % dos eleitos que são g; cand_g, voto_g idem.
+#
+# Competitivas × não competitivas pela MARGEM DE VOTOS (exploração competitividade-
+# eleitoral): competitiva = eleita ou a < 0,1 QE do limiar de eleição.
+#   cmshare_g / ncmshare_g  % das competitivas / não competitivas que são g
+#   voto_c_g / voto_nc_g    % dos votos da lista obtidos por g competitivas / não
+#                           competitivas (somam voto_g); idem gasto_c/nc, recp_c/nc
+#   Disputa: vin_c_g / vin_nc_g = % dos votos das competitivas / não competitivas da
+#   UF obtidos por g; gin_c_g / gin_nc_g idem para o gasto.
+# A classificação é ex post (depende do resultado, que a EC pode mudar): as partições
+# são resultados (decomposição válida); as parcelas DENTRO de cada categoria são
+# heterogeneidade descritiva, não efeito causal.
 # Recursos e gasto de 2026 vêm da prestação PARCIAL (ver 01_bases_2026.R).
 #
 # Rodar da raiz, depois de 01_bases_2026.R e dos scripts 01, 04 e 05 de
@@ -94,6 +105,28 @@ cand <- bind_rows(c14, c1822, c26) |>
   mutate(partido_h = para_2026(partido, ANO), federal = DS_CARGO == "Deputado Federal")
 stopifnot(!anyDuplicated(cand[c("ANO", "DS_CARGO", "sq_candidato")]))
 
+# Competitividade pela margem de votos (exploração competitividade-eleitoral, script 03):
+# margem_qe = votos que faltam (−) ou sobram (+) para mudar de resultado ÷ QE do distrito,
+# com a regra de distribuição do ano (validada em 100% dos eleitos do TSE).
+# Competitiva = eleita ou a menos de 0,1 QE do limiar (desfecho principal daquele estudo).
+margem <- readRDS("data/raw/margem_resultado.rds") |>
+  as_tibble() |>
+  filter(cd_cargo %in% c(6L, 7L)) |>
+  transmute(ANO = as.character(ano),
+            DS_CARGO = if_else(cd_cargo == 6L, "Deputado Federal", "Deputado Estadual"),
+            sq_candidato, margem_qe, eleito_margem = eleito)
+cand <- cand |>
+  left_join(margem, by = c("ANO", "DS_CARGO", "sq_candidato")) |>
+  mutate(compet_m = eleito == 1L | (!is.na(margem_qe) & margem_qe >= -0.1))
+pareamento <- cand |>
+  summarise(candidaturas = n(), com_margem = sum(!is.na(margem_qe)),
+            pct_com_margem = 100 * mean(!is.na(margem_qe)),
+            eleito_concorda = 100 * mean((eleito == 1L) == eleito_margem, na.rm = TRUE),
+            pct_competitivas = 100 * mean(compet_m), .by = c(DS_CARGO, ANO)) |>
+  arrange(DS_CARGO, ANO)
+write_excel_csv2(pareamento, file.path(out_dir, "pareamento_margem.csv"))
+print(as.data.frame(pareamento |> mutate(across(where(is.double), \(x) round(x, 1)))))
+
 # Descritivo nacional por ano × cargo (o "antes e depois" bruto)
 descr <- cand |>
   summarise(candidaturas = n(),
@@ -131,7 +164,18 @@ painel <- cand |>
               gasto       = \(g) pp(sum(gasto[g]), sum(gasto)),
               rec_total   = \(g) pp(sum(receita_total[g]), sum(receita_total)),
               rec_publico = \(g) pp(sum(receita_publica[g]), sum(receita_publica)),
-              rec_partido = \(g) pp(sum(receita_partido[g]), sum(receita_partido))),
+              rec_partido = \(g) pp(sum(receita_partido[g]), sum(receita_partido)),
+              # --- separação competitivas (c) × não competitivas (nc), pela margem ---
+              # presença: % das competitivas / não competitivas da lista que são g
+              cmshare  = \(g) pp(sum(g & compet_m), sum(compet_m)),
+              ncmshare = \(g) pp(sum(g & !compet_m), sum(!compet_m)),
+              # decomposição aditiva: voto_c + voto_nc = voto (idem gasto e recursos do partido)
+              voto_c   = \(g) pp(sum(VOTOS_CAND_TOTAL[g & compet_m]), sum(VOTOS_CAND_TOTAL)),
+              voto_nc  = \(g) pp(sum(VOTOS_CAND_TOTAL[g & !compet_m]), sum(VOTOS_CAND_TOTAL)),
+              gasto_c  = \(g) pp(sum(gasto[g & compet_m]), sum(gasto)),
+              gasto_nc = \(g) pp(sum(gasto[g & !compet_m]), sum(gasto)),
+              recp_c   = \(g) pp(sum(receita_partido[g & compet_m]), sum(receita_partido)),
+              recp_nc  = \(g) pp(sum(receita_partido[g & !compet_m]), sum(receita_partido))),
               .names = "{.fn}_{.col}"),
             .by = c(ANO, DS_CARGO, federal, uf, partido_h)) |>
   filter(votos_lista > 0, !is.na(partido_h)) |>          # PHS (extinto) sai
@@ -161,7 +205,14 @@ disputas <- cand |>
               cadeira = \(g) pp(sum(g & eleito == 1L), sum(eleito == 1L)),
               cand    = \(g) 100 * mean(g),
               voto    = \(g) pp(sum(VOTOS_CAND_TOTAL[g]), sum(VOTOS_CAND_TOTAL)),
-              compet  = \(g) pp(sum(g & compet), sum(compet))),
+              compet  = \(g) pp(sum(g & compet), sum(compet)),
+              # pela margem: presença e parcela de g nos votos/gasto DENTRO de cada categoria
+              cmshare  = \(g) pp(sum(g & compet_m), sum(compet_m)),
+              ncmshare = \(g) pp(sum(g & !compet_m), sum(!compet_m)),
+              vin_c    = \(g) pp(sum(VOTOS_CAND_TOTAL[g & compet_m]), sum(VOTOS_CAND_TOTAL[compet_m])),
+              vin_nc   = \(g) pp(sum(VOTOS_CAND_TOTAL[g & !compet_m]), sum(VOTOS_CAND_TOTAL[!compet_m])),
+              gin_c    = \(g) pp(sum(gasto[g & compet_m]), sum(gasto[compet_m])),
+              gin_nc   = \(g) pp(sum(gasto[g & !compet_m]), sum(gasto[!compet_m]))),
               .names = "{.fn}_{.col}"),
             .by = c(ANO, DS_CARGO, federal, uf)) |>
   mutate(ano = as.integer(ANO), gname = if_else(federal, 2022L, 0L),

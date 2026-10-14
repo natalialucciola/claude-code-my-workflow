@@ -51,6 +51,7 @@ fmt_ef <- function(y, periodo, ...) {
 - **O incentivo mudou a alocação de recursos para as mulheres e o efeito persistiu em 2026.** No federal, em relação ao estadual, a parcela das transferências partidárias destinada a mulheres subiu `r fmt_ef("rec_partido_mulher", "2022")` pontos percentuais (pp) em 2022 e `r fmt_ef("rec_partido_mulher", "2026")` pp em 2026.
 - **O ganho de votos das mulheres perdeu força.** Foi de `r fmt_ef("voto_mulher", "2022")` pp em 2022 e de `r fmt_ef("voto_mulher", "2026")` pp em 2026, sem significância. Em 2026 as mulheres cresceram mais no estadual do que no federal.
 - **Não há efeito sobre competitividade nem sobre cadeiras**, nem para mulheres nem para pessoas negras. Mais dinheiro e mais candidaturas não se converteram em mais eleitas e eleitos.
+- **Os ganhos de recursos, gasto e votos ficaram com candidaturas não competitivas** (margem de votos > 0,1 QE do limiar). A presença de mulheres e de pessoas negras entre as competitivas não mudou de forma detectável. Para pessoas negras, recursos migraram das competitivas para as não competitivas.
 - **Para pessoas negras**, os efeitos sobre candidaturas e recursos são menores e dependem da ponderação. Em 2026, a cota de 30% da EC 133/2024 dificulta a interpretação.
 - Recursos e gasto de 2026 vêm da **prestação de contas parcial** do TSE (13/10/2026) e são provisórios.
 
@@ -227,6 +228,97 @@ O efeito é maior quanto mais a fonte é controlada pelo partido, o mesmo padrã
 
 No nível da disputa (26 UFs × 2 cargos), a parcela de cadeiras ocupadas por mulheres e por pessoas negras não muda de forma distinguível de zero, em 2022 nem em 2026. Com só 52 unidades os intervalos são largos, mas as estimativas pontuais também são pequenas e mudam de sinal entre as duas eleições.
 
+# Competitivas × não competitivas
+
+Esta seção usa a medida de competitividade da exploração paralela `competitividade-eleitoral`: a **margem de votos**, isto é, quantos votos faltam (ou sobram) para a candidatura mudar de resultado. A margem é calculada refazendo a distribuição de cadeiras com a regra de cada ano (validada em 100% dos eleitos do TSE) e dividida pelo quociente eleitoral do distrito. **Competitiva** é a candidatura eleita ou a menos de 0,1 QE do limiar de eleição; as demais são **não competitivas**.
+
+```{r}
+#| label: tbl-pareamento
+#| tbl-cap: "Cruzamento com a base de margens"
+read_csv2(file.path(out, "pareamento_margem.csv"), show_col_types = FALSE) |>
+  transmute(Cargo = DS_CARGO, Ano = ANO, Candidaturas = candidaturas,
+            `% com margem` = br0(pct_com_margem), `Eleito/a coincide (%)` = br0(eleito_concorda),
+            `% competitivas` = br0(pct_competitivas)) |>
+  kable(align = "llrrrr")
+```
+
+As candidaturas sem margem (até 3% em 2022 e 2026, em geral com votos *sub judice*) entram como não competitivas, salvo se eleitas.
+
+Duas perguntas:
+
+1. **Presença** — a EC aumentou a participação de mulheres e pessoas negras **entre as competitivas** e **entre as não competitivas**?
+2. **Votos e gasto** — o ganho de votos e de recursos desses grupos ocorreu entre as **competitivas** ou entre as **não competitivas**?
+
+Para a segunda, a parcela do grupo nos votos (ou no gasto) da lista é dividida em duas partes, competitivas e não competitivas, que **somam o efeito total** (checagem no código). Isso mostra de onde vem o ganho sem condicionar a análise numa classificação que a própria EC pode alterar.
+
+```{r}
+#| label: tbl-margem
+#| tbl-cap: "Efeito da EC 111 separado entre competitivas e não competitivas (pp; erro-padrão entre parênteses)"
+linhas_m <- tribble(
+  ~y, ~Resultado, ~nivel,
+  "cmshare",  "Presença entre as competitivas (% das competitivas da UF)", "disputa",
+  "ncmshare", "Presença entre as não competitivas (% das não competitivas da UF)", "disputa",
+  "voto",     "Votos do grupo (% dos votos da lista) — total", "lista",
+  "voto_c",   "   … de competitivas", "lista",
+  "voto_nc",  "   … de não competitivas", "lista",
+  "gasto",    "Gasto do grupo (% do gasto da lista) — total ᵖ", "lista",
+  "gasto_c",  "   … de competitivas ᵖ", "lista",
+  "gasto_nc", "   … de não competitivas ᵖ", "lista",
+  "rec_partido", "Recursos do partido ao grupo (% da lista) — total ᵖ", "lista",
+  "recp_c",   "   … a competitivas ᵖ", "lista",
+  "recp_nc",  "   … a não competitivas ᵖ", "lista"
+)
+linhas_m |>
+  cross_join(tibble(g = c("mulher", "negra"), Grupo = c("Mulheres", "Pessoas negras"))) |>
+  rowwise() |>
+  mutate(`Pré-teste 2014` = cel(paste0(y, "_", g), "2014", nivel),
+         `2022` = cel(paste0(y, "_", g), "2022", nivel),
+         `2026` = cel(paste0(y, "_", g), "2026", nivel),
+         `Média` = cel(paste0(y, "_", g), "Média 2022–2026", nivel)) |>
+  ungroup() |>
+  arrange(Grupo) |>
+  select(Grupo, Resultado, `Pré-teste 2014`, `2022`, `2026`, `Média`) |>
+  kable(align = "llrrrr")
+```
+
+ᵖ sem pré-teste; 2026 provisório (prestação de contas parcial).
+
+## Presença entre competitivas e não competitivas
+
+![](output/did_2026_evento_margem_presenca.png){width=100%}
+
+**A EC não mudou de forma detectável a presença de mulheres nem de pessoas negras entre as candidaturas competitivas.** A participação das mulheres entre as competitivas sobe `r fmt_ef("cmshare_mulher", "2022", nivel = "disputa")` pp em 2022 e `r fmt_ef("cmshare_mulher", "2026", nivel = "disputa")` pp em 2026 no federal em relação ao estadual, sem significância. Entre as não competitivas, também não há mudança distinguível de zero (`r fmt_ef("ncmshare_mulher", "2022", nivel = "disputa")` e `r fmt_ef("ncmshare_mulher", "2026", nivel = "disputa")` pp). Para pessoas negras, o pré-teste entre as não competitivas falha (`r fmt_ef("ncmshare_negra", "2014", nivel = "disputa")` pp em 2014): a participação já crescia mais no federal antes da EC.
+
+O resultado é compatível com o da exploração paralela, que encontra +1,4 a +1,7 pp, sem significância, para a fatia feminina entre as competitivas.
+
+## De onde vêm os ganhos de votos, gasto e recursos
+
+![](output/did_2026_evento_margem_decomposicao.png){width=100%}
+
+**Mulheres.** Todo o ganho vem das candidaturas **não competitivas**:
+
+- **votos**: o efeito total de `r fmt_ef("voto_mulher", "2022")` pp em 2022 se divide em `r fmt_ef("voto_c_mulher", "2022")` pp de competitivas e `r fmt_ef("voto_nc_mulher", "2022")` pp de não competitivas;
+- **gasto**: de `r fmt_ef("gasto_mulher", "2022")` pp, `r fmt_ef("gasto_c_mulher", "2022")` vão para competitivas e `r fmt_ef("gasto_nc_mulher", "2022")` para não competitivas (2026: `r fmt_ef("gasto_c_mulher", "2026")` e `r fmt_ef("gasto_nc_mulher", "2026")`);
+- **recursos do partido**: de `r fmt_ef("rec_partido_mulher", "2022")` pp, `r fmt_ef("recp_c_mulher", "2022")` vão para competitivas e `r fmt_ef("recp_nc_mulher", "2022")` para não competitivas.
+
+A única exceção aparece quando as listas são ponderadas pelo tamanho: nas listas grandes, os recursos do partido a mulheres competitivas sobem `r fmt_ef("recp_c_mulher", "2026", ponderado = TRUE)` pp em 2026.
+
+**Pessoas negras.** Há uma realocação: recursos e votos migram das competitivas para as não competitivas.
+
+- **Recursos do partido**: `r fmt_ef("recp_c_negra", "2022")` pp a competitivas e `r fmt_ef("recp_nc_negra", "2022")` pp a não competitivas em 2022.
+- **Gasto**: `r fmt_ef("gasto_c_negra", "2022")` e `r fmt_ef("gasto_nc_negra", "2022")` pp.
+- **Votos**: `r fmt_ef("voto_c_negra", "2022")` e `r fmt_ef("voto_nc_negra", "2022")` pp. Mas o pré-teste de 2014 aponta na mesma direção (`r fmt_ef("voto_c_negra", "2014")` e `r fmt_ef("voto_nc_negra", "2014")` pp), então a migração de votos pode ser continuação de uma tendência anterior. Para recursos e gasto não há pré-teste.
+
+**Dentro de cada categoria** (nível UF), a parcela das mulheres no gasto das não competitivas sobe `r fmt_ef("gin_nc_mulher", "2022", nivel = "disputa")` pp em 2022 e `r fmt_ef("gin_nc_mulher", "2026", nivel = "disputa")` pp em 2026. A parcela no gasto das competitivas sobe `r fmt_ef("gin_c_mulher", "2022", nivel = "disputa")` e `r fmt_ef("gin_c_mulher", "2026", nivel = "disputa")` pp, sem significância.
+
+::: {.callout-note}
+## Como ler: a classificação é feita depois da eleição
+
+Competitiva/não competitiva é definida pelo resultado, que a própria EC pode mudar. Por isso, a divisão do efeito total em duas partes é uma **decomposição** válida: as duas somam o efeito e nenhuma candidatura é excluída. Já as comparações **dentro** de cada categoria são descritivas. Um ponto reforça a leitura: se o dinheiro extra tivesse tornado candidaturas competitivas, elas apareceriam do lado das competitivas. O fato de o dinheiro aparecer do lado das não competitivas indica que, mesmo com mais recursos, essas candidaturas não chegaram perto do limiar.
+:::
+
+**Síntese.** O incentivo da EC 111 levou os partidos a destinar mais recursos a mulheres e a pessoas negras, mas esses recursos foram para candidaturas que terminaram longe do limiar de eleição. Para as mulheres, o ganho de votos é real, mas também ocorre entre as não competitivas, sem aumentar a presença feminina entre as competitivas. É o padrão de "colheita de votos" (votos que contam em dobro para o fundo partidário, mas não elegem) descrito por Fonseca, Thomé & Guedes-Neto (2026) e previsto pelo mecanismo do Cap. 6.
+
 # Robustez e sensibilidade
 
 ```{r}
@@ -273,6 +365,7 @@ O efeito sobre os votos das mulheres em 2022 sobrevive a violações de até cer
 | Candidaturas — mulheres | **Moderada** | Pré-teste ≈ 0; efeito pequeno, sensível à ponderação |
 | Votos — mulheres | **Moderada em 2022, fraca em 2026** | Em 2026 não resiste à sensibilidade, e a cláusula de 2,5% é um choque concorrente só no federal |
 | Competitividade e cadeiras | **Ausência de efeito** | Estimativas pequenas, de sinal instável; intervalos largos no nível UF |
+| Ganhos concentrados em não competitivas (mulheres) | **Moderada** | Votos: pré-teste ≈ 0 nas duas partes. Gasto e recursos: sem pré-teste, mas o padrão se repete em 2022 e 2026 e com ou sem ponderação. Classificação *ex post* (ver nota) |
 | Pessoas negras | **Fraca** | Resultados dependem da ponderação; a EC 133/2024 confunde a parte de 2026 |
 
 Limites gerais: o tratamento é atribuído ao cargo inteiro (há, na prática, um único "grupo" tratado); muitos resultados são testados ao mesmo tempo; e o painel balanceado de quatro eleições cobre um subconjunto das listas.

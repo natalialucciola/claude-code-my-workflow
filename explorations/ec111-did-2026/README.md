@@ -68,6 +68,21 @@ Tabela completa, com versões ponderada (votos da lista em 2018), desbalanceada 
 
 **Cuidado — painéis 4b e 5 da figura de listas:** "% das candidaturas da lista que são do grupo e competitivas/eleitas" cai também para **todas** as candidaturas (−12,8* e −7,1* em 2022), ou seja, as listas federais balanceadas perderam competitividade em geral em relação às estaduais. Os valores negativos para os grupos nesses painéis são, em grande parte, mecânicos. Use 4c (parcela entre as competitivas) e as cadeiras no nível UF × cargo.
 
+## Competitivas × não competitivas (margem de votos, 2026-10-14)
+
+Medida da exploração `competitividade-eleitoral` (branch `worktree-competitividade-abd-lss`), com `margem_resultado.rds` copiado para `data/raw/`. **Competitiva** = eleita ou a menos de 0,1 QE do limiar de eleição. Pareamento: 97–100% das candidaturas, e eleito/a coincide em 99,8–100% (`output/pareamento_margem.csv`). Na decomposição, as partes competitivas + não competitivas somam o efeito total (checado no código). Figuras: `did_2026_evento_margem_presenca.png` e `did_2026_evento_margem_decomposicao.png`.
+
+| pp, sem ponderação | 2022 | 2026 |
+|---|---|---|
+| Mulheres entre as competitivas (UF) | +2,1 | +1,5 |
+| Mulheres entre as não competitivas (UF) | +0,8 | +1,3 |
+| Votos de mulheres: competitivas / não competitivas (lista) | −1,1 / **+5,2*** | −0,3 / +2,5 |
+| Gasto de mulheres: competitivas / não competitivas ᵖ | −0,3 / **+7,9*** | −0,3 / **+6,3*** |
+| Recursos do partido a mulheres: competitivas / não competitivas ᵖ | +1,3 / **+11,4*** | +2,3 / **+10,0*** |
+| Recursos do partido a pessoas negras: competitivas / não competitivas ᵖ | **−7,4*** / **+11,6*** | **−4,9*** / **+10,0*** |
+
+**Leitura.** A EC não mudou a presença de mulheres nem de pessoas negras entre as competitivas. Os ganhos de votos, gasto e recursos ficaram com candidaturas que terminaram longe do limiar. Para pessoas negras, recursos migraram das competitivas para as não competitivas. Nos votos de pessoas negras, o pré-teste de 2014 aponta na mesma direção, o que sugere uma tendência anterior. A classificação é *ex post*: a decomposição é válida, mas as comparações dentro de cada categoria são descritivas.
+
 ## Veredito de credibilidade (graduado)
 
 | Bloco | Veredito | Por quê |

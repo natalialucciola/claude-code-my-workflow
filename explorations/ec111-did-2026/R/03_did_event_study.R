@@ -51,12 +51,26 @@ rotulo_y <- c(cand = "1. Candidaturas (% da lista)", gasto = "2. Gasto (% do gas
               compet = "4b. Competitivas (% das candidaturas da lista)",
               compshare = "4c. Parcela do grupo entre as competitivas da lista",
               eleita = "5. Eleitas (% das candidaturas da lista)",
-              cadeira = "5b. Cadeiras (% dos eleitos da UF)")
+              cadeira = "5b. Cadeiras (% dos eleitos da UF)",
+              cmshare  = "Presença entre as competitivas (% das competitivas da lista)",
+              ncmshare = "Presença entre as não competitivas (% das não competitivas da lista)",
+              voto_c   = "Votos de competitivas do grupo (% dos votos da lista)",
+              voto_nc  = "Votos de não competitivas do grupo (% dos votos da lista)",
+              gasto_c  = "Gasto de competitivas do grupo (% do gasto da lista)",
+              gasto_nc = "Gasto de não competitivas do grupo (% do gasto da lista)",
+              recp_c   = "Recursos do partido a competitivas do grupo (% da lista)",
+              recp_nc  = "Recursos do partido a não competitivas do grupo (% da lista)")
 # No nível UF × cargo as parcelas são do grupo no total da disputa
 rotulo_uf <- c(cand = "1. Candidaturas (% das candidaturas da UF)",
                voto = "4a. Votos (% dos votos nominais da UF)",
                compet = "4c. Parcela do grupo entre as competitivas da UF",
-               cadeira = "5. Cadeiras (% dos eleitos da UF)")
+               cadeira = "5. Cadeiras (% dos eleitos da UF)",
+               cmshare  = "Presença entre as competitivas (% das competitivas da UF)",
+               ncmshare = "Presença entre as não competitivas (% das não competitivas da UF)",
+               vin_c    = "Votos: parcela do grupo nos votos das competitivas da UF",
+               vin_nc   = "Votos: parcela do grupo nos votos das não competitivas da UF",
+               gin_c    = "Gasto: parcela do grupo no gasto das competitivas da UF",
+               gin_nc   = "Gasto: parcela do grupo no gasto das não competitivas da UF")
 
 # ------------------------------------------------------------------------------
 # 1. Estimação
@@ -119,7 +133,19 @@ grade <- bind_rows(
               balanceado = TRUE),
   expand_grid(dados = "disputa", y = c("cadeira", "cand", "voto", "compet"),
               g = c("mulher", "negra"), anos = list(anos_longos), ponderado = FALSE,
-              balanceado = TRUE)
+              balanceado = TRUE),
+  # --- competitivas × não competitivas pela margem de votos ---
+  expand_grid(dados = "lista", y = c("cmshare", "ncmshare", "voto_c", "voto_nc"),
+              g = c("mulher", "negra"), anos = list(anos_longos), ponderado = c(FALSE, TRUE),
+              balanceado = TRUE),
+  expand_grid(dados = "lista", y = c("gasto_c", "gasto_nc", "recp_c", "recp_nc"),
+              g = c("mulher", "negra"), anos = list(anos_rec), ponderado = c(FALSE, TRUE),
+              balanceado = TRUE),
+  expand_grid(dados = "disputa", y = c("cmshare", "ncmshare", "vin_c", "vin_nc"),
+              g = c("mulher", "negra"), anos = list(anos_longos), ponderado = FALSE,
+              balanceado = TRUE),
+  expand_grid(dados = "disputa", y = c("gin_c", "gin_nc"), g = c("mulher", "negra"),
+              anos = list(anos_rec), ponderado = FALSE, balanceado = TRUE)
 )
 fits <- pmap(grade, function(dados, y, g, anos, ponderado, balanceado) {
   base <- if (dados == "lista") painel else disputas
@@ -132,6 +158,15 @@ res <- map(fits, "res") |> list_rbind() |>
          medida = str_remove(resultado, "_(mulher|negra|todos)$"),
          rotulo = if_else(nivel == "disputa", unname(rotulo_uf[medida]), unname(rotulo_y[medida])))
 write_excel_csv2(res, file.path(out_dir, "did_2026_resultados.csv"))
+
+# Checagem: competitivas + não competitivas = total (votos e gasto da lista), em cada eleição
+decomp <- res |>
+  filter(nivel == "lista", balanceado, str_detect(resultado, "^(voto|gasto)(_c|_nc)?_(mulher|negra)$")) |>
+  mutate(base = str_replace(resultado, "_(c|nc)_", "_"),
+         parte = str_extract(resultado, "_(c|nc)_") |> coalesce("total")) |>
+  select(base, parte, ponderado, periodo, att) |>
+  pivot_wider(names_from = parte, values_from = att)
+stopifnot(all(abs(decomp$`_c_` + decomp$`_nc_` - decomp$total) < 1e-6))
 
 # Replicação da etapa anterior (2018→2022, painel de 2 eleições): votos das mulheres
 rep22 <- estimar(painel, "voto_mulher", c(2018L, 2022L))$res |> filter(periodo == "2022")
@@ -199,7 +234,11 @@ evento <- function(d, titulo, subtitulo, nome, ncol, h, fonte = fonte_lista) {
          y = "Efeito estimado (pontos percentuais)", caption = fonte) + tema
   salvar(p, nome, 10, h)
 }
+margem_y <- c("cmshare", "ncmshare", "voto_c", "voto_nc", "gasto_c", "gasto_nc", "recp_c",
+              "recp_nc", "vin_c", "vin_nc", "gin_c", "gin_nc")
 base_fig <- res |> filter(!ponderado, balanceado, grupo != grupos[["todos"]])
+base_m   <- base_fig |> filter(medida %in% margem_y)
+base_fig <- base_fig |> filter(!medida %in% margem_y)
 evento(base_fig |> filter(nivel == "lista", anos == "2014–2026"),
        "EC 111: candidaturas, votos, competitividade e sucesso — federal × estadual",
        paste("Diferença em relação a 2018 no federal menos a mesma diferença no estadual.",
@@ -214,5 +253,22 @@ evento(base_fig |> filter(nivel == "disputa"),
        "EC 111 no nível da disputa (UF × cargo): cadeiras, candidaturas, votos e competitivas",
        "26 UFs × 2 cargos. Diferença em relação a 2018 no federal menos a do estadual.",
        "did_2026_evento_disputas", 2, 7, fonte = fonte_uf)
+
+nota_margem <- paste0("\nCompetitiva = eleita ou a menos de 0,1 QE do limiar de eleição (margem de votos; ",
+                      "exploração competitividade-eleitoral).")
+ordem <- \(d, niveis) d |> mutate(rotulo = factor(rotulo, levels = unique(c(niveis, rotulo))))
+evento(base_m |> filter(nivel == "disputa", medida %in% c("cmshare", "ncmshare", "vin_c", "vin_nc")) |>
+         ordem(rotulo_uf[c("cmshare", "ncmshare", "vin_c", "vin_nc")]),
+       "EC 111: presença e votos de mulheres e pessoas negras, competitivas × não competitivas",
+       paste("Nível UF × cargo. Esquerda: competitivas; direita: não competitivas.",
+             "Diferença em relação a 2018 no federal menos a do estadual."),
+       "did_2026_evento_margem_presenca", 2, 7, fonte = paste0(fonte_uf, nota_margem))
+evento(base_m |> filter(nivel == "lista", medida %in% c("voto_c", "voto_nc", "gasto_c", "gasto_nc",
+                                                        "recp_c", "recp_nc")) |>
+         ordem(rotulo_y[c("voto_c", "voto_nc", "gasto_c", "gasto_nc", "recp_c", "recp_nc")]),
+       "EC 111: de onde vêm os ganhos — competitivas × não competitivas do grupo",
+       paste("Parcela da lista; esquerda + direita = efeito total sobre o grupo.",
+             "Gasto e recursos: sem pré-teste; 2026 provisório."),
+       "did_2026_evento_margem_decomposicao", 2, 9.5, fonte = paste0(fonte_lista, nota_margem))
 
 message("DiD 2026: resultados em ", out_dir)
