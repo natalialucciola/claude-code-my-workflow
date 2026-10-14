@@ -20,7 +20,7 @@ library(parallel)
 
 # Poucos núcleos para não pressionar a memória; cada distrito é salvo ao terminar
 # (dir_cache), e uma nova execução pula os distritos já calculados.
-n_nucleos <- max(1L, min(3L, detectCores() - 2L))
+n_nucleos <- as.integer(Sys.getenv("MARGEM_NUCLEOS", max(1L, min(3L, detectCores() - 2L))))
 dir_cache <- file.path("data", "processed", "margens_por_distrito")
 dir.create(dir_cache, recursive = TRUE, showWarnings = FALSE)
 src_fun   <- file.path("explorations", "competitividade-eleitoral", "R", "funcoes_margem.R")

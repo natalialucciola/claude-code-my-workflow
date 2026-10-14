@@ -30,7 +30,7 @@ grupos <- list(Mulheres = quote(mulher), Homens = quote(!mulher),
                `Pessoas negras` = quote(negra), `Pessoas brancas` = quote(raca == "BRANCA"))
 por_grupo <- function(expr_fun) {
   rbindlist(lapply(names(grupos), function(g) {
-    d[eval(grupos[[g]]), expr_fun(.SD), by = .(ano, cargo)][, grupo := g][]
+    d[(eval(grupos[[g]])), expr_fun(.SD), by = .(ano, cargo)][, grupo := g][]
   }))
 }
 
