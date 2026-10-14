@@ -93,6 +93,24 @@ Câmara em 2018; pressionado < 4%, robustez < 3%; 2014–2022).
   (4.993 − 327 e 4.960 − 294). As bases são distintas, nenhuma UF coincide e o gênero de 2022 bate
   100% com o `consulta_cand_2022`.
 
+**Fim das coligações × magnitude** (`R/09`, `output/magnitude_candidaturas.png`).
+- Regressão por distrito: Δy = a + b·log(M) + c·Federal. O excesso do Federal em candidaturas
+  aptas por cadeira, de 2018 para 2022, é de 5,6 sem controle e 4,5 com log(M). Na faixa de
+  magnitude comum (24 a 70 cadeiras, 7 distritos federais), fica em 3,6 a 3,7. Todos
+  significativos.
+- Não competitivas por cadeira (sem controle → com log(M) → faixa comum): homens 3,4 → 3,1 → 2,6;
+  mulheres 2,2 → 1,7 → 1,3.
+- A magnitude explica a maior parte do aumento de **listas** por cadeira (0,64 → 0,26 → 0,1),
+  mas só 20 a 35% do aumento de **candidaturas**. Federal e Estadual seguem curvas separadas na
+  mesma magnitude.
+- **Tendência prévia:** de 2014 para 2018, com coligações nos dois anos, o Federal já crescia mais
+  em candidaturas por cadeira (excesso de 1,7 a 3,1). Média por distrito: Federal 10,3 → 13,3 →
+  17,8; Estadual 13,4 → 14,8 → 13,7. É uma "federalização" da estratégia partidária que começa
+  antes da EC 111. Leitura plausível: fundos e cláusula de desempenho ligados à Câmara desde 2018.
+- **Diferença na taxa de competitivas (mulheres − homens), na faixa comum:** +3,0 a +3,2 em
+  2018–2022, contra +3,5 de 2014 para 2018 (placebo). Entre distritos comparáveis, o "efeito" é do
+  mesmo tamanho da tendência anterior.
+
 **Pendências.** Sensibilidade formal (HonestDiD); refazer 2022 com a regra original da
 totalização; painel de listas (complemento do plano); decidir o capítulo de destino.
 
