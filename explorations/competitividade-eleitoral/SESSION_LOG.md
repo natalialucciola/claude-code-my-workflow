@@ -24,5 +24,12 @@
   dos eleitos em 216 distritos; 2022 com 3ª fase aberta, o resultado recalculado) rodados.
 - 03 foi interrompido por falta de memória; reiniciado com 3 núcleos e cache por distrito em
   `data/processed/margens_por_distrito/`. Ao terminar, rodar 03b, 04 e 05.
+
+## 2026-10-14
+
+- 03 concluído (200 distritos no cache + 16 com 1 núcleo). 03b, 04 e 05 rodados.
+- Bandas de 0,25/0,5 QE saturam para candidaturas fracas; o principal passa a ser 0,1 QE.
+- Mulheres: pré-teste ok; efeito de +3,6 p.p. (0,1 QE, sem peso), não significativo
+  ponderado. Raça: pré-teste falha. Resultados no README.
 - (Anterior) Próximo passo: baixar votos de legenda e composição de coligações/federações do TSE; validar a
   distribuição contra os eleitos; replicar `rv` de ABD em 2014.

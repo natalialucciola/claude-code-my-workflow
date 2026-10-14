@@ -54,9 +54,9 @@ comparacoes <- list(
 # Painel de células UF × cargo × ano com a diferença entre grupos (em pontos percentuais)
 celulas <- function(dd, comp) {
   gq <- comparacoes[[comp]]
-  a <- dd[(eval(gq$g)), c(lapply(.SD, mean), n_g = .N), by = .(uf, cargo, federal, ano),
+  a <- dd[(eval(gq$g)), c(lapply(.SD, mean), list(n_g = .N)), by = .(uf, cargo, federal, ano),
           .SDcols = names(desfechos)]
-  b <- dd[(eval(gq$c)), c(lapply(.SD, mean), n_c = .N), by = .(uf, cargo, federal, ano),
+  b <- dd[(eval(gq$c)), c(lapply(.SD, mean), list(n_c = .N)), by = .(uf, cargo, federal, ano),
           .SDcols = names(desfechos)]
   m <- merge(a, b, by = c("uf", "cargo", "federal", "ano"), suffixes = c("_g", "_c"))
   for (y in names(desfechos)) m[, (y) := 100 * (get(paste0(y, "_g")) - get(paste0(y, "_c")))]

@@ -1,6 +1,67 @@
 # Competitividade eleitoral pela margem de votos (ABD 2022 × LSS 2024)
 
-**Status:** estudo + protótipo (exploração, 2026-10-13). Nada aplicado ainda aos dados da tese.
+**Status:** aplicado a Deputado Federal e Estadual, 2014–2026 (exploração, 2026-10-14). Plano:
+`PLANO_2026-10-13_margem-ec111.md`. Abaixo, primeiro os resultados; depois o estudo das medidas.
+
+## Resultados (EC 111, 2014–2026)
+
+**Execução.** Os scripts `R/01` a `R/05` rodam em sequência, a partir da raiz do repositório.
+Os dados brutos do TSE ficam em `data/raw/tse/` e os processados em `data/processed/margem_*`;
+os dois são gitignored.
+
+**Validação.**
+- A distribuição de cadeiras reproduz **100% dos eleitos do TSE** nos 216 distritos (UF × cargo
+  × ano), em `output/validacao_distribuicao.csv`.
+- Em 2022, a base do TSE traz os eleitos **recalculados** após as ADIs 7228/7263/7325 (3ª fase
+  das sobras aberta a todas as listas). A regra original da totalização de 2022 erra 8 cadeiras
+  federais (AP, DF, RO, TO).
+
+**Comparação com ABD** (Federal 2014; `R/03b`, `output/comparacao_abd_2014.csv`). 5.796 dos 6.165
+candidatos pareados.
+- O resultado eleito/não eleito coincide em 99,98%.
+- Para os eleitos, a medida é quase a mesma (diferença mediana de 0,009).
+- Perto do limiar (|rv| < 0,1), 66% coincidem ao centésimo.
+- Para os não eleitos longe do limiar, a margem calculada aqui é maior (diferença mediana de
+  −0,15). Hipótese: o limiar entre listas de ABD não exige ultrapassar os colegas de lista. Não
+  dá para confirmar, porque o código não foi publicado.
+
+**Saturação das bandas largas.** Numa lista grande, a distância de uma candidatura fraca é dada
+pela lista (o último eleito ou o primeiro não eleito), não pelos votos dela. Entre as
+candidaturas com menos de 0,5% do QE em votos, 27,6% ficam "a menos de 0,25 QE" do limiar, mas só
+0,8% a menos de 0,1 QE. Por isso o **desfecho principal é a banda de 0,1 QE**; as de 0,25 e 0,5
+medem em boa parte a estrutura da lista.
+
+**Efeitos** (`R/05`, `output/ddd_resultados.csv`, `output/ddd_estudo_evento.png`). Tripla
+diferença, did::att_gt por UF × cargo, sem DF, base 2018, bandas uniformes de 95%. Efeitos em
+p.p. sobre a diferença entre grupos.
+
+| Mulheres − homens | 2014 (pré) | 2022 | 2026 | Geral |
+| --- | --- | --- | --- | --- |
+| Eleita ou a < 0,1 QE (sem peso) | −0,8 [−3,9; 2,4] | **3,4** [0,4; 6,4] | **3,9** [0,0; 7,7] | **3,6** [1,0; 6,3] |
+| Idem, ponderado | 0,6 | 2,4 | 2,3 | 2,3 [−0,4; 5,1] |
+| Idem, sem UFs com 8 cadeiras | 0,9 | **3,9** | **4,9** | **4,4** [1,3; 7,4] |
+| Idem, sem incumbentes (2018–2026) | — | **3,0** [0,2; 5,7] | 2,3 | 2,7 [−0,1; 5,4] |
+| Eleita (sem peso) | −2,3 | 0,9 | **2,9** [0,1; 5,8] | 1,9 [−0,3; 4,1] |
+| TWFE por candidatura (eleita ou < 0,1 QE) | 0,5 (EP 1,1) | 2,6 (1,1) | 2,5 (1,5) | — |
+
+Patamar de 2018, Federal: 7,1% das mulheres e 15,9% dos homens eleitas/os ou a < 0,1 QE.
+
+**Leitura.**
+- **Mulheres.** O pré-teste de 2014 é ≈ 0 em todos os desfechos. A EC está associada a uma
+  aproximação das mulheres ao limiar no Federal, de cerca de 3–4 p.p., ou ~40% da distância de
+  2018. O efeito aparece em 2022 e se mantém em 2026; para "eleita", só em 2026.
+- **Sensibilidade.** O efeito é menor e não significativo com peso pelo número de candidaturas
+  (as UFs grandes pesam mais) e com a normalização de LSS. Com ABD, a banda de 0,1 dá 2,5 p.p.,
+  significativo. É evidência moderada para H_a (competitividade) contra H_b (só votos longe do
+  limiar). Contrasta com a exploração de gasto (recursos sem mais mulheres viáveis) e com Fonseca
+  et al. (efeito em candidaturas pouco competitivas). Vale discutir.
+- **Raça.** O **pré-teste falha**: 2014 negativo e significativo (−5,8 p.p. em "eleita ou
+  < 0,1 QE"; −4,5 em "eleita"), da mesma ordem dos efeitos positivos de 2026. Para pessoas negras
+  e mulheres negras, o desenho não sustenta efeito da EC; há tendência prévia. HonestDiD não está
+  instalado; a sensibilidade formal fica pendente.
+
+**Pendências.** Sensibilidade formal (HonestDiD); refazer 2022 com a regra original da
+totalização; painel de listas (complemento do plano); decidir o capítulo de destino.
 
 ## Objetivo
 
