@@ -114,6 +114,77 @@ Câmara em 2018; pressionado < 4%, robustez < 3%; 2014–2022).
 **Pendências.** Sensibilidade formal (HonestDiD); refazer 2022 com a regra original da
 totalização; painel de listas (complemento do plano); decidir o capítulo de destino.
 
+## Competitividade pelo gasto derivada da margem OLPR (2014–2022)
+
+Plano: `PLANO_2026-10-14_margem-gasto.md`. Os scripts `R/10` a `R/14` rodam em sequência, a
+partir da raiz, depois do `R/03`.
+
+**Medidas.**
+- **A — margem de gasto OLPR (principal, *ex ante*).** Usa a mesma distribuição de cadeiras
+  da margem de votos (`funcoes_margem.R`, regra do ano), com o gasto no lugar do voto. As
+  listas recebem cadeiras pelo gasto das suas candidaturas, e a ordem dentro da lista segue o
+  gasto. A margem é quantos reais faltam ou sobram para mudar o resultado, dividida pelo
+  **QE de gasto** (gasto do distrito ÷ cadeiras). Competitiva = eleita pelo gasto ou a
+  < 0,1 QE de gasto do limiar.
+- **D2 — dinheiro faltante (*ex post*).** Converte a margem de votos em reais pela
+  elasticidade voto–gasto, estimada dentro da lista (ε ≈ 0,23–0,33; `elasticidade_voto_gasto.csv`).
+  Com 1/ε ≈ 4, o D2 explode para as candidaturas fracas: a mediana das não eleitas vai de
+  −54 a −224.018 QE de gasto, conforme o grupo. Só tem leitura perto do limiar, por isso entra apenas como
+  indicador "< 0,1 QE".
+- **D3** — gasto ÷ gasto do último eleito da lista; corte de 0,5.
+- **Gasto** = despesas sem repasses (`R/10`). A cobertura é de 99,9% em 2018/2022 e de 83–85%
+  em 2014: as aptas sem registro entram com gasto 0, e nenhum eleito de 2014 está nesse caso.
+
+**Validação de A** (`R/11`, `output/margem_gasto_validacao.csv`).
+- Teste de sanidade: com votos no lugar do gasto, a montagem reproduz exatamente a margem do
+  `R/03` (AC, Federal, 2018).
+- O gasto, sozinho, elege de 47% a 66% dos eleitos reais; o acerto geral fica em 92–98%.
+- Spearman com a margem de votos: 0,49–0,74, maior em 2022. Concordância na banda de 0,1 QE:
+  89–96%.
+- Comparação com `razao_p10 ≥ 0,5` (`gasto_concordancia_p10.csv`): concordância de 80–87%.
+  A é bem mais exigente, porque a maior parte das candidaturas acima de 0,5 × p10 não é
+  competitiva por A. A margem ancorada na lista mede a disputa real por cadeira.
+
+**Descritivo** (`R/13`; `gasto_descr_competitivas.csv`, `gasto_competitivas.png`,
+`gasto_margem_ecdf.png`).
+- Mulheres competitivas por A: Federal 4,0 → 6,0 → 8,8%; Estadual 4,5 → 9,7 → 12,9% (2014 →
+  2018 → 2022). Pelo voto, ficam estáveis ou caem (Federal 6,1 → 7,1 → 4,6%).
+- **Dinheiro sem voto** (competitiva por A e não pelo voto, `gasto_cruzamento_voto.csv`):
+  mulheres no Federal, 1,0 → 2,8 → 5,7%; no Estadual, 1,3 → 6,2 → 8,1%. A fatia das mulheres
+  competitivas só pelo voto cai no Federal (3,9 → 1,5%). A distribuição pelo gasto elegeria
+  343 deputadas estaduais e 133 federais em 2022; as eleitas foram 187 e 90.
+- A aproximação das mulheres pelo gasto acontece **nos dois cargos**. Isso é compatível com a
+  cota de 30% do FEFC, que vale para Federal e Estadual e que a tripla diferença elimina.
+
+**Tripla diferença** (`R/14`, `ddd_gasto_resultados.csv`, `ddd_gasto_estudo_evento.png`).
+Mesmo desenho do `R/05`, com três eleições, base 2018 e sem DF. Efeito de 2022 em p.p., sem
+peso [IC 95%]; ponderado ao lado.
+
+| Mulheres − homens | 2022 | Ponderado |
+| --- | --- | --- |
+| Voto: eleita ou < 0,1 QE (referência; reproduz o `R/05`) | **3,4** [0,8; 6,0] | 2,4 [−0,1; 4,8] |
+| A: margem de gasto < 0,1 QE | 1,9 [−0,8; 4,7] | 0,8 [−1,7; 3,3] |
+| A: eleita pelo gasto | 1,2 [−0,8; 3,2] | **1,7** [0,1; 3,3] |
+| D2: dinheiro faltante < 0,1 QE | 2,4 [0,0; 4,7] | **2,1** [0,4; 3,9] |
+| D3 ≥ 0,5 | 3,0 [−1,3; 7,3] | 2,5 [−1,5; 6,5] |
+| Competitiva só pelo gasto | 1,0 [−1,0; 3,0] | 0,3 [−1,4; 2,0] |
+
+- **Leitura.** Na comparação Federal × Estadual, a EC 111 aproxima as mulheres do limiar
+  **pelo voto**, mas não de forma clara **pelo gasto**: A e D3 dão efeitos positivos e não
+  significativos. O D2 acompanha o voto porque é construído a partir da margem de votos, então
+  não é evidência independente. Isso concorda com a exploração de gasto: mais recursos para
+  as mulheres, sem mais mulheres viáveis pelo dinheiro. O crescimento de "dinheiro sem voto"
+  é comum aos dois cargos, e a EC não o amplia no Federal.
+- **2014 (coeficiente sinalizado, sem leitura de pré-teste**, decisão de 2026-09-28). Para as
+  mulheres, D2 dá −5,3 e "só pelo gasto" dá +2,8, os dois significativos. A e D3 ficam perto
+  de 0.
+- **Raça.** Nenhum efeito em 2022 em nenhuma medida. Em 2014, voto, D2 e A de 0,25 são
+  negativos: é a mesma tendência prévia do `R/05`.
+
+**Pendências.** Robustez de A com D'Hondt puro (`MARGEM_GASTO_REGRA=dhondt Rscript R/11`);
+2026 quando sair a prestação final; sensibilidade de D2 com ε ± 1 EP (já calculada em
+`margem_gasto_medidas.rds`, ainda não tabulada).
+
 ## Objetivo
 
 Estudar como implementar, para Deputado Federal e Estadual (2014, 2018, 2022), a medida de

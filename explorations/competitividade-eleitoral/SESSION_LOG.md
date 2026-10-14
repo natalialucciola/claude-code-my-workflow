@@ -48,3 +48,9 @@
   de 1 voto apareceu ao mudar a ordem das listas: é o empate resolvido pela ordem dos dados,
   convenção já documentada. Fixada a mesma ordem do R/03.
 - 2014 entra no estudo de evento sinalizado, sem leitura de pré-teste (decisão de 2026-09-28).
+- R/11: bug no cluster (dir_cache não exportado) corrigido; 159 distritos em 28 min.
+  O gasto, sozinho, elege 47–66% dos eleitos; Spearman com a margem de votos de 0,49 a 0,74.
+- R/12: ε voto–gasto dentro da lista ≈ 0,23–0,33; D2 explode longe do limiar (só a banda
+  serve). R/13: bug de geom_vline corrigido. R/14: voto reproduz o R/05 (+3,4); A +1,9 n.s.;
+  "só pelo gasto" +1,0 n.s. A EC aproxima as mulheres pelo voto, não pelo gasto.
+  Resultados no README.

@@ -84,8 +84,8 @@ tema <- theme_minimal(base_size = 10) +
 fe <- d[, .(ano, cargo, grupo = fifelse(mulher, "Mulheres", "Homens"),
             x = pmin(pmax(margem_gasto_qe, -1.5), 1.5))]
 p1 <- ggplot(fe, aes(x = x, colour = grupo)) +
-  geom_vline(xintercept = c(-0.1, 0), colour = "grey70", linetype = c("dashed", "solid"),
-             linewidth = 0.4) +
+  geom_vline(xintercept = -0.1, colour = "grey70", linetype = "dashed", linewidth = 0.4) +
+  geom_vline(xintercept = 0, colour = "grey70", linewidth = 0.4) +
   stat_ecdf(linewidth = 0.7) +
   facet_grid(cargo ~ ano) +
   scale_colour_manual(values = cores, name = NULL) +

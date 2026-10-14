@@ -86,7 +86,7 @@ message("Regra: ", regra_modo, " | distritos: ", length(lista_insumos),
 if (length(pendentes)) {
   cl <- makeCluster(n_nucleos)
   invisible(clusterEvalQ(cl, library(data.table)))
-  clusterExport(cl, c("src_fun", "arq_cache", "regra_de", "regra_modo"))
+  clusterExport(cl, c("src_fun", "dir_cache", "arq_cache", "regra_de", "regra_modo"))
   invisible(clusterEvalQ(cl, source(src_fun)))
   t0 <- Sys.time()
   invisible(parLapplyLB(cl, pendentes, calcular))
