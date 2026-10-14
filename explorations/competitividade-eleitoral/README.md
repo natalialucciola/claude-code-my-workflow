@@ -77,6 +77,22 @@ constante no tempo em todas as UF × cargo).
 - **Peso pela magnitude.** Dá resultados próximos aos sem peso (taxa: 3,1 contra 3,6 p.p. no
   geral).
 
+**Cláusula de desempenho** (`R/08`; partido ou federação de 2022 classificado pela votação para a
+Câmara em 2018; pressionado < 4%, robustez < 3%; 2014–2022).
+- Não competitivas por cadeira, 2022 (sem peso / magnitude):
+  - homens: +1,5 / +1,2 nos partidos com folga e +1,9 / +1,8 nos pressionados;
+  - mulheres: +0,9 / +0,7 com folga e +1,2 / +1,1 pressionados.
+- A expansão é geral e só um pouco maior nos pressionados. **A cláusula não explica a maior parte
+  dela.**
+- A "aproximação" das mulheres (diferença na taxa de competitivas) aparece nos partidos **com
+  folga** (+4,5 / +5,8) e não nos pressionados (+1,8 / +0,9). A composição das competitivas não
+  muda em nenhum grupo.
+- Hipótese ainda não testada: o fim das coligações com limite de M + 1 candidaturas por partido
+  (Lei 14.211/2021) pesa mais em distritos de magnitude pequena, que são mais comuns no Federal.
+- Conferência: o "4.666" de mulheres não competitivas no Estadual em 2018 e 2022 é coincidência
+  (4.993 − 327 e 4.960 − 294). As bases são distintas, nenhuma UF coincide e o gênero de 2022 bate
+  100% com o `consulta_cand_2022`.
+
 **Pendências.** Sensibilidade formal (HonestDiD); refazer 2022 com a regra original da
 totalização; painel de listas (complemento do plano); decidir o capítulo de destino.
 
