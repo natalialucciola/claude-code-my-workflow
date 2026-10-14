@@ -1,0 +1,1141 @@
+M,lb,ub,restricao,grupo,desfecho,peso,alvo
+,0.173396885008954,6.03713868446421,Original,mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+0,0.213889521878441,5.99664604759471,RM (M̄),mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+0.25,-0.108269616044471,6.22215744414075,RM (M̄),mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+0.5,-0.575400366032692,6.52820862516752,RM (M̄),mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+0.75,-1.13917885739779,6.94701550446731,RM (M̄),mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+1,-1.86403691772434,7.49468603893626,RM (M̄),mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+1.25,-2.65332680563548,8.15511227167822,RM (M̄),mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+1.5,-3.44261669354661,8.8155385044202,RM (M̄),mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+1.75,-4.26412249525004,9.50818065095445,RM (M̄),mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+2,-5.11784421074575,10.2169307543849,RM (M̄),mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,média 2022 e 2026
+,0.307670692880084,5.80873806729979,Original,mulheres,dif_pct_comp,magnitude,2022
+0,0.317801540378007,5.79860721980187,RM (M̄),mulheres,dif_pct_comp,magnitude,2022
+0.25,0.135614093970565,5.92006551740683,RM (M̄),mulheres,dif_pct_comp,magnitude,2022
+0.5,-0.137667075640596,6.08707067661365,RM (M̄),mulheres,dif_pct_comp,magnitude,2022
+0.75,-0.42613053245238,6.31480498462295,RM (M̄),mulheres,dif_pct_comp,magnitude,2022
+1,-0.836052286869123,6.60326844143474,RM (M̄),mulheres,dif_pct_comp,magnitude,2022
+1.25,-1.32188547728897,6.96764333424962,RM (M̄),mulheres,dif_pct_comp,magnitude,2022
+1.5,-1.85326552931067,7.39274737586698,RM (M̄),mulheres,dif_pct_comp,magnitude,2022
+1.75,-2.399827868533,7.84821599188559,RM (M̄),mulheres,dif_pct_comp,magnitude,2022
+2,-2.9312079205547,8.28850232070357,RM (M̄),mulheres,dif_pct_comp,magnitude,2022
+0,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2022
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2022
+1,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2022
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2022
+2,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2022
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2022
+3,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2022
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2022
+4,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2022
+,-0.197311652336599,6.50197403110304,Original,mulheres,dif_pct_comp,magnitude,2026
+0,-0.176569525236072,6.48123190400252,RM (M̄),mulheres,dif_pct_comp,magnitude,2026
+0.25,-0.596102218037407,6.75484018191643,RM (M̄),mulheres,dif_pct_comp,magnitude,2026
+0.5,-1.19804042944802,7.15613232285684,RM (M̄),mulheres,dif_pct_comp,magnitude,2026
+0.75,-2.01886526318976,7.73982998240652,RM (M̄),mulheres,dif_pct_comp,magnitude,2026
+1,-3.02209561554078,8.52417371242641,RM (M̄),mulheres,dif_pct_comp,magnitude,2026
+1.25,-4.08004762347458,9.41796075361186,RM (M̄),mulheres,dif_pct_comp,magnitude,2026
+1.5,-5.15624018326932,10.3299883466582,RM (M̄),mulheres,dif_pct_comp,magnitude,2026
+1.75,-6.30539495050776,11.2602564915656,RM (M̄),mulheres,dif_pct_comp,magnitude,2026
+2,-7.43630916588527,12.3182084994994,RM (M̄),mulheres,dif_pct_comp,magnitude,2026
+0,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2026
+1,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2026
+2,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2026
+3,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2026
+4,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,magnitude,2026
+,0.733487294366271,6.54084177084951,Original,mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+0,0.7836814601381,6.49064760507769,RM (M̄),mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+0.25,0.121439654923268,6.70490230676484,RM (M̄),mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+0.5,-0.696623751518585,6.91915700845199,RM (M̄),mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+0.75,-1.74841955980096,7.26975561121278,RM (M̄),mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+1,-2.85864846854348,8.16572981826815,RM (M̄),mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+1.25,-3.98835507743937,9.19804792639715,RM (M̄),mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+1.5,-5.11806168633526,10.2693214348329,RM (M̄),mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+1.75,-6.30620139569128,11.3990280437288,RM (M̄),mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+2,-7.49434110504731,12.5482123527781,RM (M̄),mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,média 2022 e 2026
+,0.728043689197538,6.05692234172048,Original,mulheres,dif_pct_comp,sem peso,2022
+0,0.754423748531396,6.03054228238662,RM (M̄),mulheres,dif_pct_comp,sem peso,2022
+0.25,0.334525041684786,6.14008107547704,RM (M̄),mulheres,dif_pct_comp,sem peso,2022
+0.5,-0.158399527222103,6.32264573062774,RM (M̄),mulheres,dif_pct_comp,sem peso,2022
+0.75,-0.779119354734483,6.52346685129351,RM (M̄),mulheres,dif_pct_comp,sem peso,2022
+1,-1.49112150982221,6.76080090298942,RM (M̄),mulheres,dif_pct_comp,sem peso,2022
+1.25,-2.25789306145515,7.10767374777575,RM (M̄),mulheres,dif_pct_comp,sem peso,2022
+1.5,-3.04292107860316,7.76490650631827,RM (M̄),mulheres,dif_pct_comp,sem peso,2022
+1.75,-3.8096926302361,8.476908661406,RM (M̄),mulheres,dif_pct_comp,sem peso,2022
+2,-4.57646418186904,9.18891081649373,RM (M̄),mulheres,dif_pct_comp,sem peso,2022
+0,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2022
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2022
+1,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2022
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2022
+2,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2022
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2022
+3,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2022
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2022
+4,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2022
+,0.179953028292991,7.58373907122056,Original,mulheres,dif_pct_comp,sem peso,2026
+0,0.219456897445827,7.54423520206773,RM (M̄),mulheres,dif_pct_comp,sem peso,2026
+0.25,-0.534218040650316,7.68554925296076,RM (M̄),mulheres,dif_pct_comp,sem peso,2026
+0.5,-1.59407342234802,7.99172969656231,RM (M̄),mulheres,dif_pct_comp,sem peso,2026
+0.75,-2.96010924764728,8.93382336918249,RM (M̄),mulheres,dif_pct_comp,sem peso,2026
+1,-4.42035444020856,10.2056498272197,RM (M̄),mulheres,dif_pct_comp,sem peso,2026
+1.25,-5.92770431640085,11.5952379943345,RM (M̄),mulheres,dif_pct_comp,sem peso,2026
+1.5,-7.45860653440864,13.0790355287113,RM (M̄),mulheres,dif_pct_comp,sem peso,2026
+1.75,-9.03661343604744,14.6099377467191,RM (M̄),mulheres,dif_pct_comp,sem peso,2026
+2,-10.6381726795017,16.1643923065424,RM (M̄),mulheres,dif_pct_comp,sem peso,2026
+0,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2026
+1,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2026
+2,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2026
+3,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2026
+4,,,"Suavidade (M, p.p.)",mulheres,dif_pct_comp,sem peso,2026
+,0.0275444939497875,4.30534856657866,Original,mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+0,0.0718550722947349,4.26103798823371,RM (M̄),mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+0.25,-0.650417844246469,4.63249263102633,RM (M̄),mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+0.5,-1.57905445122801,5.16903822617123,RM (M̄),mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+0.75,-2.6521456415178,5.9944929879326,RM (M̄),mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+1,-3.76650956989566,6.98503870204625,RM (M̄),mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+1.25,-4.90150986731755,8.03749352329201,RM (M̄),mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+1.5,-6.03651016473944,9.13122108262583,RM (M̄),mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+1.75,-7.19214683120537,10.2455850110037,RM (M̄),mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+2,-8.36841986671533,11.4012216774696,RM (M̄),mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,média 2022 e 2026
+,-0.278810138814384,3.54288040267408,Original,mulheres,dif_pct_eleita,magnitude,2022
+0,-0.266505407173941,3.53057567103365,RM (M̄),mulheres,dif_pct_eleita,magnitude,2022
+0.25,-0.714366252295864,3.72529777760839,RM (M̄),mulheres,dif_pct_eleita,magnitude,2022
+0.5,-1.27906036136263,4.01738093747051,RM (M̄),mulheres,dif_pct_eleita,magnitude,2022
+0.75,-1.96058773437425,4.42629736127748,RM (M̄),mulheres,dif_pct_eleita,magnitude,2022
+1,-2.68105952870082,4.99099147034426,RM (M̄),mulheres,dif_pct_eleita,magnitude,2022
+1.25,-3.42100353368486,5.63357442204092,RM (M̄),mulheres,dif_pct_eleita,magnitude,2022
+1.5,-4.19989195998385,6.33457400571001,RM (M̄),mulheres,dif_pct_eleita,magnitude,2022
+1.75,-4.95930817562537,7.05504580003658,RM (M̄),mulheres,dif_pct_eleita,magnitude,2022
+2,-5.71872439126689,7.77551759436315,RM (M̄),mulheres,dif_pct_eleita,magnitude,2022
+0,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2022
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2022
+1,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2022
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2022
+2,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2022
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2022
+3,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2022
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2022
+4,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2022
+,0.140967451920435,5.26074840527677,Original,mulheres,dif_pct_eleita,magnitude,2026
+0,0.160287698904252,5.24142815829296,RM (M̄),mulheres,dif_pct_eleita,magnitude,2026
+0.25,-0.773913013360041,5.74270658926404,RM (M̄),mulheres,dif_pct_eleita,magnitude,2026
+0.5,-2.02710909078775,6.56298038539854,RM (M̄),mulheres,dif_pct_eleita,magnitude,2026
+0.75,-3.46258823402312,7.77060569637433,RM (M̄),mulheres,dif_pct_eleita,magnitude,2026
+1,-4.94363814371041,9.13772868993183,RM (M̄),mulheres,dif_pct_eleita,magnitude,2026
+1.25,-6.44747343662366,10.5732078331672,RM (M̄),mulheres,dif_pct_eleita,magnitude,2026
+1.5,-7.97409411276287,12.0542577428545,RM (M̄),mulheres,dif_pct_eleita,magnitude,2026
+1.75,-9.52350017212803,13.5808784189937,RM (M̄),mulheres,dif_pct_eleita,magnitude,2026
+2,-11.0956916147192,15.1302844783589,RM (M̄),mulheres,dif_pct_eleita,magnitude,2026
+0,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2026
+1,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2026
+2,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2026
+3,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2026
+4,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,magnitude,2026
+,-0.593160207939811,4.38641912783333,Original,mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+0,-0.555663372399067,4.34892229229259,RM (M̄),mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+0.25,-1.49986168217928,4.87347690883715,RM (M̄),mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+0.5,-2.75879276188623,5.73899202613568,RM (M̄),mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+0.75,-4.20131795738377,6.91923991336094,RM (M̄),mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+1,-5.67007088370855,8.25685418554958,RM (M̄),mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+1.25,-7.19127927168778,9.69937938104713,RM (M̄),mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+1.5,-8.68625992883978,11.1681323073719,RM (M̄),mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+1.75,-10.2336960476462,12.6631129645239,RM (M̄),mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+2,-11.7811321664527,14.1843213525031,RM (M̄),mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,média 2022 e 2026
+,-1.24994045346451,2.95897179993745,Original,mulheres,dif_pct_eleita,sem peso,2022
+0,-1.24403693049087,2.95306827696381,RM (M̄),mulheres,dif_pct_eleita,sem peso,2022
+0.25,-1.82629430031117,3.26845768561647,RM (M̄),mulheres,dif_pct_eleita,sem peso,2022
+0.5,-2.60263746007157,3.75367216046672,RM (M̄),mulheres,dif_pct_eleita,sem peso,2022
+0.75,-3.52454496228705,4.43297242525707,RM (M̄),mulheres,dif_pct_eleita,sem peso,2022
+1,-4.49497391198755,5.2578370325025,RM (M̄),mulheres,dif_pct_eleita,sem peso,2022
+1.25,-5.48966358543057,6.15548381097547,RM (M̄),mulheres,dif_pct_eleita,sem peso,2022
+1.5,-6.50861398261609,7.12591276067597,RM (M̄),mulheres,dif_pct_eleita,sem peso,2022
+1.75,-7.52756437980162,8.09634171037647,RM (M̄),mulheres,dif_pct_eleita,sem peso,2022
+2,-8.54651477698715,9.09103138381948,RM (M̄),mulheres,dif_pct_eleita,sem peso,2022
+0,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2022
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2022
+1,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2022
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2022
+2,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2022
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2022
+3,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2022
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2022
+4,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2022
+,-0.274519610559599,6.1520061038737,Original,mulheres,dif_pct_eleita,sem peso,2026
+0,-0.247825675357429,6.12531216867154,RM (M̄),mulheres,dif_pct_eleita,sem peso,2026
+0.25,-1.47457990824563,6.84341220743536,RM (M̄),mulheres,dif_pct_eleita,sem peso,2026
+0.5,-3.15014666536123,8.04024560537507,RM (M̄),mulheres,dif_pct_eleita,sem peso,2026
+0.75,-5.03515926711627,9.68589152754218,RM (M̄),mulheres,dif_pct_eleita,sem peso,2026
+1,-7.0099343737168,11.5110624594002,RM (M̄),mulheres,dif_pct_eleita,sem peso,2026
+1.25,-9.01463031526582,13.4259958961038,RM (M̄),mulheres,dif_pct_eleita,sem peso,2026
+1.5,-11.0193262568148,15.3708501677558,RM (M̄),mulheres,dif_pct_eleita,sem peso,2026
+1.75,-13.0838638682608,17.4054669442533,RM (M̄),mulheres,dif_pct_eleita,sem peso,2026
+2,-15.1484014797068,19.4400837207508,RM (M̄),mulheres,dif_pct_eleita,sem peso,2026
+0,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2026
+1,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2026
+2,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2026
+3,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2026
+4,,,"Suavidade (M, p.p.)",mulheres,dif_pct_eleita,sem peso,2026
+,-3.14535332419491,6.03147061960964,Original,mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+0,-3.11221282996232,5.99833012537705,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+0.25,-3.58209756691392,6.70315723080445,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+0.5,-4.20861054951606,7.56461258188238,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+0.75,-4.99175177776873,8.79153383947822,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+1,-6.00983537449719,10.1750833427246,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+1.25,-7.08012838644251,11.6369469687963,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+1.5,-8.20263081360466,13.0727058872595,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+1.75,-9.32513324076682,14.5606742209395,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+2,-10.4737403755374,16.0486425546196,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+,-3.37081063366062,5.81046285697919,Original,mulheres,pct_grupo_entre_comp,magnitude,2022
+0,-3.33742712268055,5.77707934599912,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2022
+0.25,-3.49412350896157,6.03823998980083,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2022
+0.5,-3.75528415276328,6.48221308426373,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2022
+0.75,-4.06867692532533,7.00453437186715,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2022
+1,-4.48653395540807,7.70966811013176,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2022
+1.25,-5.06108737177183,8.57149823467741,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2022
+1.5,-5.74010504565628,9.45944442360322,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2022
+1.75,-6.47135484830106,10.4257388056695,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2022
+2,-7.17648858656568,11.3920331877359,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2022
+0,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2022
+0.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2022
+1,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2022
+1.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2022
+2,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2022
+2.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2022
+3,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2022
+3.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2022
+4,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2022
+,-3.43473671006271,6.76731907757358,Original,mulheres,pct_grupo_entre_comp,magnitude,2026
+0,-3.40304498768609,6.73562735519698,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2026
+0.25,-4.2359670781779,7.88448541104775,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2026
+0.5,-5.18377497425479,9.17695072387987,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2026
+0.75,-6.44751883569064,10.9289592590523,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2026
+1,-7.85486995410784,12.9394608567911,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2026
+1.25,-9.34838542671384,14.94996245453,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2026
+1.5,-10.8993438021124,16.9604640522689,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2026
+1.75,-12.4790236289072,18.9709656500077,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2026
+2,-14.058703455702,20.9527457963503,RM (M̄),mulheres,pct_grupo_entre_comp,magnitude,2026
+0,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2026
+1,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2026
+2,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2026
+3,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2026
+4,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,magnitude,2026
+,-2.2021559403942,5.67054921774365,Original,mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+0,-2.12404288944253,5.59243616679198,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+0.25,-2.61710864383451,5.83896904398797,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+0.5,-3.33205398770289,6.33203479837995,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+0.75,-4.34283878420645,7.17024658084632,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+1,-5.5755031701864,8.32895110366748,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+1.25,-6.85747413160555,9.56161548964743,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+1.5,-8.1887516684639,10.8682397387862,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+1.75,-9.56933578076145,12.2241705633641,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+2,-10.9992264684982,13.6294079633813,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+,-2.04383450313914,5.76990817476372,Original,mulheres,pct_grupo_entre_comp,sem peso,2022
+0,-2.02065620639938,5.74672987802395,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2022
+0.25,-2.24118136337039,5.86924385411896,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2022
+0.5,-2.6087232916554,6.13877460152797,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2022
+0.75,-3.07427640081642,6.50631652981299,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2022
+1,-3.68684628129145,7.04537802463101,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2022
+1.25,-4.44643293308048,7.75595908598204,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2022
+1.5,-5.30403076574552,8.58905412342807,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2022
+1.75,-6.18613139362955,9.44665195609311,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2022
+2,-7.06823202151359,10.3287525839771,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2022
+0,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2022
+0.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2022
+1,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2022
+1.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2022
+2,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2022
+2.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2022
+3,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2022
+3.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2022
+4,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2022
+,-3.38669895312046,6.59741183619479,Original,mulheres,pct_grupo_entre_comp,sem peso,2026
+0,-3.36664752939218,6.5773604124665,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2026
+0.25,-3.96749393071294,6.81769897299481,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2026
+0.5,-4.89880585276013,7.44858769438161,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2026
+0.75,-6.31079489586393,8.65028049702314,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2026
+1,-7.99316481956207,10.2124811404571,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2026
+1.25,-9.73561938339229,11.8648087440892,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2026
+1.5,-11.5982432274867,13.6673479480515,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2026
+1.75,-13.400782431449,15.4698871520138,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2026
+2,-15.2634062755433,17.3024686760422,RM (M̄),mulheres,pct_grupo_entre_comp,sem peso,2026
+0,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2026
+1,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2026
+2,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2026
+3,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2026
+4,,,"Suavidade (M, p.p.)",mulheres,pct_grupo_entre_comp,sem peso,2026
+,0.958411251205492,2.48034131970377,Original,mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+0,0.965237871417571,2.4735146994917,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+0.25,0.751737498493837,2.56304711394358,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+0.5,0.503801581550145,2.68012796361144,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+0.75,0.221430120586496,2.83164435729925,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+1,-0.0747155579851357,3.02448340381101,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+1.25,-0.377748345360758,3.25864510314672,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+1.5,-0.680781132736382,3.52035523769839,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+1.75,-0.990701028915996,3.79583958985805,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+2,-1.30062092509561,4.08509815962569,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+,1.05546406466149,2.46532801454643,Original,mulheres,nc_por_cadeira_grupo,magnitude,2022
+0,1.05738127739041,2.46341080181751,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2022
+0.25,0.931960803380479,2.51621942245327,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2022
+0.5,0.780136019052669,2.58883127582744,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2022
+0.75,0.60850800198645,2.67464528436055,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2022
+1,0.417076752181821,2.78026252563207,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2022
+1.25,0.225645502377192,2.905682999642,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2022
+1.5,0.0210120974136219,3.05750778396981,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2022
+1.75,-0.177020229970477,3.22253472345656,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2022
+2,-0.381653634934046,3.39416274052278,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2022
+0,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2022
+0.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2022
+1,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2022
+1.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2022
+2,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2022
+2.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2022
+3,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2022
+3.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2022
+4,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2022
+,0.825217378210391,2.53149568440022,Original,mulheres,nc_por_cadeira_grupo,magnitude,2026
+0,0.835908031168744,2.52080503144187,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2026
+0.25,0.534245249460456,2.65324235024063,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2026
+0.5,0.195794323641401,2.815110184328,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2026
+0.75,-0.186802375110575,3.0358390489926,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2026
+1,-0.584114331506856,3.33014420187874,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2026
+1.25,-0.996141545547445,3.67595275651994,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2026
+1.5,-1.40816875958803,4.04383419762761,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2026
+1.75,-1.82019597362862,4.42643089637959,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2026
+2,-2.23222318766921,4.82374285277587,RM (M̄),mulheres,nc_por_cadeira_grupo,magnitude,2026
+0,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2026
+1,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2026
+2,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2026
+3,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2026
+4,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,magnitude,2026
+,1.67245222039822,2.6601471334725,Original,mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+0,1.68121181711133,2.65138753675939,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+0.25,1.49712719338323,2.73099169837154,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+0.5,1.25831470854679,2.85537320089052,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+0.75,0.989650663105787,3.04940834482013,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+1,0.716011357564026,3.28324556955582,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+1.25,0.442372052022265,3.53698383469454,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+1.5,0.163757486379746,3.80067262003478,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+1.75,-0.114857079262774,4.06933666547578,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+2,-0.398446905006054,4.3479512311183,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+,1.6855804357763,2.61462367187295,Original,mulheres,nc_por_cadeira_grupo,sem peso,2022
+0,1.694086550965,2.60611755668424,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2022
+0.25,1.58309865079811,2.65919872632928,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2022
+0.5,1.44315738537029,2.73640770035842,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2022
+0.75,1.27908831555836,2.83774447877167,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2022
+1,1.10536812399279,2.97286018332267,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2022
+1.25,0.926822371550397,3.12727813138096,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2022
+1.5,0.743451058231183,3.29134720119288,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2022
+1.75,0.555254184035149,3.46506739275845,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2022
+2,0.371882870715935,3.64361314520085,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2022
+0,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2022
+0.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2022
+1,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2022
+1.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2022
+2,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2022
+2.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2022
+3,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2022
+3.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2022
+4,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2022
+,1.59140671169267,2.77358788839952,Original,mulheres,nc_por_cadeira_grupo,sem peso,2026
+0,1.59429429691369,2.7707003031785,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2026
+0.25,1.34806978397454,2.87466176419725,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2026
+0.5,1.01977043338901,3.0497547511762,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2026
+0.75,0.664112803588024,3.3233375433308,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2026
+1,0.297511862100851,3.64616523807324,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2026
+1.25,-0.0690890793863224,3.99635121203114,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2026
+1.5,-0.44663333255968,4.35200884183213,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2026
+1.75,-0.818705929889946,4.7186097833193,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2026
+2,-1.2017218389064,5.09068238064956,RM (M̄),mulheres,nc_por_cadeira_grupo,sem peso,2026
+0,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2026
+1,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2026
+2,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2026
+3,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2026
+4,,,"Suavidade (M, p.p.)",mulheres,nc_por_cadeira_grupo,sem peso,2026
+,-1.8898722138526,-0.267577444156684,Original,mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+0,-1.87732816179058,-0.280121496218698,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+0.25,-1.96571113933211,-0.134920890257619,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+0.5,-2.07934639617121,0.0418450648254352,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+0.75,-2.23086007195669,0.250176369030464,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+1,-2.42656523651293,0.490073022357466,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+1.25,-2.64752268036674,0.742595815333258,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+1.5,-2.89373240351814,1.00774474795784,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+1.75,-3.14625519649393,1.27920675040681,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+2,-3.40509105929412,1.55066875285579,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+,-2.00978062867211,-0.486895125859863,Original,mulheres,dif_nc_por_cadeira,magnitude,2022
+0,-2.00878545295272,-0.487890301579258,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2022
+0.25,-2.05726019881322,-0.403059496323368,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2022
+0.5,-2.11785363113886,-0.312169347834914,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2022
+0.75,-2.20268443639475,-0.190982483183642,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2022
+1,-2.30569327134833,-0.0455582456021162,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2022
+1.25,-2.43293947923217,0.105925335211973,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2022
+1.5,-2.57230437358113,0.275586945723753,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2022
+1.75,-2.72984729762778,0.43918921300297,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2022
+2,-2.88739022167444,0.614910166747314,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2022
+0,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2022
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2022
+1,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2022
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2022
+2,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2022
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2022
+3,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2022
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2022
+4,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2022
+,-1.83043294708033,0.0122093855937505,Original,mulheres,dif_nc_por_cadeira,magnitude,2026
+0,-1.82011188499057,0.00188832350398727,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2026
+0.25,-1.93699491723362,0.201277025565656,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2026
+0.5,-2.10200625687086,0.44879403502152,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2026
+0.75,-2.32202137638718,0.737563879386694,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2026
+1,-2.60391574826747,1.06758655866118,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2026
+1.25,-2.92706295505707,1.41823565539032,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2026
+1.5,-3.26396110681644,1.78263569708923,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2026
+1.75,-3.6077347310607,2.14016026630326,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2026
+2,-3.96525930027473,2.50456030800217,RM (M̄),mulheres,dif_nc_por_cadeira,magnitude,2026
+0,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2026
+1,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2026
+2,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2026
+3,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2026
+4,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,magnitude,2026
+,-1.85634334310518,-0.469571059151691,Original,mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+0,-1.84576333678727,-0.480151065469598,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+0.25,-1.93723975687553,-0.25799404525524,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+0.5,-2.06792035700163,0.0164352150095555,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+0.75,-2.27047528719707,0.336602685318483,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+1,-2.53183648744926,0.663304185633716,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+1.25,-2.83240186773927,1.00960777596786,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+1.5,-3.14603530804189,1.35591136630201,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+1.75,-3.47273680835713,1.70221495663615,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+2,-3.80597233867866,2.041984516964,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+,-1.9127567771614,-0.557164081578287,Original,mulheres,dif_nc_por_cadeira,sem peso,2022
+0,-1.90299589962327,-0.566924959116418,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2022
+0.25,-1.94817704253896,-0.431381530369347,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2022
+0.5,-2.02563043039443,-0.25711140769454,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2022
+0.75,-2.12244716521376,-0.0634779380558666,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2022
+1,-2.25153614497288,0.155973327534631,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2022
+1.25,-2.41289736967177,0.375424593125128,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2022
+1.5,-2.59362194133454,0.594875858715625,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2022
+1.75,-2.79370985996117,0.827236022282033,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2022
+2,-3.00025222757575,1.05314173686049,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2022
+0,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2022
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2022
+1,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2022
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2022
+2,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2022
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2022
+3,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2022
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2022
+4,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2022
+,-1.87024357979681,-0.311664365977243,Original,mulheres,dif_nc_por_cadeira,sem peso,2026
+0,-1.86141967598224,-0.320488269791815,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2026
+0.25,-1.99389794167281,-0.0206690369131355,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2026
+0.5,-2.20307415065794,0.348875598960586,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2026
+0.75,-2.52381100443513,0.774200557230339,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2026
+1,-2.91427326120736,1.22044313639861,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2026
+1.25,-3.33262567917762,1.68063079616588,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2026
+1.5,-3.76492317774687,2.14081845593316,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2026
+1.75,-4.21116575691514,2.60100611570043,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2026
+2,-4.66438087638291,3.06119377546771,RM (M̄),mulheres,dif_nc_por_cadeira,sem peso,2026
+0,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2026
+0.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2026
+1,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2026
+1.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2026
+2,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2026
+2.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2026
+3,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2026
+3.5,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2026
+4,,,"Suavidade (M, p.p.)",mulheres,dif_nc_por_cadeira,sem peso,2026
+,-0.33782062351191,6.21414975100628,Original,negras,dif_pct_comp,magnitude,média 2022 e 2026
+0,-0.291726823439944,6.16805595093432,RM (M̄),negras,dif_pct_comp,magnitude,média 2022 e 2026
+0.25,-2.23362471266902,6.80214505762136,RM (M̄),negras,dif_pct_comp,magnitude,média 2022 e 2026
+0.5,-4.61145886274543,8.03069270182751,RM (M̄),negras,dif_pct_comp,magnitude,média 2022 e 2026
+0.75,-7.18744585866154,10.0518517293925,RM (M̄),negras,dif_pct_comp,magnitude,média 2022 e 2026
+1,-9.72380228540972,12.3900553103009,RM (M̄),negras,dif_pct_comp,magnitude,média 2022 e 2026
+1.25,-12.2997892813258,14.8471505987132,RM (M̄),negras,dif_pct_comp,magnitude,média 2022 e 2026
+1.5,-14.9154068464099,17.3835070254614,RM (M̄),negras,dif_pct_comp,magnitude,média 2022 e 2026
+1.75,-17.531024411494,19.9594940213775,RM (M̄),negras,dif_pct_comp,magnitude,média 2022 e 2026
+2,-20.1862725457459,22.5751115864616,RM (M̄),negras,dif_pct_comp,magnitude,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,média 2022 e 2026
+,-1.49795830564023,3.78920070867999,Original,negras,dif_pct_comp,magnitude,2022
+0,-1.49354817074857,3.78479057378833,RM (M̄),negras,dif_pct_comp,magnitude,2022
+0.25,-2.76762993667126,4.07600926314208,RM (M̄),negras,dif_pct_comp,magnitude,2022
+0.5,-4.33293039194772,4.69484897801883,RM (M̄),negras,dif_pct_comp,magnitude,2022
+0.75,-6.04384019190106,5.78691906309543,RM (M̄),negras,dif_pct_comp,magnitude,2022
+1,-7.7547499918544,7.24301250986422,RM (M̄),negras,dif_pct_comp,magnitude,2022
+1.25,-9.50206212797696,8.80831296514068,RM (M̄),negras,dif_pct_comp,magnitude,2022
+1.5,-11.2129719279303,10.4464180927556,RM (M̄),negras,dif_pct_comp,magnitude,2022
+1.75,-12.9602840640529,12.1573278927089,RM (M̄),negras,dif_pct_comp,magnitude,2022
+2,-14.7075962001754,13.8682376926623,RM (M̄),negras,dif_pct_comp,magnitude,2022
+0,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2022
+0.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2022
+1,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2022
+1.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2022
+2,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2022
+2.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2022
+3,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2022
+3.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2022
+4,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2022
+,0.231511117790984,9.22990473415799,Original,negras,dif_pct_comp,magnitude,2026
+0,0.257926477702419,9.20348937424656,RM (M̄),negras,dif_pct_comp,magnitude,2026
+0.25,-2.12755696137602,10.2127323677028,RM (M̄),negras,dif_pct_comp,magnitude,2026
+0.5,-5.20116062326554,12.0477196285324,RM (M̄),negras,dif_pct_comp,magnitude,2026
+0.75,-8.5500123742795,14.8002005197767,RM (M̄),negras,dif_pct_comp,magnitude,2026
+1,-11.9447388068142,17.919678863187,RM (M̄),negras,dif_pct_comp,magnitude,2026
+1.25,-15.3394652393489,21.1767812511595,RM (M̄),negras,dif_pct_comp,magnitude,2026
+1.5,-18.8259410349251,24.5256330021734,RM (M̄),negras,dif_pct_comp,magnitude,2026
+1.75,-22.3124168305012,27.9662341162289,RM (M̄),negras,dif_pct_comp,magnitude,2026
+2,-25.7988926260774,31.4068352302843,RM (M̄),negras,dif_pct_comp,magnitude,2026
+0,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2026
+0.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2026
+1,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2026
+1.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2026
+2,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2026
+2.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2026
+3,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2026
+3.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2026
+4,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,magnitude,2026
+,-0.376464378220458,6.98239488657149,Original,negras,dif_pct_comp,sem peso,média 2022 e 2026
+0,-0.308464349388132,6.91439485773917,RM (M̄),negras,dif_pct_comp,sem peso,média 2022 e 2026
+0.25,-2.93009472827137,8.41246935995816,RM (M̄),negras,dif_pct_comp,sem peso,média 2022 e 2026
+0.5,-6.24725969747058,10.9270944172543,RM (M̄),negras,dif_pct_comp,sem peso,média 2022 e 2026
+0.75,-9.72493264905038,14.0837514040729,RM (M̄),negras,dif_pct_comp,sem peso,média 2022 e 2026
+1,-13.2561082614237,17.4544190340657,RM (M̄),negras,dif_pct_comp,sem peso,média 2022 e 2026
+1.25,-16.8407865345906,20.9320919856455,RM (M̄),negras,dif_pct_comp,sem peso,média 2022 e 2026
+1.5,-20.478967468551,24.5167702588124,RM (M̄),negras,dif_pct_comp,sem peso,média 2022 e 2026
+1.75,-24.1171484025114,28.1014485319792,RM (M̄),negras,dif_pct_comp,sem peso,média 2022 e 2026
+2,-27.7553293364719,31.7396294659397,RM (M̄),negras,dif_pct_comp,sem peso,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,média 2022 e 2026
+,-2.28536693405823,4.11227900801255,Original,negras,dif_pct_comp,sem peso,2022
+0,-2.22607678995936,4.05298886391368,RM (M̄),negras,dif_pct_comp,sem peso,2022
+0.25,-3.96175347476979,4.92082720631889,RM (M̄),negras,dif_pct_comp,sem peso,2022
+0.5,-6.05477535939413,6.29915869131541,RM (M̄),negras,dif_pct_comp,sem peso,2022
+0.75,-8.35199450105499,8.1369340046441,RM (M̄),negras,dif_pct_comp,sem peso,2022
+1,-10.7513122712341,10.2810052035276,RM (M̄),negras,dif_pct_comp,sem peso,2022
+1.25,-13.1506300414132,12.5271750309293,RM (M̄),negras,dif_pct_comp,sem peso,2022
+1.5,-15.4988984973332,14.8754434868493,RM (M̄),negras,dif_pct_comp,sem peso,2022
+1.75,-17.8982162675124,17.2237119427693,RM (M̄),negras,dif_pct_comp,sem peso,2022
+2,-20.3485833519506,19.6230297129484,RM (M̄),negras,dif_pct_comp,sem peso,2022
+0,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2022
+0.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2022
+1,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2022
+1.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2022
+2,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2022
+2.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2022
+3,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2022
+3.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2022
+4,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2022
+,0.6698920476583,10.7150568950894,Original,negras,dif_pct_comp,sem peso,2026
+0,0.712854061669404,10.6720948810783,RM (M̄),negras,dif_pct_comp,sem peso,2026
+0.25,-2.48617480759528,12.8450201507676,RM (M̄),negras,dif_pct_comp,sem peso,2026
+0.5,-6.83202534697372,16.2854851611088,RM (M̄),negras,dif_pct_comp,sem peso,2026
+0.75,-11.4193120274287,20.510617629949,RM (M̄),negras,dif_pct_comp,sem peso,2026
+1,-16.0669577431529,25.0375452751348,RM (M̄),negras,dif_pct_comp,sem peso,2026
+1.25,-20.8353215294154,29.685190990859,RM (M̄),negras,dif_pct_comp,sem peso,2026
+1.5,-25.664044350947,34.4535547771215,RM (M̄),negras,dif_pct_comp,sem peso,2026
+1.75,-30.4927671724786,39.2219185633839,RM (M̄),negras,dif_pct_comp,sem peso,2026
+2,-35.3214899940102,44.0506413849155,RM (M̄),negras,dif_pct_comp,sem peso,2026
+0,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2026
+0.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2026
+1,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2026
+1.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2026
+2,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2026
+2.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2026
+3,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2026
+3.5,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2026
+4,,,"Suavidade (M, p.p.)",negras,dif_pct_comp,sem peso,2026
+,-0.692207673571049,3.4327216731965,Original,negras,dif_pct_eleita,magnitude,média 2022 e 2026
+0,-0.649127312708828,3.38964131233428,RM (M̄),negras,dif_pct_eleita,magnitude,média 2022 e 2026
+0.25,-2.11198838949609,4.28007848950914,RM (M̄),negras,dif_pct_eleita,magnitude,média 2022 e 2026
+0.5,-3.89286274384581,5.58393292751518,RM (M̄),negras,dif_pct_eleita,magnitude,média 2022 e 2026
+0.75,-5.76914108146426,7.14219798757118,RM (M̄),negras,dif_pct_eleita,magnitude,média 2022 e 2026
+1,-7.67722074683896,8.89127101416465,RM (M̄),negras,dif_pct_eleita,magnitude,média 2022 e 2026
+1.25,-9.55349908445741,10.7039466962706,RM (M̄),negras,dif_pct_eleita,magnitude,média 2022 e 2026
+1.5,-11.4615787498321,12.5484237061328,RM (M̄),negras,dif_pct_eleita,magnitude,média 2022 e 2026
+1.75,-13.3696584152068,14.4247020437513,RM (M̄),negras,dif_pct_eleita,magnitude,média 2022 e 2026
+2,-15.3095394083377,16.332781709126,RM (M̄),negras,dif_pct_eleita,magnitude,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,média 2022 e 2026
+,-1.91331548885835,1.93331752996479,Original,negras,dif_pct_eleita,magnitude,2022
+0,-1.90209670604518,1.92209874715162,RM (M̄),negras,dif_pct_eleita,magnitude,2022
+0.25,-2.83482730438586,2.41955506626665,RM (M̄),negras,dif_pct_eleita,magnitude,2022
+0.5,-3.98519504233937,3.10355750504981,RM (M̄),negras,dif_pct_eleita,magnitude,2022
+0.75,-5.22883584012694,3.97410606350112,RM (M̄),negras,dif_pct_eleita,magnitude,2022
+1,-6.47247663791452,5.00010972167587,RM (M̄),negras,dif_pct_eleita,magnitude,2022
+1.25,-7.74720845564679,6.11938643968468,RM (M̄),negras,dif_pct_eleita,magnitude,2022
+1.5,-9.05303129332374,7.30084519758288,RM (M̄),negras,dif_pct_eleita,magnitude,2022
+1.75,-10.327763111056,8.51339497542577,RM (M̄),negras,dif_pct_eleita,magnitude,2022
+2,-11.6024949287883,9.75703577321335,RM (M̄),negras,dif_pct_eleita,magnitude,2022
+0,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2022
+0.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2022
+1,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2022
+1.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2022
+2,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2022
+2.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2022
+3,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2022
+3.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2022
+4,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2022
+,0.0513110719041752,5.40971488624028,Original,negras,dif_pct_eleita,magnitude,2026
+0,0.0918198217921642,5.3692061363523,RM (M̄),negras,dif_pct_eleita,magnitude,2026
+0.25,-1.7605078250402,6.69729010955286,RM (M̄),negras,dif_pct_eleita,magnitude,2026
+0.5,-4.06717998902013,8.58456733462735,RM (M̄),negras,dif_pct_eleita,magnitude,2026
+0.75,-6.51365046596854,10.7514411856388,RM (M̄),negras,dif_pct_eleita,magnitude,2026
+1,-8.99507052115907,13.128012506103,RM (M̄),negras,dif_pct_eleita,magnitude,2026
+1.25,-11.5114401545917,15.5395334048093,RM (M̄),negras,dif_pct_eleita,magnitude,2026
+1.5,-14.0627593662665,18.0209534599998,RM (M̄),negras,dif_pct_eleita,magnitude,2026
+1.75,-16.6140785779413,20.5373230934324,RM (M̄),negras,dif_pct_eleita,magnitude,2026
+2,-19.2003473678581,23.1235918833493,RM (M̄),negras,dif_pct_eleita,magnitude,2026
+0,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2026
+0.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2026
+1,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2026
+1.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2026
+2,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2026
+2.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2026
+3,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2026
+3.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2026
+4,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,magnitude,2026
+,-0.410568306983072,4.66616192070244,Original,negras,dif_pct_eleita,sem peso,média 2022 e 2026
+0,-0.364297048549389,4.61989066226875,RM (M̄),negras,dif_pct_eleita,sem peso,média 2022 e 2026
+0.25,-2.3180986311901,5.85596921455166,RM (M̄),negras,dif_pct_eleita,sem peso,média 2022 e 2026
+0.5,-4.7902557357559,7.80977079719236,RM (M̄),negras,dif_pct_eleita,sem peso,média 2022 e 2026
+0.75,-7.38203334538134,10.2021808983851,RM (M̄),negras,dif_pct_eleita,sem peso,média 2022 e 2026
+1,-10.0136844566933,12.7142115046374,RM (M̄),negras,dif_pct_eleita,sem peso,média 2022 e 2026
+1.25,-12.6852090696918,15.3059891142629,RM (M̄),negras,dif_pct_eleita,sem peso,média 2022 e 2026
+1.5,-15.3567336826904,17.9775137272614,RM (M̄),negras,dif_pct_eleita,sem peso,média 2022 e 2026
+1.75,-18.0681317973754,20.6490383402599,RM (M̄),negras,dif_pct_eleita,sem peso,média 2022 e 2026
+2,-20.7795299120605,23.360436454945,RM (M̄),negras,dif_pct_eleita,sem peso,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,média 2022 e 2026
+,-1.8028218535957,2.49717630286763,Original,negras,dif_pct_eleita,sem peso,2022
+0,-1.75577408939491,2.45012853866683,RM (M̄),negras,dif_pct_eleita,sem peso,2022
+0.25,-3.11985061741493,3.17005781734407,RM (M̄),negras,dif_pct_eleita,sem peso,2022
+0.5,-4.7112732334383,4.19311521335909,RM (M̄),negras,dif_pct_eleita,sem peso,2022
+0.75,-6.45425990813055,5.59508275604634,RM (M̄),negras,dif_pct_eleita,sem peso,2022
+1,-8.23513759749003,7.22439638673692,RM (M̄),negras,dif_pct_eleita,sem peso,2022
+1.25,-9.97812427218228,8.89160103209473,RM (M̄),negras,dif_pct_eleita,sem peso,2022
+1.5,-11.7590019615418,10.634587706787,RM (M̄),negras,dif_pct_eleita,sem peso,2022
+1.75,-13.5777706655685,12.4154653961465,RM (M̄),negras,dif_pct_eleita,sem peso,2022
+2,-15.3586483549279,14.1963430855059,RM (M̄),negras,dif_pct_eleita,sem peso,2022
+0,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2022
+0.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2022
+1,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2022
+1.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2022
+2,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2022
+2.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2022
+3,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2022
+3.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2022
+4,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2022
+,0.329490884655833,7.48734189351097,Original,negras,dif_pct_eleita,sem peso,2026
+0,0.361375308585522,7.45545746958128,RM (M̄),negras,dif_pct_eleita,sem peso,2026
+0.25,-2.03344223620922,9.26286693735089,RM (M̄),negras,dif_pct_eleita,sem peso,2026
+0.5,-5.19640880480606,11.9739811390053,RM (M̄),negras,dif_pct_eleita,sem peso,2026
+0.75,-8.58530155687409,15.1369477076022,RM (M̄),negras,dif_pct_eleita,sem peso,2026
+1,-12.0645647823306,18.4806552229759,RM (M̄),negras,dif_pct_eleita,sem peso,2026
+1.25,-15.5890132444814,21.9599184484325,RM (M̄),negras,dif_pct_eleita,sem peso,2026
+1.5,-19.1586469433264,25.4843669105832,RM (M̄),negras,dif_pct_eleita,sem peso,2026
+1.75,-22.7282806421714,29.0540006094282,RM (M̄),negras,dif_pct_eleita,sem peso,2026
+2,-26.3430995777106,32.6236343082732,RM (M̄),negras,dif_pct_eleita,sem peso,2026
+0,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2026
+0.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2026
+1,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2026
+1.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2026
+2,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2026
+2.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2026
+3,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2026
+3.5,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2026
+4,,,"Suavidade (M, p.p.)",negras,dif_pct_eleita,sem peso,2026
+,-6.07705488141134,5.75281403919774,Original,negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+0,-5.99689663525708,5.67265579304348,RM (M̄),negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+0.25,-7.84188516147061,5.94940407197551,RM (M̄),negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+0.5,-10.1019961060822,6.59515005615025,RM (M̄),negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+0.75,-12.9156036085578,8.53238800867445,RM (M̄),negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+1,-15.7753358241888,11.0231225190627,RM (M̄),negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+1.25,-18.6811927529751,13.7444805952277,RM (M̄),negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+1.5,-21.6331743949167,16.5580880977033,RM (M̄),negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+1.75,-24.6312807500137,19.4639450264896,RM (M̄),negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+2,-27.675511818266,22.4159266684313,RM (M̄),negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,média 2022 e 2026
+,-7.71913467270905,2.22855097194697,Original,negras,pct_grupo_entre_comp,magnitude,2022
+0,-7.68311968136402,2.19253598060195,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2022
+0.25,-8.75745879103396,2.35781892055117,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2022
+0.5,-10.0797223106277,2.93630921037344,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2022
+0.75,-11.7325517101199,3.92800685006876,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2022
+1,-13.5919847845487,5.41555330961175,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2022
+1.25,-15.534059328952,7.15102417907858,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2022
+1.5,-17.4761338733554,8.96913651852001,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2022
+1.75,-19.4182084177587,10.8285695929487,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2022
+2,-21.3602829621621,12.7706441373521,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2022
+0,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2022
+0.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2022
+1,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2022
+1.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2022
+2,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2022
+2.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2022
+3,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2022
+3.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2022
+4,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2022
+,-5.55681353980573,10.3989155561406,Original,negras,pct_grupo_entre_comp,magnitude,2026
+0,-5.4823668817401,10.324468898075,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2026
+0.25,-7.86189054751871,10.6644008503291,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2026
+0.5,-10.9212781178055,11.4575754055886,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2026
+0.75,-14.6038742672248,14.0070650474943,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2026
+1,-18.3997810673954,17.2930739192838,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2026
+1.25,-22.3089985183174,20.9190147433274,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2026
+1.5,-26.2182159692394,24.6582662181223,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2026
+1.75,-30.2973993962885,28.5674836690444,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2026
+2,-34.3199274979619,32.4767011199664,RM (M̄),negras,pct_grupo_entre_comp,magnitude,2026
+0,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2026
+0.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2026
+1,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2026
+1.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2026
+2,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2026
+2.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2026
+3,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2026
+3.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2026
+4,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,magnitude,2026
+,-6.74898965532447,7.21210969172389,Original,negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+0,-6.64165536020536,7.10477539660478,RM (M̄),negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+0.25,-9.17209286270275,8.33579904646837,RM (M̄),negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+0.5,-12.5916030012127,10.5242855351148,RM (M̄),negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+0.75,-16.5582347618843,13.8070152680843,RM (M̄),negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+1,-20.6616469280963,17.5684764204453,RM (M̄),negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+1.25,-24.7650590943083,21.5351081811169,RM (M̄),negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+1.5,-28.9368614632905,25.6385203473289,RM (M̄),negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+1.75,-33.245444237813,29.8103227163111,RM (M̄),negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+2,-37.5540270123356,34.0505152880635,RM (M̄),negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,média 2022 e 2026
+,-10.5774166230088,4.11279197893309,Original,negras,pct_grupo_entre_comp,sem peso,2022
+0,-10.5033053126478,4.038680668572,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2022
+0.25,-11.9785792527715,4.67094092862503,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2022
+0.5,-13.9456111729365,5.72470802871342,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2022
+0.75,-16.2638987931309,7.27023310884306,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2022
+1,-18.7929398333431,9.30751616901394,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2022
+1.25,-21.5327342935729,11.6960549292143,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2022
+1.5,-24.3427798938086,14.2250959694264,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2022
+1.75,-27.1528254940443,16.8946392896503,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2022
+2,-29.96287109428,19.5641826098743,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2022
+0,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2022
+0.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2022
+1,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2022
+1.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2022
+2,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2022
+2.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2022
+3,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2022
+3.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2022
+4,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2022
+,-4.67447055892771,12.0653352758023,Original,negras,pct_grupo_entre_comp,sem peso,2026
+0,-4.5698922035442,11.9607569204188,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2026
+0.25,-7.81563609546388,13.7723349066065,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2026
+0.5,-12.4200634770244,17.1690436307085,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2026
+0.75,-17.7038326034052,21.9244358444513,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2026
+1,-23.1385665619684,27.0572401386499,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2026
+1.25,-28.6487829366227,32.4164916811219,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2026
+1.5,-34.3099641434594,38.0021904718674,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2026
+1.75,-40.0466277663872,43.663371678704,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2026
+2,-45.8587738054061,49.3245528855407,RM (M̄),negras,pct_grupo_entre_comp,sem peso,2026
+0,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2026
+0.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2026
+1,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2026
+1.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2026
+2,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2026
+2.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2026
+3,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2026
+3.5,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2026
+4,,,"Suavidade (M, p.p.)",negras,pct_grupo_entre_comp,sem peso,2026
+,1.4820604183194,4.08597899431752,Original,negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+0,1.48404232066515,4.08399709197176,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+0.25,1.37914501000725,4.09148975701876,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+0.5,1.25176970420836,4.14393841234771,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+0.75,1.09442373822151,4.21137239777065,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+1,0.907107112046682,4.30128437833456,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+1.25,0.682327160636888,4.46612300936841,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+1.5,0.435069214086115,4.66842496563723,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+1.75,0.187811267535342,4.90069758209401,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+2,-0.0819246741564097,5.14046286359779,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,média 2022 e 2026
+,1.46860535760817,4.17411717551471,Original,negras,nc_por_cadeira_grupo,magnitude,2022
+0,1.47639518409339,4.16632734902948,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2022
+0.25,1.42988338873427,4.17407931492267,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2022
+0.5,1.36011569569558,4.17407931492267,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2022
+0.75,1.27484407087052,4.21283914438861,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2022
+1,1.18182048015227,4.25159897385455,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2022
+1.25,1.08104492354083,4.31361470100005,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2022
+1.5,0.949261503356638,4.39113435993192,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2022
+1.75,0.809726117279261,4.49190991654336,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2022
+2,0.646934833522322,4.61594137083436,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2022
+0,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2022
+0.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2022
+1,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2022
+1.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2022
+2,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2022
+2.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2022
+3,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2022
+3.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2022
+4,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2022
+,1.41547328266232,4.07788300948864,Original,negras,nc_por_cadeira_grupo,magnitude,2026
+0,1.43608294022501,4.05727335192594,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2026
+0.25,1.26031798550454,4.11076703379739,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2026
+0.5,1.05398521257181,4.20247048843416,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2026
+0.75,0.809442666873768,4.30945785217705,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2026
+1,0.519048393857339,4.48522280689752,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2026
+1.25,0.190444348075589,4.76797512536089,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2026
+1.5,-0.161085561365352,5.08893721658958,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2026
+1.75,-0.512615470806294,5.41754126237132,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2026
+2,-0.879429289353363,5.76907117181227,RM (M̄),negras,nc_por_cadeira_grupo,magnitude,2026
+0,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2026
+0.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2026
+1,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2026
+1.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2026
+2,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2026
+2.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2026
+3,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2026
+3.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2026
+4,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,magnitude,2026
+,2.28626221888667,4.74426219176564,Original,negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+0,2.30161349539496,4.72891091525735,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+0.25,2.13595224715509,4.79373488195991,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+0.5,1.93427768408047,4.90177482646417,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+0.75,1.710995132105,4.99540944503453,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+1,1.43729393936088,5.12505737843964,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+1.25,1.13478209474894,5.30512395261341,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+1.5,0.832270250137015,5.50679851568803,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+1.75,0.522555742558134,5.70847307876265,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+2,0.212841234979254,5.93895829370507,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,média 2022 e 2026
+,2.31933785200799,4.64615399337423,Original,negras,nc_por_cadeira_grupo,sem peso,2022
+0,2.32551542643891,4.63997641894331,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2022
+0.25,2.22936571161677,4.68805127635438,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2022
+0.5,2.1126124864756,4.72925829699244,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2022
+0.75,1.98212358778841,4.79106882794953,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2022
+1,1.83103117878219,4.86661503245264,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2022
+1.25,1.64559958591092,4.94902907372876,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2022
+1.5,1.44643231949362,5.05891446209692,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2022
+1.75,1.24039721630332,5.1825355240111,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2022
+2,1.02749427634001,5.3198922594713,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2022
+0,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2022
+0.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2022
+1,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2022
+1.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2022
+2,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2022
+2.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2022
+3,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2022
+3.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2022
+4,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2022
+,2.15847424150937,4.93708273441303,Original,negras,nc_por_cadeira_grupo,sem peso,2026
+0,2.17218281465891,4.9233741612635,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2026
+0.25,1.94759576595649,5.01160478753944,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2026
+0.5,1.68290388712865,5.13191927791574,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2026
+0.75,1.37810717817537,5.27629666636729,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2026
+1,0.993100808971227,5.46879985096936,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2026
+1.25,0.584031541691828,5.71744979774704,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2026
+1.5,0.174962274412429,6.04630940477557,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2026
+1.75,-0.242127958892057,6.4393367400048,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2026
+2,-0.667239158221629,6.84038504125911,RM (M̄),negras,nc_por_cadeira_grupo,sem peso,2026
+0,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2026
+0.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2026
+1,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2026
+1.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2026
+2,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2026
+2.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2026
+3,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2026
+3.5,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2026
+4,,,"Suavidade (M, p.p.)",negras,nc_por_cadeira_grupo,sem peso,2026
+,-0.0108551238493777,2.21291185126125,Original,negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+0,0.00673793271054279,2.19531879470133,RM (M̄),negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+0.25,-0.304207982107821,2.55410254256867,RM (M̄),negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+0.5,-0.746707937810877,3.03248087305846,RM (M̄),negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+0.75,-1.28488355961189,3.59457541138397,RM (M̄),negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+1,-1.85893755619964,4.20450778275845,RM (M̄),negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+1.25,-2.46886992757412,4.81444015413293,RM (M̄),negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+1.5,-3.10272121547309,5.46025090029415,RM (M̄),negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+1.75,-3.73657250337206,6.09410218819312,RM (M̄),negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+2,-4.38238324953328,6.73991293435434,RM (M̄),negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,média 2022 e 2026
+,-0.244150728518272,2.09650639886792,Original,negras,dif_nc_por_cadeira,magnitude,2022
+0,-0.232184461150554,2.0845401315002,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2022
+0.25,-0.440567096468346,2.25614936058544,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2022
+0.5,-0.722496544251243,2.48904760005826,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2022
+0.75,-1.05345720034421,2.78323484991868,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2022
+1,-1.42119126266972,3.11419550601164,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2022
+1.25,-1.81344092915027,3.48192956833716,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2022
+1.5,-2.23020619978586,3.87417923481771,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2022
+1.75,-2.63471366834393,4.27868670337577,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2022
+2,-3.06373674105703,4.68319417193384,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2022
+0,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2022
+0.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2022
+1,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2022
+1.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2022
+2,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2022
+2.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2022
+3,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2022
+3.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2022
+4,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2022
+,-0.0199620931681741,2.57171987764227,Original,negras,dif_nc_por_cadeira,magnitude,2026
+0,-0.00752222531722069,2.55928000979132,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2026
+0.25,-0.381578832443591,3.08811866124584,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2026
+0.5,-0.923315987592126,3.79753636441654,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2026
+0.75,-1.61983518706882,4.59724359344533,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2026
+1,-2.40664391240359,5.43564633355616,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2026
+1.25,-3.2192496451264,6.29984608105502,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2026
+1.5,-4.05765238523723,7.15114732485986,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2026
+1.75,-4.90895362904207,8.02824557605273,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2026
+2,-5.77315337654092,8.9053438272456,RM (M̄),negras,dif_nc_por_cadeira,magnitude,2026
+0,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2026
+0.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2026
+1,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2026
+1.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2026
+2,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2026
+2.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2026
+3,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2026
+3.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2026
+4,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,magnitude,2026
+,0.370267086478303,2.82487180357438,Original,negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+0,0.39180784316738,2.8033310468853,RM (M̄),negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+0.25,0.175850541341894,3.19925276689869,RM (M̄),negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+0.5,-0.112092527758753,3.70315313782483,RM (M̄),negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+0.75,-0.544007131409725,4.26704164814693,RM (M̄),negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+1,-1.05990513021505,4.890918297865,RM (M̄),negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+1.25,-1.62379364053715,5.51479494758307,RM (M̄),negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+1.5,-2.21167740661764,6.13867159730114,RM (M̄),negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+1.75,-2.82355642845652,6.7745458748984,RM (M̄),negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+2,-3.44743307817459,7.41042015249566,RM (M̄),negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+0,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+0.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+1,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+1.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+2,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+2.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+3,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+3.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+4,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,média 2022 e 2026
+,0.296435583088136,2.6154903963321,Original,negras,dif_nc_por_cadeira,sem peso,2022
+0,0.308274679754986,2.60365129966525,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2022
+0.25,0.19175810006411,2.836684459047,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2022
+0.5,0.0169832305277939,3.13962756624328,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2022
+0.75,-0.216049928853957,3.48917730531591,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2022
+1,-0.507341378081149,3.8736820182958,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2022
+1.25,-0.833587801215602,4.28149004721387,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2022
+1.5,-1.19478919825732,4.67764641816285,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2022
+1.75,-1.57929391123721,5.10875776301909,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2022
+2,-1.97545028218619,5.52821744990625,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2022
+0,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2022
+0.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2022
+1,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2022
+1.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2022
+2,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2022
+2.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2022
+3,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2022
+3.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2022
+4,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2022
+,0.274819983668437,3.20353181701669,Original,negras,dif_nc_por_cadeira,sem peso,2026
+0,0.292931428133398,3.18542037255173,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2026
+0.25,0.00236176248406927,3.70052114347554,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2026
+0.5,-0.433492735989926,4.38732217137396,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2026
+0.75,-1.0542552035135,5.16657718379716,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2026
+1,-1.76747165556185,5.95903990829534,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2026
+1.25,-2.53351895591008,6.79112576901842,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2026
+1.5,-3.33918939248323,7.63641934181647,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2026
+1.75,-4.17127525320631,8.49492062668949,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2026
+2,-4.99015340185442,9.35342191156251,RM (M̄),negras,dif_nc_por_cadeira,sem peso,2026
+0,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2026
+0.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2026
+1,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2026
+1.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2026
+2,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2026
+2.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2026
+3,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2026
+3.5,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2026
+4,,,"Suavidade (M, p.p.)",negras,dif_nc_por_cadeira,sem peso,2026

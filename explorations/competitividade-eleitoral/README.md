@@ -111,7 +111,34 @@ Câmara em 2018; pressionado < 4%, robustez < 3%; 2014–2022).
   2018–2022, contra +3,5 de 2014 para 2018 (placebo). Entre distritos comparáveis, o "efeito" é do
   mesmo tamanho da tendência anterior.
 
-**Pendências.** Sensibilidade formal (HonestDiD); refazer 2022 com a regra original da
+**Sensibilidade formal — HonestDiD** (`R/10`, `output/honestdid_*`; Rambachan & Roth 2023).
+- **Restrição usada:** magnitudes relativas (RM). A violação pós-2018 pode ser até M̄ vezes a de
+  2014 para 2018, que serve de régua de tamanho por ser outro regime de financiamento.
+- **Valor de quebra** = maior M̄ em que o IC robusto de 95% ainda exclui o zero. Alvo: a média de
+  2022 e 2026 (peso pela magnitude / sem peso).
+
+| | Estimativa | IC original | Quebra M̄ |
+| --- | --- | --- | --- |
+| Mulheres: taxa de competitivas (mulheres − homens) | 3,1 / 3,6 | [0,2; 6,0] / [0,7; 6,5] | 0 / 0,25 |
+| Mulheres: taxa de eleitas | 2,2 / 1,9 | [0,0; 4,3] / n.s. | 0 / — |
+| Mulheres: % entre as competitivas | 1,4 / 1,7 | n.s. | — |
+| Mulheres não competitivas por cadeira | 1,7 / 2,2 | [1,0; 2,5] / [1,7; 2,7] | **0,75 / 1,5** |
+| Não competitivas por cadeira (mulheres − homens) | −1,1 / −1,2 | significativo | 0,25 |
+| Pessoas negras não competitivas por cadeira | 2,8 / 3,5 | [1,5; 4,1] / [2,3; 4,7] | **1,75 / ∞** |
+| Pessoas negras: taxa de competitivas e % entre as competitivas | — | n.s. | — |
+
+- **Leitura.** A "aproximação" das mulheres ao limiar só se sustenta se a violação de tendências
+  depois de 2018 for praticamente nula (M̄ < 0,25), então é frágil. O que resiste é o aumento de
+  candidaturas **não competitivas** no Federal: de mulheres, até violações de 0,75 a 1,5 vez a de
+  2014; de pessoas negras, até 1,75 vez ou mais.
+- Com só um período anterior, estimado com imprecisão, a RM é conservadora: ela incorpora a
+  incerteza do coeficiente de 2014.
+- **Suavidade (ΔSD): não calculável.** Com um único período anterior a restrição é degenerada, e o
+  método condicional não tem solução. O FLCI, recomendado nesse caso, exige CVXR ≥ 1.0-12,
+  indisponível para o R 4.2 desta máquina sem atualizar o Matrix. Pacotes instalados: HonestDiD
+  0.2.8, CVXR 1.0-11, osqp 0.6.0.8.
+
+**Pendências.** Suavidade (ΔSD) num R mais novo; refazer 2022 com a regra original da
 totalização; painel de listas (complemento do plano); decidir o capítulo de destino.
 
 ## Objetivo
