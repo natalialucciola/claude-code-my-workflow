@@ -60,6 +60,23 @@ Patamar de 2018, Federal: 7,1% das mulheres e 15,9% dos homens eleitas/os ou a <
   e mulheres negras, o desenho não sustenta efeito da EC; há tendência prévia. HonestDiD não está
   instalado; a sensibilidade formal fica pendente.
 
+**Composição e candidaturas não competitivas** (`R/06`, `R/07`; peso = magnitude do distrito,
+constante no tempo em todas as UF × cargo).
+- **Composição.** A fatia feminina entre as competitivas sobe nos dois cargos quase igual (Federal
+  17,1 → 19,3 → 21,1%; Estadual 16,7 → 17,7 → 20,1%). Efeito: +1,4 a +1,7 p.p., sem
+  significância.
+- **Não competitivas** (não eleitas e a mais de 0,1 QE do limiar). De 2018 para 2022, as femininas
+  no Federal passam de 2.201 para 3.090; no Estadual ficam em 4.666. Efeito: +1,7 a +2,2 por
+  cadeira, em 2022 e 2026. As masculinas crescem ainda mais no Federal: a diferença
+  mulheres − homens por cadeira é −1,1 a −1,2. A fatia feminina entre as não competitivas não muda
+  de forma diferenciada (+0,5 a +1,1, sem significância).
+- **Leitura.** Houve uma expansão geral de candidaturas fracas ao Federal, maior entre homens. A
+  queda da taxa de competitividade dos homens (denominador maior) explica a maior parte da
+  "aproximação" das mulheres no `R/05`. Um motor plausível e específico do Federal, além da EC:
+  cláusula de desempenho e distribuição de fundos por votos na Câmara (EC 97/2017), a conferir.
+- **Peso pela magnitude.** Dá resultados próximos aos sem peso (taxa: 3,1 contra 3,6 p.p. no
+  geral).
+
 **Pendências.** Sensibilidade formal (HonestDiD); refazer 2022 com a regra original da
 totalização; painel de listas (complemento do plano); decidir o capítulo de destino.
 
