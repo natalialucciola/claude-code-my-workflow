@@ -15,7 +15,7 @@ format:
     fontsize: 11pt
 ---
 
-<!-- Este arquivo é derivado do capítulo do livro (Quarto/thesis/chapters/06-sobreposicao-territorial-partido.qmd). NÃO inclui a seção "Limitações" por design -- essa seção existe só nas versões dentro da tese. Ao propagar edições, o capítulo do livro é a fonte; este arquivo é atualizado a partir dele, exceto Limitações. -->
+<!-- Este arquivo é derivado do capítulo do livro (Quarto/thesis/chapters/05-sobreposicao-territorial-partido.qmd). NÃO inclui a seção "Limitações" por design -- essa seção existe só nas versões dentro da tese. Ao propagar edições, o capítulo do livro é a fonte; este arquivo é atualizado a partir dele, exceto Limitações. -->
 
 ## Introdução
 
@@ -179,9 +179,9 @@ O baixo nível de coordenação intrapartidário é explicado, em certa medida, 
 
 A respeito das Hipóteses 1 e 2, que previam uma taxa de sobreposição maior para candidaturas de mulheres e pessoas negras, @fig-lacuna-genero e @fig-lacuna-raca confirmam a relação esperada. A distância entre estes grupos diminui entre 2018 e 2022 nos dois cargos, mas em ritmos diferentes. A de gênero cai mais acentuadamente, de 7,5 para 3,1 pontos percentuais nas eleições estaduais e de 10,7 para 3,1 nas eleições para deputado federal. A de raça cai de forma mais moderada, de 7,6 para 6,0 nas estaduais e de 5,8 para 3,8 nas federais, permanecendo maior em magnitude ao final do período nos dois cargos. Um teste t de Welch, calculado separadamente para cada combinação de cargo, ano e grupo mas não representado nas figuras, confirma que essa diferença de médias é estatisticamente significativa em todas as oito combinações, com p < 0,001, e que nenhuma das duas lacunas desaparece em nenhuma delas.
 
-![Lacuna de sobreposição territorial por gênero, cargo e ano](../thesis/Figures/06-sobreposicao-territorial-partido/grafico_lacuna_genero.png){#fig-lacuna-genero width="70%"}
+![Lacuna de sobreposição territorial por gênero, cargo e ano](../thesis/Figures/05-sobreposicao-territorial-partido/grafico_lacuna_genero.png){#fig-lacuna-genero width="70%"}
 
-![Lacuna de sobreposição territorial por raça, cargo e ano](../thesis/Figures/06-sobreposicao-territorial-partido/grafico_lacuna_raca.png){#fig-lacuna-raca width="70%"}
+![Lacuna de sobreposição territorial por raça, cargo e ano](../thesis/Figures/05-sobreposicao-territorial-partido/grafico_lacuna_raca.png){#fig-lacuna-raca width="70%"}
 
 Dentro das capitais, nem a lacuna de gênero (0,1 p.p., p = 0,262) nem a de raça (−0,1 p.p., p = 0,663) são estatisticamente significativas. As lacunas documentadas acima são, portanto, um fenômeno de município não-capital. Recalculando a taxa pessoal de sobreposição restrita aos municípios não-capital de cada candidato, tanto a lacuna de gênero (61,8% contra 56,8%, ou 5,0 p.p., p < 0,001) quanto a de raça (59,3% contra 57,7%, ou 1,6 p.p., p = 0,002) permanecem robustas. Os dois grupos enfrentam mais sobreposição fora das capitais, ainda que a lacuna de gênero seja consideravelmente maior em magnitude.
 
@@ -246,7 +246,7 @@ Para candidatos negros, o Modelo 3 confirma o padrão dos dois anteriores. Não 
 
 Para mulheres, o resultado é qualitativamente diferente dos dois anteriores. O Modelo 3 não dilui o sinal do Modelo 1, ele o fortalece de forma substancial, com a estimativa passando de marginal (p = 0,057) para muito além do limiar convencional (p < 0,001), e robusto à amostra completa, líderes mais não líderes (−4,25 p.p., p < 0,001). Decompor a tripla diferença em suas partes explica por que os Modelos 2 e 3 divergem tanto. No Modelo 2, a queda na taxa de sobreposição com incumbente para mulheres, entre 2018 e 2022, é parecida nos dois cargos: cai 5,6 pontos percentuais em relação a homens nas eleições para deputado federal e 4,0 nas estaduais. É exatamente por essa queda não ser restrita ao nível federal que a tripla diferença se anula, já que uma mudança que acontece onde o incentivo financeiro não vale não pode ser atribuída a ele. No Modelo 3, o padrão é o oposto. Nas eleições estaduais, a diferença de gênero na taxa de sobreposição com líder do partido muda muito pouco entre 2018 e 2022 (0,7 p.p.); nas federais, ela se abre 5,9 pontos percentuais, com mulheres se afastando de líderes do partido (31,5% para 28,9% de seus municípios QL>1) enquanto homens se aproximam (24,6% para 27,9%). É essa queda restrita ao nível federal, presente no Modelo 3 e ausente no Modelo 2, que torna o coeficiente da tripla interação grande e preciso.
 
-![Modelo 1 (amplo) vs. Modelo 2 (incumbente) vs. Modelo 3 (líder do partido)](../thesis/Figures/06-sobreposicao-territorial-partido/grafico_comparativo_modelo1_modelo2_modelo3.png){#fig-modelo1-modelo2-modelo3 width="90%"}
+![Modelo 1 (amplo) vs. Modelo 2 (incumbente) vs. Modelo 3 (líder do partido)](../thesis/Figures/05-sobreposicao-territorial-partido/grafico_comparativo_modelo1_modelo2_modelo3.png){#fig-modelo1-modelo2-modelo3 width="90%"}
 
 A leitura mais direta é que a incumbência, no Modelo 2, estava misturando um efeito real, específico do mecanismo de proteção de lideranças, com uma tendência geral e alheia à EC 111 de incumbentes de qualquer cargo ficarem mais "protegidos" ao longo do tempo. Esse ruído é suficiente para mascarar o sinal. Ao trocar para liderança formal, medida sobre o partido atual do candidato e não contaminada pela troca de partido entre ciclos, esse ruído desaparece e o padrão restrito ao nível federal, previsto pela hipótese, aparece com força, ao menos para mulheres.
 

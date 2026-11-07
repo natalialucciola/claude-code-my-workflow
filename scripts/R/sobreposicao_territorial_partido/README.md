@@ -1,7 +1,7 @@
 # scripts/R/sobreposicao_territorial_partido/
 
 Scripts que produzem os dados, tabelas e figuras do Capítulo 6
-(`Quarto/thesis/chapters/06-sobreposicao-territorial-partido.qmd`).
+(`Quarto/thesis/chapters/05-sobreposicao-territorial-partido.qmd`).
 
 Graduados de `explorations/base-territorial-partidos/` em 2026-08-15 (01–06)
 e 2026-08-17 (09–12, pipeline do Modelo 3). Para o processo investigativo
@@ -76,4 +76,4 @@ demais para `data/raw/` sob a mesma disciplina de arquivos leves usada pelos
 Rodar a partir da raiz do repo — os scripts escrevem em
 `explorations/base-territorial-partidos/output/` (local original). As
 figuras/tabelas finais usadas no capítulo foram copiadas para
-`Figures/06-sobreposicao-territorial-partido/`.
+`Figures/05-sobreposicao-territorial-partido/`.

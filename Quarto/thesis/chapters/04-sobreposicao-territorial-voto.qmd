@@ -1,7 +1,7 @@
 # Sobreposição Territorial do Voto entre Candidatos do Mesmo Partido, 2018–2026 {#sec-sobreposicao-voto}
 
 <!-- TODO: título e posição provisórios. Capítulo derivado de explorations/ql-voto-2026/;
-     o Capítulo 6 (gasto) permanece inalterado e receberá 2026 quando a prestação de
+     o capítulo do gasto (@sec-sobreposicao-territorial) permanece inalterado e receberá 2026 quando a prestação de
      contas for publicada pelo TSE. -->
 
 ## Introdução
@@ -72,9 +72,9 @@ A @tbl-lacunas-voto apresenta as taxas médias de sobreposição por grupo, carg
 
 As @fig-lacuna-genero-voto e [-@fig-lacuna-raca-voto] comparam essas lacunas com as obtidas pelo QL do gasto no Capítulo [-@sec-sobreposicao-territorial], nos dois anos em que ambas existem. Para gênero, as duas medidas registram queda da lacuna entre 2018 e 2022 no cargo federal (de 7,8 para 3,8 pontos pelo voto), mais acentuada pelo gasto, que parte de um patamar mais alto. No cargo estadual elas se separam: pelo gasto a lacuna também cai, enquanto pelo voto ela quase não muda (de 5,6 para 5,1). Em 2026, a lacuna de gênero no cargo federal volta a subir pela medida de voto, de 3,8 para 5,8 pontos. Para raça, as medidas discordam na direção: pelo gasto, a lacuna cai nos dois cargos entre 2018 e 2022; pelo voto, ela fica estável no cargo estadual e cresce no federal.
 
-![Lacuna de sobreposição territorial por gênero, QL do voto (2018–2026) e QL do gasto (2018–2022)](../Figures/05b-sobreposicao-territorial-voto/grafico_lacuna_genero.png){#fig-lacuna-genero-voto width="70%"}
+![Lacuna de sobreposição territorial por gênero, QL do voto (2018–2026) e QL do gasto (2018–2022)](../Figures/04-sobreposicao-territorial-voto/grafico_lacuna_genero.png){#fig-lacuna-genero-voto width="70%"}
 
-![Lacuna de sobreposição territorial por raça, QL do voto (2018–2026) e QL do gasto (2018–2022)](../Figures/05b-sobreposicao-territorial-voto/grafico_lacuna_raca.png){#fig-lacuna-raca-voto width="70%"}
+![Lacuna de sobreposição territorial por raça, QL do voto (2018–2026) e QL do gasto (2018–2022)](../Figures/04-sobreposicao-territorial-voto/grafico_lacuna_raca.png){#fig-lacuna-raca-voto width="70%"}
 
 ### Incumbência e resultado eleitoral
 
@@ -97,7 +97,7 @@ A @tbl-ddd-voto e a @fig-ddd-voto reportam a tripla interação Federal × Ano �
 
 | Especificação | Mulher × 2022 | Mulher × 2026 | Negra × 2022 | Negra × 2026 |
 |:--------------|:------------:|:------------:|:------------:|:------------:|
-| Réplica 2018–2022, QL do gasto (Cap. 6) | −2,92 (1,46)\* | — | 0,75 (2,06) | — |
+| Réplica 2018–2022, QL do gasto (Cap. [-@sec-sobreposicao-territorial]) | −2,92 (1,46)\* | — | 0,75 (2,06) | — |
 | Réplica 2018–2022, QL do voto | −3,16 (1,03)\*\*\* | — | 2,64 (1,32)\* | — |
 | Três eleições | −3,11 (1,03)\*\*\* | −1,24 (1,14) | 2,62 (1,31)\* | 2,48 (1,45) |
 | Três eleições + incumbência | −2,99 (1,04)\*\*\* | −0,90 (1,12) | 2,61 (1,30)\* | 2,51 (1,51) |
@@ -106,7 +106,7 @@ A @tbl-ddd-voto e a @fig-ddd-voto reportam a tripla interação Federal × Ano �
 
 : Tripla diferença sobre a taxa de sobreposição (QL do voto, piso de 2,5%). Coeficientes em pontos percentuais; erro-padrão clusterizado (partido, estado) entre parênteses. Efeitos fixos de partido e de estado; base: 2018. Na linha "Pós agrupado", o coeficiente único aparece na coluna de 2022. \* p < 0,1; \*\* p < 0,05; \*\*\* p < 0,01. {#tbl-ddd-voto}
 
-![Tripla interação Federal × ano × grupo, QL do gasto e QL do voto](../Figures/05b-sobreposicao-territorial-voto/grafico_ddd_coeficientes.png){#fig-ddd-voto width="90%"}
+![Tripla interação Federal × ano × grupo, QL do gasto e QL do voto](../Figures/04-sobreposicao-territorial-voto/grafico_ddd_coeficientes.png){#fig-ddd-voto width="90%"}
 
 Para gênero, a medida de voto reproduz o resultado do Capítulo [-@sec-sobreposicao-territorial] com mais precisão: a sobreposição das mulheres no cargo federal cai cerca de 3 pontos percentuais em 2022, em relação ao estadual, agora com p = 0,005, contra p = 0,057 na medida de gasto. A queda, porém, não se repete em 2026. O coeficiente de 2026 é de −1,2 ponto e não se distingue de zero (p = 0,29), e os controles por incumbência e por resultado eleitoral não alteram esse quadro. O efeito agrupado dos dois pleitos pós-reforma (−2,3 pontos, p = 0,02) mistura um 2022 forte com um 2026 nulo e não deve ser lido como efeito persistente.
 

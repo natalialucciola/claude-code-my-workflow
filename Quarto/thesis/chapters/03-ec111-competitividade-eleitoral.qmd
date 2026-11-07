@@ -65,7 +65,7 @@ A margem é uma medida *ex post*: depende do resultado e mede proximidade do lim
 
 @fig-faixas-margem mostra a distribuição das candidaturas por faixa de margem. Em 2018, último ano antes da emenda, 7,1% das candidatas a deputada federal e 15,9% dos candidatos se elegeram ou ficaram a menos de 0,1 QE do limiar.
 
-![Distribuição das candidaturas por faixa de margem de votos (em QE), por grupo, cargo e eleição, 2014–2026.](../Figures/04-ec111-competitividade/descr_faixas_margem.png){#fig-faixas-margem width="100%"}
+![Distribuição das candidaturas por faixa de margem de votos (em QE), por grupo, cargo e eleição, 2014–2026.](../Figures/03-ec111-competitividade/descr_faixas_margem.png){#fig-faixas-margem width="100%"}
 
 ## Desenho de identificação {#sec-desenho-ec111}
 
@@ -117,7 +117,7 @@ As duas primeiras são testadas diretamente na @sec-fragilidade-ec111.
 
 : Efeito do voto em dobro ao longo do funil eleitoral, federal × estadual, base 2018 (pontos percentuais). Listas partido × UF, painel balanceado, sem ponderação; cadeiras no nível UF × cargo. \* IC de 95% exclui zero. ᵖ Provisório (prestação de contas parcial de 2026). Recursos e gasto sem pré-teste (doação empresarial em 2014). {#tbl-funil-ec111}
 
-![Recursos e gasto: efeito do voto em dobro, federal × estadual, base 2018.](../Figures/04-ec111-competitividade/did_2026_evento_recursos.png){#fig-recursos-ec111 width="100%"}
+![Recursos e gasto: efeito do voto em dobro, federal × estadual, base 2018.](../Figures/03-ec111-competitividade/did_2026_evento_recursos.png){#fig-recursos-ec111 width="100%"}
 
 A parcela de mulheres nas listas federais sobe cerca de 3 pontos em relação às estaduais, com pré-teste próximo de zero. A de pessoas negras sobe cerca de 5 pontos, mas o efeito desaparece quando as listas são ponderadas pelos votos que tiveram em 2018 (+0,4 em 2022; +0,2 em 2026): o aumento se concentra em listas pequenas.
 
@@ -125,7 +125,7 @@ O ganho de votos das mulheres, de 4,1 pontos em 2022, cai para 2,2 em 2026 e per
 
 No fim do funil, a parcela de cadeiras ocupadas por mulheres e por pessoas negras não muda de forma distinguível de zero em nenhuma das duas eleições. Com 52 disputas os intervalos são largos, mas as estimativas pontuais também são pequenas e mudam de sinal entre 2022 e 2026 (@fig-funil-ec111).
 
-![Candidaturas, votos, competitividade (corte de 10% do QE) e sucesso: efeito do voto em dobro, federal × estadual, base 2018.](../Figures/04-ec111-competitividade/did_2026_evento_candidaturas_votos.png){#fig-funil-ec111 width="100%"}
+![Candidaturas, votos, competitividade (corte de 10% do QE) e sucesso: efeito do voto em dobro, federal × estadual, base 2018.](../Figures/03-ec111-competitividade/did_2026_evento_candidaturas_votos.png){#fig-funil-ec111 width="100%"}
 
 Entre recursos e cadeiras há, portanto, uma perda. Mais dinheiro e mais candidaturas de mulheres não produziram mais eleitas no cargo federal em relação ao estadual. A pergunta das próximas seções é onde essa perda acontece: se o dinheiro aproximou mulheres do limiar sem chegar a convertê-lo em cadeiras (H1) ou se foi para candidaturas que nunca chegaram perto dele (H2).
 
@@ -149,7 +149,7 @@ Entre recursos e cadeiras há, portanto, uma perda. Mais dinheiro e mais candida
 
 : Tripla diferença (grupo × cargo × período) na taxa de candidaturas competitivas, base 2018 (pontos percentuais). Unidade UF × cargo, sem DF; bandas uniformes de 95% entre colchetes (bootstrap multiplicador, agrupado por UF). Em negrito, banda que exclui zero. ABD = @AvelinoBidermanDesposato2022_incumbency; LSS = @LuechingerSchelkerSchmid2024_closeness. {#tbl-ddd-ec111}
 
-![Estudo de evento da tripla diferença: diferença entre grupos na proximidade do limiar de eleição, federal menos estadual, relativa a 2018.](../Figures/04-ec111-competitividade/ddd_estudo_evento.png){#fig-ddd-ec111 width="100%"}
+![Estudo de evento da tripla diferença: diferença entre grupos na proximidade do limiar de eleição, federal menos estadual, relativa a 2018.](../Figures/03-ec111-competitividade/ddd_estudo_evento.png){#fig-ddd-ec111 width="100%"}
 
 O resultado é sensível à especificação. Ponderado pelo número de candidaturas, o que dá mais peso às UFs grandes, o efeito médio cai para 2,3 pontos e deixa de ser significativo. Com a normalização de @LuechingerSchelkerSchmid2024_closeness, fica em 1,2 e também não é significativo. Ele se mantém quando se excluem as UFs com 8 cadeiras federais, onde a distância até o limiar é mais grosseira, e diminui um pouco quando se excluem os incumbentes.
 
@@ -176,7 +176,7 @@ Para saber em que candidaturas ficaram os ganhos de votos, gasto e recursos das 
 
 : Decomposição do efeito do voto em dobro entre candidaturas competitivas e não competitivas do grupo (pontos percentuais; competitiva = eleita ou a menos de 0,1 QE do limiar). Listas partido × UF, painel balanceado, sem ponderação. Em negrito, IC de 95% que exclui zero. ᵖ Provisório (prestação de contas parcial de 2026). {#tbl-decomposicao-ec111}
 
-![De onde vêm os ganhos: efeito do voto em dobro sobre votos, gasto e recursos do partido, separado entre candidaturas competitivas e não competitivas do grupo.](../Figures/04-ec111-competitividade/did_2026_evento_margem_decomposicao.png){#fig-decomposicao-ec111 width="100%"}
+![De onde vêm os ganhos: efeito do voto em dobro sobre votos, gasto e recursos do partido, separado entre candidaturas competitivas e não competitivas do grupo.](../Figures/03-ec111-competitividade/did_2026_evento_margem_decomposicao.png){#fig-decomposicao-ec111 width="100%"}
 
 Para as mulheres, praticamente todo o ganho está nas candidaturas não competitivas. Dos 12,7 pontos a mais de recursos partidários em 2022, 11,4 foram para candidatas que terminaram a mais de 0,1 QE do limiar; dos 7,6 pontos a mais de gasto, 7,9 (a parte das competitivas é ligeiramente negativa). O mesmo vale para os votos: o efeito de 4,1 pontos em 2022 divide-se em −1,1 de competitivas e +5,2 de não competitivas, com pré-teste próximo de zero nas duas partes. O padrão se repete em 2026.
 
@@ -198,7 +198,7 @@ Se os recursos e os votos ficaram com candidaturas não competitivas e a composi
 
 **O fim das coligações e a magnitude do distrito.** Uma segunda explicação é o fim das coligações com limite de M + 1 candidaturas por partido, que pesa mais em distritos de magnitude pequena, mais comuns no federal. Regressões por distrito da variação de candidaturas aptas por cadeira mostram que o federal cresceu 5,6 candidaturas por cadeira a mais que o estadual de 2018 para 2022; controlando pelo log da magnitude, 4,5; restringindo à faixa de magnitude comum aos dois cargos (24 a 70 cadeiras), 3,6 a 3,7, todos significativos. A magnitude explica a maior parte do aumento do número de **listas** por cadeira, mas só 20% a 35% do aumento de **candidaturas** (@fig-magnitude-ec111).
 
-![Candidaturas aptas por cadeira e magnitude do distrito, federal e estadual, 2014–2026.](../Figures/04-ec111-competitividade/magnitude_candidaturas.png){#fig-magnitude-ec111 width="100%"}
+![Candidaturas aptas por cadeira e magnitude do distrito, federal e estadual, 2014–2026.](../Figures/03-ec111-competitividade/magnitude_candidaturas.png){#fig-magnitude-ec111 width="100%"}
 
 **A tendência já existia antes da emenda.** De 2014 para 2018, quando havia coligações nos dois anos e não havia voto em dobro, o federal já crescia mais em candidaturas por cadeira, com excesso de 1,7 a 3,1 sobre o estadual. A média por distrito foi de 10,3 para 13,3 e depois 17,8 candidaturas por cadeira no federal, contra 13,4, 14,8 e 13,7 no estadual. É uma federalização da estratégia partidária que começa antes da EC 111, plausivelmente ligada à distribuição de fundos e à cláusula de desempenho atreladas à Câmara desde 2018. Na faixa de magnitude comum, a diferença na taxa de competitivas entre mulheres e homens aumenta 3,0 a 3,2 pontos de 2018 para 2022, contra 3,5 pontos de 2014 para 2018, um período sem o incentivo que serve de placebo. Entre distritos comparáveis, o "efeito" tem o mesmo tamanho da tendência anterior.
 
@@ -218,7 +218,7 @@ Se os recursos e os votos ficaram com candidaturas não competitivas e a composi
 
 : Sensibilidade a violações de tendências paralelas (HonestDiD, magnitudes relativas). Valores com peso pela magnitude do distrito / sem peso. "Quebra M̄" é o maior múltiplo da violação de 2014–2018 com que o IC robusto de 95% ainda exclui zero; "—" indica que o IC original já inclui zero. {#tbl-honestdid-ec111}
 
-![Sensibilidade a violações de tendências paralelas (HonestDiD, magnitudes relativas): IC robusto de 95% para o efeito médio de 2022 e 2026.](../Figures/04-ec111-competitividade/honestdid_sensibilidade.png){#fig-honestdid-ec111 width="100%"}
+![Sensibilidade a violações de tendências paralelas (HonestDiD, magnitudes relativas): IC robusto de 95% para o efeito médio de 2022 e 2026.](../Figures/03-ec111-competitividade/honestdid_sensibilidade.png){#fig-honestdid-ec111 width="100%"}
 
 A aproximação das mulheres ao limiar só se sustenta se a violação de tendências depois de 2018 for praticamente nula (M̄ < 0,25). O que resiste é o aumento de candidaturas **não competitivas** no cargo federal: de mulheres, até violações de 0,75 a 1,5 vez a de 2014–2018; de pessoas negras, até 1,75 vez ou mais. Como há um único período anterior, estimado com imprecisão, a restrição de magnitudes relativas é conservadora, porque incorpora a incerteza do coeficiente de 2014. A restrição alternativa de suavidade não pôde ser calculada: com um só período anterior ela é degenerada, e o procedimento recomendado nesse caso não roda na versão de R disponível.
 

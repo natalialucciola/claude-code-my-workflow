@@ -1,6 +1,6 @@
 # Coordenação Territorial de Listas Partidárias (sobreposição de gasto)
 
-> **→ Graduado para Capítulo 6 da tese**: `Quarto/thesis/chapters/06-sobreposicao-territorial-partido.qmd`.
+> **→ Graduado para Capítulo 6 da tese**: `Quarto/thesis/chapters/05-sobreposicao-territorial-partido.qmd`.
 > Scripts de produção em `scripts/R/sobreposicao_territorial_partido/`. Esta pasta continua sendo o
 > registro do processo investigativo completo (bugs, correções metodológicas, scripts de diagnóstico) — ver `SESSION_LOG.md`.
 
@@ -146,7 +146,7 @@ Script: `R/04_tabelas_graficos_consolidacao.R`. Convenção visual seguida (mesm
 
 ## Modelo 2 e alcance territorial total — 2026-08-16
 
-*(Nesta seção, chamados H6/H7 na numeração original desta exploração — no capítulo final, após a remoção de H1/H2 sobre cargo/tempo, correspondem a H4/H5. Ver `Quarto/thesis/chapters/06-sobreposicao-territorial-partido.qmd` para a numeração vigente. Os números desta seção também refletem a amostra de 8 partidos, depois substituída — ver seção seguinte.)*
+*(Nesta seção, chamados H6/H7 na numeração original desta exploração — no capítulo final, após a remoção de H1/H2 sobre cargo/tempo, correspondem a H4/H5. Ver `Quarto/thesis/chapters/05-sobreposicao-territorial-partido.qmd` para a numeração vigente. Os números desta seção também refletem a amostra de 8 partidos, depois substituída — ver seção seguinte.)*
 
 Reformulação do capítulo: em vez de medir sobreposição com **qualquer** correligionário (Modelo 1, acima), o Modelo 2 mede especificamente a sobreposição com correligionários **incumbentes** (proxy de "candidato tradicional/consolidado" do partido) — teste direto do mecanismo de que lideranças partidárias protegem seus quadros mais fortes enquanto aproveitam o incentivo da EC 111/2021 para mulheres/negros. Scripts: `R/05_modelo2_incumbente.R` (Modelo 2 + H7), `R/06_tabelas_graficos_modelo2.R` (tabelas/gráficos).
 
@@ -156,7 +156,7 @@ Reformulação do capítulo: em vez de medir sobreposição com **qualquer** cor
 
 Decisão: em vez de manter `partidos_sel` como amostra principal e reportar essa instabilidade como um robustness check à parte, o filtro foi **removido por completo** de `01_overlap_partido.R` — desde então, todo o pipeline (01–06) roda sobre o universo completo de partidos (34 legendas, 37.158 candidatos) como única amostra. `02_overlap_extensoes.R` também foi corrigido nesta sessão: a Tabela D (incumbência) tinha um cálculo local desatualizado que excluía Federal 2018 mesmo depois de os dados de candidaturas Federal 2014 já estarem disponíveis desde a sessão anterior — agora completa nas 4 células.
 
-Os scripts `07_versao_b_universo_completo.R` e `08_grafico_versaoB.R` (criados para o teste de robustez) estão marcados como SUPERSEDED no cabeçalho — a "Versão B" que calculavam é, desde esta sessão, a única versão. Resultado final (achados descritivos H1/H2 mais fortes com a amostra correta; evidência causal H3/H4/H5 fraca para os dois grupos) documentado em `Quarto/thesis/chapters/06-sobreposicao-territorial-partido.qmd`.
+Os scripts `07_versao_b_universo_completo.R` e `08_grafico_versaoB.R` (criados para o teste de robustez) estão marcados como SUPERSEDED no cabeçalho — a "Versão B" que calculavam é, desde esta sessão, a única versão. Resultado final (achados descritivos H1/H2 mais fortes com a amostra correta; evidência causal H3/H4/H5 fraca para os dois grupos) documentado em `Quarto/thesis/chapters/05-sobreposicao-territorial-partido.qmd`.
 
 ## Next Steps
 

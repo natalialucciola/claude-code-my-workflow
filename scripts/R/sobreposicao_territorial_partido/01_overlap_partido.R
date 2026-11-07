@@ -9,7 +9,7 @@
 #          overlap_municipio_partido.rds, tab_overlap_municipio.rds/.csv,
 #          tab_taxa_sobreposicao_{genero,raca,genero_raca}.rds/.csv,
 #          teste_t_{genero,raca}.rds
-# Status: PRODUÇÃO — alimenta 06-sobreposicao-territorial-partido.qmd.
+# Status: PRODUÇÃO — alimenta 05-sobreposicao-territorial-partido.qmd.
 #         Histórico investigativo em
 #         explorations/base-territorial-partidos/SESSION_LOG.md.
 #
