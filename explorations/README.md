@@ -50,6 +50,6 @@ Cada pasta abaixo está no `main`, inclusive o que **não** entrou em capítulo 
 
 Os antigos placeholders de capítulo (Dados e Métodos; Índice G/QL; Alinhamento gasto-voto; Gasto na base territorial do partido) foram removidos em 2026-11-07 — continham só o título, não havia texto a preservar.
 
-### Fora da tese
+## Archived Projects
 
-- `senadoras-2026/` — **projeto independente da tese** (artigo próprio, submissão à Revista Dados). Vive aqui só para reusar a infraestrutura de skills/agents; não vai "graduar" para um capítulo. Ver `senadoras-2026/README.md`.
+- `ARCHIVE/abandoned_senadoras-2026/` — projeto independente da tese (artigo para a Revista Dados sobre mulheres candidatas ao Senado em 2026). Abandonado em 2026-11-07: resultados não promissores. Ver o README da pasta.

@@ -1,3 +1,27 @@
+# Abandoned: senadoras-2026 (2026-08-19 – 2026-11-07)
+
+## Why Abandoned
+Resultados não promissores (decisão da usuária em 2026-11-07). <!-- REVISAR: detalhar em 1-2 frases quais resultados/sinais motivaram a decisão -->
+
+## What Was Tried
+- Plano de pesquisa completo em `docs/plano-pesquisa.md` (4 perguntas de pesquisa sobre o aumento de mulheres candidatas ao Senado em 2026: trajetória histórica, oferta partidária, substituição entre cargos, perfil/experiência), com 9 scripts R esqueleto (`00_setup.R` a `08_checagem_sanidade.R`).
+- `00_setup.R` validado (`electionsBR` 0.5.0; `candidate_asset()`/`party_composition()` citadas no plano não existem nesta versão — usar `seats_fed()`).
+- Download automático via `electionsBR` bloqueado: `cdn.tse.jus.br` retorna HTTP 403 (Akamai) a clientes não-navegador; o pacote não checa o status HTTP e devolve data frame vazio ("erro 1 na extração a partir de arquivo zip"). Confirmado em 19 e 20/08/2026; mesmo problema na issue #52 do `electionsBR`, sem solução.
+- Workaround manual implementado em `scripts/utils_tse.R` (`carregar_zip_candidatos_tse(ano)`, lê zips baixados pelo navegador) e `01_download_candidatos.R` reescrito para usá-lo — nunca testado com dado real.
+- Pelo `SESSION_LOG.md`, os scripts `02`–`08` continuam sem lógica implementada.
+
+## Learnings
+- [LEARN:dados-tse] `electionsBR` falha em silêncio quando o TSE bloqueia o download (403 do Akamai): retorna 0 linhas em vez de erro. Sempre conferir `nrow()` após baixar; o caminho confiável é baixar o zip pelo navegador em dadosabertos.tse.jus.br e ler localmente (ver `scripts/utils_tse.R`, reaproveitável).
+- [LEARN:dados-tse] CEPESPdata (`elections_cepesp()`) também estava quebrado em 09/2025 (issue #53 do `electionsBR`); não contar com ele como fonte alternativa.
+
+## Would Revisiting Require
+- Uma pergunta de pesquisa ou um sinal empírico que justifique o artigo (o motivo do abandono foi o resultado, não a infraestrutura).
+- Os zips de `consulta_cand` baixados manualmente (vários já estão em `data/raw/tse/` do repo principal) e a implementação dos scripts `02`–`08`.
+
+---
+
+*Conteúdo original do README preservado abaixo.*
+
 # senadoras-2026
 
 > **Projeto independente da tese** — não é uma exploration que "graduará" para um capítulo de `Quarto/thesis/`. Vive em `explorations/` por reusar a infraestrutura do Claude Code deste repo (skills, agents, rules), mas o artefato final é um artigo próprio, para submissão à Revista Dados. Ver `SESSION_LOG.md` para o histórico de sessões.
