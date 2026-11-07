@@ -107,8 +107,17 @@ explorations/senadoras-2026/outputs/tabelas/*
 !explorations/senadoras-2026/outputs/figuras/.gitkeep
 !explorations/senadoras-2026/outputs/tabelas/.gitkeep
 
+# ql-voto-2026 — bases candidato × município e .rds intermediários (centenas de MB,
+# regeneráveis por R/01 e R/run_all.R); CSV, .tex e figuras são versionados
+explorations/ql-voto-2026/output/dados/
+explorations/ql-voto-2026/output/**/*.rds
+
 # Quarto book rendered output (regenerable)
 Quarto/thesis/_book/
 
 /.quarto/
 **/*.quarto_ipynb
+
+# cap2-descritivo — painel candidato × ano (inclui CPF) e bases intermediárias,
+# regeneráveis por R/01–03; CSVs de indicadores e figuras são versionados
+explorations/cap2-descritivo/output/dados/

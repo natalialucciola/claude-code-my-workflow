@@ -1,0 +1,63 @@
+# Sobreposição Territorial do Voto entre Candidatos do Mesmo Partido, 2018–2026 {#sec-sobreposicao-voto}
+
+<!-- TODO: título e posição provisórios. Capítulo derivado de explorations/ql-voto-2026/;
+     o Capítulo 6 (gasto) permanece inalterado e receberá 2026 quando a prestação de
+     contas for publicada pelo TSE. -->
+
+## Introdução
+
+<!-- TODO: introdução — motivação para olhar a sobreposição pelo voto e para incluir 2026,
+     o segundo pleito sob o incentivo da EC 111/2021. -->
+
+## Dados e Métodos {#sec-metodos-sobreposicao-voto}
+
+### Por que o voto, e não o gasto
+
+O Capítulo [-@sec-sobreposicao-territorial] mede a coordenação territorial das listas partidárias pela concentração do gasto de campanha, e justifica essa escolha: o gasto é decidido antes da eleição e por isso registra onde a campanha decidiu investir, enquanto a votação mistura essa decisão com o comportamento do eleitor e o desempenho dos adversários. Este capítulo usa a outra medida, a concentração territorial do voto, por duas razões. A primeira é prática: a prestação de contas das eleições de 2026 ainda não havia sido publicada pelo TSE quando esta análise foi feita, de modo que só o voto permite incluir o segundo pleito realizado sob o incentivo da EC 111/2021. A segunda é substantiva: o voto mostra onde cada candidato efetivamente construiu sua base eleitoral, e a sobreposição medida assim indica se correligionários terminaram a eleição disputando o mesmo eleitorado, qualquer que tenha sido a intenção inicial da campanha. As duas medidas são complementares, e a medida de voto não substitui a de gasto. Os resultados deste capítulo devem ser lidos com essa ressalva, que a validação descrita adiante torna explícita.
+
+### Quociente locacional do voto
+
+A concentração territorial do voto é medida pelo mesmo Quociente Locacional (QL) do Capítulo [-@sec-sobreposicao-territorial], agora aplicado ao uso que lhe deu origem na ciência política, a votação recebida por um candidato [@AvelinoBidermanSilva2011_concentracao_eleitoral; @AvelinoBidermanSilva2016_concentracao_brasil]. Para um candidato $i$ e um município $m$:
+
+$$\text{QL}^{\text{voto}}_{im} = \frac{\text{votos}_{im} \,/\, \text{votos}_{i}}{\text{votos}_{m} \,/\, \text{votos}_{\text{estado}}}$$
+
+em que $\text{votos}_{im}$ são os votos nominais válidos do candidato $i$ no município $m$, $\text{votos}_i$ é a sua votação total, e $\text{votos}_m$ e $\text{votos}_{\text{estado}}$ são os votos nominais válidos para o mesmo cargo no município e no estado. O denominador usa os votos do cargo, e não o eleitorado como no QL do gasto, para comparar a votação do candidato com a de todos os concorrentes ao mesmo cargo, já descontadas a abstenção e as diferenças de comparecimento entre municípios. Um QL acima de 1 indica que o município pesa mais na votação do candidato do que na votação do cargo no estado.
+
+### Base territorial do candidato
+
+Aplicado ao voto, o limiar QL > 1 usado para o gasto não basta para delimitar a base territorial de um candidato. Quase todo candidato recebe alguns votos em muitos municípios, e um punhado de votos num município pequeno já basta para produzir QL acima de 1. Um candidato com 20 mil votos que obtém 30 votos num município responsável por 0,05% da votação do estado tem ali QL de 3, embora esse município represente 0,15% da sua votação. Por isso, a base territorial do candidato $i$ é definida aqui por duas condições:
+
+$$B_i = \left\{ m : \text{QL}^{\text{voto}}_{im} > 1 \ \text{ e } \ \frac{\text{votos}_{im}}{\text{votos}_i} \geq 0{,}025 \right\}$$
+
+Um município entra na base quando o candidato é ali proporcionalmente mais forte do que o conjunto da disputa e quando o município responde por pelo menos 2,5% da votação do candidato. A distribuição dessa base por gênero e raça entre 2014 e 2026 está descrita no Capítulo [-@sec-analise-descritiva]. A sobreposição territorial e as taxas de sobreposição por candidato seguem exatamente as definições do Capítulo [-@sec-sobreposicao-territorial], com $B_i$ no lugar do conjunto de municípios com QL do gasto acima de 1.
+
+::: {.callout-note}
+## Escolha e validação do piso de 2,5%
+
+O piso foi escolhido nos pleitos de 2018 e 2022, os únicos em que as duas medidas existem, antes de qualquer resultado de 2026 ser examinado. Foram comparados quatro pisos (0%, 2,5%, 5% e 10%) segundo o quanto reproduzem as oito lacunas de sobreposição por gênero e por raça do Capítulo [-@sec-sobreposicao-territorial] (dois grupos, dois cargos, dois anos). Sem piso, isto é, só com QL > 1, a base mediana de um candidato tem de 15 a 26 municípios, contra 2 na medida de gasto. A sobreposição no nível do município sobe de 26–36% para 54–70%, a correlação entre as taxas de sobreposição de um mesmo candidato nas duas medidas fica entre 0,25 e 0,38, e as lacunas se afastam das do gasto em 6,4 pontos percentuais em média, com a de raça mudando de sinal. Com o piso de 2,5%, a base mediana cai para 3 municípios, a sobreposição no nível do município fica entre 28% e 34%, a correlação sobe para 0,38–0,45 e o erro médio das lacunas cai para 1,5 ponto percentual, o menor entre os quatro pisos (1,9 com 5% e 2,6 com 10%). A medida de voto calibrada reproduz, portanto, os padrões agregados do Capítulo [-@sec-sobreposicao-territorial], mas continua sendo outra medida no nível do candidato. O piso de 5% é reportado como teste de robustez.
+:::
+
+### Dados
+
+Todos os dados vêm do Portal de Dados Abertos do TSE. A votação por candidato, município e zona eleitoral (`votacao_candidato_munzona`) fornece os votos nominais válidos usados no QL, para Deputado Federal e Deputado Estadual em 2018, 2022 e 2026; o arquivo de 2026 usado aqui foi gerado pelo TSE em 13 de outubro de 2026, nove dias após o primeiro turno. Gênero, raça, partido e CPF vêm do conjunto de candidaturas, e a incumbência é definida como no Capítulo [-@sec-sobreposicao-territorial], por correspondência de CPF com os eleitos no mesmo cargo na eleição anterior (2022 para os candidatos de 2026).
+
+Para 2018 e 2022, o resultado eleitoral (eleito, competitivo, não competitivo) é o mesmo do Capítulo [-@sec-sobreposicao-territorial]. Para 2026 ele foi construído com a mesma regra: eleito é o candidato eleito por quociente partidário ou por média, e competitivo é o candidato que obteve pelo menos 10% do quociente eleitoral do estado, calculado com os votos válidos, nominais e de legenda, e com o número de vagas do pleito. A regra, aplicada a 2022, reproduz a classificação usada no Capítulo [-@sec-sobreposicao-territorial] para 99,8% a 99,9% dos candidatos, conforme o cargo. Em 2026 ela identifica 513 eleitos para Deputado Federal e 1.035 para Deputado Estadual, exatamente o número de vagas em disputa.
+
+A amostra inclui os candidatos com pelo menos um voto nominal válido, de todos os partidos, e exclui o Distrito Federal no cargo estadual, como no Capítulo [-@sec-sobreposicao-territorial]. Em 2018 e 2022, os partidos seguem a harmonização de siglas daquele capítulo. Em 2026 é usada a sigla vigente no pleito, para não tratar como uma só legenda partidos que disputaram separados.
+
+### Estratégia de inferência
+
+A tripla diferença segue a especificação da Seção [-@sec-estrategia-inferencia], com efeitos fixos de partido e de estado e erros-padrão clusterizados nas mesmas duas dimensões. Como o incentivo da EC 111/2021 vale para as eleições de 2022 a 2030, 2026 é um segundo período tratado. O modelo com as três eleições estima separadamente as interações Federal × Ano × Grupo para 2022 e para 2026, ambas em relação a 2018, e a estimação restrita a 2018 e 2022 é reportada como réplica direta do Capítulo [-@sec-sobreposicao-territorial].
+
+## Resultados
+
+<!-- TODO: resultados — fonte: explorations/ql-voto-2026/output/fatia_025/
+     (tabela_lacunas_voto, ddd_coeficientes, modelo2_alcance_coeficientes, figuras/). -->
+
+## Discussão
+
+<!-- TODO -->
+
+## Conclusão
+
+<!-- TODO -->

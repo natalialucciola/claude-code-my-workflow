@@ -9,12 +9,10 @@ book:
     - index.qmd
     - chapters/00-introducao.qmd
     - chapters/01-revisao-literatura.qmd
-    - chapters/02-dados-metodos.qmd
+    - chapters/02-analise-descritiva.qmd
     - part: "Capítulos empíricos (títulos provisórios)"
       chapters:
-        - chapters/03-indice-g-concentracao-geografica.qmd
-        - chapters/04-alinhamento-espacial-gasto-voto.qmd
-        - chapters/05-gasto-base-territorial-partido.qmd
+        - chapters/05b-sobreposicao-territorial-voto.qmd
         - chapters/06-sobreposicao-territorial-partido.qmd
     - chapters/99-conclusao.qmd
 

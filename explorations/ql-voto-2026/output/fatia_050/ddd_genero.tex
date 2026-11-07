@@ -1,0 +1,62 @@
+
+\begingroup
+\centering
+\begin{tabular}{lccccc}
+   \tabularnewline \midrule \midrule
+   Dependent Variable: & \multicolumn{5}{c}{taxa\_sobreposicao}\\
+                                              & replica\_2018\_2022   & tres\_eleicoes  & pos\_agrupado   & tres\_incumbencia  & tres\_resultado \\    
+   Model:                                     & (1)                   & (2)             & (3)             & (4)                & (5)\\  
+   \midrule
+   \emph{Variables}\\
+   federal                                    & -0.0776$^{***}$       & -0.0761$^{***}$ & -0.0759$^{***}$ & -0.0754$^{***}$    & -0.0760$^{***}$\\   
+                                              & (0.0198)              & (0.0200)        & (0.0200)        & (0.0197)           & (0.0195)\\   
+   ano2022                                    & 0.0361$^{**}$         & 0.0348$^{**}$   &                 & 0.0335$^{**}$      & 0.0328$^{**}$\\   
+                                              & (0.0146)              & (0.0145)        &                 & (0.0137)           & (0.0133)\\   
+   mulher                                     & 0.0780$^{***}$        & 0.0781$^{***}$  & 0.0780$^{***}$  & 0.0719$^{***}$     & 0.0678$^{***}$\\   
+                                              & (0.0126)              & (0.0127)        & (0.0127)        & (0.0117)           & (0.0115)\\   
+   ano2022 $\times$ federal                   & 0.0178                & 0.0174          &                 & 0.0159             & 0.0132\\   
+                                              & (0.0152)              & (0.0154)        &                 & (0.0147)           & (0.0140)\\   
+   federal $\times$ mulher                    & 0.0107                & 0.0100          & 0.0100          & 0.0095             & 0.0099\\   
+                                              & (0.0114)              & (0.0114)        & (0.0114)        & (0.0115)           & (0.0111)\\   
+   ano2022 $\times$ mulher                    & -0.0126               & -0.0134         &                 & -0.0136            & -0.0134\\   
+                                              & (0.0110)              & (0.0111)        &                 & (0.0106)           & (0.0103)\\   
+   ano2022 $\times$ federal $\times$ mulher   & -0.0191               & -0.0186         &                 & -0.0178            & -0.0155\\   
+                                              & (0.0164)              & (0.0165)        &                 & (0.0164)           & (0.0159)\\   
+   ano2026                                    &                       & 0.0151          &                 & 0.0178             & 0.0184\\   
+                                              &                       & (0.0156)        &                 & (0.0152)           & (0.0155)\\   
+   ano2026 $\times$ federal                   &                       & 0.0114          &                 & 0.0074             & 0.0045\\   
+                                              &                       & (0.0166)        &                 & (0.0154)           & (0.0145)\\   
+   ano2026 $\times$ mulher                    &                       & -0.0063         &                 & -0.0092            & -0.0090\\   
+                                              &                       & (0.0131)        &                 & (0.0127)           & (0.0125)\\   
+   ano2026 $\times$ federal $\times$ mulher   &                       & 0.0035          &                 & 0.0063             & 0.0078\\   
+                                              &                       & (0.0170)        &                 & (0.0164)           & (0.0159)\\   
+   pos                                        &                       &                 & 0.0275$^{*}$    &                    &   \\   
+                                              &                       &                 & (0.0143)        &                    &   \\   
+   federal $\times$ pos                       &                       &                 & 0.0145          &                    &   \\   
+                                              &                       &                 & (0.0151)        &                    &   \\   
+   mulher $\times$ pos                        &                       &                 & -0.0106         &                    &   \\   
+                                              &                       &                 & (0.0115)        &                    &   \\   
+   federal $\times$ mulher $\times$ pos       &                       &                 & -0.0090         &                    &   \\   
+                                              &                       &                 & (0.0159)        &                    &   \\   
+   incumbente                                 &                       &                 &                 & -0.1488$^{***}$    &   \\   
+                                              &                       &                 &                 & (0.0290)           &   \\   
+   resultadoEleito                            &                       &                 &                 &                    & -0.0569$^{**}$\\   
+                                              &                       &                 &                 &                    & (0.0249)\\   
+   resultadoNao\_competitivo                  &                       &                 &                 &                    & 0.0692$^{***}$\\   
+                                              &                       &                 &                 &                    & (0.0139)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   partido\_harm                              & Yes                   & Yes             & Yes             & Yes                & Yes\\  
+   SG\_UF                                     & Yes                   & Yes             & Yes             & Yes                & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations                               & 46,285                & 63,499          & 63,499          & 63,499             & 63,473\\  
+   R$^2$                                      & 0.08884               & 0.08569         & 0.08535         & 0.09277            & 0.09370\\  
+   Within R$^2$                               & 0.01740               & 0.01645         & 0.01609         & 0.02406            & 0.02501\\  
+   \midrule \midrule
+   \multicolumn{6}{l}{\emph{Clustered (partido\_harm \& SG\_UF) standard-errors in parentheses}}\\
+   \multicolumn{6}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}
+\par\endgroup
+
+

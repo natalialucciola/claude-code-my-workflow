@@ -1,0 +1,12 @@
+| Cargo | Ano | Candidaturas | Eleitos | Mulheres (cand.) | Mulheres (eleitas) | Negros (cand.) | Negros (eleitos) | Mulheres negras (cand.) | Mulheres negras (eleitas) |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Deputado Federal | 2014 | 5.867 | 513 | 29,4 | 9,9 | 39,7 | 19,9 | 12,8 | 1,9 |
+| Deputado Federal | 2018 | 7.630 | 513 | 31,7 | 15,0 | 40,8 | 24,0 | 13,8 | 2,5 |
+| Deputado Federal | 2022 | 9.376 | 513 | 35,4 | 17,5 | 48,2 | 27,0 | 18,5 | 6,1 |
+| Deputado Federal | 2026 | 7.051 | 513 | 37,3 | 21,2 | 46,2 | 26,3 | 18,7 | 6,7 |
+| Deputado Estadual | 2014 | 14.209 | 1.035 | 28,7 | 11,0 | 45,1 | 26,5 | 13,3 | 3,4 |
+| Deputado Estadual | 2018 | 16.011 | 1.035 | 31,1 | 15,4 | 48,4 | 28,4 | 15,4 | 4,7 |
+| Deputado Estadual | 2022 | 14.723 | 1.035 | 33,6 | 18,1 | 52,2 | 35,1 | 18,7 | 7,1 |
+| Deputado Estadual | 2026 | 10.430 | 1.035 | 35,0 | 20,6 | 49,4 | 31,2 | 18,7 | 7,1 |
+
+: Candidaturas, eleitos e participação de mulheres, negros e mulheres negras (%), por cargo e ano {#tbl-cap2-visao-geral}

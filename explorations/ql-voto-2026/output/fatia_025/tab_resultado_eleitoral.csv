@@ -1,0 +1,19 @@
+cargo,ANO_ELEICAO,resultado,taxa_overlap_pct,n
+Estadual,2018,Eleito,46,6067
+Estadual,2018,"Competitivo, não eleito",52.6,5859
+Estadual,2018,Não competitivo,71.7,43204
+Estadual,2022,Eleito,52.4,5821
+Estadual,2022,"Competitivo, não eleito",60.4,5476
+Estadual,2022,Não competitivo,71.2,41484
+Estadual,2026,Eleito,52.3,5613
+Estadual,2026,"Competitivo, não eleito",61.5,5085
+Estadual,2026,Não competitivo,71.2,27562
+Federal,2018,Eleito,39.1,2474
+Federal,2018,"Competitivo, não eleito",41.7,2575
+Federal,2018,Não competitivo,64.5,21548
+Federal,2022,Eleito,51.4,2510
+Federal,2022,"Competitivo, não eleito",56.9,2684
+Federal,2022,Não competitivo,65,28618
+Federal,2026,Eleito,49,2498
+Federal,2026,"Competitivo, não eleito",57.2,2219
+Federal,2026,Não competitivo,63.9,20222
