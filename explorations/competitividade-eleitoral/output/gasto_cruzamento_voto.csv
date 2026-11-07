@@ -1,0 +1,49 @@
+ano,cargo,grupo,comp_voto,comp_a,N,pct,celula
+2014,Federal,Homens,TRUE,TRUE,452,11.11,competitiva nos dois
+2014,Federal,Homens,FALSE,FALSE,3247,79.8,em nenhum
+2014,Federal,Homens,FALSE,TRUE,128,3.15,só pelo gasto
+2014,Federal,Homens,TRUE,FALSE,242,5.95,só pelo voto
+2014,Federal,Mulheres,TRUE,TRUE,50,2.97,competitiva nos dois
+2014,Federal,Mulheres,FALSE,FALSE,1564,92.87,em nenhum
+2014,Federal,Mulheres,FALSE,TRUE,17,1.01,só pelo gasto
+2014,Federal,Mulheres,TRUE,FALSE,53,3.15,só pelo voto
+2014,Estadual,Homens,TRUE,TRUE,961,9.45,competitiva nos dois
+2014,Estadual,Homens,FALSE,FALSE,8101,79.67,em nenhum
+2014,Estadual,Homens,FALSE,TRUE,325,3.2,só pelo gasto
+2014,Estadual,Homens,TRUE,FALSE,781,7.68,só pelo voto
+2014,Estadual,Mulheres,TRUE,TRUE,136,3.27,competitiva nos dois
+2014,Estadual,Mulheres,FALSE,FALSE,3861,92.77,em nenhum
+2014,Estadual,Mulheres,FALSE,TRUE,52,1.25,só pelo gasto
+2014,Estadual,Mulheres,TRUE,FALSE,113,2.72,só pelo voto
+2018,Federal,Homens,TRUE,TRUE,414,8.12,competitiva nos dois
+2018,Federal,Homens,FALSE,FALSE,4135,81.08,em nenhum
+2018,Federal,Homens,FALSE,TRUE,154,3.02,só pelo gasto
+2018,Federal,Homens,TRUE,FALSE,397,7.78,só pelo voto
+2018,Federal,Mulheres,TRUE,TRUE,75,3.17,competitiva nos dois
+2018,Federal,Mulheres,FALSE,FALSE,2134,90.12,em nenhum
+2018,Federal,Mulheres,FALSE,TRUE,67,2.83,só pelo gasto
+2018,Federal,Mulheres,TRUE,FALSE,92,3.89,só pelo voto
+2018,Estadual,Homens,TRUE,TRUE,825,7.47,competitiva nos dois
+2018,Estadual,Homens,FALSE,FALSE,8969,81.22,em nenhum
+2018,Estadual,Homens,FALSE,TRUE,438,3.97,só pelo gasto
+2018,Estadual,Homens,TRUE,FALSE,811,7.34,só pelo voto
+2018,Estadual,Mulheres,TRUE,TRUE,179,3.59,competitiva nos dois
+2018,Estadual,Mulheres,FALSE,FALSE,4359,87.3,em nenhum
+2018,Estadual,Mulheres,FALSE,TRUE,307,6.15,só pelo gasto
+2018,Estadual,Mulheres,TRUE,FALSE,148,2.96,só pelo voto
+2022,Federal,Homens,TRUE,TRUE,416,7,competitiva nos dois
+2022,Federal,Homens,FALSE,FALSE,4994,84.03,em nenhum
+2022,Federal,Homens,FALSE,TRUE,326,5.49,só pelo gasto
+2022,Federal,Homens,TRUE,FALSE,207,3.48,só pelo voto
+2022,Federal,Mulheres,TRUE,TRUE,102,3.15,competitiva nos dois
+2022,Federal,Mulheres,FALSE,FALSE,2906,89.72,em nenhum
+2022,Federal,Mulheres,FALSE,TRUE,184,5.68,só pelo gasto
+2022,Federal,Mulheres,TRUE,FALSE,47,1.45,só pelo voto
+2022,Estadual,Homens,TRUE,TRUE,809,8.28,competitiva nos dois
+2022,Estadual,Homens,FALSE,FALSE,7845,80.26,em nenhum
+2022,Estadual,Homens,FALSE,TRUE,561,5.74,só pelo gasto
+2022,Estadual,Homens,TRUE,FALSE,560,5.73,só pelo voto
+2022,Estadual,Mulheres,TRUE,TRUE,239,4.82,competitiva nos dois
+2022,Estadual,Mulheres,FALSE,FALSE,4266,86.01,em nenhum
+2022,Estadual,Mulheres,FALSE,TRUE,400,8.06,só pelo gasto
+2022,Estadual,Mulheres,TRUE,FALSE,55,1.11,só pelo voto
