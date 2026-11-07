@@ -99,6 +99,11 @@ THRESHOLDS = {
 # ISSUE DETECTION (Lightweight checks - full agents run separately)
 # ==============================================================================
 
+# Quarto cross-reference prefixes, and punctuation Pandoc strips from key ends
+CROSSREF_PREFIXES = ('fig-', 'tbl-', 'sec-', 'eq-', 'lst-', 'thm-', 'lem-',
+                     'cor-', 'prp-', 'cnj-', 'def-', 'exm-', 'exr-', 'sol-', 'rem-')
+TRAILING_PUNCT = '.:;,?!'
+
 class IssueDetector:
     """Detect common issues for quality scoring."""
 
@@ -114,6 +119,8 @@ class IssueDetector:
                 ['quarto', 'render', filepath.name, '--to', 'html'],
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 timeout=limit,
                 cwd=filepath.parent
             )
@@ -193,6 +200,19 @@ class IssueDetector:
         return overflows
 
     @staticmethod
+    def find_bib_file(filepath: Path) -> Path:
+        """Find Bibliography_base.bib in the file's directory or nearest ancestor.
+
+        Book chapters live several levels below the repo root
+        (Quarto/thesis/chapters/), so a fixed relative path is not enough.
+        """
+        for directory in filepath.resolve().parents:
+            candidate = directory / 'Bibliography_base.bib'
+            if candidate.exists():
+                return candidate
+        return filepath.parent / 'Bibliography_base.bib'
+
+    @staticmethod
     def check_broken_citations(content: str, bib_file: Path) -> List[str]:
         """Check for LaTeX citation keys not in bibliography.
 
@@ -234,9 +254,11 @@ class IssueDetector:
         limit = _timeout("QUALITY_RSCRIPT_TIMEOUT", 10)
         try:
             result = subprocess.run(
-                ['Rscript', '-e', f'parse("{filepath}")'],
+                ['Rscript', '-e', f'parse("{filepath.as_posix()}")'],
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 timeout=limit
             )
             if result.returncode != 0:
@@ -356,18 +378,22 @@ class IssueDetector:
             inner = match.group(1)
             # Extract individual @key references from within brackets
             for key_match in re.finditer(r'@([\w:.#$%&\-+?<>~/]+)', inner):
-                cited_keys.add(key_match.group(1))
+                cited_keys.add(key_match.group(1).rstrip(TRAILING_PUNCT))
 
         # Pattern 2: standalone @key (not inside brackets, not email addresses)
         # Match @key that is preceded by start-of-line or whitespace or punctuation
         # but NOT preceded by characters that indicate an email address
         standalone_pattern = r'(?<![.\w])@([\w:.#$%&\-+?<>~/]+)'
         for match in re.finditer(standalone_pattern, content):
-            key = match.group(1)
+            # Pandoc drops trailing punctuation from a key ("@key." cites "key")
+            key = match.group(1).rstrip(TRAILING_PUNCT)
             # Skip if it looks like a Quarto directive or special syntax
             if key.startswith('{') or key in ('fig', 'tbl', 'sec', 'eq', 'lst'):
                 continue
             cited_keys.add(key)
+
+        # Cross-references (@fig-x, @tbl-x, @sec-x, ...) are not citations
+        cited_keys = {k for k in cited_keys if not k.startswith(CROSSREF_PREFIXES)}
 
         if not cited_keys:
             return []
@@ -420,8 +446,13 @@ class QualityScorer:
         if compiles is None:
             self.unverified.append(error)
 
-        # Check equation overflow (heuristic)
-        equation_overflows = IssueDetector.check_equation_overflow(content)
+        # Check equation overflow (heuristic). Slides only: the >120-char
+        # source-line rule targets fixed-width revealjs slides; book chapters
+        # scroll wide math, and LaTeX markup inflates the count.
+        front_matter = re.match(r'---\r?\n(.*?)\r?\n---', content, re.DOTALL)
+        is_slides = bool(front_matter and 'revealjs' in front_matter.group(1))
+        equation_overflows = (IssueDetector.check_equation_overflow(content)
+                              if is_slides else [])
         for line in equation_overflows:
             self.issues['critical'].append({
                 'type': 'equation_overflow',
@@ -432,7 +463,7 @@ class QualityScorer:
             self.score -= 20
 
         # Check broken citations (LaTeX-style \cite patterns)
-        bib_file = self.filepath.parent.parent / 'Bibliography_base.bib'
+        bib_file = IssueDetector.find_bib_file(self.filepath)
         broken_citations = IssueDetector.check_broken_citations(content, bib_file)
 
         # Also check Quarto-style @key citations
@@ -532,10 +563,7 @@ class QualityScorer:
             return self._generate_report()
 
         # Check for undefined/broken citations (\cite, \citep, \citet patterns)
-        bib_file = self.filepath.parent.parent / 'Bibliography_base.bib'
-        if not bib_file.exists():
-            # Also check same directory
-            bib_file = self.filepath.parent / 'Bibliography_base.bib'
+        bib_file = IssueDetector.find_bib_file(self.filepath)
         broken_citations = IssueDetector.check_broken_citations(content, bib_file)
         for key in broken_citations:
             self.issues['critical'].append({
