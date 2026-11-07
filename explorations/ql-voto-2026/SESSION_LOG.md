@@ -86,3 +86,12 @@ no texto do Cap. 6 (nada foi alterado no `.qmd`).
 - `05b_calibracao_base_voto.R` agora grava `calibracao_erro_medio.csv`: erro médio sem piso é
   6,44 p.p. (não 5,7 — conta manual errada corrigida acima).
 - Livro renderiza sem avisos; todas as xrefs do capítulo novo resolvem.
+
+## 2026-11-07 — rascunho de Resultados do Cap. 05b
+
+- Figuras de `output/fatia_025/figuras/` (PNG) copiadas para `Quarto/thesis/Figures/05b-sobreposicao-territorial-voto/`.
+- Seção Resultados escrita no `05b-sobreposicao-territorial-voto.qmd`: lacunas (tabela + 2 figuras), incumbência/resultado (tabela; nível par candidato × município, não candidato), DDD (tabela + figura), Modelo 2/alcance, robustez com piso de 5% (tabela).
+- Dois callouts `.callout-important` explícitos: (1) EP do Modelo 2 raça 2026 ~3x menor que o de 2022, **não investigado**, coeficiente não interpretado; hipótese não testada = clusters de partido em 2026 usam a sigla vigente; (2) nenhum coeficiente da DDD é significativo com piso de 5%.
+- Achado novo ao montar a robustez: com piso de 5% o Modelo 2 raça 2026 dá −3,40 (EP 1,33, p = 0,017), com EP próximo ao de 2022 — a estimativa muda muito entre pisos (−1,42 → −3,40).
+- Livro renderiza sem avisos; xrefs e imagens resolvem. Rótulos saem "Table"/"Figure" (sem `lang: pt` no `_quarto.yml`, igual aos demais capítulos).
+- Nada commitado.
