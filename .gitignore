@@ -112,6 +112,11 @@ explorations/senadoras-2026/outputs/tabelas/*
 explorations/ql-voto-2026/output/dados/
 explorations/ql-voto-2026/output/**/*.rds
 
+# ec111-did-ql-municipio — bases e painéis intermediários (até ~160 MB); logs de execução
+explorations/ec111-did-ql-municipio/output/dados/
+explorations/ec111-did-ql-municipio/output/**/*.rds
+explorations/ec111-did-ql-municipio/output/log_*.txt
+
 # Quarto book rendered output (regenerable)
 Quarto/thesis/_book/
 
