@@ -1,6 +1,6 @@
 # Coordenação Territorial de Listas Partidárias (sobreposição de gasto)
 
-> **→ Graduado para Capítulo 6 da tese**: `Quarto/thesis/chapters/05-sobreposicao-territorial-partido.qmd`.
+> **→ Graduado para Capítulo 5 da tese (era o 6 até 2026-11-07)**: `Quarto/thesis/chapters/05-sobreposicao-territorial-partido.qmd`.
 > Scripts de produção em `scripts/R/sobreposicao_territorial_partido/`. Esta pasta continua sendo o
 > registro do processo investigativo completo (bugs, correções metodológicas, scripts de diagnóstico) — ver `SESSION_LOG.md`.
 

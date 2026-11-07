@@ -3,7 +3,7 @@
 **Status:** aplicado a Deputado Federal e Estadual, 2014–2026 (exploração, 2026-10-14). Plano:
 `PLANO_2026-10-13_margem-ec111.md`. Abaixo, primeiro os resultados; depois o estudo das medidas.
 
-**Destino (2026-11-07):** resultados levados ao Cap. 4 da tese,
+**Destino (2026-11-07):** resultados levados ao Cap. 3 da tese,
 `Quarto/thesis/chapters/03-ec111-competitividade-eleitoral.qmd`, junto com `explorations/ec111-did-2026/`.
 Figuras copiadas para `Quarto/thesis/Figures/03-ec111-competitividade/`; ao regerar uma figura aqui,
 copiar de novo para lá.
