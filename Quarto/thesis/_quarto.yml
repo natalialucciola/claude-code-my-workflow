@@ -12,6 +12,7 @@ book:
     - chapters/02-analise-descritiva.qmd
     - part: "Capítulos empíricos (títulos provisórios)"
       chapters:
+        - chapters/04-ec111-competitividade-eleitoral.qmd
         - chapters/05b-sobreposicao-territorial-voto.qmd
         - chapters/06-sobreposicao-territorial-partido.qmd
     - chapters/99-conclusao.qmd

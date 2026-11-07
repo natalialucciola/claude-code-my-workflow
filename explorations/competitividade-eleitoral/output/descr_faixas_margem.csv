@@ -1,0 +1,257 @@
+ano,cargo,faixa,N,pct,grupo
+2014,Federal,"falta > 0,5 QE",612,15.0405505038093,Homens
+2014,Federal,"falta 0,25–0,5",1587,39.0022118456623,Homens
+2014,Federal,"falta 0,1–0,25",1176,28.901449987712,Homens
+2014,Federal,"falta < 0,1",239,5.87367903661833,Homens
+2014,Federal,"sobra < 0,1",145,3.56352912263455,Homens
+2014,Federal,"sobra 0,1–0,25",151,3.71098550012288,Homens
+2014,Federal,"sobra 0,25–0,5",101,2.48218235438683,Homens
+2014,Federal,"sobra > 0,5",58,1.42541164905382,Homens
+2018,Federal,"falta > 0,5 QE",770,15.0980392156863,Homens
+2018,Federal,"falta 0,25–0,5",1794,35.1764705882353,Homens
+2018,Federal,"falta 0,1–0,25",1725,33.8235294117647,Homens
+2018,Federal,"falta < 0,1",378,7.41176470588235,Homens
+2018,Federal,"sobra < 0,1",149,2.92156862745098,Homens
+2018,Federal,"sobra 0,1–0,25",153,3,Homens
+2018,Federal,"sobra 0,25–0,5",90,1.76470588235294,Homens
+2018,Federal,"sobra > 0,5",41,0.803921568627451,Homens
+2022,Federal,"falta > 0,5 QE",1867,31.4151102136968,Homens
+2022,Federal,"falta 0,25–0,5",2252,37.8933198721185,Homens
+2022,Federal,"falta 0,1–0,25",1201,20.208648830557,Homens
+2022,Federal,"falta < 0,1",206,3.46626283022043,Homens
+2022,Federal,"sobra < 0,1",110,1.85091704526334,Homens
+2022,Federal,"sobra 0,1–0,25",147,2.47349823321555,Homens
+2022,Federal,"sobra 0,25–0,5",120,2.01918223119637,Homens
+2022,Federal,"sobra > 0,5",40,0.673060743732122,Homens
+2026,Federal,"falta > 0,5 QE",1173,27.1088513981974,Homens
+2026,Federal,"falta 0,25–0,5",1673,38.6642015253062,Homens
+2026,Federal,"falta 0,1–0,25",878,20.2911948232031,Homens
+2026,Federal,"falta < 0,1",207,4.78391495262306,Homens
+2026,Federal,"sobra < 0,1",146,3.37416223711578,Homens
+2026,Federal,"sobra 0,1–0,25",132,3.05061243355674,Homens
+2026,Federal,"sobra 0,25–0,5",64,1.47908481626993,Homens
+2026,Federal,"sobra > 0,5",54,1.24797781372776,Homens
+2014,Estadual,"falta > 0,5 QE",583,5.73367427222659,Homens
+2014,Estadual,"falta 0,25–0,5",4184,41.1487018095987,Homens
+2014,Estadual,"falta 0,1–0,25",3659,35.9854445318647,Homens
+2014,Estadual,"falta < 0,1",821,8.07435090479937,Homens
+2014,Estadual,"sobra < 0,1",432,4.2486231313926,Homens
+2014,Estadual,"sobra 0,1–0,25",285,2.80291109362707,Homens
+2014,Estadual,"sobra 0,25–0,5",155,1.52439024390244,Homens
+2014,Estadual,"sobra > 0,5",49,0.481904012588513,Homens
+2018,Estadual,"falta > 0,5 QE",433,3.9210359503758,Homens
+2018,Estadual,"falta 0,25–0,5",4040,36.5842615231368,Homens
+2018,Estadual,"falta 0,1–0,25",4934,44.6798877116726,Homens
+2018,Estadual,"falta < 0,1",760,6.88218781128317,Homens
+2018,Estadual,"sobra < 0,1",399,3.61314860092366,Homens
+2018,Estadual,"sobra 0,1–0,25",284,2.57176491895318,Homens
+2018,Estadual,"sobra 0,25–0,5",153,1.38549307253464,Homens
+2018,Estadual,"sobra > 0,5",40,0.362220411120167,Homens
+2022,Estadual,"falta > 0,5 QE",1380,14.1176470588235,Homens
+2022,Estadual,"falta 0,25–0,5",3803,38.9053708439898,Homens
+2022,Estadual,"falta 0,1–0,25",3223,32.9718670076726,Homens
+2022,Estadual,"falta < 0,1",521,5.32992327365729,Homens
+2022,Estadual,"sobra < 0,1",337,3.44757033248082,Homens
+2022,Estadual,"sobra 0,1–0,25",287,2.93606138107417,Homens
+2022,Estadual,"sobra 0,25–0,5",157,1.60613810741688,Homens
+2022,Estadual,"sobra > 0,5",67,0.685421994884911,Homens
+2026,Estadual,"falta > 0,5 QE",1073,15.8212916543792,Homens
+2026,Estadual,"falta 0,25–0,5",2887,42.5685638454733,Homens
+2026,Estadual,"falta 0,1–0,25",1611,23.7540548510764,Homens
+2026,Estadual,"falta < 0,1",389,5.73577115895016,Homens
+2026,Estadual,"sobra < 0,1",297,4.37923916248894,Homens
+2026,Estadual,"sobra 0,1–0,25",307,4.52668829253907,Homens
+2026,Estadual,"sobra 0,25–0,5",163,2.40342081981716,Homens
+2026,Estadual,"sobra > 0,5",55,0.81097021527573,Homens
+2014,Federal,"falta > 0,5 QE",322,19.1211401425178,Mulheres
+2014,Federal,"falta 0,25–0,5",852,50.5938242280285,Mulheres
+2014,Federal,"falta 0,1–0,25",407,24.1686460807601,Mulheres
+2014,Federal,"falta < 0,1",53,3.14726840855107,Mulheres
+2014,Federal,"sobra < 0,1",19,1.12826603325416,Mulheres
+2014,Federal,"sobra 0,1–0,25",15,0.890736342042755,Mulheres
+2014,Federal,"sobra 0,25–0,5",13,0.771971496437055,Mulheres
+2014,Federal,"sobra > 0,5",3,0.178147268408551,Mulheres
+2018,Federal,"falta > 0,5 QE",391,16.5118243243243,Mulheres
+2018,Federal,"falta 0,25–0,5",1063,44.8902027027027,Mulheres
+2018,Federal,"falta 0,1–0,25",747,31.5456081081081,Mulheres
+2018,Federal,"falta < 0,1",95,4.01182432432432,Mulheres
+2018,Federal,"sobra < 0,1",29,1.22466216216216,Mulheres
+2018,Federal,"sobra 0,1–0,25",20,0.844594594594595,Mulheres
+2018,Federal,"sobra 0,25–0,5",11,0.464527027027027,Mulheres
+2018,Federal,"sobra > 0,5",12,0.506756756756757,Mulheres
+2022,Federal,"falta > 0,5 QE",1080,33.3436245754863,Mulheres
+2022,Federal,"falta 0,25–0,5",1365,42.1426366162396,Mulheres
+2022,Federal,"falta 0,1–0,25",645,19.9135535659154,Mulheres
+2022,Federal,"falta < 0,1",61,1.8832973139858,Mulheres
+2022,Federal,"sobra < 0,1",32,0.987959246681074,Mulheres
+2022,Federal,"sobra 0,1–0,25",22,0.679221982093239,Mulheres
+2022,Federal,"sobra 0,25–0,5",18,0.555727076258104,Mulheres
+2022,Federal,"sobra > 0,5",16,0.493979623340537,Mulheres
+2026,Federal,"falta > 0,5 QE",741,28.8776305533905,Mulheres
+2026,Federal,"falta 0,25–0,5",1180,45.9859703819174,Mulheres
+2026,Federal,"falta 0,1–0,25",484,18.8620420888543,Mulheres
+2026,Federal,"falta < 0,1",52,2.02650038971161,Mulheres
+2026,Federal,"sobra < 0,1",36,1.40296180826189,Mulheres
+2026,Federal,"sobra 0,1–0,25",23,0.896336710833983,Mulheres
+2026,Federal,"sobra 0,25–0,5",34,1.32501948558067,Mulheres
+2026,Federal,"sobra > 0,5",16,0.623538581449727,Mulheres
+2014,Estadual,"falta > 0,5 QE",288,6.91975012013455,Mulheres
+2014,Estadual,"falta 0,25–0,5",2246,53.9644401729938,Mulheres
+2014,Estadual,"falta 0,1–0,25",1379,33.133109082172,Mulheres
+2014,Estadual,"falta < 0,1",135,3.24363286881307,Mulheres
+2014,Estadual,"sobra < 0,1",49,1.17731859682845,Mulheres
+2014,Estadual,"sobra 0,1–0,25",36,0.864968765016819,Mulheres
+2014,Estadual,"sobra 0,25–0,5",21,0.504565112926478,Mulheres
+2014,Estadual,"sobra > 0,5",8,0.192215281114849,Mulheres
+2018,Estadual,"falta > 0,5 QE",215,4.30602843981574,Mulheres
+2018,Estadual,"falta 0,25–0,5",2307,46.2046865611857,Mulheres
+2018,Estadual,"falta 0,1–0,25",2144,42.9401161626277,Mulheres
+2018,Estadual,"falta < 0,1",168,3.36471059483277,Mulheres
+2018,Estadual,"sobra < 0,1",56,1.12157019827759,Mulheres
+2018,Estadual,"sobra 0,1–0,25",60,1.20168235529742,Mulheres
+2018,Estadual,"sobra 0,25–0,5",33,0.660925295413579,Mulheres
+2018,Estadual,"sobra > 0,5",10,0.200280392549569,Mulheres
+2022,Estadual,"falta > 0,5 QE",752,15.1612903225806,Mulheres
+2022,Estadual,"falta 0,25–0,5",2399,48.366935483871,Mulheres
+2022,Estadual,"falta 0,1–0,25",1515,30.5443548387097,Mulheres
+2022,Estadual,"falta < 0,1",107,2.15725806451613,Mulheres
+2022,Estadual,"sobra < 0,1",68,1.37096774193548,Mulheres
+2022,Estadual,"sobra 0,1–0,25",66,1.33064516129032,Mulheres
+2022,Estadual,"sobra 0,25–0,5",33,0.665322580645161,Mulheres
+2022,Estadual,"sobra > 0,5",20,0.403225806451613,Mulheres
+2026,Estadual,"falta > 0,5 QE",617,16.8994795946316,Mulheres
+2026,Estadual,"falta 0,25–0,5",1965,53.8208709942482,Mulheres
+2026,Estadual,"falta 0,1–0,25",765,20.9531635168447,Mulheres
+2026,Estadual,"falta < 0,1",92,2.5198575732676,Mulheres
+2026,Estadual,"sobra < 0,1",62,1.69816488633251,Mulheres
+2026,Estadual,"sobra 0,1–0,25",72,1.97206244864421,Mulheres
+2026,Estadual,"sobra 0,25–0,5",53,1.45165708025199,Mulheres
+2026,Estadual,"sobra > 0,5",25,0.684743905779239,Mulheres
+2014,Federal,"falta > 0,5 QE",475,13.9010828211882,Pessoas brancas
+2014,Federal,"falta 0,25–0,5",1465,42.8738659642962,Pessoas brancas
+2014,Federal,"falta 0,1–0,25",868,25.4023997658765,Pessoas brancas
+2014,Federal,"falta < 0,1",205,5.99941469124963,Pessoas brancas
+2014,Federal,"sobra < 0,1",121,3.5411179397132,Pessoas brancas
+2014,Federal,"sobra 0,1–0,25",139,4.06789581504243,Pessoas brancas
+2014,Federal,"sobra 0,25–0,5",93,2.72168568920105,Pessoas brancas
+2014,Federal,"sobra > 0,5",51,1.49253731343284,Pessoas brancas
+2018,Federal,"falta > 0,5 QE",588,13.5359116022099,Pessoas brancas
+2018,Federal,"falta 0,25–0,5",1559,35.8885819521179,Pessoas brancas
+2018,Federal,"falta 0,1–0,25",1476,33.9779005524862,Pessoas brancas
+2018,Federal,"falta < 0,1",341,7.84990791896869,Pessoas brancas
+2018,Federal,"sobra < 0,1",130,2.9926335174954,Pessoas brancas
+2018,Federal,"sobra 0,1–0,25",140,3.22283609576427,Pessoas brancas
+2018,Federal,"sobra 0,25–0,5",72,1.65745856353591,Pessoas brancas
+2018,Federal,"sobra > 0,5",38,0.874769797421731,Pessoas brancas
+2022,Federal,"falta > 0,5 QE",1235,26.5762857757693,Pessoas brancas
+2022,Federal,"falta 0,25–0,5",1807,38.8853023455993,Pessoas brancas
+2022,Federal,"falta 0,1–0,25",1056,22.7243382827631,Pessoas brancas
+2022,Federal,"falta < 0,1",188,4.04562083064343,Pessoas brancas
+2022,Federal,"sobra < 0,1",93,2.00129115558425,Pessoas brancas
+2022,Federal,"sobra 0,1–0,25",120,2.5823111684958,Pessoas brancas
+2022,Federal,"sobra 0,25–0,5",104,2.23800301269636,Pessoas brancas
+2022,Federal,"sobra > 0,5",44,0.946847428448461,Pessoas brancas
+2026,Federal,"falta > 0,5 QE",773,21.4364947310039,Pessoas brancas
+2026,Federal,"falta 0,25–0,5",1424,39.48973932335,Pessoas brancas
+2026,Federal,"falta 0,1–0,25",866,24.0155296727676,Pessoas brancas
+2026,Federal,"falta < 0,1",175,4.85302273987798,Pessoas brancas
+2026,Federal,"sobra < 0,1",131,3.63283416528009,Pessoas brancas
+2026,Federal,"sobra 0,1–0,25",108,2.99500831946755,Pessoas brancas
+2026,Federal,"sobra 0,25–0,5",73,2.02440377149196,Pessoas brancas
+2026,Federal,"sobra > 0,5",56,1.55296727676095,Pessoas brancas
+2014,Estadual,"falta > 0,5 QE",448,5.7941024314537,Pessoas brancas
+2014,Estadual,"falta 0,25–0,5",3159,40.8561821003621,Pessoas brancas
+2014,Estadual,"falta 0,1–0,25",2723,35.2172788411795,Pessoas brancas
+2014,Estadual,"falta < 0,1",644,8.32902224521469,Pessoas brancas
+2014,Estadual,"sobra < 0,1",338,4.37144335230212,Pessoas brancas
+2014,Estadual,"sobra 0,1–0,25",240,3.10398344542162,Pessoas brancas
+2014,Estadual,"sobra 0,25–0,5",136,1.75892395240559,Pessoas brancas
+2014,Estadual,"sobra > 0,5",44,0.569063631660631,Pessoas brancas
+2018,Estadual,"falta > 0,5 QE",333,4.10351201478743,Pessoas brancas
+2018,Estadual,"falta 0,25–0,5",2838,34.9722735674677,Pessoas brancas
+2018,Estadual,"falta 0,1–0,25",3600,44.362292051756,Pessoas brancas
+2018,Estadual,"falta < 0,1",604,7.4430067775724,Pessoas brancas
+2018,Estadual,"sobra < 0,1",319,3.93099199014171,Pessoas brancas
+2018,Estadual,"sobra 0,1–0,25",243,2.99445471349353,Pessoas brancas
+2018,Estadual,"sobra 0,25–0,5",133,1.63894023413432,Pessoas brancas
+2018,Estadual,"sobra > 0,5",45,0.55452865064695,Pessoas brancas
+2022,Estadual,"falta > 0,5 QE",812,11.8401866433363,Pessoas brancas
+2022,Estadual,"falta 0,25–0,5",2492,36.3371245261009,Pessoas brancas
+2022,Estadual,"falta 0,1–0,25",2479,36.1475648877224,Pessoas brancas
+2022,Estadual,"falta < 0,1",406,5.92009332166813,Pessoas brancas
+2022,Estadual,"sobra < 0,1",259,3.77661125692622,Pessoas brancas
+2022,Estadual,"sobra 0,1–0,25",218,3.1787693205016,Pessoas brancas
+2022,Estadual,"sobra 0,25–0,5",124,1.80810731991834,Pessoas brancas
+2022,Estadual,"sobra > 0,5",68,0.991542723826188,Pessoas brancas
+2026,Estadual,"falta > 0,5 QE",636,12.3976608187135,Pessoas brancas
+2026,Estadual,"falta 0,25–0,5",2103,40.9941520467836,Pessoas brancas
+2026,Estadual,"falta 0,1–0,25",1362,26.5497076023392,Pessoas brancas
+2026,Estadual,"falta < 0,1",326,6.35477582846004,Pessoas brancas
+2026,Estadual,"sobra < 0,1",244,4.75633528265107,Pessoas brancas
+2026,Estadual,"sobra 0,1–0,25",264,5.14619883040936,Pessoas brancas
+2026,Estadual,"sobra 0,25–0,5",144,2.80701754385965,Pessoas brancas
+2026,Estadual,"sobra > 0,5",51,0.994152046783626,Pessoas brancas
+2014,Federal,"falta > 0,5 QE",451,19.7287839020123,Pessoas negras
+2014,Federal,"falta 0,25–0,5",949,41.5135608048994,Pessoas negras
+2014,Federal,"falta 0,1–0,25",702,30.7086614173228,Pessoas negras
+2014,Federal,"falta < 0,1",83,3.63079615048119,Pessoas negras
+2014,Federal,"sobra < 0,1",43,1.88101487314086,Pessoas negras
+2014,Federal,"sobra 0,1–0,25",27,1.18110236220472,Pessoas negras
+2014,Federal,"sobra 0,25–0,5",21,0.918635170603675,Pessoas negras
+2014,Federal,"sobra > 0,5",10,0.437445319335083,Pessoas negras
+2018,Federal,"falta > 0,5 QE",550,18.1099769509384,Pessoas negras
+2018,Federal,"falta 0,25–0,5",1261,41.5212380638788,Pessoas negras
+2018,Federal,"falta 0,1–0,25",977,32.1699045110306,Pessoas negras
+2018,Federal,"falta < 0,1",127,4.18175831412578,Pessoas negras
+2018,Federal,"sobra < 0,1",47,1.54757984853474,Pessoas negras
+2018,Federal,"sobra 0,1–0,25",32,1.05367138623642,Pessoas negras
+2018,Federal,"sobra 0,25–0,5",29,0.954889693776753,Pessoas negras
+2018,Federal,"sobra > 0,5",14,0.460981231478433,Pessoas negras
+2022,Federal,"falta > 0,5 QE",1674,38.0714123265863,Pessoas negras
+2022,Federal,"falta 0,25–0,5",1773,40.3229474641801,Pessoas negras
+2022,Federal,"falta 0,1–0,25",737,16.7614282465317,Pessoas negras
+2022,Federal,"falta < 0,1",77,1.7511939959063,Pessoas negras
+2022,Federal,"sobra < 0,1",46,1.04616784171026,Pessoas negras
+2022,Federal,"sobra 0,1–0,25",47,1.06891062087787,Pessoas negras
+2022,Federal,"sobra 0,25–0,5",32,0.727768933363657,Pessoas negras
+2022,Federal,"sobra > 0,5",11,0.250170570843757,Pessoas negras
+2026,Federal,"falta > 0,5 QE",1096,34.4545740333229,Pessoas negras
+2026,Federal,"falta 0,25–0,5",1390,43.6969506444514,Pessoas negras
+2026,Federal,"falta 0,1–0,25",480,15.0895944671487,Pessoas negras
+2026,Federal,"falta < 0,1",82,2.57780572147124,Pessoas negras
+2026,Federal,"sobra < 0,1",49,1.54039610185476,Pessoas negras
+2026,Federal,"sobra 0,1–0,25",46,1.44608613643508,Pessoas negras
+2026,Federal,"sobra 0,25–0,5",25,0.785916378497328,Pessoas negras
+2026,Federal,"sobra > 0,5",13,0.408676516818611,Pessoas negras
+2014,Estadual,"falta > 0,5 QE",417,6.43319962974391,Pessoas negras
+2014,Estadual,"falta 0,25–0,5",3215,49.5988892317186,Pessoas negras
+2014,Estadual,"falta 0,1–0,25",2270,35.0200555384141,Pessoas negras
+2014,Estadual,"falta < 0,1",306,4.72076519592718,Pessoas negras
+2014,Estadual,"sobra < 0,1",140,2.15982721382289,Pessoas negras
+2014,Estadual,"sobra 0,1–0,25",81,1.24961431656896,Pessoas negras
+2014,Estadual,"sobra 0,25–0,5",40,0.617093489663684,Pessoas negras
+2014,Estadual,"sobra > 0,5",13,0.200555384140697,Pessoas negras
+2018,Estadual,"falta > 0,5 QE",301,3.87487126673532,Pessoas negras
+2018,Estadual,"falta 0,25–0,5",3453,44.451596292482,Pessoas negras
+2018,Estadual,"falta 0,1–0,25",3408,43.8722966014418,Pessoas negras
+2018,Estadual,"falta < 0,1",312,4.01647785787848,Pessoas negras
+2018,Estadual,"sobra < 0,1",135,1.73789907312049,Pessoas negras
+2018,Estadual,"sobra 0,1–0,25",101,1.30020597322348,Pessoas negras
+2018,Estadual,"sobra 0,25–0,5",53,0.682286302780639,Pessoas negras
+2018,Estadual,"sobra > 0,5",5,0.0643666323377961,Pessoas negras
+2022,Estadual,"falta > 0,5 QE",1281,16.6731745411948,Pessoas negras
+2022,Estadual,"falta 0,25–0,5",3629,47.2341533255239,Pessoas negras
+2022,Estadual,"falta 0,1–0,25",2193,28.5435376805935,Pessoas negras
+2022,Estadual,"falta < 0,1",217,2.82441754522973,Pessoas negras
+2022,Estadual,"sobra < 0,1",146,1.9002993622283,Pessoas negras
+2022,Estadual,"sobra 0,1–0,25",134,1.744110373552,Pessoas negras
+2022,Estadual,"sobra 0,25–0,5",66,0.859039437719641,Pessoas negras
+2022,Estadual,"sobra > 0,5",17,0.221267733958089,Pessoas negras
+2026,Estadual,"falta > 0,5 QE",1017,19.7207678883072,Pessoas negras
+2026,Estadual,"falta 0,25–0,5",2689,52.1427186348652,Pessoas negras
+2026,Estadual,"falta 0,1–0,25",978,18.9645142524724,Pessoas negras
+2026,Estadual,"falta < 0,1",150,2.9086678301338,Pessoas negras
+2026,Estadual,"sobra < 0,1",115,2.22997866976925,Pessoas negras
+2026,Estadual,"sobra 0,1–0,25",114,2.21058755090169,Pessoas negras
+2026,Estadual,"sobra 0,25–0,5",68,1.31859608299399,Pessoas negras
+2026,Estadual,"sobra > 0,5",26,0.504169090556525,Pessoas negras
