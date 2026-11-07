@@ -2,6 +2,7 @@
 
 **Status:** exploração ativa (2026-10-13). Plano: `quality_reports/plans/2026-10-13_did-ec111-2026.md`.
 **Antecessor:** `explorations/competitividade-gasto/` (DiD 2×2 2018→2022 e placebo 2014, à la Fonseca, Thomé & Guedes-Neto 2026).
+**Destino (2026-11-07):** o funil (candidaturas → recursos → votos → cadeiras) e a decomposição competitivas × não competitivas foram levados ao Cap. 4, `Quarto/thesis/chapters/04-ec111-competitividade-eleitoral.qmd`, junto com `explorations/competitividade-eleitoral/`. Figuras copiadas para `Quarto/thesis/Figures/04-ec111-competitividade/`.
 
 ## Pergunta
 

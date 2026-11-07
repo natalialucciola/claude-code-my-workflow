@@ -13,9 +13,10 @@ book:
     - part: "Capítulos empíricos (títulos provisórios)"
       chapters:
         - chapters/03-indice-g-concentracao-geografica.qmd
-        - chapters/04-alinhamento-espacial-gasto-voto.qmd
+        - chapters/04-ec111-competitividade-eleitoral.qmd
         - chapters/05-gasto-base-territorial-partido.qmd
         - chapters/06-sobreposicao-territorial-partido.qmd
+        - chapters/07-alinhamento-espacial-gasto-voto.qmd
     - chapters/99-conclusao.qmd
 
 bibliography: ../../Bibliography_base.bib
