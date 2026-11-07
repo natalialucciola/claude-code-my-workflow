@@ -31,4 +31,7 @@ explorations/
 
 - `base-territorial-partidos/` — sandbox de tese; graduou para `Quarto/thesis/chapters/06-sobreposicao-territorial-partido.qmd`, permanece como registro do processo investigativo.
 - `competitividade-gasto/` — sandbox de tese; medida de competitividade da candidatura baseada em gasto (não em votos), comparável entre Deputado Federal e Estadual, 2018/2022.
-- `senadoras-2026/` — **projeto independente da tese** (artigo próprio, submissão à Revista Dados). Vive aqui só para reusar a infraestrutura de skills/agents; não vai "graduar" para um capítulo. Ver `senadoras-2026/README.md`.
+
+## Archived Projects
+
+- `ARCHIVE/abandoned_senadoras-2026/` — projeto independente da tese (artigo para a Revista Dados sobre mulheres candidatas ao Senado em 2026). Abandonado em 2026-11-07: resultados não promissores. Ver o README da pasta.
