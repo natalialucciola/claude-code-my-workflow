@@ -22,7 +22,7 @@ Os dois só avisam se o último commit do `main` que toca os caminhos da tese (l
 ## Procedimento de republicação (para Claude)
 
 1. **Revisar os dados qualitativos.** Ver o que o commit mudou (`git log -1 --stat main`). Se mudou o estado de algum capítulo (nova seção, código rodado, pendência resolvida, novo capítulo no `_quarto.yml`), atualizar o capítulo em `quality_reports/estado-capitulos/capitulos.json`: `status` (`ok` | `part` | `no` | `na`), `o_que_existe`, `pendencias`, `proxima_acao`, `acao_curta`, `fontes`. Palavras, seções, TODOs e data da última alteração são calculados sozinhos. Se `capitulos.json` mudar, commitá-lo antes do passo 2.
-2. **Gerar:** `python scripts/estado_capitulos/gerar.py` (renderiza o livro; `--sem-render` reaproveita `Quarto/thesis/_book/`). Saída em `quality_reports/estado-capitulos/_site/` (não versionada), com `publicar.json`.
+2. **Gerar:** se `git status` mostrar alterações não commitadas em `Quarto/thesis/` (trabalho em andamento de outra sessão), gerar a partir de um worktree limpo do `main` para não publicar rascunho. `python scripts/estado_capitulos/gerar.py` (renderiza o livro; `--sem-render` reaproveita `Quarto/thesis/_book/`). Saída em `quality_reports/estado-capitulos/_site/` (não versionada), com `publicar.json`.
 3. **Publicar** com a ferramenta Artifact, usando `publicar.json`:
    - em uma sessão que ainda não publicou esta página: primeiro `action: "read"` com o `url`, depois `action: "list"`, `scope: "files"`, com o mesmo `url` (a publicação exige ter visto a página e os arquivos);
    - `action: "publish"`, `url` = `url` do manifesto, `file_path` = `file_path` do manifesto, `files` = `files` do manifesto (entradas `null` removem arquivos que saíram). Sem `icon`.

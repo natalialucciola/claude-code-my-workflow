@@ -306,6 +306,11 @@ def build(render: bool) -> None:
         print("AVISO: capítulos sem descrição em capitulos.json: " + ", ".join(sem_desc))
     if current_branch() != "main":
         print(f"AVISO: este checkout está no branch '{current_branch()}', não no main; a página reflete este branch.")
+    sujos = git("status", "--porcelain", "--", "Quarto/thesis", cwd=ROOT)
+    if sujos:
+        print("AVISO: há alterações não commitadas em Quarto/thesis; a página vai mostrá-las. "
+              "Para publicar só o que está no main, gere a partir de um worktree limpo do main "
+              "(git worktree add <pasta> main) ou commite antes:\n" + sujos)
 
 
 def marcar() -> None:
