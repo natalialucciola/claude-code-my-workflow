@@ -73,7 +73,12 @@ python scripts/quality_score.py Quarto/thesis/chapters/file.qmd
 
 # Surface-count sync (README ↔ CLAUDE.md ↔ guide ↔ landing page)
 ./scripts/check-surface-sync.sh
+
+# Página "Estado dos Capítulos" (gera _site/; publicar conforme o README)
+python scripts/estado_capitulos/gerar.py            # --status | --marcar-publicado
 ```
+
+**Página "Estado dos Capítulos":** https://claude.ai/artifact/8HGZSw58Vv8Lq9tmhjKsPc — resumo por capítulo com links para o HTML e o `.qmd`. Hooks em `.claude/settings.json` avisam Claude para republicá-la quando há commit novo no `main` nos caminhos da tese; procedimento em `scripts/estado_capitulos/README.md`, dados qualitativos em `quality_reports/estado-capitulos/capitulos.json`.
 
 **Data/scripts migration policy:** R scripts and data migrate from the author's separate analysis project incrementally, one analysis at a time as it's actively used — never referenced by absolute path (`.claude/rules/content-invariants.md` INV-10). Migrated files land in `scripts/R/` and `data/`. See `data/README.md`.
 

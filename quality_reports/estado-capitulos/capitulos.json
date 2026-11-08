@@ -1,0 +1,99 @@
+{
+  "_leia": "Dados qualitativos da página Estado dos Capítulos. Fatos automáticos (palavras, seções, TODOs, último commit) são calculados por scripts/estado_capitulos/gerar.py. Status: ok | part | no | na. Procedimento: scripts/estado_capitulos/README.md",
+  "artifact_url": "https://claude.ai/artifact/8HGZSw58Vv8Lq9tmhjKsPc",
+  "github_base": "https://github.com/natalialucciola/claude-tese-privado",
+  "titulo": "Estado dos capítulos da tese",
+  "subtitulo": "Sub-representação de gênero e raça na política brasileira. Pergunta de cada capítulo, o que já existe e a próxima ação.",
+  "capitulos": {
+    "00-introducao.qmd": {
+      "titulo": "Introdução",
+      "pergunta": "",
+      "status": {"estrutura": "no", "codigo": "na", "prosa": "no", "plano": "no"},
+      "o_que_existe": "",
+      "pendencias": "",
+      "proxima_acao": "Escrever por último. Esboçar o roteiro quando os capítulos 03 a 05 estiverem estáveis.",
+      "acao_curta": "Escrever por último; esboçar quando 03–05 estabilizarem",
+      "fontes": []
+    },
+    "01-revisao-literatura.qmd": {
+      "titulo": "Revisão de Literatura",
+      "pergunta": "Por que, como e onde ações afirmativas eleitorais funcionam, e como é o caso brasileiro?",
+      "status": {"estrutura": "ok", "codigo": "na", "prosa": "ok", "plano": "part"},
+      "o_que_existe": "Três blocos (fundamentos e tipologia; evidência comparada e sínteses sistemáticas; trajetória legal brasileira e desenho eleitoral) e síntese. Reestruturado a partir dos comentários em PDF de setembro.",
+      "pendencias": "Quatro planos de setembro ainda marcados como rascunho, embora a reestruturação já tenha sido feita.",
+      "proxima_acao": "Verificar as citações novas (CoVe), decidir os termos em inglês restantes (fast track, standing for/acting for) e revisar o texto.",
+      "acao_curta": "Verificar citações novas, decidir termos em inglês, revisar o texto",
+      "fontes": [
+        {"rotulo": "Planos", "caminho": "quality_reports/plans/2026-09-0*_capitulo1-*.md"}
+      ]
+    },
+    "02-analise-descritiva.qmd": {
+      "titulo": "Panorama Descritivo, 2014–2026",
+      "pergunta": "Como mulheres e pessoas negras aparecem em candidaturas, eleitos, financiamento, votos e geografia entre 2014 e 2026? Sem hipóteses, por desenho.",
+      "status": {"estrutura": "ok", "codigo": "ok", "prosa": "ok", "plano": "part"},
+      "o_que_existe": "Oito seções. Quatro scripts rodados geram as tabelas e figuras incluídas no capítulo.",
+      "pendencias": "Financiamento e geografia do gasto de 2026 (aguardam a prestação de contas do TSE); verificação de 2 referências.",
+      "proxima_acao": "Verificar as 2 referências e revisar agora. Atualizar o financiamento com 2026 quando o TSE publicar.",
+      "acao_curta": "Verificar 2 referências e revisar; incluir financiamento de 2026 quando o TSE publicar",
+      "fontes": [
+        {"rotulo": "Código", "caminho": "explorations/cap2-descritivo"}
+      ]
+    },
+    "03-ec111-competitividade-eleitoral.qmd": {
+      "titulo": "A EC 111 e a Competitividade Eleitoral",
+      "pergunta": "O voto em dobro da EC 111/2021 aumentou a competitividade eleitoral de mulheres e pessoas negras em 2022 e 2026?",
+      "status": {"estrutura": "ok", "codigo": "ok", "prosa": "ok", "plano": "ok"},
+      "o_que_existe": "Da introdução à conclusão: hipóteses, medida de margem de votos validada, DiD federal × estadual, tripla diferença, HonestDiD, discussão e limitações.",
+      "pendencias": "Prestação final de 2026; verificação das referências novas. A margem de gasto OLPR já foi rodada, mas não está no capítulo.",
+      "proxima_acao": "Ler o rascunho, que entrou no livro na fusão de 7/11 e ainda não foi revisto pela autora. Decidir se os resultados da margem de gasto OLPR entram. Depois, verificar as referências.",
+      "acao_curta": "Ler o rascunho; decidir se entra a margem de gasto OLPR",
+      "fontes": [
+        {"rotulo": "Código", "caminho": "explorations/competitividade-eleitoral"},
+        {"rotulo": "Código", "caminho": "explorations/ec111-did-2026"},
+        {"rotulo": "Relatório", "caminho": "explorations/ec111-did-2026/relatorio_ec111_2026.html"}
+      ]
+    },
+    "04-sobreposicao-territorial-voto.qmd": {
+      "titulo": "Sobreposição Territorial do Voto, 2018–2026",
+      "pergunta": "Partidos coordenam onde se concentram os votos dos seus candidatos, e isso prejudica mulheres e pessoas negras? Inclui 2026.",
+      "status": {"estrutura": "part", "codigo": "ok", "prosa": "part", "plano": "part"},
+      "o_que_existe": "Dados e métodos e rascunho de resultados (lacunas, incumbência, tripla diferença, robustez com piso de 5%). Introdução, discussão e conclusão estão por escrever.",
+      "pendencias": "Só uma lista num comentário do capítulo: erro-padrão do Modelo 2, Modelo 3 e refazer com o QL do gasto quando houver 2026.",
+      "proxima_acao": "Investigar o erro-padrão do Modelo 2 para raça em 2026 (cerca de 3 vezes menor que o de 2022) e refazer o Modelo 3 (liderança). Depois, escrever introdução e discussão.",
+      "acao_curta": "Investigar o erro-padrão do Modelo 2 (raça, 2026) e refazer o Modelo 3",
+      "fontes": [
+        {"rotulo": "Código", "caminho": "explorations/ql-voto-2026"},
+        {"rotulo": "Resultados", "caminho": "explorations/ql-voto-2026/output/fatia_025"}
+      ]
+    },
+    "05-sobreposicao-territorial-partido.qmd": {
+      "titulo": "Coordenação Territorial das Listas Partidárias",
+      "pergunta": "Lideranças partidárias protegem candidatos tradicionais (incumbentes) da sobreposição territorial enquanto aproveitam o incentivo da EC 111?",
+      "status": {"estrutura": "ok", "codigo": "ok", "prosa": "ok", "plano": "ok"},
+      "o_que_existe": "Capítulo completo, com 11 scripts de produção. Já passou por revisão de manuscrito, verificação de citações, auditoria de reprodutibilidade e revisão de estilo.",
+      "pendencias": "A introdução e a revisão de literatura ainda soam como artigo avulso e repetem o capítulo 01. Gasto de 2026 aguarda o TSE.",
+      "proxima_acao": "Adaptar a introdução e a revisão de literatura ao livro. Incluir 2026 quando o TSE publicar a prestação de contas.",
+      "acao_curta": "Adaptar introdução e revisão ao livro; incluir 2026 quando o TSE publicar",
+      "fontes": [
+        {"rotulo": "Código", "caminho": "scripts/R/sobreposicao_territorial_partido"},
+        {"rotulo": "Histórico", "caminho": "explorations/base-territorial-partidos"},
+        {"rotulo": "Revisões", "caminho": "quality_reports/*06-sobreposicao*"}
+      ]
+    },
+    "99-conclusao.qmd": {
+      "titulo": "Conclusão",
+      "pergunta": "",
+      "status": {"estrutura": "no", "codigo": "na", "prosa": "no", "plano": "no"},
+      "o_que_existe": "",
+      "pendencias": "",
+      "proxima_acao": "Deixar para o fim.",
+      "acao_curta": "Deixar para o fim",
+      "fontes": []
+    }
+  },
+  "transversais": [
+    {"titulo": "Capítulos 04 e 05: um estudo, duas medidas", "texto": "O 04 usa o quociente locacional do voto e já cobre 2026; o 05 usa o do gasto e cobre 2018–2022. Quando a prestação de contas de 2026 sair, vale decidir se o 04 continua como capítulo próprio ou vira seção de robustez do 05."},
+    {"titulo": "A prestação de contas de 2026", "texto": "A publicação da prestação final pelo TSE destrava ao mesmo tempo pendências dos capítulos 02, 03, 04 e 05."},
+    {"titulo": "Explorações sem capítulo", "texto": "explorations/competitividade-gasto/ (antecessora do 03) e explorations/ec111-did-ql-municipio/ (DiD com QL por município, com decisões em aberto no plano de 14/10)."}
+  ]
+}

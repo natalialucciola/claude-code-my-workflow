@@ -58,6 +58,16 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" && { python3 scripts/estado_capitulos/gerar.py --hook sessao 2>/dev/null || python scripts/estado_capitulos/gerar.py --hook sessao; }",
+            "timeout": 20
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -78,6 +88,16 @@
             "type": "command",
             "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/claim-reconcile.py",
             "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" && { python3 scripts/estado_capitulos/gerar.py --hook post 2>/dev/null || python scripts/estado_capitulos/gerar.py --hook post; }",
+            "timeout": 20
           }
         ]
       }
