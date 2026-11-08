@@ -79,6 +79,8 @@ p <- ggplot(fig, aes(x = faixa, y = pct, fill = grupo)) +
        caption = paste0("Fonte: TSE (votação por candidato e por partido). Margem calculada refazendo a ",
                         "distribuição de cadeiras com a regra de cada ano; sem DF.\nAs faixas extremas ",
                         "(falta > 0,5 QE e sobra > 0,5 QE) não aparecem.")) + tema
+# Versão da tese: sem título/subtítulo embutidos (a legenda do Quarto cumpre esse papel)
+p <- p + labs(title = NULL, subtitle = NULL)
 ggsave(file.path(dir_out, "descr_faixas_margem.png"), p, width = 11, height = 8.5, dpi = 300,
        bg = "white")
 ggsave(file.path(dir_out, "descr_faixas_margem.pdf"), p, width = 11, height = 8.5)

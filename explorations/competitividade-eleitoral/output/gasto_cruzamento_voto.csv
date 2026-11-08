@@ -47,3 +47,19 @@ ano,cargo,grupo,comp_voto,comp_a,N,pct,celula
 2022,Estadual,Mulheres,FALSE,FALSE,4266,86.01,em nenhum
 2022,Estadual,Mulheres,FALSE,TRUE,400,8.06,só pelo gasto
 2022,Estadual,Mulheres,TRUE,FALSE,55,1.11,só pelo voto
+2026,Federal,Homens,TRUE,TRUE,399,9.22,competitiva nos dois
+2026,Federal,Homens,FALSE,FALSE,3466,80.1,em nenhum
+2026,Federal,Homens,FALSE,TRUE,258,5.96,só pelo gasto
+2026,Federal,Homens,TRUE,FALSE,204,4.71,só pelo voto
+2026,Federal,Mulheres,TRUE,TRUE,125,4.87,competitiva nos dois
+2026,Federal,Mulheres,FALSE,FALSE,2247,87.57,em nenhum
+2026,Federal,Mulheres,FALSE,TRUE,158,6.16,só pelo gasto
+2026,Federal,Mulheres,TRUE,FALSE,36,1.4,só pelo voto
+2026,Estadual,Homens,TRUE,TRUE,806,11.88,competitiva nos dois
+2026,Estadual,Homens,FALSE,FALSE,5150,75.94,em nenhum
+2026,Estadual,Homens,FALSE,TRUE,421,6.21,só pelo gasto
+2026,Estadual,Homens,TRUE,FALSE,405,5.97,só pelo voto
+2026,Estadual,Mulheres,TRUE,TRUE,260,7.12,competitiva nos dois
+2026,Estadual,Mulheres,FALSE,FALSE,2999,82.14,em nenhum
+2026,Estadual,Mulheres,FALSE,TRUE,348,9.53,só pelo gasto
+2026,Estadual,Mulheres,TRUE,FALSE,44,1.21,só pelo voto

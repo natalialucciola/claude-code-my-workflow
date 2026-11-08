@@ -36,7 +36,7 @@ source(src_fun)
 cand      <- readRDS(file.path("data", "processed", "margem_gasto_insumos.rds"))
 listas    <- readRDS(file.path("data", "processed", "margem_listas.rds"))
 distritos <- readRDS(file.path("data", "processed", "margem_distritos.rds"))
-distritos <- distritos[ano %in% c(2014L, 2018L, 2022L) & cd_cargo %in% 6:7]
+distritos <- distritos[ano %in% c(2014L, 2018L, 2022L, 2026L) & cd_cargo %in% 6:7]
 
 # Insumos de um distrito. var = "gasto" (medida A) ou "votos" (teste: soma os votos de
 # legenda da lista em extra, como o R/03).
@@ -80,6 +80,18 @@ lista_insumos <- lapply(seq_len(nrow(distritos)), function(k) {
   d <- distritos[k]; insumos_distrito(d$ano, d$uf, d$cd_cargo)
 })
 lista_insumos <- lista_insumos[order(-vapply(lista_insumos, function(x) length(x$v), 1L))]
+# Distritos sem gasto registrado não têm distribuição pelo gasto. Único caso: DF 2026, que a
+# base de 2026 (ec111-did-2026/R/01) não traz porque o DF não elege deputados estaduais;
+# o DF fica fora da tripla diferença de qualquer forma.
+sem_gasto <- Filter(function(x) x$total <= 0, lista_insumos)
+if (length(sem_gasto)) {
+  message("Sem gasto registrado (fora da medida A): ",
+          paste(vapply(sem_gasto, function(x) sprintf("%s %d %d", x$uf, x$cd_cargo, x$ano), ""),
+                collapse = ", "))
+  stopifnot(all(vapply(sem_gasto, function(x) x$uf == "DF" && x$ano == 2026L, TRUE)))
+}
+lista_insumos <- Filter(function(x) x$total > 0, lista_insumos)
+cand <- cand[!(ano == 2026L & uf == "DF")]
 pendentes <- Filter(function(x) !file.exists(arq_cache(x)), lista_insumos)
 message("Regra: ", regra_modo, " | distritos: ", length(lista_insumos),
         " | pendentes: ", length(pendentes))

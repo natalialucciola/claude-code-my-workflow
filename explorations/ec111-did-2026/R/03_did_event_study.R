@@ -33,16 +33,21 @@ library(tidyverse)
 library(did)
 library(fixest)
 
+source("explorations/ec111-did-2026/R/funcoes_persistencia.R")
+
 set.seed(20261013)
 out_dir <- "explorations/ec111-did-2026/output"
-biters  <- 1000L                      # exploração; 25000 para a versão final
+# versão da tese: 25000 (did-conventions); BITERS=200 só para testar o código
+biters  <- as.integer(Sys.getenv("BITERS", "25000"))
 
 painel   <- readRDS("data/processed/painel_listas_2014_2026.rds")
 disputas <- readRDS("data/processed/painel_disputas_2014_2026.rds")
 
 anos_longos <- c(2014L, 2018L, 2022L, 2026L)
 anos_rec    <- c(2018L, 2022L, 2026L)      # 2014 não serve de referência para recursos
-grupos <- c(mulher = "Mulheres", negra = "Pessoas negras", todos = "Todas as candidaturas")
+grupos <- c(mulher = "Mulheres", negra = "Pessoas negras", mulher_negra = "Mulheres negras",
+            todos = "Todas as candidaturas")
+gs <- c("mulher", "negra", "mulher_negra")
 rotulo_y <- c(cand = "1. Candidaturas (% da lista)", gasto = "2. Gasto (% do gasto da lista)",
               rec_partido = "3. Recursos do partido (% das transferências)",
               rec_publico = "3b. Recursos públicos FEFC + FP (% da lista)",
@@ -59,7 +64,13 @@ rotulo_y <- c(cand = "1. Candidaturas (% da lista)", gasto = "2. Gasto (% do gas
               gasto_c  = "Gasto de competitivas do grupo (% do gasto da lista)",
               gasto_nc = "Gasto de não competitivas do grupo (% do gasto da lista)",
               recp_c   = "Recursos do partido a competitivas do grupo (% da lista)",
-              recp_nc  = "Recursos do partido a não competitivas do grupo (% da lista)")
+              recp_nc  = "Recursos do partido a não competitivas do grupo (% da lista)",
+              rtp    = "Receita total do grupo vinda do partido (% da receita da lista)",
+              rto    = "Receita total do grupo de outras fontes (% da receita da lista)",
+              rtp_c  = "Receita do partido a competitivas do grupo (% da receita da lista)",
+              rtp_nc = "Receita do partido a não competitivas do grupo (% da receita da lista)",
+              rto_c  = "Outras receitas de competitivas do grupo (% da receita da lista)",
+              rto_nc = "Outras receitas de não competitivas do grupo (% da receita da lista)")
 # No nível UF × cargo as parcelas são do grupo no total da disputa
 rotulo_uf <- c(cand = "1. Candidaturas (% das candidaturas da UF)",
                voto = "4a. Votos (% dos votos nominais da UF)",
@@ -95,8 +106,20 @@ estimar <- function(dados, y, anos, ponderado = FALSE, balanceado = TRUE, nivel 
   din <- tibble(periodo = as.character(ano_e), att = es$att.egt, ep = es$se.egt,
                 crit = es$crit.val.egt) |>
     filter(periodo != "2018")                                   # referência (≡ 0)
+  # Persistência: ATT(2026) − ATT(2022), EP pela função de influência (cluster = lista)
+  pers <- if (all(c(2022L, 2026L) %in% anos)) {
+    dif_att(a, t1 = match(2022L, anos), t2 = match(2026L, anos))
+  } else {
+    list(att = NA_real_, ep = NA_real_, ep_formula_t1 = NA_real_, ep_did_t1 = NA_real_,
+         ep_formula_t2 = NA_real_, ep_did_t2 = NA_real_)
+  }
+  conf <- tibble(resultado = y, ponderado = ponderado, balanceado = balanceado, nivel = nivel,
+                 ep_formula_2022 = pers$ep_formula_t1, ep_did_2022 = pers$ep_did_t1,
+                 ep_formula_2026 = pers$ep_formula_t2, ep_did_2026 = pers$ep_did_t2)
   res <- bind_rows(din, tibble(periodo = "Média 2022–2026", att = gr$overall.att,
-                               ep = gr$overall.se, crit = qnorm(.975))) |>
+                               ep = gr$overall.se, crit = qnorm(.975)),
+                   tibble(periodo = "Dif. 2026 − 2022", att = pers$att, ep = pers$ep,
+                          crit = qnorm(.975))) |>
     mutate(ic_inf = att - qnorm(.975) * ep, ic_sup = att + qnorm(.975) * ep,
            ic_unif_inf = att - crit * ep, ic_unif_sup = att + crit * ep)
   b <- d |> filter(federal, ano == 2018L)
@@ -117,35 +140,38 @@ estimar <- function(dados, y, anos, ponderado = FALSE, balanceado = TRUE, nivel 
     chk <- out |> filter(!is.na(twfe))
     stopifnot(all(abs(chk$att - chk$twfe) < 1e-6))   # did = TWFE: sem erro de código
   }
-  list(res = out, att_gt = a)
+  list(res = out, att_gt = a, conf = conf)
 }
 
 grade <- bind_rows(
   expand_grid(dados = "lista", y = c("cand", "voto", "compet", "eleita", "compshare"),
-              g = c("mulher", "negra"), anos = list(anos_longos), ponderado = c(FALSE, TRUE),
+              g = gs, anos = list(anos_longos), ponderado = c(FALSE, TRUE),
               balanceado = TRUE),
-  expand_grid(dados = "lista", y = c("cand", "voto", "compet", "eleita"), g = c("mulher", "negra"),
+  expand_grid(dados = "lista", y = c("cand", "voto", "compet", "eleita"), g = gs,
               anos = list(anos_longos), ponderado = FALSE, balanceado = FALSE),
   expand_grid(dados = "lista", y = c("compet", "eleita"), g = "todos", anos = list(anos_longos),
               ponderado = FALSE, balanceado = TRUE),
   expand_grid(dados = "lista", y = c("gasto", "rec_partido", "rec_publico", "rec_total"),
-              g = c("mulher", "negra"), anos = list(anos_rec), ponderado = c(FALSE, TRUE),
+              g = gs, anos = list(anos_rec), ponderado = c(FALSE, TRUE),
               balanceado = TRUE),
   expand_grid(dados = "disputa", y = c("cadeira", "cand", "voto", "compet"),
-              g = c("mulher", "negra"), anos = list(anos_longos), ponderado = FALSE,
+              g = gs, anos = list(anos_longos), ponderado = FALSE,
               balanceado = TRUE),
   # --- competitivas × não competitivas pela margem de votos ---
   expand_grid(dados = "lista", y = c("cmshare", "ncmshare", "voto_c", "voto_nc"),
-              g = c("mulher", "negra"), anos = list(anos_longos), ponderado = c(FALSE, TRUE),
+              g = gs, anos = list(anos_longos), ponderado = c(FALSE, TRUE),
               balanceado = TRUE),
   expand_grid(dados = "lista", y = c("gasto_c", "gasto_nc", "recp_c", "recp_nc"),
-              g = c("mulher", "negra"), anos = list(anos_rec), ponderado = c(FALSE, TRUE),
+              g = gs, anos = list(anos_rec), ponderado = c(FALSE, TRUE),
               balanceado = TRUE),
   expand_grid(dados = "disputa", y = c("cmshare", "ncmshare", "vin_c", "vin_nc"),
-              g = c("mulher", "negra"), anos = list(anos_longos), ponderado = FALSE,
+              g = gs, anos = list(anos_longos), ponderado = FALSE,
               balanceado = TRUE),
-  expand_grid(dados = "disputa", y = c("gin_c", "gin_nc"), g = c("mulher", "negra"),
-              anos = list(anos_rec), ponderado = FALSE, balanceado = TRUE)
+  expand_grid(dados = "disputa", y = c("gin_c", "gin_nc"), g = gs,
+              anos = list(anos_rec), ponderado = FALSE, balanceado = TRUE),
+  # --- de onde vem a receita total do grupo: partido × outras fontes (e c × nc) ---
+  expand_grid(dados = "lista", y = c("rtp", "rto", "rtp_c", "rtp_nc", "rto_c", "rto_nc"),
+              g = gs, anos = list(anos_rec), ponderado = c(FALSE, TRUE), balanceado = TRUE)
 )
 fits <- pmap(grade, function(dados, y, g, anos, ponderado, balanceado) {
   base <- if (dados == "lista") painel else disputas
@@ -153,20 +179,40 @@ fits <- pmap(grade, function(dados, y, g, anos, ponderado, balanceado) {
 })
 saveRDS(map(fits, "att_gt"), "data/processed/did_2026_att_gt.rds")
 
+# "mulher_negra" antes de "mulher" e "negra": o grupo é o sufixo mais longo
+re_grupo <- "(mulher_negra|mulher|negra|todos)$"
 res <- map(fits, "res") |> list_rbind() |>
-  mutate(grupo = unname(grupos[str_extract(resultado, "(mulher|negra|todos)$")]),
-         medida = str_remove(resultado, "_(mulher|negra|todos)$"),
+  mutate(grupo = unname(grupos[str_extract(resultado, re_grupo)]),
+         medida = str_remove(resultado, paste0("_", re_grupo)),
          rotulo = if_else(nivel == "disputa", unname(rotulo_uf[medida]), unname(rotulo_y[medida])))
+stopifnot(!anyNA(res$grupo), !anyNA(res$rotulo))
 write_excel_csv2(res, file.path(out_dir, "did_2026_resultados.csv"))
 
-# Checagem: competitivas + não competitivas = total (votos e gasto da lista), em cada eleição
-decomp <- res |>
-  filter(nivel == "lista", balanceado, str_detect(resultado, "^(voto|gasto)(_c|_nc)?_(mulher|negra)$")) |>
-  mutate(base = str_replace(resultado, "_(c|nc)_", "_"),
-         parte = str_extract(resultado, "_(c|nc)_") |> coalesce("total")) |>
-  select(base, parte, ponderado, periodo, att) |>
-  pivot_wider(names_from = parte, values_from = att)
-stopifnot(all(abs(decomp$`_c_` + decomp$`_nc_` - decomp$total) < 1e-6))
+# Conferência do EP da persistência: a fórmula da função de influência, aplicada a cada
+# ATT isolada, deve ficar próxima do EP do did (bootstrap); razão reportada
+conf <- map(fits, "conf") |> list_rbind() |>
+  mutate(razao_2022 = ep_formula_2022 / ep_did_2022, razao_2026 = ep_formula_2026 / ep_did_2026)
+write_excel_csv2(conf, file.path(out_dir, "did_2026_conferencia_ep_persistencia.csv"))
+message("Razão EP fórmula / EP did (deve ficar perto de 1): ",
+        paste(round(quantile(c(conf$razao_2022, conf$razao_2026), c(0, .5, 1), na.rm = TRUE), 3),
+              collapse = " / "))
+
+# Checagens aditivas (cada eleição, cada versão): os ATT das partes somam o ATT do total
+#   competitivas + não competitivas = total (votos, gasto, recursos do partido)
+#   receita do partido + outras receitas = receita total; idem dentro de c e de nc
+somar <- function(partes, total) {
+  w <- res |>
+    filter(nivel == "lista", balanceado, medida %in% c(partes, total),
+           !periodo %in% c("2018")) |>
+    select(medida, grupo, ponderado, periodo, att) |>
+    pivot_wider(names_from = medida, values_from = att)
+  stopifnot(nrow(w) > 0, all(abs(rowSums(w[partes]) - w[[total]]) < 1e-6))
+}
+somar(c("voto_c", "voto_nc"), "voto")
+somar(c("gasto_c", "gasto_nc"), "gasto")
+somar(c("rtp", "rto"), "rec_total")
+somar(c("rtp_c", "rtp_nc"), "rtp")
+somar(c("rto_c", "rto_nc"), "rto")
 
 # Replicação da etapa anterior (2018→2022, painel de 2 eleições): votos das mulheres
 rep22 <- estimar(painel, "voto_mulher", c(2018L, 2022L))$res |> filter(periodo == "2022")
@@ -193,7 +239,7 @@ write_excel_csv2(rm_sens, file.path(out_dir, "did_2026_sensibilidade_rm.csv"))
 # ------------------------------------------------------------------------------
 # 3. Figuras (não ponderado, painel balanceado)
 # ------------------------------------------------------------------------------
-cores_gr <- c("Mulheres" = "#eb6834", "Pessoas negras" = "#2a78d6")
+cores_gr <- c("Mulheres" = "#eb6834", "Pessoas negras" = "#2a78d6", "Mulheres negras" = "#7b3f99")
 tema <- theme_minimal(base_size = 10) +
   theme(panel.grid.minor = element_blank(),
         strip.text = element_text(face = "bold", hjust = 0),
@@ -207,14 +253,14 @@ salvar <- function(p, nome, w, h) {
 fonte_lista <- paste0("Fonte: TSE. DiD (Callaway & Sant'Anna, pacote did): Deputado Federal (EC 111) × ",
                       "Estadual, base fixa 2018; listas partido × UF balanceadas, sem DF.\nBarra fina: IC 95% ",
                       "uniforme (bootstrap, EP agrupados por lista); barra grossa: IC 95% pontual. ",
-                      "2026: recursos e gasto da prestação parcial (TSE, 13/10/2026).")
+                      "2026: recursos e gasto da prestação de contas final (TSE, arquivo de 08/11/2026).")
 fonte_uf <- paste0("Fonte: TSE. DiD (Callaway & Sant'Anna, pacote did): Deputado Federal (EC 111) × ",
                    "Estadual, base fixa 2018; unidade = UF × cargo (26 UFs, sem DF).\nBarra fina: IC 95% ",
                    "uniforme (bootstrap, EP agrupados por UF × cargo); barra grossa: IC 95% pontual.")
 
 evento <- function(d, titulo, subtitulo, nome, ncol, h, fonte = fonte_lista) {
   d <- d |>
-    filter(periodo != "Média 2022–2026") |>
+    filter(periodo %in% c("2014", "2022", "2026")) |>
     bind_rows(d |> distinct(resultado, nivel, rotulo, grupo) |>
                 mutate(periodo = "2018", att = 0, ic_inf = 0, ic_sup = 0, ic_unif_inf = 0,
                        ic_unif_sup = 0)) |>
@@ -230,7 +276,7 @@ evento <- function(d, titulo, subtitulo, nome, ncol, h, fonte = fonte_lista) {
     facet_wrap(~rotulo, ncol = ncol, scales = "free_y") +
     scale_x_continuous(breaks = c(2014, 2018, 2022, 2026)) +
     scale_colour_manual(values = cores_gr, name = NULL) +
-    labs(title = titulo, subtitle = subtitulo, x = NULL,
+    labs(title = NULL, subtitle = NULL, x = NULL,
          y = "Efeito estimado (pontos percentuais)", caption = fonte) + tema
   salvar(p, nome, 10, h)
 }
@@ -247,7 +293,7 @@ evento(base_fig |> filter(nivel == "lista", anos == "2014–2026"),
 evento(base_fig |> filter(nivel == "lista", anos == "2018–2026"),
        "EC 111: gasto e recursos — federal × estadual",
        paste("Diferença em relação a 2018. Sem pré-teste (2014 tinha doação empresarial).",
-             "2026 PROVISÓRIO: prestação de contas parcial."),
+             "2026: prestação de contas final."),
        "did_2026_evento_recursos", 2, 7)
 evento(base_fig |> filter(nivel == "disputa"),
        "EC 111 no nível da disputa (UF × cargo): cadeiras, candidaturas, votos e competitivas",
@@ -268,7 +314,20 @@ evento(base_m |> filter(nivel == "lista", medida %in% c("voto_c", "voto_nc", "ga
          ordem(rotulo_y[c("voto_c", "voto_nc", "gasto_c", "gasto_nc", "recp_c", "recp_nc")]),
        "EC 111: de onde vêm os ganhos — competitivas × não competitivas do grupo",
        paste("Parcela da lista; esquerda + direita = efeito total sobre o grupo.",
-             "Gasto e recursos: sem pré-teste; 2026 provisório."),
+             "Gasto e recursos: sem pré-teste."),
        "did_2026_evento_margem_decomposicao", 2, 9.5, fonte = paste0(fonte_lista, nota_margem))
+
+# De onde vem a receita total do grupo: partido × outras fontes (decisão de 2026-11-08)
+base_r <- res |> filter(!ponderado, balanceado, grupo != grupos[["todos"]], nivel == "lista")
+evento(base_r |> filter(medida %in% c("rec_total", "rec_partido", "rtp", "rto")) |>
+         ordem(rotulo_y[c("rec_total", "rec_partido", "rtp", "rto")]),
+       "EC 111: receita total e transferências do partido",
+       "Receita total do grupo = parte vinda do partido + parte de outras fontes.",
+       "did_2026_evento_receita_origem", 2, 7)
+evento(base_r |> filter(medida %in% c("rtp_c", "rtp_nc", "rto_c", "rto_nc")) |>
+         ordem(rotulo_y[c("rtp_c", "rtp_nc", "rto_c", "rto_nc")]),
+       "EC 111: origem da receita, competitivas × não competitivas",
+       "Parcela da receita total da lista; as quatro partes somam o efeito sobre a receita total.",
+       "did_2026_evento_receita_origem_margem", 2, 7, fonte = paste0(fonte_lista, nota_margem))
 
 message("DiD 2026: resultados em ", out_dir)

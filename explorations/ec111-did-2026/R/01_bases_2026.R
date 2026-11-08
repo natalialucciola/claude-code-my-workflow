@@ -15,8 +15,9 @@
 #     arquivo de votação (deferido, pendente ou com recurso em curso = permanece
 #     na urna), como em "Código - Preparando dados - Bases 2026.R".
 #   - Cadeiras: contadas a partir dos eleitos de cada UF × cargo.
-#   - Prestação de contas PARCIAL (arquivo do TSE de 13/10/2026: relatórios
-#     financeiros de 72 h + prestação parcial; a final vence em novembro).
+#   - Prestação de contas: arquivo do TSE de 08/11/2026, já com a prestação FINAL
+#     (>99% dos registros; 253 candidaturas só com a parcial e 156 só com relatórios
+#     financeiros). A versão de 13/10/2026 era parcial (relatórios de 72 h + parcial).
 #     Deduplicação por SQ_DESPESA / SQ_RECEITA, priorizando final > parcial > relatório.
 #
 # Rodar da raiz do repositório:

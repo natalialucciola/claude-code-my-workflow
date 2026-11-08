@@ -161,5 +161,7 @@ p <- ggplot(fig, aes(x = M, ymin = lb, ymax = ub, colour = restricao == "Origina
                         "do distrito; variância agrupada por UF.\nRambachan & Roth (2023). Cinza: IC ",
                         "original (sem violação). 2014–2018 é outro regime de financiamento de campanha.")) +
   tema
+# Versão da tese: sem título/subtítulo embutidos (a legenda do Quarto cumpre esse papel)
+p <- p + labs(title = NULL, subtitle = NULL)
 ggsave(file.path(dir_out, "honestdid_sensibilidade.png"), p, width = 10, height = 8, dpi = 300, bg = "white")
 ggsave(file.path(dir_out, "honestdid_sensibilidade.pdf"), p, width = 10, height = 8, device = cairo_pdf)

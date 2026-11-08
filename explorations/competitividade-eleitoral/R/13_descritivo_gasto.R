@@ -1,5 +1,5 @@
 # =============================================================================
-# 13 — Descritivo: competitividade pelo gasto (A, D2, D3) × pelo voto, 2014–2022
+# 13 — Descritivo: competitividade pelo gasto (A, D2, D3) × pelo voto, 2014–2026 (2026 parcial)
 #
 # Entrada: data/processed/margem_gasto_medidas.rds (R/12),
 #          data/processed/competitividade_gasto_cand.rds (razao_p10, 2018 e 2022)
@@ -110,8 +110,8 @@ p2 <- ggplot(fc, aes(x = ano, y = value, colour = grupo)) +
   geom_line(linewidth = 0.7) + geom_point(size = 1.6) +
   facet_grid(cargo ~ medida, labeller = label_wrap_gen(24)) +
   scale_colour_manual(values = cores, name = NULL) +
-  scale_x_continuous(breaks = c(2014, 2018, 2022)) +
-  labs(title = "Candidaturas competitivas pelo voto e pelo gasto, 2014–2022",
+  scale_x_continuous(breaks = c(2014, 2018, 2022, 2026)) +
+  labs(title = NULL,
        subtitle = "% das candidaturas aptas do grupo classificadas como competitivas em cada medida.",
        x = NULL, y = "% do grupo",
        caption = paste0("Fonte: TSE. Competitiva = eleita ou a menos de 0,1 QE do limiar (voto, A, D2); ",

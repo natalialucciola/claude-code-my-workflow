@@ -19,3 +19,11 @@ ano,cargo,grupo,eleitos,acerto_eleitos,falsos_eleitos,acerto_geral,spearman_marg
 2022,Federal,Homens,423,0.499,169,0.937,0.751,0.91
 2022,Federal,Mulheres,90,0.5,88,0.96,0.725,0.928
 2022,Federal,Todas,513,0.499,257,0.945,0.742,0.917
+2026,Estadual,Homens,822,0.484,274,0.897,0.679,0.878
+2026,Estadual,Mulheres,212,0.75,204,0.93,0.548,0.893
+2026,Estadual,Todas,1035,0.538,478,0.908,0.632,0.883
+2026,Estadual,,1,0,0,0.5,1,0.5
+2026,Federal,Homens,396,0.538,150,0.923,0.751,0.893
+2026,Federal,Mulheres,109,0.725,63,0.964,0.689,0.924
+2026,Federal,Todas,505,0.578,213,0.938,0.73,0.905
+2026,Federal,,0,,0,1,,1
