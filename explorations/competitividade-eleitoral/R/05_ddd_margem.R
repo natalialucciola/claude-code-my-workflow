@@ -25,10 +25,11 @@ library(data.table)
 library(did)
 library(fixest)
 library(ggplot2)
+source(file.path("explorations", "ec111-did-2026", "R", "funcoes_persistencia.R"))
 set.seed(20261013)
 
 dir_out <- file.path("explorations", "competitividade-eleitoral", "output")
-n_boot  <- 25000L
+n_boot  <- as.integer(Sys.getenv("BITERS", "25000"))   # 25000 na tese
 res <- readRDS(file.path("data", "processed", "margem_resultado.rds"))
 d <- res[apta & cd_cargo %in% 6:7 & uf != "DF" & !is.na(margem_qe) & !is.na(genero)]
 d[, federal := cd_cargo == 6L]
@@ -72,11 +73,18 @@ estimar_did <- function(cel, y, ponderado) {
                 weightsname = if (ponderado) "peso" else NULL, print_details = FALSE)
   din <- aggte(att, type = "dynamic", cband = TRUE, biters = n_boot, na.rm = TRUE)
   grp <- aggte(att, type = "group", cband = TRUE, biters = n_boot, na.rm = TRUE)
+  # Persistência: ATT(2026) − ATT(2022), EP pela função de influência agregada por UF
+  pr <- if (all(c(2022L, 2026L) %in% att$t)) {
+    dif_att(att, 2022L, 2026L, cluster = cluster_de(att, "uf_id"))
+  } else list(att = NA_real_, ep = NA_real_, ep_formula_t1 = NA_real_, ep_did_t1 = NA_real_)
   rbind(
     data.table(termo = paste0("e", din$egt), ano = 2022L + din$egt, att = din$att.egt,
                ep = din$se.egt, crit = din$crit.val.egt),
     data.table(termo = "ATT geral (2022 e 2026)", ano = NA_integer_, att = grp$overall.att,
-               ep = grp$overall.se, crit = qnorm(0.975)))
+               ep = grp$overall.se, crit = qnorm(0.975)),
+    data.table(termo = "Dif. 2026 − 2022", ano = NA_integer_, att = pr$att, ep = pr$ep,
+               crit = qnorm(0.975)),
+    fill = TRUE)[, `:=`(ep_formula_2022 = pr$ep_formula_t1, ep_did_2022 = pr$ep_did_t1)][]
 }
 
 # --- Principal + robustez de amostra (sem UFs com 8 cadeiras federais) --------
@@ -179,9 +187,7 @@ p <- ggplot(fig, aes(x = ano, y = att)) +
   geom_point(colour = "#eb6834", size = 1.8) +
   facet_grid(comparacao ~ desfecho, labeller = label_wrap_gen(22)) +
   scale_x_continuous(breaks = c(2014, 2018, 2022, 2026)) +
-  labs(title = "EC 111 e a proximidade do limiar de eleição: estudo de evento",
-       subtitle = paste("Tripla diferença: diferença entre grupos (p.p.), federal menos estadual,",
-                        "relativa a 2018. 2014 é pré-teste; 2022 e 2026, eleições sob a EC."),
+  labs(title = NULL, subtitle = NULL,
        x = NULL, y = "Efeito estimado (pontos percentuais)",
        caption = paste0("Fonte: TSE. did::att_gt (Callaway & Sant'Anna), unidade UF × cargo, sem DF, ",
                         "sem peso; base universal 2018.\nTraço fino: IC 95% pontual; faixa larga: ",

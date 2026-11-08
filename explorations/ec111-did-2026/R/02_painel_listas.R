@@ -14,6 +14,10 @@
 #   rec_partido_g % das transferências do partido à lista recebidas por g      2018–2026
 #   rec_publico_g % dos recursos públicos (FEFC + FP) da lista recebidos por g 2018–2026
 #   rec_total_g   % de todas as receitas da lista recebidas por g              2018–2026
+#   rtp_g / rto_g parcela de g na receita total da lista vinda do partido / de
+#                 outras fontes (somam rec_total_g); rtp_c/nc, rto_c/nc idem por
+#                 competitivas × não competitivas (decisão da autora, 2026-11-08)
+#   Grupos g: mulher, negra e mulher_negra (interseção; decisão de 2026-11-08).
 #   Disputa: cadeira_g = % dos eleitos que são g; cand_g, voto_g idem.
 #
 # Competitivas × não competitivas pela MARGEM DE VOTOS (exploração competitividade-
@@ -102,7 +106,13 @@ c26 <- readRDS("data/processed/cand_dep_2026.rds") |>
 
 cand <- bind_rows(c14, c1822, c26) |>
   filter(uf != "DF") |>
-  mutate(partido_h = para_2026(partido, ANO), federal = DS_CARGO == "Deputado Federal")
+  mutate(partido_h = para_2026(partido, ANO), federal = DS_CARGO == "Deputado Federal",
+         mulher_negra = mulher & negra,
+         # receita que não veio do partido (doações de pessoas físicas, recursos próprios,
+         # financiamento coletivo, outras candidaturas…): receita_total − receita_partido
+         receita_outras = receita_total - receita_partido)
+chk_rec <- cand |> filter(!is.na(receita_total))
+stopifnot(all(chk_rec$receita_partido <= chk_rec$receita_total + 1e-6))
 stopifnot(!anyDuplicated(cand[c("ANO", "DS_CARGO", "sq_candidato")]))
 
 # Competitividade pela margem de votos (exploração competitividade-eleitoral, script 03):
@@ -155,7 +165,7 @@ painel <- cand |>
   summarise(n_cand = n(), votos_lista = sum(VOTOS_CAND_TOTAL), n_eleitos = sum(eleito),
             # referência: mudanças que não dependem do grupo (viés mecânico em compet_g/eleita_g)
             compet_todos = 100 * mean(compet), eleita_todos = 100 * mean(eleito == 1L),
-            across(c(mulher, negra), list(
+            across(c(mulher, negra, mulher_negra), list(
               compshare = \(g) pp(sum(g & compet), sum(compet)),   # % das competitivas que são g
               cand   = \(g) 100 * mean(g),
               voto   = \(g) pp(sum(VOTOS_CAND_TOTAL[g]), sum(VOTOS_CAND_TOTAL)),
@@ -175,7 +185,16 @@ painel <- cand |>
               gasto_c  = \(g) pp(sum(gasto[g & compet_m]), sum(gasto)),
               gasto_nc = \(g) pp(sum(gasto[g & !compet_m]), sum(gasto)),
               recp_c   = \(g) pp(sum(receita_partido[g & compet_m]), sum(receita_partido)),
-              recp_nc  = \(g) pp(sum(receita_partido[g & !compet_m]), sum(receita_partido))),
+              recp_nc  = \(g) pp(sum(receita_partido[g & !compet_m]), sum(receita_partido)),
+              # --- de onde vem a receita total do grupo (decisão da autora, 2026-11-08) ---
+              # rtp + rto = rec_total: parcela de g na receita total da lista vinda do
+              # partido (rtp) e de outras fontes (rto); idem separadas em c × nc
+              rtp    = \(g) pp(sum(receita_partido[g]), sum(receita_total)),
+              rto    = \(g) pp(sum(receita_outras[g]), sum(receita_total)),
+              rtp_c  = \(g) pp(sum(receita_partido[g & compet_m]), sum(receita_total)),
+              rtp_nc = \(g) pp(sum(receita_partido[g & !compet_m]), sum(receita_total)),
+              rto_c  = \(g) pp(sum(receita_outras[g & compet_m]), sum(receita_total)),
+              rto_nc = \(g) pp(sum(receita_outras[g & !compet_m]), sum(receita_total))),
               .names = "{.fn}_{.col}"),
             .by = c(ANO, DS_CARGO, federal, uf, partido_h)) |>
   filter(votos_lista > 0, !is.na(partido_h)) |>          # PHS (extinto) sai
@@ -201,7 +220,7 @@ message("Siglas de 2026 sem lista em 2022: ", paste(sem_par_2026, collapse = ", 
 # ------------------------------------------------------------------------------
 disputas <- cand |>
   summarise(n_cadeiras = sum(eleito),
-            across(c(mulher, negra), list(
+            across(c(mulher, negra, mulher_negra), list(
               cadeira = \(g) pp(sum(g & eleito == 1L), sum(eleito == 1L)),
               cand    = \(g) 100 * mean(g),
               voto    = \(g) pp(sum(VOTOS_CAND_TOTAL[g]), sum(VOTOS_CAND_TOTAL)),

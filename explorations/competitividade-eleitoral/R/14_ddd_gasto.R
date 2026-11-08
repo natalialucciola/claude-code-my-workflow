@@ -7,7 +7,8 @@
 # candidaturas competitivas. Bootstrap multiplicador, bandas uniformes, agrupado por UF;
 # sem peso e com peso pelo número de candidaturas da célula.
 #
-# Eleições 2014, 2018 e 2022 (a prestação final de 2026 ainda não saiu).
+# Eleições 2014, 2018, 2022 e 2026 (2026: prestação final, arquivo do TSE de 08/11/2026).
+# Persistência: linha "Dif. 2026 − 2022" (funcoes_persistencia.R, EP agregado por UF).
 # ATENÇÃO — 2014 (e = −8): decisão da autora (2026-09-28) de que 2014 não serve de
 # referência de tendência para recursos (fim da doação empresarial em 2015). O coeficiente
 # é reportado com pre_teste_valido = FALSE; a leitura principal é 2018 → 2022.
@@ -27,10 +28,11 @@
 library(data.table)
 library(did)
 library(ggplot2)
+source(file.path("explorations", "ec111-did-2026", "R", "funcoes_persistencia.R"))
 set.seed(20261014)
 
 dir_out <- file.path("explorations", "competitividade-eleitoral", "output")
-n_boot  <- 25000L
+n_boot  <- as.integer(Sys.getenv("BITERS", "25000"))   # 25000 na tese
 d <- readRDS(file.path("data", "processed", "margem_gasto_medidas.rds"))
 d <- d[cd_cargo %in% 6:7 & uf != "DF" & !is.na(margem_qe)]
 d[, federal := cd_cargo == 6L]
@@ -72,16 +74,23 @@ estimar_did <- function(cel, y, ponderado) {
                 weightsname = if (ponderado) "peso" else NULL, print_details = FALSE)
   din <- aggte(att, type = "dynamic", cband = TRUE, biters = n_boot, na.rm = TRUE)
   grp <- aggte(att, type = "group", cband = TRUE, biters = n_boot, na.rm = TRUE)
+  # Persistência: ATT(2026) − ATT(2022), EP pela função de influência agregada por UF
+  pr <- if (all(c(2022L, 2026L) %in% att$t)) {
+    dif_att(att, 2022L, 2026L, cluster = cluster_de(att, "uf_id"))
+  } else list(att = NA_real_, ep = NA_real_, ep_formula_t1 = NA_real_, ep_did_t1 = NA_real_)
   rbind(
     data.table(termo = paste0("e", din$egt), ano = 2022L + din$egt, att = din$att.egt,
                ep = din$se.egt, crit = din$crit.val.egt),
-    data.table(termo = "ATT geral (2022)", ano = NA_integer_, att = grp$overall.att,
-               ep = grp$overall.se, crit = qnorm(0.975)))
+    data.table(termo = "ATT geral (2022 e 2026)", ano = NA_integer_, att = grp$overall.att,
+               ep = grp$overall.se, crit = qnorm(0.975)),
+    data.table(termo = "Dif. 2026 − 2022", ano = NA_integer_, att = pr$att, ep = pr$ep,
+               crit = qnorm(0.975)),
+    fill = TRUE)[, `:=`(ep_formula_2022 = pr$ep_formula_t1, ep_did_2022 = pr$ep_did_t1)][]
 }
 
 out <- rbindlist(lapply(names(comparacoes), function(comp) {
   cel <- celulas(d, comp)
-  stopifnot(cel[, .N, by = id][, all(N == 3L)])            # painel balanceado: 3 eleições
+  stopifnot(cel[, .N, by = id][, all(N == 4L)])            # painel balanceado: 4 eleições
   rbindlist(lapply(names(desfechos), function(y) {
     rbindlist(lapply(c(FALSE, TRUE), function(pd) {
       estimar_did(cel, y, pd)[, `:=`(desfecho = y, comparacao = comp, ponderado = pd)]
@@ -106,13 +115,13 @@ rot_y <- c(voto_010 = "Voto: eleita ou < 0,1 QE (referência)", a_010 = "A: marg
 fig <- out[!ponderado & desfecho %in% names(rot_y) & !is.na(ano)]
 fig[, desfecho := factor(rot_y[desfecho], levels = rot_y)]
 fig[, comparacao := factor(comparacao, levels = names(comparacoes))]
-fig[, periodo := fifelse(ano == 2014L, "2014 (sem leitura de pré-teste)", "2018 (base) e 2022")]
+fig[, periodo := fifelse(ano == 2014L, "2014 (sem leitura de pré-teste)", "2018 (base), 2022 e 2026")]
 tema <- theme_minimal(base_size = 10) +
   theme(panel.grid.minor = element_blank(), strip.text = element_text(face = "bold", hjust = 0),
         plot.title = element_text(face = "bold"), plot.title.position = "plot",
         plot.caption.position = "plot", plot.caption = element_text(colour = "grey40", hjust = 0),
         legend.position = "top")
-cor_p <- c("2014 (sem leitura de pré-teste)" = "#9a9890", "2018 (base) e 2022" = "#eb6834")
+cor_p <- c("2014 (sem leitura de pré-teste)" = "#9a9890", "2018 (base), 2022 e 2026" = "#eb6834")
 p <- ggplot(fig, aes(x = ano, y = att, colour = periodo)) +
   geom_hline(yintercept = 0, colour = "grey50", linewidth = 0.4) +
   geom_vline(xintercept = 2020, colour = "grey70", linetype = "dashed", linewidth = 0.4) +
@@ -121,14 +130,12 @@ p <- ggplot(fig, aes(x = ano, y = att, colour = periodo)) +
   geom_point(size = 1.8) +
   facet_grid(comparacao ~ desfecho, labeller = label_wrap_gen(22)) +
   scale_colour_manual(values = cor_p, name = NULL) +
-  scale_x_continuous(breaks = c(2014, 2018, 2022)) +
-  labs(title = "EC 111 e a competitividade pelo gasto: estudo de evento",
-       subtitle = paste("Tripla diferença: diferença entre grupos (p.p.), federal menos estadual,",
-                        "relativa a 2018. 2022 é a eleição sob a EC."),
+  scale_x_continuous(breaks = c(2014, 2018, 2022, 2026)) +
+  labs(title = NULL, subtitle = NULL,
        x = NULL, y = "Efeito estimado (pontos percentuais)",
        caption = paste0("Fonte: TSE. did::att_gt (Callaway & Sant'Anna), unidade UF × cargo, sem DF, ",
                         "sem peso; base universal 2018. Traço fino: IC 95% pontual; faixa larga: banda\n",
-                        "uniforme 95% (bootstrap multiplicador, ", n_boot, " repetições, agrupado por UF). ",
+                        "uniforme 95% (bootstrap multiplicador, ", n_boot, " repetições, agrupado por UF). 2026: prestação final. ",
                         "2014 não é lido como pré-teste para recursos (fim da doação empresarial em 2015).")) +
   tema
 ggsave(file.path(dir_out, "ddd_gasto_estudo_evento.png"), p, width = 12, height = 7, dpi = 300, bg = "white")

@@ -101,5 +101,7 @@ p <- ggplot(fig, aes(x = M, y = delta, colour = cargo)) +
                         "Não competitiva: não eleita e a mais de 0,1 QE do limiar.\nFaixa cinza: ",
                         "magnitudes comuns aos dois cargos (24–70). Linhas: ajuste linear em log(M).")) +
   tema
+# Versão da tese: sem título/subtítulo embutidos (a legenda do Quarto cumpre esse papel)
+p <- p + labs(title = NULL, subtitle = NULL)
 ggsave(file.path(dir_out, "magnitude_candidaturas.png"), p, width = 11, height = 4.5, dpi = 300, bg = "white")
 ggsave(file.path(dir_out, "magnitude_candidaturas.pdf"), p, width = 11, height = 4.5)

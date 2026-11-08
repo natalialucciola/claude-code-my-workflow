@@ -10,7 +10,9 @@
 #         (regra de competitividade-gasto/R/07_placebo_2014.R);
 #   2018, 2022: competitividade_gasto_cand.rds (coluna gasto, já sem repasses).
 # Candidatura apta sem registro de despesa entra com gasto 0 (marcada em sem_registro).
-# 2026: a prestação final ainda não foi publicada.
+# 2026: data/processed/cand_dep_2026.rds (explorations/ec111-did-2026/R/01), mesma regra
+#       (despesas contratadas sem repasses); arquivo do TSE de 08/11/2026, já com a
+#       prestação final (>99% dos registros) — extensão de 2026-11-08.
 #
 # Entrada: data/processed/margem_resultado.rds, data/processed/competitividade_gasto_cand.rds,
 #          data/raw/prestacao_final_2014.zip
@@ -23,7 +25,7 @@ library(data.table)
 
 dir_out <- file.path("explorations", "competitividade-eleitoral", "output")
 res <- readRDS(file.path("data", "processed", "margem_resultado.rds"))
-res <- res[ano %in% c(2014L, 2018L, 2022L) & cd_cargo %in% 6:7]
+res <- res[ano %in% c(2014L, 2018L, 2022L, 2026L) & cd_cargo %in% 6:7]
 res[, sq_candidato := as.character(sq_candidato)]
 
 # --- 2014: despesas da prestação final ---------------------------------------
@@ -43,7 +45,11 @@ g14[, ano := 2014L]
 g1822 <- as.data.table(readRDS(file.path("data", "processed", "competitividade_gasto_cand.rds")))
 g1822 <- g1822[, .(ano = as.integer(ANO), sq_candidato = as.character(sq_candidato), gasto)]
 
-gasto <- rbind(g14[, .(ano, sq_candidato, gasto)], g1822)
+# --- 2026 (prestação parcial) ----------------------------------------------------
+g26 <- as.data.table(readRDS(file.path("data", "processed", "cand_dep_2026.rds")))
+g26 <- g26[, .(ano = 2026L, sq_candidato = as.character(sq_candidato), gasto)]
+
+gasto <- rbind(g14[, .(ano, sq_candidato, gasto)], g1822, g26)
 stopifnot(!anyDuplicated(gasto, by = c("ano", "sq_candidato")))
 
 d <- merge(res, gasto, by = c("ano", "sq_candidato"), all.x = TRUE)
