@@ -1,15 +1,17 @@
 # A EC 111/2021 e a Competitividade Eleitoral de Mulheres e Pessoas Negras {#sec-ec111-competitividade}
 
+```{=html}
 <!-- Rascunho (2026-11-07). Fontes: explorations/competitividade-eleitoral/ (margem de votos,
 tripla diferença, HonestDiD) e explorations/ec111-did-2026/ (DiD federal × estadual de
 candidaturas, recursos, votos e cadeiras, 2014–2026). Números conferidos nos CSVs de output/
 das duas explorações. Recursos e gasto de 2026: prestação de contas PARCIAL (TSE, 13/10/2026). -->
+```
 
 ## Introdução {#sec-introducao-ec111}
 
-A Emenda Constitucional 111/2021, art. 2º, criou um incentivo financeiro inédito no sistema brasileiro de ações afirmativas. Nas eleições de 2022 a 2030, os votos dados a candidatas mulheres e a candidaturas negras para a Câmara dos Deputados contam em dobro na distribuição do Fundo Especial de Financiamento de Campanha (FEFC) e do Fundo Partidário entre os partidos. Diferentemente das cotas de candidaturas e de recursos discutidas no @sec-revisao-literatura, a regra não obriga o partido a nada. Ela altera o preço relativo de cada voto: um voto obtido por uma mulher ou por uma pessoa negra vale, para o caixa do partido no ciclo seguinte, o dobro de um voto obtido por um homem branco.
+A Emenda Constitucional 111/2021, art. 2º, criou um incentivo financeiro inédito no sistema eleitoral brasileiro em favor da maior representação de mulheres e pessoas negras. Nas eleições de 2022 a 2030, os votos dados a candidatas mulheres e a candidaturas negras para a Câmara dos Deputados contam em dobro na distribuição entre os partidos dos fundos públicos de financiamento disponíveis. Diferentemente das cotas de candidaturas e de recursos discutidas no @sec-revisao-literatura, a regra não obriga o partido a nada. Ela altera, no entanto, o valor relativo de cada voto: um voto obtido por uma mulher ou por uma pessoa negra vale, para o caixa do partido no ciclo seguinte, o dobro de um voto obtido por um homem branco.
 
-Este capítulo pergunta se esse incentivo aumentou a **competitividade eleitoral** de mulheres e de pessoas negras nas duas eleições já realizadas sob a emenda, 2022 e 2026. A pergunta não é a mesma que perguntar se a EC 111 aumentou votos ou recursos desses grupos. Um partido maximiza o que recebe do fundo somando votos, e um voto conta o mesmo para o fundo esteja ele numa candidatura que se elege ou numa candidatura que termina muito longe da cadeira. O desenho da emenda premia o volume de votos, não a eleição. Por isso é possível que a EC 111 tenha mudado a alocação de recursos e a votação de mulheres e pessoas negras sem aproximá-las do limiar de eleição, e é essa distinção que o capítulo procura medir.
+Este capítulo pergunta se esse incentivo aumentou as chances de sucesso eleitoral de mulheres e de pessoas negras nas duas eleições já realizadas sob a vigência da regra, 2022 e 2026. A pergunta não é a mesma que perguntar se a EC 111 aumentou votos ou recursos desses grupos. Um partido maximiza o que recebe do fundo somando votos, e um voto conta o mesmo para o fundo esteja ele numa candidatura que se elege ou numa candidatura que termina muito longe da cadeira. O desenho da emenda premia o volume de votos, não a eleição. Por isso é possível que a EC 111 tenha mudado a alocação de recursos e a votação de mulheres e pessoas negras sem aproximá-las do limiar de eleição, e é essa distinção que o capítulo procura medir.
 
 Três escolhas orientam a análise. A primeira é a medida de competitividade: em vez de um corte fixo de votos, uso a **margem de votos** de cada candidatura, isto é, quantos votos faltariam (ou sobrariam) para que ela mudasse de resultado, calculada refazendo a distribuição de cadeiras com a regra de cada eleição [@AvelinoBidermanDesposato2022_incumbency; @LuechingerSchelkerSchmid2024_closeness]. A segunda é o desenho de identificação: como o voto em dobro vale só para deputado federal, as candidaturas a deputado estadual da mesma UF servem de comparação, como em @FonsecaThomeGuedesNeto2026_money_talks. A terceira é o horizonte: a eleição de 2026 permite verificar se o que se observou em 2022 persistiu, com 2014 como pré-teste.
 
@@ -33,12 +35,12 @@ A história legislativa da emenda torna a segunda propriedade mais do que uma po
 
 O capítulo contrasta duas leituras do efeito da emenda:
 
-- **H1 (competitividade).** A EC 111 aumentou, no cargo federal em relação ao estadual, a proporção de mulheres (e de pessoas negras) que se elegem ou terminam perto do limiar de eleição, em comparação com homens (e com pessoas brancas).
-- **H2 (colheita de votos).** Os ganhos de votos e de recursos de mulheres (e de pessoas negras) produzidos pela EC 111 concentraram-se em candidaturas que terminaram longe do limiar, sem alterar a composição do conjunto de candidaturas competitivas nem das cadeiras.
+-   **H1 (competitividade).** A EC 111 aumentou, no cargo federal em relação ao estadual, a proporção de mulheres (e de pessoas negras) que se elegem ou terminam perto do limiar de eleição, em comparação com homens (e com pessoas brancas).
+-   **H2 (colheita de votos).** Os ganhos de votos e de recursos de mulheres (e de pessoas negras) produzidos pela EC 111 concentraram-se em candidaturas que terminaram longe do limiar, sem alterar a composição do conjunto de candidaturas competitivas nem das cadeiras.
 
 As duas hipóteses não são excludentes em sentido estrito: o incentivo pode ter produzido algumas candidaturas competitivas e muitas não competitivas. O que as distingue é onde está a massa do efeito. A eleição de 2026 acrescenta uma terceira pergunta:
 
-- **H3 (persistência).** Os efeitos observados em 2022 se mantêm em 2026, quando partidos e candidaturas já conheciam a regra.
+-   **H3 (persistência).** Os efeitos observados em 2022 se mantêm em 2026, quando partidos e candidaturas já conheciam a regra.
 
 ## Medir competitividade pela margem de votos {#sec-medida-ec111}
 
@@ -52,11 +54,11 @@ A margem de votos resolve isso. Ela responde a uma pergunta contrafactual: manti
 
 As duas propostas trazem fórmulas fechadas para regras genéricas (D'Hondt, maiores restos), mas a regra brasileira tem pisos que dependem do próprio QE: a exigência individual de 10% do QE desde 2018, a restrição das sobras a listas com 80% do QE e candidaturas com 20% do QE em 2022, além das federações. Somar votos a uma candidatura muda o QE e pode ligar ou desligar essas cláusulas. Por isso a margem foi calculada **por busca**: para cada candidatura procura-se o menor número inteiro de votos que, somado ou retirado, muda o resultado, refazendo a cada passo a distribuição completa de cadeiras com a regra do ano. Como o resultado é monótono nos votos da própria candidatura, a busca binária é válida.
 
-::: {.callout-note}
+::: callout-note
 ## Validação da medida
 
-- A distribuição de cadeiras reproduz **100% dos eleitos** do TSE nos 216 distritos (UF × cargo × ano, 2014–2026). Em 2022 a base do TSE já traz os eleitos recalculados após as ADIs 7228, 7263 e 7325, que abriram a terceira fase das sobras a todas as listas.
-- Para deputado federal em 2014, 5.796 das 6.165 candidaturas da base de replicação de @AvelinoBidermanDesposato2022_incumbency foram pareadas. O resultado eleito/não eleito coincide em 99,98% dos casos; entre os eleitos, a diferença mediana na medida é de 0,009; perto do limiar (|margem| < 0,1), 66% coincidem ao centésimo.
+-   A distribuição de cadeiras reproduz **100% dos eleitos** do TSE nos 216 distritos (UF × cargo × ano, 2014–2026). Em 2022 a base do TSE já traz os eleitos recalculados após as ADIs 7228, 7263 e 7325, que abriram a terceira fase das sobras a todas as listas.
+-   Para deputado federal em 2014, 5.796 das 6.165 candidaturas da base de replicação de @AvelinoBidermanDesposato2022_incumbency foram pareadas. O resultado eleito/não eleito coincide em 99,98% dos casos; entre os eleitos, a diferença mediana na medida é de 0,009; perto do limiar (\|margem\| \< 0,1), 66% coincidem ao centésimo.
 :::
 
 A margem é dividida pelo QE do distrito, o que dá uma escala comum entre os dois cargos da mesma UF. **Competitiva** é a candidatura eleita ou a menos de 0,1 QE do limiar de eleição. Bandas mais largas (0,25 e 0,5 QE) foram descartadas como desfecho principal porque saturam: numa lista grande, a distância de uma candidatura fraca até o limiar é determinada pelos colegas de lista, não pelos votos dela. Entre as candidaturas com menos de 0,5% do QE, 27,6% ficam "a menos de 0,25 QE" do limiar, mas só 0,8% a menos de 0,1 QE. As normalizações originais de @AvelinoBidermanDesposato2022_incumbency (pelos votos da candidatura e do primeiro não eleito da lista) e de @LuechingerSchelkerSchmid2024_closeness (pelo eleitorado) entram como robustez.
@@ -79,8 +81,8 @@ O período de referência é fixo em 2018, o último antes do tratamento. O efei
 
 O capítulo combina duas análises com o mesmo desenho e unidades diferentes.
 
-1. **O funil do incentivo** (candidaturas, gasto, recursos, votos e cadeiras). A unidade é a **lista partido × UF × cargo**, e cada desfecho é a parcela do grupo na lista, em %. O painel principal é balanceado (801 listas presentes nas quatro eleições), com o desbalanceado como robustez, já que fusões e federações fazem listas surgirem e desaparecerem [@SantAnnaXu2023_compositional]. Os erros são agrupados por lista. As siglas foram harmonizadas para as vigentes em 2026.
-2. **A competitividade.** A unidade é a **disputa UF × cargo** (26 UFs × 2 cargos; o Distrito Federal fica de fora porque não elege deputados estaduais). O desfecho é a diferença, em pontos percentuais, entre a taxa de candidaturas competitivas de mulheres e a de homens (ou de pessoas negras e brancas) na disputa. O estimador aplicado a essa diferença é, portanto, uma **tripla diferença**: grupo × cargo × período. As bandas de confiança são uniformes, por bootstrap multiplicador com 25.000 repetições e agrupamento por UF.
+1.  **O funil do incentivo** (candidaturas, gasto, recursos, votos e cadeiras). A unidade é a **lista partido × UF × cargo**, e cada desfecho é a parcela do grupo na lista, em %. O painel principal é balanceado (801 listas presentes nas quatro eleições), com o desbalanceado como robustez, já que fusões e federações fazem listas surgirem e desaparecerem [@SantAnnaXu2023_compositional]. Os erros são agrupados por lista. As siglas foram harmonizadas para as vigentes em 2026.
+2.  **A competitividade.** A unidade é a **disputa UF × cargo** (26 UFs × 2 cargos; o Distrito Federal fica de fora porque não elege deputados estaduais). O desfecho é a diferença, em pontos percentuais, entre a taxa de candidaturas competitivas de mulheres e a de homens (ou de pessoas negras e brancas) na disputa. O estimador aplicado a essa diferença é, portanto, uma **tripla diferença**: grupo × cargo × período. As bandas de confiança são uniformes, por bootstrap multiplicador com 25.000 repetições e agrupamento por UF.
 
 Recursos e gasto não têm pré-teste, porque em 2014 vigorava a doação empresarial, outro regime de financiamento. Os dados de recursos de 2026 vêm da prestação de contas parcial do TSE (13/10/2026) e são provisórios.
 
@@ -88,9 +90,9 @@ Recursos e gasto não têm pré-teste, porque em 2014 vigorava a doação empres
 
 A comparação entre os cargos elimina o que afeta os dois da mesma forma. As ameaças são as mudanças específicas do cargo federal, ou que interagem com o incentivo:
 
-- **Fim das coligações proporcionais** (EC 97/2017, aplicado a partir de 2020) com limite de candidaturas por partido de M + 1 (Lei 14.211/2021). O efeito sobre o número de candidaturas por cadeira depende da magnitude do distrito, menor em média no federal.
-- **Cláusula de desempenho**, medida só pelos votos para deputado federal: 2% em 2022 e 2,5% em 2026. Incentiva partidos ameaçados a maximizar votos no cargo tratado.
-- **EC 133/2024**, que exige pelo menos 30% do FEFC e do Fundo Partidário para candidaturas negras nos dois cargos. É um choque comum, mas pode interagir com o voto em dobro se os partidos cumprirem a cota alocando recursos no federal.
+-   **Fim das coligações proporcionais** (EC 97/2017, aplicado a partir de 2020) com limite de candidaturas por partido de M + 1 (Lei 14.211/2021). O efeito sobre o número de candidaturas por cadeira depende da magnitude do distrito, menor em média no federal.
+-   **Cláusula de desempenho**, medida só pelos votos para deputado federal: 2% em 2022 e 2,5% em 2026. Incentiva partidos ameaçados a maximizar votos no cargo tratado.
+-   **EC 133/2024**, que exige pelo menos 30% do FEFC e do Fundo Partidário para candidaturas negras nos dois cargos. É um choque comum, mas pode interagir com o voto em dobro se os partidos cumprirem a cota alocando recursos no federal.
 
 As duas primeiras são testadas diretamente na @sec-fragilidade-ec111.
 
@@ -101,19 +103,19 @@ As duas primeiras são testadas diretamente na @sec-fragilidade-ec111.
 @tbl-funil-ec111 resume os efeitos ao longo do funil, da candidatura à cadeira. O efeito pretendido pela emenda, a mudança na alocação de recursos, aparece com clareza para as mulheres e se mantém em 2026. No federal, em relação ao estadual, a parcela das transferências partidárias destinada a mulheres sobe 12,7 pontos percentuais em 2022 e 12,3 em 2026; a de recursos públicos (FEFC e Fundo Partidário), 9,0 e 7,5; a do gasto, 7,6 e 6,0. O efeito é maior quanto mais a fonte é controlada pelo partido.
 
 | Desfecho (% da lista) | Grupo | Pré-teste 2014 | 2022 | 2026 |
-|:--|:--|--:|--:|--:|
+|:---|:---|---:|---:|---:|
 | Candidaturas | Mulheres | −0,9 | +3,3\* | +2,7\* |
-| | Pessoas negras | +2,6 | +4,9\* | +5,5\* |
+|  | Pessoas negras | +2,6 | +4,9\* | +5,5\* |
 | Recursos do partido | Mulheres | — | +12,7\* | +12,3\*ᵖ |
-| | Pessoas negras | — | +4,1 | +5,1ᵖ |
+|  | Pessoas negras | — | +4,1 | +5,1ᵖ |
 | Recursos públicos (FEFC + FP) | Mulheres | — | +9,0\* | +7,5\*ᵖ |
-| | Pessoas negras | — | +5,6\* | +5,3ᵖ |
+|  | Pessoas negras | — | +5,6\* | +5,3ᵖ |
 | Gasto | Mulheres | — | +7,6\* | +6,0\*ᵖ |
-| | Pessoas negras | — | +3,0 | +3,0ᵖ |
+|  | Pessoas negras | — | +3,0 | +3,0ᵖ |
 | Votos nominais | Mulheres | −0,3 | +4,1\* | +2,2 |
-| | Pessoas negras | −0,5 | +3,3 | +2,6 |
+|  | Pessoas negras | −0,5 | +3,3 | +2,6 |
 | Cadeiras (% dos eleitos da UF) | Mulheres | −1,9 | −2,1 | +1,8 |
-| | Pessoas negras | −3,6 | −5,0 | +1,9 |
+|  | Pessoas negras | −3,6 | −5,0 | +1,9 |
 
 : Efeito do voto em dobro ao longo do funil eleitoral, federal × estadual, base 2018 (pontos percentuais). Listas partido × UF, painel balanceado, sem ponderação; cadeiras no nível UF × cargo. \* IC de 95% exclui zero. ᵖ Provisório (prestação de contas parcial de 2026). Recursos e gasto sem pré-teste (doação empresarial em 2014). {#tbl-funil-ec111}
 
@@ -134,18 +136,18 @@ Entre recursos e cadeiras há, portanto, uma perda. Mais dinheiro e mais candida
 @tbl-ddd-ec111 traz a tripla diferença para a taxa de candidaturas competitivas, isto é, eleitas ou a menos de 0,1 QE do limiar. Para as mulheres, o pré-teste de 2014 é próximo de zero e o efeito é positivo nas duas eleições: 3,4 pontos em 2022 e 3,9 em 2026, ou 3,6 em média. Como em 2018 a diferença entre homens e mulheres no federal era de cerca de 9 pontos (15,9% contra 7,1%), o efeito equivaleria a fechar perto de 40% dessa distância. Para a taxa de eleitas o efeito só aparece em 2026 (2,9 pontos).
 
 | Desfecho / especificação | 2014 (pré) | 2022 | 2026 | Média |
-|:--|--:|--:|--:|--:|
-| *Mulheres − homens* | | | | |
-| Competitiva (eleita ou < 0,1 QE), principal | −0,8 [−3,9; 2,4] | **3,4** [0,4; 6,4] | **3,9** [0,0; 7,7] | **3,6** [1,0; 6,3] |
-| Idem, ponderado pelo nº de candidaturas | 0,6 | 2,4 | 2,3 | 2,3 [−0,4; 5,1] |
-| Idem, sem UFs com 8 cadeiras | 0,9 | **3,9** | **4,9** | **4,4** [1,3; 7,4] |
-| Idem, sem incumbentes (2018–2026) | — | **3,0** [0,2; 5,7] | 2,3 | 2,7 [−0,1; 5,4] |
-| Idem, normalização de ABD | −2,4 | 1,9 | 3,1 | **2,5** [0,1; 4,8] |
-| Idem, normalização de LSS | −2,0 | 0,5 | 1,8 | 1,2 [−1,0; 3,3] |
-| Eleita | −2,3 | 0,9 | **2,9** [0,1; 5,8] | 1,9 [−0,3; 4,1] |
-| *Pessoas negras − brancas* | | | | |
-| Competitiva (eleita ou < 0,1 QE), principal | **−5,8** [−10,7; −0,8] | 0,9 | **5,7** | **3,3** [0,1; 6,5] |
-| Eleita | **−4,5** [−8,6; −0,4] | 0,3 | **3,9** | 2,1 [−0,6; 4,8] |
+|:--------------|--------------:|--------------:|--------------:|--------------:|
+| *Mulheres − homens* |  |  |  |  |
+| Competitiva (eleita ou \< 0,1 QE), principal | −0,8 \[−3,9; 2,4\] | **3,4** \[0,4; 6,4\] | **3,9** \[0,0; 7,7\] | **3,6** \[1,0; 6,3\] |
+| Idem, ponderado pelo nº de candidaturas | 0,6 | 2,4 | 2,3 | 2,3 \[−0,4; 5,1\] |
+| Idem, sem UFs com 8 cadeiras | 0,9 | **3,9** | **4,9** | **4,4** \[1,3; 7,4\] |
+| Idem, sem incumbentes (2018–2026) | — | **3,0** \[0,2; 5,7\] | 2,3 | 2,7 \[−0,1; 5,4\] |
+| Idem, normalização de ABD | −2,4 | 1,9 | 3,1 | **2,5** \[0,1; 4,8\] |
+| Idem, normalização de LSS | −2,0 | 0,5 | 1,8 | 1,2 \[−1,0; 3,3\] |
+| Eleita | −2,3 | 0,9 | **2,9** \[0,1; 5,8\] | 1,9 \[−0,3; 4,1\] |
+| *Pessoas negras − brancas* |  |  |  |  |
+| Competitiva (eleita ou \< 0,1 QE), principal | **−5,8** \[−10,7; −0,8\] | 0,9 | **5,7** | **3,3** \[0,1; 6,5\] |
+| Eleita | **−4,5** \[−8,6; −0,4\] | 0,3 | **3,9** | 2,1 \[−0,6; 4,8\] |
 
 : Tripla diferença (grupo × cargo × período) na taxa de candidaturas competitivas, base 2018 (pontos percentuais). Unidade UF × cargo, sem DF; bandas uniformes de 95% entre colchetes (bootstrap multiplicador, agrupado por UF). Em negrito, banda que exclui zero. ABD = @AvelinoBidermanDesposato2022_incumbency; LSS = @LuechingerSchelkerSchmid2024_closeness. {#tbl-ddd-ec111}
 
@@ -155,8 +157,8 @@ O resultado é sensível à especificação. Ponderado pelo número de candidatu
 
 Mais importante, a taxa de competitivas é uma razão, e a aproximação das mulheres pode vir tanto do numerador quanto do denominador. Duas outras medidas olham diretamente para o conjunto das competitivas e não mostram mudança:
 
-- **Composição.** A parcela de mulheres entre as candidaturas competitivas sobe nos dois cargos quase no mesmo ritmo: no federal, 17,1% em 2018, 19,3% em 2022 e 21,1% em 2026; no estadual, 16,7%, 17,7% e 20,1%. A diferença entre os cargos é de 1,4 a 1,7 ponto, sem significância.
-- **Cadeiras.** Como visto na @sec-funil-ec111, a parcela de mulheres entre os eleitos não muda de forma distinguível de zero.
+-   **Composição.** A parcela de mulheres entre as candidaturas competitivas sobe nos dois cargos quase no mesmo ritmo: no federal, 17,1% em 2018, 19,3% em 2022 e 21,1% em 2026; no estadual, 16,7%, 17,7% e 20,1%. A diferença entre os cargos é de 1,4 a 1,7 ponto, sem significância.
+-   **Cadeiras.** Como visto na @sec-funil-ec111, a parcela de mulheres entre os eleitos não muda de forma distinguível de zero.
 
 Se a EC 111 tivesse trazido mais mulheres para perto do limiar, elas apareceriam no conjunto das competitivas. Não aparecem. A aproximação medida pela taxa vem, então, de outro lugar, e as duas seções seguintes mostram de onde.
 
@@ -165,12 +167,12 @@ Se a EC 111 tivesse trazido mais mulheres para perto do limiar, elas apareceriam
 Para saber em que candidaturas ficaram os ganhos de votos, gasto e recursos das mulheres, a parcela do grupo na lista pode ser dividida em duas partes, a das candidaturas do grupo que terminaram competitivas e a das que terminaram não competitivas. As duas partes **somam o efeito total**, e nenhuma candidatura é excluída. @tbl-decomposicao-ec111 e @fig-decomposicao-ec111 mostram a divisão.
 
 | Desfecho (% da lista) | 2022: competitivas | 2022: não competitivas | 2026: competitivas | 2026: não competitivas |
-|:--|--:|--:|--:|--:|
-| *Mulheres* | | | | |
+|:--------------|--------------:|--------------:|--------------:|--------------:|
+| *Mulheres* |  |  |  |  |
 | Votos | −1,1 | **+5,2** | −0,3 | +2,5 |
 | Gasto | −0,3 | **+7,9** | −0,3 | **+6,3**ᵖ |
 | Recursos do partido | +1,3 | **+11,4** | +2,3 | **+10,0**ᵖ |
-| *Pessoas negras* | | | | |
+| *Pessoas negras* |  |  |  |  |
 | Votos | **−4,7** | **+8,0** | −3,0 | **+5,6** |
 | Recursos do partido | **−7,4** | **+11,6** | **−4,9**ᵖ | **+10,0**ᵖ |
 
@@ -182,7 +184,7 @@ Para as mulheres, praticamente todo o ganho está nas candidaturas não competit
 
 Para pessoas negras, há uma realocação: os recursos partidários a candidaturas negras competitivas **caem** 7,4 pontos em 2022 e 4,9 em 2026, enquanto os destinados às não competitivas sobem 11,6 e 10,0. Nos votos, porém, o pré-teste de 2014 já aponta na mesma direção (−3,9 nas competitivas e +3,4 nas não competitivas), o que sugere a continuação de uma tendência anterior.
 
-::: {.callout-important}
+::: callout-important
 ## Como ler uma classificação feita depois da eleição
 
 Competitiva ou não competitiva é definida pelo resultado, que a própria EC 111 pode alterar. A divisão do efeito total em duas partes continua válida como decomposição contábil, porque as partes somam o total e ninguém é excluído. O que ela não permite é tratar as competitivas como um grupo fixo e comparar o que aconteceu dentro dele. Ainda assim, a direção do viés favorece a leitura adotada: se o dinheiro extra tivesse tornado competitivas candidaturas que não o seriam, essas candidaturas e o dinheiro que receberam apareceriam do lado das competitivas. O fato de o dinheiro aparecer do lado das não competitivas indica que, mesmo com mais recursos, essas candidaturas não chegaram perto do limiar.
@@ -205,22 +207,22 @@ Se os recursos e os votos ficaram com candidaturas não competitivas e a composi
 **Sensibilidade formal.** A análise de @RambachanRoth2023_parallel_trends formaliza essa preocupação. Sob a restrição de magnitudes relativas, a violação de tendências paralelas depois de 2018 pode ser até M̄ vezes a observada de 2014 para 2018. O **valor de quebra** é o maior M̄ com que o intervalo robusto de 95% ainda exclui zero (@tbl-honestdid-ec111, @fig-honestdid-ec111).
 
 | Desfecho (efeito médio 2022–2026) | Estimativa | IC original | Quebra M̄ |
-|:--|--:|:--:|--:|
-| *Mulheres* | | | |
-| Taxa de competitivas (mulheres − homens) | 3,1 / 3,6 | [0,2; 6,0] / [0,7; 6,5] | 0 / 0,25 |
-| Taxa de eleitas (mulheres − homens) | 2,2 / 1,9 | [0,0; 4,3] / n.s. | 0 / — |
-| % de mulheres entre as competitivas | 1,4 / 1,7 | n.s. | — |
-| Mulheres não competitivas por cadeira | 1,7 / 2,2 | [1,0; 2,5] / [1,7; 2,7] | **0,75 / 1,5** |
-| Não competitivas por cadeira (mulheres − homens) | −1,1 / −1,2 | [−1,9; −0,3] / [−1,9; −0,5] | 0,25 / 0,25 |
-| *Pessoas negras* | | | |
+|:----------------|----------------:|:-------------------:|----------------:|
+| *Mulheres* |  |  |  |
+| Taxa de competitivas (mulheres − homens) | 3,1 / 3,6 | \[0,2; 6,0\] / \[0,7; 6,5\] | 0 / 0,25 |
+| Taxa de eleitas (mulheres − homens) | 2,2 / 1,9 | \[0,0; 4,3\] / n.s. | 0 / — |
+| \% de mulheres entre as competitivas | 1,4 / 1,7 | n.s. | — |
+| Mulheres não competitivas por cadeira | 1,7 / 2,2 | \[1,0; 2,5\] / \[1,7; 2,7\] | **0,75 / 1,5** |
+| Não competitivas por cadeira (mulheres − homens) | −1,1 / −1,2 | \[−1,9; −0,3\] / \[−1,9; −0,5\] | 0,25 / 0,25 |
+| *Pessoas negras* |  |  |  |
 | Taxa de competitivas e % entre as competitivas | — | n.s. | — |
-| Pessoas negras não competitivas por cadeira | 2,8 / 3,5 | [1,5; 4,1] / [2,3; 4,7] | **1,75 / ∞** |
+| Pessoas negras não competitivas por cadeira | 2,8 / 3,5 | \[1,5; 4,1\] / \[2,3; 4,7\] | **1,75 / ∞** |
 
 : Sensibilidade a violações de tendências paralelas (HonestDiD, magnitudes relativas). Valores com peso pela magnitude do distrito / sem peso. "Quebra M̄" é o maior múltiplo da violação de 2014–2018 com que o IC robusto de 95% ainda exclui zero; "—" indica que o IC original já inclui zero. {#tbl-honestdid-ec111}
 
 ![Sensibilidade a violações de tendências paralelas (HonestDiD, magnitudes relativas): IC robusto de 95% para o efeito médio de 2022 e 2026.](../Figures/03-ec111-competitividade/honestdid_sensibilidade.png){#fig-honestdid-ec111 width="100%"}
 
-A aproximação das mulheres ao limiar só se sustenta se a violação de tendências depois de 2018 for praticamente nula (M̄ < 0,25). O que resiste é o aumento de candidaturas **não competitivas** no cargo federal: de mulheres, até violações de 0,75 a 1,5 vez a de 2014–2018; de pessoas negras, até 1,75 vez ou mais. Como há um único período anterior, estimado com imprecisão, a restrição de magnitudes relativas é conservadora, porque incorpora a incerteza do coeficiente de 2014. A restrição alternativa de suavidade não pôde ser calculada: com um só período anterior ela é degenerada, e o procedimento recomendado nesse caso não roda na versão de R disponível.
+A aproximação das mulheres ao limiar só se sustenta se a violação de tendências depois de 2018 for praticamente nula (M̄ \< 0,25). O que resiste é o aumento de candidaturas **não competitivas** no cargo federal: de mulheres, até violações de 0,75 a 1,5 vez a de 2014–2018; de pessoas negras, até 1,75 vez ou mais. Como há um único período anterior, estimado com imprecisão, a restrição de magnitudes relativas é conservadora, porque incorpora a incerteza do coeficiente de 2014. A restrição alternativa de suavidade não pôde ser calculada: com um só período anterior ela é degenerada, e o procedimento recomendado nesse caso não roda na versão de R disponível.
 
 ### Pessoas negras {#sec-negras-ec111}
 
@@ -256,6 +258,7 @@ A EC 111/2021 mudou o comportamento dos partidos no que ela remunera. Os partido
 
 O resultado reforça um argumento central desta tese: políticas que incentivam os partidos sem condicionar o benefício à eleição tendem a ser absorvidas pela estratégia partidária de menor custo, que preserva as candidaturas competitivas existentes. Um incentivo baseado em votos produz votos. Para produzir representação, o desenho teria de premiar cadeiras ou proximidade da cadeira, ou restringir a pulverização de recursos entre candidaturas sem viabilidade.
 
+```{=html}
 <!-- Pendências (2026-11-07):
 - Refazer recursos e gasto de 2026 com a prestação de contas final (prazo em nov/2026): trocar o zip em data/raw/ e rodar explorations/ec111-did-2026/R/01 → 03.
 - ec111-did-2026 rodou com biters = 1000; usar 25.000 na versão final (competitividade-eleitoral já usa 25.000).
@@ -267,3 +270,4 @@ O resultado reforça um argumento central desta tese: políticas que incentivam 
 - Figuras: os PNGs trazem título e subtítulo embutidos (padrão de exploração); para a versão final, regerar sem título, já que a legenda do Quarto cumpre esse papel.
 - Graduar os scripts das duas explorações para scripts/R/ quando o capítulo sair de rascunho.
 -->
+```
