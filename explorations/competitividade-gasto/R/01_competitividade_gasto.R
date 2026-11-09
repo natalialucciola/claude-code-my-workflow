@@ -26,7 +26,10 @@
 #   Rscript explorations/competitividade-gasto/R/01_competitividade_gasto.R
 #
 # Entradas (data/raw/, copiadas do projeto de análise da tese — ver README):
-#   despesas_categorizadas_dep_{2018,2022}.rds  (gerado por Analise_Despesas_Genero_Raca.R)
+#   prestacao_de_contas_eleitorais_candidatos_{2018,2022}.zip (TSE): despesas contratadas,
+#     só cópias exatas removidas (regra de 2026-11-09; ver ler_prestacao em funcoes_apoio.R)
+#   despesas_categorizadas_dep_{2018,2022}.rds  (base anterior, uma linha por SQ_DESPESA;
+#     só para a conferência output/conferencia_regra_deduplicacao.csv)
 #   candidatos{2018,2022}.rds, candidatos_estadual_{2018,2022}.rds
 #   eleitos_e_compet_{2018,2022}_df.rds, eleitos_e_compet_est_{2018,2022}_df.rds
 # Saídas:
@@ -34,6 +37,7 @@
 #   explorations/competitividade-gasto/output/*.csv, *.png, *.pdf
 # ==============================================================================
 
+library(data.table)
 library(tidyverse)
 
 source("explorations/competitividade-gasto/R/funcoes_apoio.R")
@@ -64,8 +68,26 @@ write_excel_csv2(tetos, file.path(out_dir, "limites_gasto_cargo_ano.csv"))
 # ------------------------------------------------------------------------------
 # 2. Gasto por candidatura (bruto, repasses e líquido)
 # ------------------------------------------------------------------------------
-gasto <- map(anos, \(a) rd(paste0("despesas_categorizadas_dep_", a, ".rds"))) |>
+# Desde 2026-11-09 (decisão da autora): despesas lidas direto da prestação de contas do
+# TSE, removendo só as linhas idênticas em todas as colunas (ler_prestacao, em
+# funcoes_apoio.R). A base anterior (despesas_categorizadas_dep_{ano}.rds) mantinha uma
+# linha por SQ_DESPESA e descartava itens distintos do mesmo documento (~20% do gasto).
+desp <- map(anos, function(a) {
+  x <- ler_prestacao(file.path(raw_dir, paste0("prestacao_de_contas_eleitorais_candidatos_", a, ".zip")),
+                     paste0("despesas_contratadas_candidatos_", a, "_BRASIL.csv"), cargos)
+  message(a, ": ", attr(x, "copias_exatas"), " cópias exatas removidas")
+  as_tibble(x[, .(ANO = a, DS_CARGO, SQ_CANDIDATO, DS_ORIGEM_DESPESA,
+                  VR_DESPESA_CONTRATADA = as.numeric(sub(",", ".", VR_DESPESA_CONTRATADA, fixed = TRUE)))])
+}) |> list_rbind()
+conf_regra <- map(anos, \(a) rd(paste0("despesas_categorizadas_dep_", a, ".rds")) |>
+                    summarise(regra_antiga_mi = sum(VR_DESPESA_CONTRATADA, na.rm = TRUE) / 1e6,
+                              .by = DS_CARGO) |> mutate(ANO = a)) |>
   list_rbind() |>
+  left_join(desp |> summarise(regra_nova_mi = sum(VR_DESPESA_CONTRATADA, na.rm = TRUE) / 1e6,
+                              .by = c(ANO, DS_CARGO)), by = c("ANO", "DS_CARGO"))
+write_excel_csv2(conf_regra, file.path(out_dir, "conferencia_regra_deduplicacao.csv"))
+print(conf_regra)
+gasto <- desp |>
   summarise(gasto_bruto = sum(VR_DESPESA_CONTRATADA, na.rm = TRUE),
             repasse     = sum(VR_DESPESA_CONTRATADA[DS_ORIGEM_DESPESA == origem_repasse],
                               na.rm = TRUE),

@@ -18,7 +18,7 @@
 #   - Prestação de contas: arquivo do TSE de 08/11/2026, já com a prestação FINAL
 #     (>99% dos registros; 253 candidaturas só com a parcial e 156 só com relatórios
 #     financeiros). A versão de 13/10/2026 era parcial (relatórios de 72 h + parcial).
-#     Deduplicação por SQ_DESPESA / SQ_RECEITA, priorizando final > parcial > relatório.
+#     Só cópias exatas (linhas idênticas em todas as colunas) são removidas; ver seção 3.
 #
 # Rodar da raiz do repositório:
 #   Rscript explorations/ec111-did-2026/R/01_bases_2026.R
@@ -97,25 +97,28 @@ cand <- as_tibble(votos_cand) |>
 stopifnot(!anyNA(cand$genero), !anyNA(cand$QE))
 
 # ------------------------------------------------------------------------------
-# 3. Gasto e receitas (prestação parcial)
+# 3. Gasto e receitas (prestação de contas; arquivo do TSE de 08/11/2026, já final)
 # ------------------------------------------------------------------------------
-zip_pc <- "prestacao_de_contas_eleitorais_candidatos_2026.zip"
-prioridade <- \(tp) -(toupper(tp) == "FINAL") * 2 - (toupper(tp) == "PARCIAL")
+# Regra de 2026-11-09 (decisão da autora): só as linhas idênticas em todas as colunas
+# saem (ler_prestacao, competitividade-gasto/R/funcoes_apoio.R). Antes ficava um
+# registro por SQ_DESPESA / SQ_RECEITA, o que descartava itens distintos do mesmo
+# documento (~19% do gasto). Nenhuma candidatura tem mais de um tipo de prestação.
+source("explorations/competitividade-gasto/R/funcoes_apoio.R")
+zip_pc <- file.path(raw_dir, "prestacao_de_contas_eleitorais_candidatos_2026.zip")
 
-desp <- ler_zip(zip_pc, "despesas_contratadas_candidatos_2026_BRASIL.csv",
-                c("TP_PRESTACAO_CONTAS", "DS_CARGO", "SQ_CANDIDATO", "DS_ORIGEM_DESPESA",
-                  "SQ_DESPESA", "VR_DESPESA_CONTRATADA"))[DS_CARGO %in% cargos]
-desp <- desp[order(prioridade(TP_PRESTACAO_CONTAS))][!duplicated(SQ_DESPESA)][
+desp <- ler_prestacao(zip_pc, "despesas_contratadas_candidatos_2026_BRASIL.csv", cargos)
+message("2026: ", attr(desp, "copias_exatas"), " cópias exatas removidas (despesas)")
+desp <- desp[, .(DS_CARGO, SQ_CANDIDATO, DS_ORIGEM_DESPESA, VR_DESPESA_CONTRATADA)][
   , v := num(VR_DESPESA_CONTRATADA)][
   , .(gasto_bruto = sum(v, na.rm = TRUE),
       repasse = sum(v[DS_ORIGEM_DESPESA == "Doações financeiras a outros candidatos/partidos"],
                     na.rm = TRUE)),
   by = .(DS_CARGO, SQ_CANDIDATO)][, gasto := gasto_bruto - repasse]
 
-rec <- ler_zip(zip_pc, "receitas_candidatos_2026_BRASIL.csv",
-               c("TP_PRESTACAO_CONTAS", "DS_CARGO", "SQ_CANDIDATO", "DS_ORIGEM_RECEITA",
-                 "DS_FONTE_RECEITA", "SQ_RECEITA", "VR_RECEITA"))[DS_CARGO %in% cargos]
-rec <- rec[order(prioridade(TP_PRESTACAO_CONTAS))][!duplicated(SQ_RECEITA)][, v := num(VR_RECEITA)]
+rec <- ler_prestacao(zip_pc, "receitas_candidatos_2026_BRASIL.csv", cargos)
+message("2026: ", attr(rec, "copias_exatas"), " cópias exatas removidas (receitas)")
+rec <- rec[, .(DS_CARGO, SQ_CANDIDATO, DS_ORIGEM_RECEITA, DS_FONTE_RECEITA, VR_RECEITA)][
+  , v := num(VR_RECEITA)]
 eh_partido <- \(o) grepl("partido pol", tolower(o), fixed = TRUE)
 rec <- rec[, .(receita_total   = sum(v, na.rm = TRUE),
                receita_partido = sum(v[eh_partido(DS_ORIGEM_RECEITA)], na.rm = TRUE),

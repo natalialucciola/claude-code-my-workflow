@@ -1,0 +1,26 @@
+# Comparacao votacao 2026: 13/10 x republicacao
+Colunas cand removidas: 
+Colunas cand novas: 
+Linhas cand (cargos 6/7/8) old/new: 13083344 / 13081204
+Candidaturas old/new/so-old/so-new: 18350 / 18348 / 2 / 0
+Candidaturas com votos alterados: 2; soma |dif| = 116; soma liquida = -116; max |dif| = 84
+Por UF x cargo (n candidaturas alteradas, dif liquida):
+  MG 7: n=1 liq=-84 abs=84
+  RN 7: n=1 liq=-32 abs=32
+Candidaturas com DS_SIT_TOT_TURNO alterada: 1
+  SUPLENTE -> NÃO ELEITO: 1
+Candidaturas com DS_SITUACAO_JULGAMENTO alterada: 93
+  INDEFERIDO EM PRAZO RECURSAL OU COM RECURSO -> INDEFERIDO: 86
+  DEFERIDO COM RECURSO -> DEFERIDO: 5
+  DEFERIDO COM RECURSO -> INDEFERIDO: 1
+  PENDENTE DE JULGAMENTO -> DEFERIDO: 1
+Eleitos old/new: 1572 / 1572
+Eleitos que sairam: 0; que entraram: 0
+UF x cargo com n de eleitos diferente: 0
+Colunas partido removidas: 
+Colunas partido novas: 
+Linhas partido old/new: 570782 / 570782
+Partido, nivel SG_UFxCD_CARGO: celulas com diferenca = 2 de 54
+  MS 7: d_nominais=-33768 d_leg=33768
+  RN 7: d_nominais=-32 d_leg=0
+Partido, nivel SG_UFxCD_CARGOxNR_PARTIDO: celulas com diferenca = 2 de 1149
