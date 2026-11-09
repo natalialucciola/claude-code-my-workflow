@@ -96,13 +96,33 @@ Medida da exploração `competitividade-eleitoral` (branch `worktree-competitivi
 
 Limites gerais: o tratamento é do cargo (só um "cluster" tratado, como em qualquer DiD federal × estadual); há muitos resultados (comparações múltiplas); e o painel balanceado de 4 eleições (801 listas) é um subconjunto das listas.
 
+## Regra de contagem da prestação de contas (decisão da autora, 2026-11-09)
+
+**Problema.** Até 08/11 o gasto e as receitas eram montados com **uma linha por `SQ_DESPESA` / `SQ_RECEITA`** (a base `despesas_categorizadas_dep_{2018,2022}` do projeto de análise da tese seguia essa regra). O diagnóstico de 09/11 mostrou que o código identifica o **documento** (nota fiscal, contrato, recibo), não o item: dentro de um mesmo código, valor e descrição variam em ~90% dos grupos, enquanto candidatura, fornecedor, data e tipo de prestação nunca variam. Exemplos: uma nota com dez itens de material impresso (santinhos, adesivos, banners) de um mesmo fornecedor; duas quinzenas de pagamento de pessoal sob o mesmo código.
+
+**Decisão.** Remover **só as linhas idênticas em todas as colunas** (cópias exatas). Implementada em `ler_prestacao()`, em `explorations/competitividade-gasto/R/funcoes_apoio.R`, e usada no gasto de 2018/2022 (`competitividade-gasto/R/01`, agora lido direto do zip do TSE), nas receitas de 2018/2022 (`R/04`) e no gasto e nas receitas de 2026 (`ec111-did-2026/R/01`). Nenhuma candidatura tem mais de um tipo de prestação (final/parcial) nos arquivos do TSE, então não há soma de prestações sucessivas.
+
+| Gasto de deputados (R$ mi) | Todas as linhas | Só cópias exatas removidas (regra nova) | Uma linha por código (regra antiga) |
+|---|---:|---:|---:|
+| 2018 | 2.161,7 | 2.148,1 | 1.791,8 |
+| 2022 | 4.790,8 | 4.747,9 | 3.999,3 |
+| 2026 | 5.151,5 | 5.110,1 | 4.287,0 |
+
+Receitas: efeito de ~0,4% (2022: 5.037,7 → 5.055,3). Conferência por cargo em `explorations/competitividade-gasto/output/conferencia_regra_deduplicacao.csv`.
+
+**Efeito no Cap. 3** (rodada única de 09/11, junto com a votação republicada, 25.000 réplicas): estimativas do funil mudam até 0,4 p.p., nenhuma significância muda; tripla diferença pelo voto e HonestDiD inalterados; na margem de gasto, a média de 2022–2026 para mulheres negras − homens brancos passa de +4,4 (IC excluía zero) para +1,9 (não exclui), e para pessoas negras − brancas, de +2,3 para −0,2.
+
+**Ainda não propagado:** as bases de gasto usadas nos Caps. 2 e 5 e os scripts 02, 03, 06 e 07 de `competitividade-gasto`.
+
+## Votação de 2026 republicada pelo TSE (2026-11-09)
+
+O TSE republicou `votacao_candidato_munzona_2026.zip` (09/11) e `votacao_partido_munzona_2026.zip` (08/11); cópias em `data/raw/tse_20261108/`. Em relação à versão de 13/10: eleitos idênticos (1.572); duas candidaturas estaduais saem do arquivo (116 votos); uma estadual do MS é indeferida e seus 33.768 votos passam a legenda; 86 candidaturas passam a "indeferido", e as aptas caem para 7.065 (federal) e 10.618 (estadual); o painel balanceado vai de 801 para 799 listas. A distribuição de cadeiras reproduz 100% dos eleitos nos 216 distritos. Comparação em `output/versoes_votacao_2026/` (script `R/00_comparar_versoes_votacao_2026.R`).
+
 ## Pendências e desvios
 
-- **HonestDiD não instalado** (R 4.2.3 local; a dependência `CVXR` não está disponível para esta versão). `output/did_2026_sensibilidade_rm.csv` traz o **conjunto identificado** sob magnitudes relativas ± 1,96 EP, sem a inferência de Rambachan & Roth. Para a tese, rodar o `HonestDiD` num R ≥ 4.3.
-- **Deduplicação das despesas por `SQ_DESPESA`.** É a regra usada em 2018/2022 (reproduz exatamente os R$ 3.999 mi de `despesas_categorizadas_dep_2022`) e foi mantida em 2026 por comparabilidade. Mas ela descarta linhas que não são cópias: em 2022, deduplicar por linha dá R$ 4.652 mi (+16%). A decisão é da autora e afeta igualmente as análises anteriores.
-- **Recursos de 2026:** refazer quando sair a prestação final (prazo em nov/2026). Basta trocar o zip em `data/raw/` e rodar 01 → 03.
+- **HonestDiD do funil:** `output/did_2026_sensibilidade_rm.csv` traz só o **conjunto identificado** sob magnitudes relativas ± 1,96 EP. A restrição de magnitudes relativas do `HonestDiD` roda no R 4.2.3 local (é usada em `competitividade-eleitoral/R/10_honestdid.R`); só a de suavidade exige R ≥ 4.3.
 - **Replicação da etapa anterior:** o efeito 2018→2022 sobre os votos das mulheres dá +4,7 neste painel, contra +5,2 na etapa anterior. A diferença vem das siglas harmonizadas para 2026 (fusões juntam listas: 1.111 contra 1.219).
-- `biters = 1000` (exploração). Usar 25.000 na versão final.
+- Rodadas finais com `biters = 25000` (variável de ambiente `BITERS`; o padrão do script já é 25000).
 
 ## Como rodar (da raiz)
 
@@ -112,4 +132,4 @@ Rscript explorations/ec111-did-2026/R/02_painel_listas.R   # requer base de 2018
 Rscript explorations/ec111-did-2026/R/03_did_event_study.R # pacotes did, fixest
 ```
 
-Entradas em `data/raw/` (não versionadas): `votacao_candidato_munzona_2026.zip`, `votacao_partido_munzona_2026.zip`, `consulta_cand_2026.zip`, `prestacao_de_contas_eleitorais_candidatos_2026.zip` (TSE, CDN, 13/10/2026) e as bases de 2014 listadas no script 02.
+Entradas em `data/raw/` (não versionadas): `votacao_candidato_munzona_2026.zip`, `votacao_partido_munzona_2026.zip`, `consulta_cand_2026.zip`, `prestacao_de_contas_eleitorais_candidatos_2026.zip` (TSE, CDN; versões em uso: votação de 08–09/11/2026, registro e prestação de contas de 08/11/2026) e as bases de 2014 listadas no script 02.

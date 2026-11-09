@@ -2,6 +2,8 @@
 
 **Status:** exploração ativa (etapa 1 concluída em 2026-09-28)
 
+**Regra de contagem (2026-11-09, decisão da autora):** o gasto (`R/01`) passou a ser lido direto da prestação de contas do TSE e as receitas (`R/04`) deixaram de manter uma linha por `SQ_RECEITA`: em ambos, só as linhas idênticas em todas as colunas são removidas (`ler_prestacao()`, em `R/funcoes_apoio.R`). A regra anterior, uma linha por código, descartava itens distintos do mesmo documento (~20% do gasto). Os números dos achados abaixo são anteriores a essa mudança; só `R/01`, `R/04` e `R/05` foram rodados de novo. Detalhes e totais em `explorations/ec111-did-2026/README.md`, seção "Regra de contagem da prestação de contas".
+
 ## Objetivo
 
 Repetir parte das análises da tese com uma medida de competitividade da **candidatura** que não dependa do resultado (votos), e sim do **volume de gasto de campanha**. Pergunta de fundo: o aumento de votos das mulheres candidatas a deputada (federal e estadual) entre 2018 e 2022 foi maior entre candidaturas mais ou menos competitivas?

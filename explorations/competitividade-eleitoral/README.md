@@ -8,6 +8,12 @@
 Figuras copiadas para `Quarto/thesis/Figures/03-ec111-competitividade/`; ao regerar uma figura aqui,
 copiar de novo para lá.
 
+**Atualização (2026-11-09):** a cadeia foi refeita com a votação de 2026 republicada pelo TSE (eleitos
+idênticos; validação de 100% mantida) e, na margem de gasto (`R/10`–`R/14`), com a regra de contagem que
+remove só cópias exatas da prestação de contas, agora com 2026 (prestação final). Tabelas abaixo podem
+trazer números anteriores; os valores vigentes estão em `output/` e no Cap. 3. Registro em
+`explorations/ec111-did-2026/README.md`.
+
 ## Resultados (EC 111, 2014–2026)
 
 **Execução.** Os scripts `R/01` a `R/05` rodam em sequência, a partir da raiz do repositório.

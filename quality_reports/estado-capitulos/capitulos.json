@@ -44,7 +44,7 @@
       "pergunta": "Onde, entre a candidatura e a cadeira, se perde o efeito do voto em dobro da EC 111/2021 para mulheres, pessoas negras e mulheres negras, e o efeito de 2022 persistiu em 2026?",
       "status": {"estrutura": "ok", "codigo": "ok", "prosa": "ok", "plano": "ok"},
       "o_que_existe": "Reestruturado em 08/11 pelo funil: candidaturas, receita total e transferências do partido (com a origem da receita: partido × outras fontes), gasto, votos, competitividade pelo voto (margem de votos) e pelo gasto (margem de gasto), eleição; persistência 2026 − 2022. DiD federal × estadual, tripla diferença, HonestDiD. Recursos e gasto de 2026 com a prestação final do TSE (08/11).",
-      "pendencias": "HonestDiD formal do funil e de mulheres negras; refazer a margem de votos de 2026 com os arquivos de votação republicados pelo TSE em 08/11; verificação (CoVe) das caracterizações da literatura; revisão de texto; títulos de painel com numeração interna em algumas figuras.",
+      "pendencias": "Resolvido em 09/11: votação de 2026 republicada pelo TSE e nova regra de contagem da prestação de contas (só cópias exatas removidas; o gasto subiu ~20%), com toda a cadeia refeita e os números do texto conferidos. Falta: HonestDiD formal do funil e de mulheres negras; verificação (CoVe) das caracterizações da literatura; revisão de texto; títulos de painel com numeração interna em algumas figuras.",
       "proxima_acao": "Ler o capítulo reestruturado. Depois, verificar as citações (CoVe) e fazer a revisão de texto.",
       "acao_curta": "Ler o capítulo reestruturado; depois CoVe e revisão de texto",
       "fontes": [
@@ -93,7 +93,7 @@
   },
   "transversais": [
     {"titulo": "Capítulos 04 e 05: um estudo, duas medidas", "texto": "O 04 usa o quociente locacional do voto e já cobre 2026; o 05 usa o do gasto e cobre 2018–2022. Quando a prestação de contas de 2026 sair, vale decidir se o 04 continua como capítulo próprio ou vira seção de robustez do 05."},
-    {"titulo": "A prestação de contas de 2026", "texto": "O arquivo do TSE de 08/11/2026 já traz a prestação final (>99% dos registros) e foi usado no capítulo 03. Ele destrava as pendências de 2026 dos capítulos 02, 04 e 05. Está em data/raw/ do worktree plano-cap3-ec111; copiar para data/raw/ do checkout principal antes de usar."},
+    {"titulo": "A prestação de contas de 2026", "texto": "O arquivo do TSE de 08/11/2026 já traz a prestação final (>99% dos registros) e foi usado no capítulo 03; está em data/raw/ do checkout principal. Ele destrava as pendências de 2026 dos capítulos 02, 04 e 05. Atenção: desde 09/11 o gasto e as receitas devem ser montados removendo só as cópias exatas (ler_prestacao, em explorations/competitividade-gasto/R/funcoes_apoio.R); a base antiga despesas_categorizadas_dep_*, usada nos capítulos 02 e 05, mantinha uma linha por código de despesa e subestima o gasto em ~20%."},
     {"titulo": "Explorações sem capítulo", "texto": "explorations/competitividade-gasto/ (antecessora do 03) e explorations/ec111-did-ql-municipio/ (DiD com QL por município, com decisões em aberto no plano de 14/10)."}
   ]
 }
