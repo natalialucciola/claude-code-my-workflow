@@ -55,14 +55,14 @@ ano,cargo,faixa,N,pct,grupo
 2022,Estadual,"sobra 0,1–0,25",287,2.93606138107417,Homens
 2022,Estadual,"sobra 0,25–0,5",157,1.60613810741688,Homens
 2022,Estadual,"sobra > 0,5",67,0.685421994884911,Homens
-2026,Estadual,"falta > 0,5 QE",1073,15.8212916543792,Homens
-2026,Estadual,"falta 0,25–0,5",2887,42.5685638454733,Homens
-2026,Estadual,"falta 0,1–0,25",1611,23.7540548510764,Homens
-2026,Estadual,"falta < 0,1",389,5.73577115895016,Homens
-2026,Estadual,"sobra < 0,1",297,4.37923916248894,Homens
-2026,Estadual,"sobra 0,1–0,25",307,4.52668829253907,Homens
-2026,Estadual,"sobra 0,25–0,5",163,2.40342081981716,Homens
-2026,Estadual,"sobra > 0,5",55,0.81097021527573,Homens
+2026,Estadual,"falta > 0,5 QE",1073,15.8236248340953,Homens
+2026,Estadual,"falta 0,25–0,5",2887,42.5748414688099,Homens
+2026,Estadual,"falta 0,1–0,25",1610,23.742810794868,Homens
+2026,Estadual,"falta < 0,1",389,5.73661701813892,Homens
+2026,Estadual,"sobra < 0,1",297,4.37988497271789,Homens
+2026,Estadual,"sobra 0,1–0,25",307,4.52735584722017,Homens
+2026,Estadual,"sobra 0,25–0,5",163,2.40377525438726,Homens
+2026,Estadual,"sobra > 0,5",55,0.811089809762572,Homens
 2014,Federal,"falta > 0,5 QE",322,19.1211401425178,Mulheres
 2014,Federal,"falta 0,25–0,5",852,50.5938242280285,Mulheres
 2014,Federal,"falta 0,1–0,25",407,24.1686460807601,Mulheres
@@ -119,14 +119,14 @@ ano,cargo,faixa,N,pct,grupo
 2022,Estadual,"sobra 0,1–0,25",66,1.33064516129032,Mulheres
 2022,Estadual,"sobra 0,25–0,5",33,0.665322580645161,Mulheres
 2022,Estadual,"sobra > 0,5",20,0.403225806451613,Mulheres
-2026,Estadual,"falta > 0,5 QE",617,16.8994795946316,Mulheres
-2026,Estadual,"falta 0,25–0,5",1965,53.8208709942482,Mulheres
-2026,Estadual,"falta 0,1–0,25",765,20.9531635168447,Mulheres
-2026,Estadual,"falta < 0,1",92,2.5198575732676,Mulheres
-2026,Estadual,"sobra < 0,1",62,1.69816488633251,Mulheres
-2026,Estadual,"sobra 0,1–0,25",72,1.97206244864421,Mulheres
-2026,Estadual,"sobra 0,25–0,5",53,1.45165708025199,Mulheres
-2026,Estadual,"sobra > 0,5",25,0.684743905779239,Mulheres
+2026,Estadual,"falta > 0,5 QE",616,16.8767123287671,Mulheres
+2026,Estadual,"falta 0,25–0,5",1965,53.8356164383562,Mulheres
+2026,Estadual,"falta 0,1–0,25",765,20.958904109589,Mulheres
+2026,Estadual,"falta < 0,1",92,2.52054794520548,Mulheres
+2026,Estadual,"sobra < 0,1",62,1.6986301369863,Mulheres
+2026,Estadual,"sobra 0,1–0,25",72,1.97260273972603,Mulheres
+2026,Estadual,"sobra 0,25–0,5",53,1.45205479452055,Mulheres
+2026,Estadual,"sobra > 0,5",25,0.684931506849315,Mulheres
 2014,Federal,"falta > 0,5 QE",475,13.9010828211882,Pessoas brancas
 2014,Federal,"falta 0,25–0,5",1465,42.8738659642962,Pessoas brancas
 2014,Federal,"falta 0,1–0,25",868,25.4023997658765,Pessoas brancas
@@ -183,14 +183,14 @@ ano,cargo,faixa,N,pct,grupo
 2022,Estadual,"sobra 0,1–0,25",218,3.1787693205016,Pessoas brancas
 2022,Estadual,"sobra 0,25–0,5",124,1.80810731991834,Pessoas brancas
 2022,Estadual,"sobra > 0,5",68,0.991542723826188,Pessoas brancas
-2026,Estadual,"falta > 0,5 QE",636,12.3976608187135,Pessoas brancas
-2026,Estadual,"falta 0,25–0,5",2103,40.9941520467836,Pessoas brancas
-2026,Estadual,"falta 0,1–0,25",1362,26.5497076023392,Pessoas brancas
-2026,Estadual,"falta < 0,1",326,6.35477582846004,Pessoas brancas
-2026,Estadual,"sobra < 0,1",244,4.75633528265107,Pessoas brancas
-2026,Estadual,"sobra 0,1–0,25",264,5.14619883040936,Pessoas brancas
-2026,Estadual,"sobra 0,25–0,5",144,2.80701754385965,Pessoas brancas
-2026,Estadual,"sobra > 0,5",51,0.994152046783626,Pessoas brancas
+2026,Estadual,"falta > 0,5 QE",636,12.4000779879119,Pessoas brancas
+2026,Estadual,"falta 0,25–0,5",2103,41.0021446675765,Pessoas brancas
+2026,Estadual,"falta 0,1–0,25",1361,26.5353870150127,Pessoas brancas
+2026,Estadual,"falta < 0,1",326,6.35601481770326,Pessoas brancas
+2026,Estadual,"sobra < 0,1",244,4.75726262429324,Pessoas brancas
+2026,Estadual,"sobra 0,1–0,25",264,5.14720218366153,Pessoas brancas
+2026,Estadual,"sobra 0,25–0,5",144,2.80756482745175,Pessoas brancas
+2026,Estadual,"sobra > 0,5",51,0.99434587638916,Pessoas brancas
 2014,Federal,"falta > 0,5 QE",451,19.7287839020123,Pessoas negras
 2014,Federal,"falta 0,25–0,5",949,41.5135608048994,Pessoas negras
 2014,Federal,"falta 0,1–0,25",702,30.7086614173228,Pessoas negras
@@ -247,11 +247,11 @@ ano,cargo,faixa,N,pct,grupo
 2022,Estadual,"sobra 0,1–0,25",134,1.744110373552,Pessoas negras
 2022,Estadual,"sobra 0,25–0,5",66,0.859039437719641,Pessoas negras
 2022,Estadual,"sobra > 0,5",17,0.221267733958089,Pessoas negras
-2026,Estadual,"falta > 0,5 QE",1017,19.7207678883072,Pessoas negras
-2026,Estadual,"falta 0,25–0,5",2689,52.1427186348652,Pessoas negras
-2026,Estadual,"falta 0,1–0,25",978,18.9645142524724,Pessoas negras
-2026,Estadual,"falta < 0,1",150,2.9086678301338,Pessoas negras
-2026,Estadual,"sobra < 0,1",115,2.22997866976925,Pessoas negras
-2026,Estadual,"sobra 0,1–0,25",114,2.21058755090169,Pessoas negras
-2026,Estadual,"sobra 0,25–0,5",68,1.31859608299399,Pessoas negras
-2026,Estadual,"sobra > 0,5",26,0.504169090556525,Pessoas negras
+2026,Estadual,"falta > 0,5 QE",1016,19.7051978277735,Pessoas negras
+2026,Estadual,"falta 0,25–0,5",2689,52.1528316524438,Pessoas negras
+2026,Estadual,"falta 0,1–0,25",978,18.9681923972071,Pessoas negras
+2026,Estadual,"falta < 0,1",150,2.90923196276183,Pessoas negras
+2026,Estadual,"sobra < 0,1",115,2.23041117145074,Pessoas negras
+2026,Estadual,"sobra 0,1–0,25",114,2.21101629169899,Pessoas negras
+2026,Estadual,"sobra 0,25–0,5",68,1.3188518231187,Pessoas negras
+2026,Estadual,"sobra > 0,5",26,0.504266873545384,Pessoas negras

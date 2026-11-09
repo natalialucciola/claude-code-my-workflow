@@ -55,11 +55,11 @@ ano,cargo,grupo,comp_voto,comp_a,N,pct,celula
 2026,Federal,Mulheres,FALSE,FALSE,2247,87.57,em nenhum
 2026,Federal,Mulheres,FALSE,TRUE,158,6.16,só pelo gasto
 2026,Federal,Mulheres,TRUE,FALSE,36,1.4,só pelo voto
-2026,Estadual,Homens,TRUE,TRUE,806,11.88,competitiva nos dois
-2026,Estadual,Homens,FALSE,FALSE,5150,75.94,em nenhum
+2026,Estadual,Homens,TRUE,TRUE,806,11.89,competitiva nos dois
+2026,Estadual,Homens,FALSE,FALSE,5149,75.93,em nenhum
 2026,Estadual,Homens,FALSE,TRUE,421,6.21,só pelo gasto
 2026,Estadual,Homens,TRUE,FALSE,405,5.97,só pelo voto
 2026,Estadual,Mulheres,TRUE,TRUE,260,7.12,competitiva nos dois
-2026,Estadual,Mulheres,FALSE,FALSE,2999,82.14,em nenhum
+2026,Estadual,Mulheres,FALSE,FALSE,2998,82.14,em nenhum
 2026,Estadual,Mulheres,FALSE,TRUE,348,9.53,só pelo gasto
 2026,Estadual,Mulheres,TRUE,FALSE,44,1.21,só pelo voto
