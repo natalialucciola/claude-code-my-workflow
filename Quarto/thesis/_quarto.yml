@@ -17,6 +17,8 @@ book:
         - chapters/05-sobreposicao-territorial-partido.qmd
     - chapters/99-conclusao.qmd
 
+lang: pt-BR   # referências cruzadas ("Capítulo", "Figura", "Tabela"), sumário, busca e citações em português
+
 bibliography: ../../Bibliography_base.bib
 
 tbl-cap-location: bottom
