@@ -3,8 +3,9 @@
 # Purpose: Receitas por origem/fonte e gasto por candidatura, 2014, 2018 e 2022
 #          (a prestação de contas de 2026 ainda não foi publicada pelo TSE).
 #          Regras iguais às de explorations/competitividade-gasto:
-#   - receitas 2018/2022: prestação final > parcial; um registro por SQ_RECEITA
-#   - gasto 2018/2022: despesas contratadas (despesas_categorizadas_dep_*.rds)
+#   - receitas e despesas 2018/2022: só cópias exatas removidas (regra de 2026-11-09,
+#     ler_prestacao() em competitividade-gasto/R/funcoes_apoio.R)
+#   - gasto 2018/2022: despesas contratadas da prestação de contas do TSE
 #     menos repasses ("Doações financeiras a outros candidatos/partidos")
 #   - gasto 2014: despesas menos doações a outros candidatos/comitês e lançamentos
 #     "Baixa de Estimaveis"
@@ -12,7 +13,6 @@
 #
 # Inputs:  data/raw/prestacao_final_2014.zip
 #          data/raw/prestacao_de_contas_eleitorais_candidatos_{2018,2022}.zip
-#          data/raw/despesas_categorizadas_dep_{2018,2022}.rds
 # Outputs: explorations/cap2-descritivo/output/dados/financiamento_candidaturas.rds
 #          explorations/cap2-descritivo/output/receitas_origem_ano.csv
 #
@@ -79,18 +79,18 @@ gasto_2014 <- ler_2014("despesas_candidatos_2014_brasil.txt",
 # 2. 2018 e 2022
 # ==============================================================================
 
+# Regra de contagem de 2026-11-09 (decisão da autora; ver explorations/ec111-did-2026/README.md):
+# SQ_RECEITA / SQ_DESPESA identificam o documento, não o item. Só as linhas idênticas em
+# todas as colunas (cópias exatas) são removidas, via ler_prestacao(). A versão anterior
+# mantinha uma linha por código e usava despesas_categorizadas_dep_*.rds para o gasto,
+# o que descartava ~20% do gasto e ~0,4% das receitas.
+source(file.path("explorations", "competitividade-gasto", "R", "funcoes_apoio.R"))
+zip_ano <- \(ano) file.path(raw_dir, sprintf("prestacao_de_contas_eleitorais_candidatos_%d.zip", ano))
+
 ler_receitas <- function(ano) {
-  zip <- file.path(raw_dir, sprintf("prestacao_de_contas_eleitorais_candidatos_%d.zip", ano))
-  csv <- sprintf("receitas_candidatos_%d_BRASIL.csv", ano)
-  unzip(zip, files = csv, exdir = tmp_dir, overwrite = TRUE)
-  x <- fread(file.path(tmp_dir, csv), sep = ";", encoding = "Latin-1", colClasses = "character",
-             select = c("TP_PRESTACAO_CONTAS", "DS_CARGO", "SQ_CANDIDATO", "DS_FONTE_RECEITA",
-                        "DS_ORIGEM_RECEITA", "SQ_RECEITA", "VR_RECEITA"))
-  file.remove(file.path(tmp_dir, csv))
-  x <- x[DS_CARGO %in% cargos]
-  tp <- toupper(x$TP_PRESTACAO_CONTAS)
-  x <- x[order(-(tp == "FINAL"), -(tp == "PARCIAL"))][!duplicated(SQ_RECEITA)]
-  as_tibble(x) |>
+  x <- ler_prestacao(zip_ano(ano), sprintf("receitas_candidatos_%d_BRASIL.csv", ano), cargos)
+  message(ano, ": ", attr(x, "copias_exatas"), " cópias exatas removidas (receitas)")
+  as_tibble(x[, .(SQ_CANDIDATO, DS_FONTE_RECEITA, DS_ORIGEM_RECEITA, VR_RECEITA)]) |>
     transmute(ANO_ELEICAO = ano, SQ_CANDIDATO, origem = categorizar_origem(DS_ORIGEM_RECEITA),
               publico = str_detect(DS_FONTE_RECEITA, "(?i)especial|partid"),
               valor = num(VR_RECEITA))
@@ -98,9 +98,11 @@ ler_receitas <- function(ano) {
 
 origem_repasse <- "Doações financeiras a outros candidatos/partidos"
 gasto_recentes <- map(c(2018L, 2022L), \(a) {
-  readRDS(file.path(raw_dir, sprintf("despesas_categorizadas_dep_%d.rds", a))) |>
-    as_tibble() |>
-    summarise(gasto = sum(VR_DESPESA_CONTRATADA[DS_ORIGEM_DESPESA != origem_repasse], na.rm = TRUE),
+  x <- ler_prestacao(zip_ano(a), sprintf("despesas_contratadas_candidatos_%d_BRASIL.csv", a), cargos)
+  message(a, ": ", attr(x, "copias_exatas"), " cópias exatas removidas (despesas)")
+  as_tibble(x[, .(SQ_CANDIDATO, DS_ORIGEM_DESPESA, VR_DESPESA_CONTRATADA)]) |>
+    mutate(v = num(VR_DESPESA_CONTRATADA)) |>
+    summarise(gasto = sum(v[DS_ORIGEM_DESPESA != origem_repasse], na.rm = TRUE),
               .by = SQ_CANDIDATO) |>
     mutate(ANO_ELEICAO = a)
 }) |> list_rbind()

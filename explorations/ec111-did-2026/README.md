@@ -112,7 +112,7 @@ Receitas: efeito de ~0,4% (2022: 5.037,7 → 5.055,3). Conferência por cargo em
 
 **Efeito no Cap. 3** (rodada única de 09/11, junto com a votação republicada, 25.000 réplicas): estimativas do funil mudam até 0,4 p.p., nenhuma significância muda; tripla diferença pelo voto e HonestDiD inalterados; na margem de gasto, a média de 2022–2026 para mulheres negras − homens brancos passa de +4,4 (IC excluía zero) para +1,9 (não exclui), e para pessoas negras − brancas, de +2,3 para −0,2.
 
-**Ainda não propagado:** as bases de gasto usadas nos Caps. 2 e 5 e os scripts 02, 03, 06 e 07 de `competitividade-gasto`.
+**Propagação:** Cap. 2, financiamento (receitas e gasto por candidatura), em 09/11 (`explorations/cap2-descritivo/R/02`). **Ainda não propagado:** a base geográfica `ql_gasto_eleit_*` (usada no Cap. 2, geografia do gasto, e no Cap. 5), construída fora do repositório; os scripts 02, 03, 06 e 07 de `competitividade-gasto`.
 
 ## Votação de 2026 republicada pelo TSE (2026-11-09)
 

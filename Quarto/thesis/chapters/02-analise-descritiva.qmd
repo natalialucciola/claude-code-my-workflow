@@ -8,7 +8,7 @@ O capítulo não testa hipóteses. As comparações entre grupos, anos, regiões
 
 ## Dados e definições {#sec-dados-analise-descritiva}
 
-Todos os dados vêm do Portal de Dados Abertos do Tribunal Superior Eleitoral (TSE). As candidaturas e seus atributos (gênero, cor ou raça, partido e unidade da federação) vêm do cadastro de candidaturas; os votos, da votação por candidato, município e zona eleitoral; as receitas e despesas, da prestação de contas final dos candidatos. Os arquivos de 2026 foram baixados em 13 de outubro de 2026, nove dias após o primeiro turno.
+Todos os dados vêm do Portal de Dados Abertos do Tribunal Superior Eleitoral (TSE). As candidaturas e seus atributos (gênero, cor ou raça, partido e unidade da federação) vêm do cadastro de candidaturas; os votos, da votação por candidato, município e zona eleitoral; as receitas e despesas, da prestação de contas final dos candidatos. Nos arquivos de prestação de contas, cada receita e cada despesa é um item de um documento (nota fiscal, contrato, recibo), e um mesmo documento reúne vários itens; todos os itens são somados, e só as linhas idênticas em todas as colunas, cópias do mesmo registro, são descartadas. Os votos de 2026 foram baixados em 13 de outubro de 2026, nove dias após o primeiro turno, e o cadastro de candidaturas de 2026, em 8 de novembro de 2026.
 
 A unidade de análise é a candidatura que recebeu pelo menos um voto nominal válido no primeiro turno. Ficam de fora os registros indeferidos, as renúncias e as candidaturas cujos votos foram anulados. Por isso o número de candidaturas aqui é menor que o de registros no TSE e, em 2014, a proporção de mulheres fica pouco abaixo de 30%: a cota de gênero incide sobre os registros feitos por cada partido, não sobre as candidaturas que chegam à urna com voto válido. Para Deputado Estadual, o Distrito Federal, cuja câmara legislativa elege deputados distritais, não entra na análise. Em 2014, o arquivo de votação do TSE traz só os votos nominais, e foram considerados válidos os votos das candidaturas deferidas.
 
@@ -23,7 +23,7 @@ Três recortes organizam a comparação territorial e partidária:
 ::: {.callout-important}
 ## O que falta para 2026
 
-A prestação de contas das eleições de 2026 ainda não havia sido publicada pelo TSE quando este capítulo foi escrito. As seções de financiamento e de geografia do gasto cobrem, por isso, 2014 a 2022, e serão atualizadas com 2026 quando os dados forem divulgados. A geografia do gasto também não existe para 2014, porque as despesas daquele ano não identificam o município em que foram realizadas.
+A prestação de contas final das eleições de 2026 foi publicada pelo TSE em novembro de 2026, depois da primeira versão deste capítulo, e ainda não foi incorporada a ele. As seções de financiamento e de geografia do gasto cobrem, por isso, 2014 a 2022. A geografia do gasto também não existe para 2014, porque as despesas daquele ano não identificam o município em que foram realizadas.
 :::
 
 ## Candidaturas e eleitos
@@ -52,7 +52,7 @@ A competitividade reproduz a mesma ordem. Um quarto das candidaturas federais de
 
 ## Financiamento e gasto, 2014–2022
 
-A participação das mulheres nos recursos de campanha mudou mais do que qualquer outro indicador do capítulo (@tbl-cap2-financiamento; @fig-cap2-financiamento). Em 2014, as candidatas a Deputada Federal eram 29,4% das candidaturas e receberam 9,8% das receitas; a receita média de uma candidata correspondia a 26% da de um candidato. Em 2018, primeiro pleito com o Fundo Especial de Financiamento de Campanha, essas proporções passaram a 22,3% das receitas e 62% da receita média, e em 2022 chegaram a 30,0% e 78%. No cargo estadual, a participação nas receitas já se aproxima da participação nas candidaturas desde 2018 (30,0% das receitas para 31,1% das candidaturas; em 2022, 33,1% para 33,6%).
+A participação das mulheres nos recursos de campanha mudou mais do que qualquer outro indicador do capítulo (@tbl-cap2-financiamento; @fig-cap2-financiamento). Em 2014, as candidatas a Deputada Federal eram 29,4% das candidaturas e receberam 9,8% das receitas; a receita média de uma candidata correspondia a 26% da de um candidato. Em 2018, primeiro pleito com o Fundo Especial de Financiamento de Campanha, essas proporções passaram a 22,3% das receitas e 62% da receita média, e em 2022 chegaram a 30,0% e 78%. No cargo estadual, a participação nas receitas já se aproxima da participação nas candidaturas desde 2018 (29,9% das receitas para 31,1% das candidaturas; em 2022, 33,1% para 33,6%).
 
 {{< include _tabelas-cap2/tab-cap2-financiamento.md >}}
 
