@@ -43,14 +43,14 @@
       "titulo": "Os Efeitos da EC 111/2021 sobre Candidaturas, Recursos, Votos e Sucesso Eleitoral",
       "pergunta": "Onde, entre a candidatura e a cadeira, se perde o efeito do voto em dobro da EC 111/2021 para mulheres, pessoas negras e mulheres negras, e o efeito de 2022 persistiu em 2026?",
       "status": {"estrutura": "ok", "codigo": "ok", "prosa": "ok", "plano": "ok"},
-      "o_que_existe": "Reestruturado em 08/11 pelo funil: candidaturas, receita total e transferências do partido (com a origem da receita: partido × outras fontes), gasto, votos, competitividade pelo voto (margem de votos) e pelo gasto (margem de gasto), eleição; persistência 2026 − 2022. DiD federal × estadual, tripla diferença, HonestDiD. Recursos e gasto de 2026 com a prestação final do TSE (08/11).",
-      "pendencias": "Resolvido em 09/11: votação de 2026 republicada pelo TSE e nova regra de contagem da prestação de contas (só cópias exatas removidas; o gasto subiu ~20%), com toda a cadeia refeita e os números do texto conferidos. Falta: HonestDiD formal do funil e de mulheres negras; verificação (CoVe) das caracterizações da literatura; revisão de texto; títulos de painel com numeração interna em algumas figuras.",
-      "proxima_acao": "Ler o capítulo reestruturado. Depois, verificar as citações (CoVe) e fazer a revisão de texto.",
-      "acao_curta": "Ler o capítulo reestruturado; depois CoVe e revisão de texto",
+      "o_que_existe": "Em estrutura acadêmica padrão desde 10/11: Introdução, Revisão da Literatura (estudos sobre a EC 111, o que a regra premia, hipóteses H1–H6), Metodologia (estimação: DiD federal × estadual, esquema 2×2, equações, pré-teste, limites do caso; variáveis, com as margens de votos e de gasto), Dados (fontes e tabela de amostra por ano × cargo, com cobertura de receita e gasto), Resultados (uma subseção por hipótese), Discussão e Conclusão. Recursos e gasto de 2026 com a prestação final do TSE (08/11).",
+      "pendencias": "Resolvido em 10/11: comentários da autora na Introdução; reestruturação; regra do FEFC corrigida (votos = 35%). Falta: revisão de 10/11 nas tabelas (pesos e IC da tripla diferença × HonestDiD, justificativa da restrição de magnitudes relativas); regressão linear de DiD tradicional e robustez com efeitos fixos de UF × ano; HonestDiD formal do funil; CoVe da literatura e da regra do Fundo Partidário; revisão de texto.",
+      "proxima_acao": "Ler o capítulo na nova estrutura. Depois, harmonizar as tabelas da tripla diferença e do HonestDiD e estimar a regressão linear de DiD tradicional.",
+      "acao_curta": "Ler a nova estrutura; depois tabelas (HonestDiD) e DiD linear",
       "fontes": [
         {"rotulo": "Código", "caminho": "explorations/competitividade-eleitoral"},
         {"rotulo": "Código", "caminho": "explorations/ec111-did-2026"},
-        {"rotulo": "Relatório", "caminho": "explorations/ec111-did-2026/relatorio_ec111_2026.html"}
+        {"rotulo": "Relatório", "caminho": "explorations/ec111-did-2026/relatorio_ec111_2026.html"}, {"rotulo": "Revisão", "caminho": "quality_reports/paper_review_03-ec111-competitividade-eleitoral_round1.md"}
       ]
     },
     "04-sobreposicao-territorial-voto.qmd": {

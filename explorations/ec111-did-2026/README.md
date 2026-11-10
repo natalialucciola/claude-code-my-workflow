@@ -130,6 +130,7 @@ O TSE republicou `votacao_candidato_munzona_2026.zip` (09/11) e `votacao_partido
 Rscript explorations/ec111-did-2026/R/01_bases_2026.R      # ~5 min; zips do TSE em data/raw/
 Rscript explorations/ec111-did-2026/R/02_painel_listas.R   # requer base de 2018/2022 de competitividade-gasto (scripts 01, 04, 05)
 Rscript explorations/ec111-did-2026/R/03_did_event_study.R # pacotes did, fixest
+Rscript explorations/ec111-did-2026/R/05_tabela_amostra.R  # tabela de amostra do Cap. 3 (Quarto/thesis/chapters/_tabelas-cap3/amostra.md)
 ```
 
 Entradas em `data/raw/` (não versionadas): `votacao_candidato_munzona_2026.zip`, `votacao_partido_munzona_2026.zip`, `consulta_cand_2026.zip`, `prestacao_de_contas_eleitorais_candidatos_2026.zip` (TSE, CDN; versões em uso: votação de 08–09/11/2026, registro e prestação de contas de 08/11/2026) e as bases de 2014 listadas no script 02.
