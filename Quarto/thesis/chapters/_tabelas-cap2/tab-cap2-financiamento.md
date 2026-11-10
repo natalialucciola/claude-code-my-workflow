@@ -3,14 +3,18 @@
 | Mulheres | Deputado Federal | 2014 | 29,4 | 9,8 | 13,4 | 9,6 | 0,26 |
 | Mulheres | Deputado Federal | 2018 | 31,7 | 22,3 | 25,5 | 22,3 | 0,62 |
 | Mulheres | Deputado Federal | 2022 | 35,4 | 30,0 | 32,0 | 30,0 | 0,78 |
+| Mulheres | Deputado Federal | 2026 | 37,3 | 31,9 | 33,8 | 31,5 | 0,79 |
 | Mulheres | Deputado Estadual | 2014 | 28,7 | 13,0 | 25,8 | 12,4 | 0,37 |
 | Mulheres | Deputado Estadual | 2018 | 31,1 | 29,9 | 45,0 | 30,1 | 0,95 |
 | Mulheres | Deputado Estadual | 2022 | 33,6 | 33,1 | 39,4 | 32,9 | 0,97 |
+| Mulheres | Deputado Estadual | 2026 | 35,0 | 34,9 | 43,3 | 34,7 | 1,00 |
 | Negros | Deputado Federal | 2014 | 39,7 | 17,7 | 25,7 | 17,3 | 0,33 |
 | Negros | Deputado Federal | 2018 | 40,8 | 22,6 | 23,8 | 22,1 | 0,42 |
 | Negros | Deputado Federal | 2022 | 48,2 | 35,9 | 37,8 | 35,7 | 0,60 |
+| Negros | Deputado Federal | 2026 | 46,2 | 34,4 | 35,9 | 34,0 | 0,61 |
 | Negros | Deputado Estadual | 2014 | 45,1 | 24,0 | 23,4 | 22,3 | 0,39 |
 | Negros | Deputado Estadual | 2018 | 48,4 | 30,5 | 33,7 | 28,8 | 0,47 |
 | Negros | Deputado Estadual | 2022 | 52,2 | 41,4 | 44,9 | 40,8 | 0,64 |
+| Negros | Deputado Estadual | 2026 | 49,4 | 36,9 | 40,5 | 36,5 | 0,60 |
 
-: Participação de mulheres e negros nas candidaturas, receitas, recursos públicos (FEFC e Fundo Partidário) e gasto (%), 2014–2022. Referência: homens e brancos {#tbl-cap2-financiamento}
+: Participação de mulheres e negros nas candidaturas, receitas, recursos públicos (FEFC e Fundo Partidário) e gasto (%), 2014–2026. Referência: homens e brancos {#tbl-cap2-financiamento}

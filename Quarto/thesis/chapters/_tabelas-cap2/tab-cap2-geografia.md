@@ -28,7 +28,7 @@
 | Deputado Estadual | 2022 | Mulher branca | 3 | 75,9 | 35,5 | 2 | 59,9 |
 | Deputado Estadual | 2022 | Homem negro | 3 | 78,1 | 40,3 | 2 | 66,3 |
 | Deputado Estadual | 2022 | Homem branco | 3 | 73,0 | 27,8 | 2 | 54,3 |
-| Deputado Estadual | 2026 | Mulher negra | 3 | 77,9 | 45,4 | — | — |
+| Deputado Estadual | 2026 | Mulher negra | 3 | 77,8 | 45,4 | — | — |
 | Deputado Estadual | 2026 | Mulher branca | 3 | 72,0 | 33,7 | — | — |
 | Deputado Estadual | 2026 | Homem negro | 3 | 75,9 | 38,6 | — | — |
 | Deputado Estadual | 2026 | Homem branco | 3 | 70,0 | 26,2 | — | — |

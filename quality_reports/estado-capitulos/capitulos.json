@@ -32,9 +32,9 @@
       "pergunta": "Como mulheres e pessoas negras aparecem em candidaturas, eleitos, financiamento, votos e geografia entre 2014 e 2026? Sem hipóteses, por desenho.",
       "status": {"estrutura": "ok", "codigo": "ok", "prosa": "ok", "plano": "part"},
       "o_que_existe": "Oito seções. Quatro scripts rodados geram as tabelas e figuras incluídas no capítulo.",
-      "pendencias": "Financiamento refeito em 09/11 com a regra de cópias exatas (participação no gasto muda até 1 p.p.; receitas, 0,1). Falta: geografia do gasto, que usa a base ql_gasto_eleit_* construída fora do repositório (script necessário para aplicar a regra nova); incluir 2026 no financiamento e na geografia do gasto (a prestação final já saiu); verificação de 2 referências.",
-      "proxima_acao": "Verificar as 2 referências e revisar agora. Atualizar o financiamento com 2026 quando o TSE publicar.",
-      "acao_curta": "Verificar 2 referências e revisar; incluir financiamento de 2026 quando o TSE publicar",
+      "pendencias": "Feito em 09/11: financiamento com a regra de cópias exatas e com 2026 (prestação final), votação de 2026 republicada pelo TSE. Falta: geografia do gasto, que usa a base ql_gasto_eleit_* construída fora do repositório (script necessário para aplicar a regra nova e incluir 2026); verificação de 2 referências.",
+      "proxima_acao": "Verificar as 2 referências e revisar o texto. Para a geografia do gasto (regra nova e 2026), localizar o script que gerou ql_gasto_eleit_*.",
+      "acao_curta": "Verificar 2 referências e revisar; geografia do gasto aguarda o script da base ql_gasto_eleit",
       "fontes": [
         {"rotulo": "Código", "caminho": "explorations/cap2-descritivo"}
       ]

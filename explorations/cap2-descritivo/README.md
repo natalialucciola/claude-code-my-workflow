@@ -7,8 +7,11 @@ participação de mulheres e negros nas eleições para Deputado Federal e Estad
 geografia (região/UF, magnitude, base de voto e de gasto) e partidos (maiores partidos e blocos
 ideológicos).
 
-**Status:** primeira versão completa (2026-10-13). Financiamento e geografia do gasto vão até
-2022 — a prestação de contas final de 2026 saiu em nov/2026 e ainda não foi incorporada.
+**Status:** primeira versão completa (2026-10-13). Desde 2026-11-09 o financiamento cobre
+2014–2026 (prestação de contas do TSE de 08/11/2026, final para >99% das candidaturas) e a votação
+de 2026 é a republicada pelo TSE em 08–09/11/2026 (`data/raw/tse_20261108/`; efeito: duas
+candidaturas estaduais saem do universo, 10.430 → 10.428). A geografia do gasto continua em
+2018–2022 (base `ql_gasto_eleit_*`, sem 2026).
 
 **Atualização (2026-11-09) — regra de contagem da prestação de contas.** `R/02` passou a ler
 receitas e despesas de 2018/2022 direto da prestação de contas do TSE, removendo só as linhas

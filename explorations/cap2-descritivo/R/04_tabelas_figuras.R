@@ -86,11 +86,11 @@ painel <- readRDS(file.path(dados, "painel_candidaturas.rds")) |>
   mutate(cargo = factor(cargo, levels = c("Federal", "Estadual")),
          ano = factor(ANO_ELEICAO, levels = anos))
 
-tem_financiamento <- \(a) a %in% c(2014L, 2018L, 2022L)
+tem_financiamento <- \(a) a %in% c(2014L, 2018L, 2022L, 2026L)
 
 # Nos anos com prestação publicada, candidatura sem registro de receita/despesa
 # = zero (100% dos eleitos têm registro; 5–16% das candidaturas não têm).
-# Em 2026 os valores ficam NA até a publicação.
+# 2026: prestação de contas do TSE de 08/11/2026 (final para >99% das candidaturas).
 painel <- painel |>
   mutate(across(c(starts_with("receita"), gasto),
                 \(x) if_else(tem_financiamento(ANO_ELEICAO), coalesce(x, 0), NA_real_)))
@@ -214,7 +214,7 @@ g2 <- grupo4 |>
 salvar_figura(g2, "fig-cap2-sucesso", 8, 5.5)
 
 # ==============================================================================
-# 3. FINANCIAMENTO, 2014–2022 (Tabela 3, Figura 3)
+# 3. FINANCIAMENTO, 2014–2026 (Tabela 3, Figura 3)
 # ==============================================================================
 
 fin <- painel |> filter(tem_financiamento(ANO_ELEICAO))
@@ -246,7 +246,7 @@ tab3 <- financiamento_grupo |>
             `Receita média do grupo / da referência` = formatC(razao_media, format = "f", digits = 2,
                                                              decimal.mark = ","))
 escrever_tabela_md(tab3, "tab-cap2-financiamento",
-                   "Participação de mulheres e negros nas candidaturas, receitas, recursos públicos (FEFC e Fundo Partidário) e gasto (%), 2014–2022. Referência: homens e brancos",
+                   "Participação de mulheres e negros nas candidaturas, receitas, recursos públicos (FEFC e Fundo Partidário) e gasto (%), 2014–2026. Referência: homens e brancos",
                    "tbl-cap2-financiamento", c("---", "---", "---", rep("---:", 5)))
 
 origem_grupo <- fin |>
@@ -286,12 +286,12 @@ g3b <- origem_grupo |>
   scale_fill_manual(values = cores_origem, name = NULL) +
   labs(x = NULL, y = NULL, title = "B. Composição das receitas por origem",
        caption = paste0("Fonte: TSE, prestação de contas final. Valor 1 em A: participação nas ",
-                        "receitas igual à participação nas candidaturas.\n2026: prestação de contas ",
-                        "ainda não publicada.")) +
+                        "receitas igual à participação nas candidaturas.\n2026: arquivo do TSE de 08/11/2026 ",
+                        "(prestação final para mais de 99% das candidaturas).")) +
   tema + theme(plot.title = element_text(size = 10, face = "bold"), legend.position = "right")
 # Sem plot_annotation(): incompatível com o ggplot2 4.0 instalado; legenda vai no painel B
 g3 <- g3a / g3b + plot_layout(heights = c(1, 1.4))
-salvar_figura(g3, "fig-cap2-financiamento", 8, 8)
+salvar_figura(g3, "fig-cap2-financiamento", 9, 8)
 
 # ==============================================================================
 # 4. GEOGRAFIA DAS CANDIDATURAS — região e magnitude (Tabelas 4 e 5, Figura 4)
