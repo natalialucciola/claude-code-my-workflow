@@ -13,7 +13,7 @@
 #
 # Rodar da raiz, depois de 01_bases_2026.R e 02_painel_listas.R:
 #   Rscript explorations/ec111-did-2026/R/05_tabela_amostra.R
-# Saída: output/tabela_amostra.csv e Quarto/thesis/chapters/_tabelas-cap3/amostra.md
+# Saída: output/tabela_amostra.csv e Quarto/thesis/chapters/_tabelas-cap3/{amostra,cobertura}.md
 # ==============================================================================
 
 library(tidyverse)
@@ -105,27 +105,45 @@ write_excel_csv2(tab, file.path(out_dir, "tabela_amostra.csv"))
 # ------------------------------------------------------------------------------
 f1 <- \(x) if_else(is.na(x), "—", formatC(x, format = "f", digits = 1, decimal.mark = ","))
 f0 <- \(x) if_else(is.na(x), "—", formatC(x, format = "d", big.mark = "."))
-linhas <- tab |>
+# Duas tabelas (decisão da autora, 17/11): composição da amostra e cobertura financeira
+cabecalho_nota <- paste0("Sem o DF (26 disputas por cargo e ano). ")
+linhas_comp <- tab |>
   transmute(l = paste("|", cargo, "|", ANO, "|", f0(candidaturas), "|", f1(pct_mulheres), "|",
                       f1(pct_negras), "|", f1(pct_mulheres_negras), "|",
-                      f1(pct_receita), "|", f1(pct_gasto), "|",
-                      paste0(f1(pct_gasto_mulheres), " / ", f1(pct_gasto_negras), " / ",
-                             f1(pct_gasto_mulheres_negras)), "|",
                       f0(listas), "|", f0(listas_balanceado), "|")) |>
   pull(l)
-md <- c(
-  "| Cargo | Ano | Candidaturas aptas | % mulheres | % pessoas negras | % mulheres negras | % com receita | % com gasto | % com gasto: mulheres / negras / mulheres negras | Listas | Listas no painel balanceado |",
-  "|:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
-  linhas,
+md_comp <- c(
+  "| Cargo | Ano | Candidaturas aptas | % mulheres | % pessoas negras | % mulheres negras | Listas | Listas no painel balanceado |",
+  "|:---|:---|---:|---:|---:|---:|---:|---:|",
+  linhas_comp,
   "",
-  paste0(": Amostra por cargo e eleição, sem o DF (26 disputas por cargo e ano). Candidaturas aptas a deputado federal e estadual. ",
-         "\"% com receita\" e \"% com gasto\": candidaturas com receita e com gasto maiores que zero na prestação de contas, em % das aptas ",
-         "(por grupo, em % das candidaturas do grupo). Recursos de 2014 fora da análise (doação empresarial). ",
+  paste0(": Amostra por cargo e eleição: candidaturas aptas a deputado federal e estadual e listas. ",
+         cabecalho_nota,
          "Listas = partido (sigla vigente em 2026) × UF; painel balanceado = listas presentes nas quatro eleições. ",
          "Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/05_tabela_amostra.R). {#tbl-amostra-ec111}")
 )
+linhas_cob <- tab |>
+  filter(ANO != "2014") |>
+  transmute(l = paste("|", cargo, "|", ANO, "|", f1(pct_receita), "|", f1(pct_gasto), "|",
+                      f1(pct_gasto_mulheres), "|", f1(pct_gasto_negras), "|",
+                      f1(pct_gasto_mulheres_negras), "|")) |>
+  pull(l)
+md_cob <- c(
+  "| Cargo | Ano | % com receita | % com gasto | % com gasto: mulheres | % com gasto: pessoas negras | % com gasto: mulheres negras |",
+  "|:---|:---|---:|---:|---:|---:|---:|",
+  linhas_cob,
+  "",
+  paste0(": Cobertura dos dados financeiros, 2018–2026: candidaturas com receita e com gasto maiores que zero na ",
+         "prestação de contas, em % das candidaturas aptas (nas colunas por grupo, em % das candidaturas do grupo). ",
+         cabecalho_nota, "Recursos de 2014 fora da análise (doação empresarial). ",
+         "Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/05_tabela_amostra.R). {#tbl-cobertura-ec111}")
+)
 # UTF-8 explícito: no Windows, writeLines grava na codificação local e corrompe "—" e acentos
-con <- file(file.path(tab_dir, "amostra.md"), open = "w", encoding = "UTF-8")
-writeLines(enc2utf8(md), con)
-close(con)
+gravar_md <- function(linhas, arquivo) {
+  con <- file(file.path(tab_dir, arquivo), open = "w", encoding = "UTF-8")
+  writeLines(enc2utf8(linhas), con)
+  close(con)
+}
+gravar_md(md_comp, "amostra.md")
+gravar_md(md_cob, "cobertura.md")
 print(tab, width = 200)
