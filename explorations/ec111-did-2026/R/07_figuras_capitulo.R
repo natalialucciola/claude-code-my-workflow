@@ -11,7 +11,8 @@
 #   - estudos de evento do funil sem numeração interna nos títulos de painel e com
 #     "transferências do partido" no lugar de "recursos do partido";
 #   - uma só convenção de barras em todas as figuras: barra fina = banda uniforme
-#     de 95%; barra grossa = IC pontual de 95%.
+#     de 95%; barra grossa = IC pontual de 95%;
+#   - dados brutos por cargo (níveis), a partir de 06_niveis_por_cargo.R.
 #
 # Rodar da raiz, depois de 03_did_event_study.R (ec111-did-2026) e de 04, 05 e
 # 10_honestdid.R (competitividade-eleitoral):
@@ -193,4 +194,35 @@ evento(c("voto_c", "voto_nc", "gasto_c", "gasto_nc", "recp_c", "recp_nc"),
        "did_2026_evento_margem_decomposicao", 9.5,
        paste0("\nCompetitiva = eleita ou a menos de 0,1 QE do limiar pela margem de votos. ",
               "Gasto e transferências sem pré-teste."))
+# ------------------------------------------------------------------------------
+# 5. Dados brutos: parcela média de cada grupo por cargo e ano (Cunningham 2021, cap. 9)
+# ------------------------------------------------------------------------------
+rot_niveis <- c(cand = "Candidaturas (% da lista)", voto = "Votos nominais (% da lista)",
+                rec_total = "Receita total (% da lista)",
+                rec_partido = "Transferências do partido (% das transferências da lista)",
+                rec_publico = "Recursos públicos (% dos recursos públicos da lista)", gasto = "Gasto (% da lista)")
+niv <- read_csv2(file.path(ec_out, "niveis_por_cargo.csv"), show_col_types = FALSE) |>
+  mutate(medida = str_remove(resultado, "_(mulher_negra|mulher|negra)$"),
+         g = str_extract(resultado, "(mulher_negra|mulher|negra)$"),
+         grupo = factor(c(mulher = "Mulheres", negra = "Pessoas negras",
+                          mulher_negra = "Mulheres negras")[g], names(cores_gr)),
+         painel = factor(rot_niveis[medida], rot_niveis),
+         cargo = factor(cargo, c("federal", "estadual"), c("Federal", "Estadual")))
+stopifnot(!anyNA(niv$painel), !anyNA(niv$grupo))
+p_niv <- ggplot(niv, aes(x = ano, y = media, colour = grupo, linetype = cargo, shape = cargo)) +
+  annotate("rect", xmin = 2020, xmax = Inf, ymin = -Inf, ymax = Inf, fill = "grey95") +
+  geom_line(linewidth = 0.6) + geom_point(size = 1.8) +
+  facet_wrap(~painel, ncol = 3, scales = "free_y", labeller = label_wrap_gen(width = 32)) +
+  scale_x_continuous(breaks = c(2014, 2018, 2022, 2026)) +
+  scale_y_continuous(labels = virgula) +
+  scale_colour_manual(values = cores_gr, name = NULL) +
+  scale_linetype_manual(values = c(Federal = "solid", Estadual = "22"), name = NULL) +
+  scale_shape_manual(values = c(Federal = 16, Estadual = 1), name = NULL) +
+  labs(x = NULL, y = "Parcela média do grupo nas listas (%)",
+       caption = paste0("Fonte: TSE. Média das listas partido × UF do painel balanceado de cada desfecho, ",
+                        "sem DF; área cinza = depois da EC 111. Recursos e gasto: 2018–2026 ",
+                        "(doação empresarial em 2014).")) +
+  tema
+salvar(p_niv, "niveis_por_cargo", 10, 6.5)
+
 cat("Figuras gravadas em", fig_dir, "\n")

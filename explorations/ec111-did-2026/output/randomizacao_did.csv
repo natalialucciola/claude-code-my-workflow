@@ -1,0 +1,91 @@
+﻿"nivel";"resultado";"grupo";"medida";"termo";"est_obs";"p_rand";"n_ufs";"comparacao"
+"lista";"cand_mulher";"Mulheres";"cand";"Federal × Pós";"2,929014641411190";"0,0278972102789721";"26";NA
+"lista";"cand_mulher";"Mulheres";"cand";"2022";"3,241450136184053";"0,0294970502949705";"26";NA
+"lista";"cand_mulher";"Mulheres";"cand";"2026";"2,616579146638329";"0,0513948605139486";"26";NA
+"lista";"cand_negra";"Pessoas negras";"cand";"Federal × Pós";"5,259311023444084";"0,0031996800319968";"26";NA
+"lista";"cand_negra";"Pessoas negras";"cand";"2022";"4,997077727249413";"0,0043995600439956";"26";NA
+"lista";"cand_negra";"Pessoas negras";"cand";"2026";"5,521544319638753";"0,0076992300769923";"26";NA
+"lista";"cand_mulher_negra";"Mulheres negras";"cand";"Federal × Pós";"3,935298905073361";"0,0006999300069993";"26";NA
+"lista";"cand_mulher_negra";"Mulheres negras";"cand";"2022";"3,764037404925455";"0,0015998400159984";"26";NA
+"lista";"cand_mulher_negra";"Mulheres negras";"cand";"2026";"4,106560405221268";"0,0027997200279972";"26";NA
+"lista";"voto_mulher";"Mulheres";"voto";"Federal × Pós";"3,073523958501761";"0,1784821517848215";"26";NA
+"lista";"voto_mulher";"Mulheres";"voto";"2022";"4,022592382403205";"0,1315868413158684";"26";NA
+"lista";"voto_mulher";"Mulheres";"voto";"2026";"2,124455534600318";"0,3673632636736326";"26";NA
+"lista";"voto_negra";"Pessoas negras";"voto";"Federal × Pós";"3,119684149247381";"0,1722827717228277";"26";NA
+"lista";"voto_negra";"Pessoas negras";"voto";"2022";"3,466975275777765";"0,1039896010398960";"26";NA
+"lista";"voto_negra";"Pessoas negras";"voto";"2026";"2,772393022716998";"0,3389661033896610";"26";NA
+"lista";"voto_mulher_negra";"Mulheres negras";"voto";"Federal × Pós";"3,859493607389294";"0,0095990400959904";"26";NA
+"lista";"voto_mulher_negra";"Mulheres negras";"voto";"2022";"3,835605227326143";"0,0172982701729827";"26";NA
+"lista";"voto_mulher_negra";"Mulheres negras";"voto";"2026";"3,883381987452447";"0,0399960003999600";"26";NA
+"lista";"rec_total_mulher";"Mulheres";"rec_total";"Federal × Pós";"5,816536367494983";"0,0333966603339666";"26";NA
+"lista";"rec_total_mulher";"Mulheres";"rec_total";"2022";"6,054553889033862";"0,0459954004599540";"26";NA
+"lista";"rec_total_mulher";"Mulheres";"rec_total";"2026";"5,578518845956102";"0,0353964603539646";"26";NA
+"lista";"rec_total_negra";"Pessoas negras";"rec_total";"Federal × Pós";"3,427245037280659";"0,1996800319968003";"26";NA
+"lista";"rec_total_negra";"Pessoas negras";"rec_total";"2022";"3,159328939394086";"0,2097790220977902";"26";NA
+"lista";"rec_total_negra";"Pessoas negras";"rec_total";"2026";"3,695161135167231";"0,2531746825317469";"26";NA
+"lista";"rec_total_mulher_negra";"Mulheres negras";"rec_total";"Federal × Pós";"5,037794602409267";"0,0056994300569943";"26";NA
+"lista";"rec_total_mulher_negra";"Mulheres negras";"rec_total";"2022";"4,513073928915012";"0,0204979502049795";"26";NA
+"lista";"rec_total_mulher_negra";"Mulheres negras";"rec_total";"2026";"5,562515275903521";"0,0107989201079892";"26";NA
+"lista";"rec_partido_mulher";"Mulheres";"rec_partido";"Federal × Pós";"12,297331413145287";"0,0003999600039996";"26";NA
+"lista";"rec_partido_mulher";"Mulheres";"rec_partido";"2022";"12,421762274730725";"0,0002999700029997";"26";NA
+"lista";"rec_partido_mulher";"Mulheres";"rec_partido";"2026";"12,172900551559851";"0,0004999500049995";"26";NA
+"lista";"rec_partido_negra";"Pessoas negras";"rec_partido";"Federal × Pós";"3,718352357804845";"0,1620837916208379";"26";NA
+"lista";"rec_partido_negra";"Pessoas negras";"rec_partido";"2022";"3,362038564729767";"0,2053794620537946";"26";NA
+"lista";"rec_partido_negra";"Pessoas negras";"rec_partido";"2026";"4,074666150879922";"0,1987801219878012";"26";NA
+"lista";"rec_partido_mulher_negra";"Mulheres negras";"rec_partido";"Federal × Pós";"8,226303698878322";"0,0009999000099990";"26";NA
+"lista";"rec_partido_mulher_negra";"Mulheres negras";"rec_partido";"2022";"8,055879856958166";"0,0008999100089991";"26";NA
+"lista";"rec_partido_mulher_negra";"Mulheres negras";"rec_partido";"2026";"8,396727540798478";"0,0043995600439956";"26";NA
+"lista";"rec_publico_mulher";"Mulheres";"rec_publico";"Federal × Pós";"7,941621394811158";"0,0109989001099890";"26";NA
+"lista";"rec_publico_mulher";"Mulheres";"rec_publico";"2022";"8,435332755553508";"0,0109989001099890";"26";NA
+"lista";"rec_publico_mulher";"Mulheres";"rec_publico";"2026";"7,447910034068810";"0,0162983701629837";"26";NA
+"lista";"rec_publico_negra";"Pessoas negras";"rec_publico";"Federal × Pós";"4,695748570736884";"0,0741925807419258";"26";NA
+"lista";"rec_publico_negra";"Pessoas negras";"rec_publico";"2022";"5,086503140675645";"0,0609939006099390";"26";NA
+"lista";"rec_publico_negra";"Pessoas negras";"rec_publico";"2026";"4,304994000798124";"0,1731826817318268";"26";NA
+"lista";"rec_publico_mulher_negra";"Mulheres negras";"rec_publico";"Federal × Pós";"5,908936606192908";"0,0031996800319968";"26";NA
+"lista";"rec_publico_mulher_negra";"Mulheres negras";"rec_publico";"2022";"6,382516637073428";"0,0034996500349965";"26";NA
+"lista";"rec_publico_mulher_negra";"Mulheres negras";"rec_publico";"2026";"5,435356575312389";"0,0248975102489751";"26";NA
+"lista";"gasto_mulher";"Mulheres";"gasto";"Federal × Pós";"6,051432447148807";"0,0340965903409659";"26";NA
+"lista";"gasto_mulher";"Mulheres";"gasto";"2022";"7,142540841417215";"0,0224977502249775";"26";NA
+"lista";"gasto_mulher";"Mulheres";"gasto";"2026";"4,960324052880400";"0,0848915108489151";"26";NA
+"lista";"gasto_negra";"Pessoas negras";"gasto";"Federal × Pós";"3,307932001678726";"0,2393760623937606";"26";NA
+"lista";"gasto_negra";"Pessoas negras";"gasto";"2022";"3,592298552658122";"0,2018798120187981";"26";NA
+"lista";"gasto_negra";"Pessoas negras";"gasto";"2026";"3,023565450699329";"0,3466653334666533";"26";NA
+"lista";"gasto_mulher_negra";"Mulheres negras";"gasto";"Federal × Pós";"5,247107870678349";"0,0068993100689931";"26";NA
+"lista";"gasto_mulher_negra";"Mulheres negras";"gasto";"2022";"5,295128004468603";"0,0108989101089891";"26";NA
+"lista";"gasto_mulher_negra";"Mulheres negras";"gasto";"2026";"5,199087736888095";"0,0218978102189781";"26";NA
+"disputa";"cadeira_mulher";"Mulheres";"cadeira";"Federal × Pós";"-0,154165988397291";"0,9549045095490450";"26";NA
+"disputa";"cadeira_mulher";"Mulheres";"cadeira";"2022";"-2,096858731683381";"0,5099490050994900";"26";NA
+"disputa";"cadeira_mulher";"Mulheres";"cadeira";"2026";"1,788526754888799";"0,6045395460453955";"26";NA
+"disputa";"cadeira_negra";"Pessoas negras";"cadeira";"Federal × Pós";"-1,555847898538944";"0,7174282571742826";"26";NA
+"disputa";"cadeira_negra";"Pessoas negras";"cadeira";"2022";"-5,014505396656584";"0,2756724327567243";"26";NA
+"disputa";"cadeira_negra";"Pessoas negras";"cadeira";"2026";"1,902809599578696";"0,7026297370262974";"26";NA
+"disputa";"cadeira_mulher_negra";"Mulheres negras";"cadeira";"Federal × Pós";"1,995754453014219";"0,1127887211278872";"26";NA
+"disputa";"cadeira_mulher_negra";"Mulheres negras";"cadeira";"2022";"0,478131549268657";"0,8005199480051994";"26";NA
+"disputa";"cadeira_mulher_negra";"Mulheres negras";"cadeira";"2026";"3,513377356759780";"0,0409959004099590";"26";NA
+"disputa (tripla diferença)";"compet_voto";"Mulheres";"compet_voto";"Federal × Pós";"3,634198279420036";"0,0115988401159884";"26";"Mulheres − homens"
+"disputa (tripla diferença)";"compet_voto";"Mulheres";"compet_voto";"2022";"3,392483015459007";"0,0144985501449855";"26";"Mulheres − homens"
+"disputa (tripla diferença)";"compet_voto";"Mulheres";"compet_voto";"2026";"3,875913543381065";"0,0289971002899710";"26";"Mulheres − homens"
+"disputa (tripla diferença)";"compet_voto";"Pessoas negras";"compet_voto";"Federal × Pós";"3,302631011100130";"0,0573942605739426";"26";"Pessoas negras − brancas"
+"disputa (tripla diferença)";"compet_voto";"Pessoas negras";"compet_voto";"2022";"0,913456036977161";"0,6203379662033797";"26";"Pessoas negras − brancas"
+"disputa (tripla diferença)";"compet_voto";"Pessoas negras";"compet_voto";"2026";"5,691805985223100";"0,0060993900609939";"26";"Pessoas negras − brancas"
+"disputa (tripla diferença)";"compet_voto";"Mulheres negras";"compet_voto";"Federal × Pós";"6,546142709633379";"0,0051994800519948";"26";"Mulheres negras − homens brancos"
+"disputa (tripla diferença)";"compet_voto";"Mulheres negras";"compet_voto";"2022";"3,947978388477688";"0,1332866713328667";"26";"Mulheres negras − homens brancos"
+"disputa (tripla diferença)";"compet_voto";"Mulheres negras";"compet_voto";"2026";"9,144307030789070";"0,0017998200179982";"26";"Mulheres negras − homens brancos"
+"disputa (tripla diferença)";"eleita";"Mulheres";"eleita";"Federal × Pós";"1,893818879131875";"0,1038896110388961";"26";"Mulheres − homens"
+"disputa (tripla diferença)";"eleita";"Mulheres";"eleita";"2022";"0,854515673236470";"0,4774522547745225";"26";"Mulheres − homens"
+"disputa (tripla diferença)";"eleita";"Mulheres";"eleita";"2026";"2,933122085027279";"0,0321967803219678";"26";"Mulheres − homens"
+"disputa (tripla diferença)";"eleita";"Pessoas negras";"eleita";"Federal × Pós";"2,127218453673061";"0,1377862213778622";"26";"Pessoas negras − brancas"
+"disputa (tripla diferença)";"eleita";"Pessoas negras";"eleita";"2022";"0,347177224635963";"0,8209179082091791";"26";"Pessoas negras − brancas"
+"disputa (tripla diferença)";"eleita";"Pessoas negras";"eleita";"2026";"3,907259682710158";"0,0293970602939706";"26";"Pessoas negras − brancas"
+"disputa (tripla diferença)";"eleita";"Mulheres negras";"eleita";"Federal × Pós";"4,129148656209893";"0,0112988701129887";"26";"Mulheres negras − homens brancos"
+"disputa (tripla diferença)";"eleita";"Mulheres negras";"eleita";"2022";"1,546640944449586";"0,4009599040095990";"26";"Mulheres negras − homens brancos"
+"disputa (tripla diferença)";"eleita";"Mulheres negras";"eleita";"2026";"6,711656367970201";"0,0003999600039996";"26";"Mulheres negras − homens brancos"
+"disputa (tripla diferença)";"compet_gasto";"Mulheres";"compet_gasto";"Federal × Pós";"1,335501824732960";"0,3734626537346266";"26";"Mulheres − homens"
+"disputa (tripla diferença)";"compet_gasto";"Mulheres";"compet_gasto";"2022";"2,226158084608972";"0,0787921207879212";"26";"Mulheres − homens"
+"disputa (tripla diferença)";"compet_gasto";"Mulheres";"compet_gasto";"2026";"0,444845564856948";"0,8374162583741626";"26";"Mulheres − homens"
+"disputa (tripla diferença)";"compet_gasto";"Pessoas negras";"compet_gasto";"Federal × Pós";"-0,228669560821403";"0,8909109089091091";"26";"Pessoas negras − brancas"
+"disputa (tripla diferença)";"compet_gasto";"Pessoas negras";"compet_gasto";"2022";"-1,289031528362401";"0,4517548245175482";"26";"Pessoas negras − brancas"
+"disputa (tripla diferença)";"compet_gasto";"Pessoas negras";"compet_gasto";"2026";"0,831692406719594";"0,6878312168783122";"26";"Pessoas negras − brancas"
+"disputa (tripla diferença)";"compet_gasto";"Mulheres negras";"compet_gasto";"Federal × Pós";"1,931568150712391";"0,3741625837416259";"26";"Mulheres negras − homens brancos"
+"disputa (tripla diferença)";"compet_gasto";"Mulheres negras";"compet_gasto";"2022";"1,968202533923148";"0,3724627537246276";"26";"Mulheres negras − homens brancos"
+"disputa (tripla diferença)";"compet_gasto";"Mulheres negras";"compet_gasto";"2026";"1,894933767501634";"0,4892510748925107";"26";"Mulheres negras − homens brancos"
