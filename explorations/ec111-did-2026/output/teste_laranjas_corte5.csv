@@ -1,0 +1,37 @@
+contraste,desfecho,tipo,ano,est,lo,hi
+Mulheres - homens,Laranja (<= 1% do último eleito),DiD (taxa do grupo),2014,6.486687870233684,2.3175108592479265,10.655864881219442
+Mulheres - homens,Laranja (<= 1% do último eleito),DiD (taxa do grupo),2022,4.441770095811796,-0.0571311210478882,8.94067131267148
+Mulheres - homens,Laranja (<= 1% do último eleito),DiD (taxa do grupo),2026,3.8881244296803987,-1.0636309163233144,8.839879775684112
+Mulheres - homens,Laranja (<= 1% do último eleito),DDD (grupo - comparação),2014,2.399874732902897,-1.7638786852524087,6.563628151058203
+Mulheres - homens,Laranja (<= 1% do último eleito),DDD (grupo - comparação),2022,-5.140884029437676,-10.005640092636307,-0.276127966239045
+Mulheres - homens,Laranja (<= 1% do último eleito),DDD (grupo - comparação),2026,-4.135120497403626,-8.044710527356063,-0.22553046745118976
+Mulheres - homens,"Caça-níquel (acima do corte, não competitiva)",DiD (taxa do grupo),2014,-6.314238541394432,-10.012192718558527,-2.6162843642303373
+Mulheres - homens,"Caça-níquel (acima do corte, não competitiva)",DiD (taxa do grupo),2022,-2.821524182054718,-6.466026899727009,0.822978535617573
+Mulheres - homens,"Caça-níquel (acima do corte, não competitiva)",DiD (taxa do grupo),2026,0.0056858570462114955,-3.663535970361105,3.674907684453528
+Mulheres - homens,"Caça-níquel (acima do corte, não competitiva)",DDD (grupo - comparação),2014,-1.8561965755316816,-5.9314893521479055,2.2190962010845423
+Mulheres - homens,"Caça-níquel (acima do corte, não competitiva)",DDD (grupo - comparação),2022,1.6289456218329956,-3.11686306896201,6.374754312628001
+Mulheres - homens,"Caça-níquel (acima do corte, não competitiva)",DDD (grupo - comparação),2026,0.008076351442257934,-4.348075785628671,4.364228488513188
+Pessoas negras - brancas,Laranja (<= 1% do último eleito),DiD (taxa do grupo),2014,7.230910709095968,0.8589452798615653,13.602876138330371
+Pessoas negras - brancas,Laranja (<= 1% do último eleito),DiD (taxa do grupo),2022,7.360887889449157,2.6821733877453173,12.039602391152997
+Pessoas negras - brancas,Laranja (<= 1% do último eleito),DiD (taxa do grupo),2026,5.167677680884278,0.5290944858531335,9.806260875915424
+Pessoas negras - brancas,Laranja (<= 1% do último eleito),DDD (grupo - comparação),2014,6.6357725069288165,0.8492860251530061,12.422258988704627
+Pessoas negras - brancas,Laranja (<= 1% do último eleito),DDD (grupo - comparação),2022,1.0558128838986813,-3.747974448796025,5.859600216593387
+Pessoas negras - brancas,Laranja (<= 1% do último eleito),DDD (grupo - comparação),2026,-0.05174760646465604,-5.407795400518526,5.304300187589214
+Pessoas negras - brancas,"Caça-níquel (acima do corte, não competitiva)",DiD (taxa do grupo),2014,-4.684282253667767,-10.947374449185219,1.5788099418496842
+Pessoas negras - brancas,"Caça-níquel (acima do corte, não competitiva)",DiD (taxa do grupo),2022,-3.6902776505691164,-8.444579270069557,1.0640239689313238
+Pessoas negras - brancas,"Caça-níquel (acima do corte, não competitiva)",DiD (taxa do grupo),2026,-1.1242764236819842,-5.5769870083684285,3.3284341610044597
+Pessoas negras - brancas,"Caça-níquel (acima do corte, não competitiva)",DDD (grupo - comparação),2014,-0.547857789354913,-6.2914579957852315,5.1957424170754045
+Pessoas negras - brancas,"Caça-níquel (acima do corte, não competitiva)",DDD (grupo - comparação),2022,-1.8416935989587946,-7.06697191379148,3.3835847158738908
+Pessoas negras - brancas,"Caça-níquel (acima do corte, não competitiva)",DDD (grupo - comparação),2026,-5.305771467776867,-10.780691902373345,0.16914896681961178
+Mulheres negras - homens brancos,Laranja (<= 1% do último eleito),DiD (taxa do grupo),2014,6.011922907479836,-1.1969505272023309,13.220796342162004
+Mulheres negras - homens brancos,Laranja (<= 1% do último eleito),DiD (taxa do grupo),2022,4.3352619737654745,-1.4839964249172883,10.154520372448237
+Mulheres negras - homens brancos,Laranja (<= 1% do último eleito),DiD (taxa do grupo),2026,2.9191588474130685,-3.319862472075443,9.15818016690158
+Mulheres negras - homens brancos,Laranja (<= 1% do último eleito),DDD (grupo - comparação),2014,6.044458883461077,-1.195528669535153,13.284446436457308
+Mulheres negras - homens brancos,Laranja (<= 1% do último eleito),DDD (grupo - comparação),2022,-3.1917707666737876,-10.683435738744974,4.299894205397399
+Mulheres negras - homens brancos,Laranja (<= 1% do último eleito),DDD (grupo - comparação),2026,-3.9918493908236172,-10.026219677248395,2.04252089560116
+Mulheres negras - homens brancos,"Caça-níquel (acima do corte, não competitiva)",DiD (taxa do grupo),2014,-4.735502953118889,-11.469925177862754,1.9989192716249757
+Mulheres negras - homens brancos,"Caça-níquel (acima do corte, não competitiva)",DiD (taxa do grupo),2022,-3.3237414568882655,-8.514636113819625,1.8671532000430946
+Mulheres negras - homens brancos,"Caça-níquel (acima do corte, não competitiva)",DiD (taxa do grupo),2026,-1.6367281116792074,-7.389419868636608,4.115963645278194
+Mulheres negras - homens brancos,"Caça-níquel (acima do corte, não competitiva)",DDD (grupo - comparação),2014,-1.5381390363610032,-8.36075800442146,5.284479931699453
+Mulheres negras - homens brancos,"Caça-níquel (acima do corte, não competitiva)",DDD (grupo - comparação),2022,-0.715996361704395,-8.396749576294587,6.964756852885797
+Mulheres negras - homens brancos,"Caça-níquel (acima do corte, não competitiva)",DDD (grupo - comparação),2026,-5.07300956731006,-11.827743126344988,1.6817239917248683

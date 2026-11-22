@@ -135,3 +135,19 @@ Rscript explorations/ec111-did-2026/R/06_niveis_por_cargo.R  # níveis por cargo
 ```
 
 Entradas em `data/raw/` (não versionadas): `votacao_candidato_munzona_2026.zip`, `votacao_partido_munzona_2026.zip`, `consulta_cand_2026.zip`, `prestacao_de_contas_eleitorais_candidatos_2026.zip` (TSE, CDN; versões em uso: votação de 08–09/11/2026, registro e prestação de contas de 08/11/2026) e as bases de 2014 listadas no script 02.
+
+## Teste das laranjas (21/11/2026) — `R/09_teste_laranjas.R`
+
+Pergunta: a EC 111 trocou candidaturas laranja (votos <= 1% do último eleito da UF, cargo e ano;
+Gatto & Wylie 2021) por candidaturas caça-níqueis (acima do corte, não competitivas)?
+Desenho da tbl-ddd: UF × cargo, sem DF, sem ponderação, base 2018, pré-teste 2014, EP por UF.
+Saídas: `output/teste_laranjas.csv` (corte de 1%) e `output/teste_laranjas_corte5.csv` (5%).
+
+- Corte de 1%: a taxa de laranjas no federal sobe para os dois sexos (homens: 12,2% → 25,8%
+  em 2022, em médias por UF). DDD mulheres − homens = 0,0 [−4,5; 4,6] em 2022 e +2,7 em 2026.
+  Nada indica que as laranjas tenham sido substituídas por caça-níqueis.
+- Corte de 5%: DDD mulheres − homens = −5,1* (2022) e −4,1* (2026), pré-teste +2,4 (n.s.).
+  Há sinal de substituição só na faixa logo acima das laranjas mais extremas.
+- Pré-teste do DiD simples falha nos dois cortes: em 2014 as laranjas eram mais comuns no federal.
+- Leitura: resultado sensível ao corte. A substituição não fica comprovada. A expansão de
+  candidaturas no federal produziu mais candidaturas quase sem votos, de homens e de mulheres.
