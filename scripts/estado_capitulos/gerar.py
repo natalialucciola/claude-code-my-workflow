@@ -28,6 +28,7 @@ WATCH = [
     "Quarto/thesis/chapters",
     "Quarto/thesis/_quarto.yml",
     "Quarto/thesis/Figures",
+    "Quarto/capitulo4-pdf",
     "Bibliography_base.bib",
     "explorations",
     "scripts/R",
@@ -42,6 +43,7 @@ EXPLICIT_TYPES = {
     ".woff2": "font/woff2",
     ".ttf": "font/ttf",
     ".svg": "image/svg+xml",
+    ".pdf": "application/pdf",
 }
 
 
@@ -200,6 +202,10 @@ def build_page(data: dict, order: list[str], has_book: bool, head_desc: str) -> 
             else '<span class="btn off">HTML indisponível</span>',
             f'<a class="btn" href="fonte/{esc(fname)}">Fonte (.qmd)</a>',
         ]
+        # PDF avulso do capítulo (campo "pdf" em capitulos.json), publicado em pdf/
+        pdf = c.get("pdf")
+        if pdf and (ROOT / pdf).exists():
+            links.append(f'<a class="btn" href="pdf/{esc(Path(pdf).name)}">PDF</a>')
         gh = gh_link(base, f"Quarto/thesis/chapters/{fname}")
         if gh:
             links.append(f'<a class="btn" href="{gh}">GitHub</a>')
@@ -275,6 +281,10 @@ def build(render: bool) -> None:
         src = CHAPTERS / fname
         if src.exists():
             shutil.copy2(src, SITE / "fonte" / fname)
+        pdf = data.get("capitulos", {}).get(fname, {}).get("pdf")
+        if pdf and (ROOT / pdf).exists():
+            (SITE / "pdf").mkdir(exist_ok=True)
+            shutil.copy2(ROOT / pdf, SITE / "pdf" / Path(pdf).name)
     (SITE / "index.html").write_text(build_page(data, order, has_book, desc), encoding="utf-8")
 
     files: dict[str, object] = {}

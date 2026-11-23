@@ -5,6 +5,7 @@ Página privada no claude.ai que resume cada capítulo da tese (pergunta, estrut
 - **Ler (HTML):** o capítulo renderizado pelo Quarto, publicado junto com a página.
 - **Fonte (.qmd):** o arquivo-fonte, publicado como texto.
 - **GitHub:** o arquivo no repositório privado.
+- **PDF:** a versão avulsa do capítulo, quando existir (campo `pdf` da ficha em `capitulos.json`, com o caminho do arquivo; publicada em `pdf/`).
 
 Endereço e demais dados: `quality_reports/estado-capitulos/capitulos.json` (campo `artifact_url`).
 
@@ -21,7 +22,7 @@ Os dois só avisam se o último commit do `main` que toca os caminhos da tese (l
 
 ## Procedimento de republicação (para Claude)
 
-1. **Revisar os dados qualitativos.** Ver o que o commit mudou (`git log -1 --stat main`). Se mudou o estado de algum capítulo (nova seção, código rodado, pendência resolvida, novo capítulo no `_quarto.yml`), atualizar o capítulo em `quality_reports/estado-capitulos/capitulos.json`: `status` (`ok` | `part` | `no` | `na`), `o_que_existe`, `pendencias`, `proxima_acao`, `acao_curta`, `fontes`. Palavras, seções, TODOs e data da última alteração são calculados sozinhos. Se `capitulos.json` mudar, commitá-lo antes do passo 2.
+1. **Revisar os dados qualitativos.** Ver o que o commit mudou (`git log -1 --stat main`). Se mudou o estado de algum capítulo (nova seção, código rodado, pendência resolvida, novo capítulo no `_quarto.yml`), atualizar o capítulo em `quality_reports/estado-capitulos/capitulos.json`: `status` (`ok` | `part` | `no` | `na`), `o_que_existe`, `pendencias`, `proxima_acao`, `acao_curta`, `fontes` e, se houver versão avulsa, `pdf`. Se o PDF avulso mudou, regenerá-lo antes (ex.: `python Quarto/capitulo4-pdf/derivar.py` e `quarto render Quarto/capitulo4-pdf/capitulo4.qmd`). Palavras, seções, TODOs e data da última alteração são calculados sozinhos. Se `capitulos.json` mudar, commitá-lo antes do passo 2.
 2. **Gerar:** se `git status` mostrar alterações não commitadas em `Quarto/thesis/` (trabalho em andamento de outra sessão), gerar a partir de um worktree limpo do `main` para não publicar rascunho. `python scripts/estado_capitulos/gerar.py` (renderiza o livro; `--sem-render` reaproveita `Quarto/thesis/_book/`). Saída em `quality_reports/estado-capitulos/_site/` (não versionada), com `publicar.json`.
 3. **Publicar** com a ferramenta Artifact, usando `publicar.json`:
    - em uma sessão que ainda não publicou esta página: primeiro `action: "read"` com o `url`, depois `action: "list"`, `scope: "files"`, com o mesmo `url` (a publicação exige ter visto a página e os arquivos);

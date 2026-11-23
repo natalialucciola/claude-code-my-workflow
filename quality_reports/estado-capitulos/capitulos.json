@@ -47,6 +47,7 @@
       "pendencias": "Resolvido em 22/11: variáveis por etapa, comparação com o complemento, erros por UF, transferências como realocação, nota sobre Fonseca et al. Falta: sugestões da autora para a seção de Dados; o material de robustez guardado em chapters/_apendice-cap3/robustez.md usa erros por lista e precisa ser refeito antes de virar apêndice; texto oficial da Res. TSE 23.749/2026; CoVe da literatura pelo texto integral.",
       "proxima_acao": "Autora revisa a versão de 22/11 (Dados primeiro). Depois, enviar o PDF ao orientador.",
       "acao_curta": "Autora revisa a versão de 22/11; depois enviar ao orientador",
+      "pdf": "Quarto/capitulo4-pdf/capitulo4.pdf",
       "fontes": [
         {"rotulo": "Código", "caminho": "explorations/competitividade-eleitoral"},
         {"rotulo": "Código", "caminho": "explorations/ec111-did-2026"},
