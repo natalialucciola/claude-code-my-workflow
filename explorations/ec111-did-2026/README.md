@@ -151,3 +151,17 @@ Saídas: `output/teste_laranjas.csv` (corte de 1%) e `output/teste_laranjas_cort
 - Pré-teste do DiD simples falha nos dois cortes: em 2014 as laranjas eram mais comuns no federal.
 - Leitura: resultado sensível ao corte. A substituição não fica comprovada. A expansão de
   candidaturas no federal produziu mais candidaturas quase sem votos, de homens e de mulheres.
+
+## Variáveis principais do Cap. 4 (22/11/2026) — `R/10_variaveis_principais.R`
+
+Plano: `quality_reports/plans/2026-11-22_cap4-ec111-variaveis-identificacao.md`.
+Erros agrupados por UF em todas as variáveis; comparação com o complemento (homens; não negras;
+demais candidaturas), com pessoas brancas e homens brancos como linhas adicionais nas diferenças
+de taxas; investimento relativo por candidatura (razão das médias das transferências do partido);
+p-valor por wild cluster bootstrap restrito (Webb, UF) como conferência; níveis por cargo.
+Depende de `data/processed/cand_ec111_2014_2026.rds`, salvo pelo `R/02`.
+Saídas: `output/variaveis_principais_{resultados,niveis,comparacao}.csv`.
+Depois de R/10, `R/11_tabelas_figuras_capitulo.R` escreve as tabelas do capítulo em
+`Quarto/thesis/chapters/_tabelas-cap3/` (principal, sucesso, transferencias_cargo, decomposicao,
+falsificacao) e as figuras `efeitos_etapas.png` e `transferencias_por_cargo.png`. O PDF avulso
+do capítulo é derivado por `Quarto/capitulo4-pdf/derivar.py`.

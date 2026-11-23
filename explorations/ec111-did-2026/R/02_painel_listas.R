@@ -35,7 +35,8 @@
 # Rodar da raiz, depois de 01_bases_2026.R e dos scripts 01, 04 e 05 de
 # explorations/competitividade-gasto (base de 2018/2022):
 #   Rscript explorations/ec111-did-2026/R/02_painel_listas.R
-# Saídas: data/processed/painel_listas_2014_2026.rds, painel_disputas_2014_2026.rds
+# Saídas: data/processed/painel_listas_2014_2026.rds, painel_disputas_2014_2026.rds,
+#         cand_ec111_2014_2026.rds (base por candidatura)
 #         output/listas_por_ano.csv, output/descritivo_grupos_ano_cargo.csv
 # ==============================================================================
 
@@ -128,6 +129,9 @@ margem <- readRDS("data/raw/margem_resultado.rds") |>
 cand <- cand |>
   left_join(margem, by = c("ANO", "DS_CARGO", "sq_candidato")) |>
   mutate(compet_m = eleito == 1L | (!is.na(margem_qe) & margem_qe >= -0.1))
+# Base por candidatura (usada por R/10_variaveis_principais.R; plano de 2026-11-22)
+saveRDS(cand, "data/processed/cand_ec111_2014_2026.rds")
+
 pareamento <- cand |>
   summarise(candidaturas = n(), com_margem = sum(!is.na(margem_qe)),
             pct_com_margem = 100 * mean(!is.na(margem_qe)),
