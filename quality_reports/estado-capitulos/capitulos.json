@@ -43,14 +43,14 @@
       "titulo": "Os Efeitos da EC 111/2021 sobre Candidaturas, Recursos, Votos e Sucesso Eleitoral",
       "pergunta": "Onde, entre a candidatura e a cadeira, se perde o efeito do voto em dobro da EC 111/2021 para mulheres, pessoas negras e mulheres negras, e o efeito de 2022 persistiu em 2026?",
       "status": {"estrutura": "ok", "codigo": "ok", "prosa": "ok", "plano": "ok"},
-      "o_que_existe": "Estrutura acadêmica padrão, revisada em 17 e 18/11. A Revisão da Literatura situa a EC 111 entre as ações afirmativas de financiamento eleitoral, e a estratégia dos partidos é tratada como a de candidatos caça-níqueis. O modelo é escrito como regressão de diferenças em diferenças (termo único Federal × Pós e estudo de evento), com falsificações declaradas e figura de dados brutos. Em 18/11, por decisão da autora, os testes de robustez, a sensibilidade formal (HonestDiD) e a inferência por randomização saíram do corpo e estão guardados em chapters/_apendice-cap3/robustez.md.",
-      "pendencias": "Resolvido em 17 e 18/11: regressão linear de DiD; edições feitas pelos comentários (14/11 e 17/11) portadas para o .qmd; validação da margem em nota de rodapé; exemplos de países conferidos em Krook & Norris e Ohman. Falta: decidir o apêndice de robustez (ponderações, normalizações, HonestDiD, randomização); texto oficial da Res. TSE 23.749/2026; CoVe da literatura pelo texto integral.",
-      "proxima_acao": "Enviar ao orientador. Depois, decidir o que do material de robustez volta como apêndice.",
-      "acao_curta": "Enviar ao orientador; depois decidir o apêndice de robustez",
+      "o_que_existe": "Reescrito em 22/11 (plano 2026-11-22). Cada variável mede a proporção do grupo num total, da candidatura à cadeira (candidaturas, transferências do partido, gasto, votos, presença entre as competitivas pelo voto e pelo gasto, cadeiras), com o restante das candidaturas como comparação, e o sucesso relativo (diferença de taxas) na competitividade e na eleição. Erros agrupados por UF em todas as variáveis, com conferência por wild cluster bootstrap. Achado central: o aumento das transferências às mulheres no federal veio do estadual; somando os dois cargos, a proporção delas acompanha a de candidatas. Mulheres negras são exceção parcial. Tabelas e figuras geradas por script (R/10 e R/11); PDF avulso derivado por Quarto/capitulo4-pdf/derivar.py.",
+      "pendencias": "Resolvido em 22/11: variáveis por etapa, comparação com o complemento, erros por UF, transferências como realocação, nota sobre Fonseca et al. Falta: sugestões da autora para a seção de Dados; o material de robustez guardado em chapters/_apendice-cap3/robustez.md usa erros por lista e precisa ser refeito antes de virar apêndice; texto oficial da Res. TSE 23.749/2026; CoVe da literatura pelo texto integral.",
+      "proxima_acao": "Autora revisa a versão de 22/11 (Dados primeiro). Depois, enviar o PDF ao orientador.",
+      "acao_curta": "Autora revisa a versão de 22/11; depois enviar ao orientador",
       "fontes": [
         {"rotulo": "Código", "caminho": "explorations/competitividade-eleitoral"},
         {"rotulo": "Código", "caminho": "explorations/ec111-did-2026"},
-        {"rotulo": "Relatório", "caminho": "explorations/ec111-did-2026/relatorio_ec111_2026.html"}, {"rotulo": "Revisão", "caminho": "quality_reports/paper_review_03-ec111-competitividade-eleitoral_round1.md"}, {"rotulo": "Plano", "caminho": "quality_reports/plans/2026-11-17_cap4-ec111-revisao-estilo-consistencia.md"}
+        {"rotulo": "Relatório", "caminho": "explorations/ec111-did-2026/relatorio_ec111_2026.html"}, {"rotulo": "Revisão", "caminho": "quality_reports/paper_review_03-ec111-competitividade-eleitoral_round1.md"}, {"rotulo": "Plano", "caminho": "quality_reports/plans/2026-11-22_cap4-ec111-variaveis-identificacao.md"}, {"rotulo": "PDF", "caminho": "Quarto/capitulo4-pdf/capitulo4.pdf"}
       ]
     },
     "04-sobreposicao-territorial-voto.qmd": {
