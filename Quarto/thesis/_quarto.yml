@@ -26,6 +26,7 @@ tbl-cap-location: bottom
 format:
   html:
     theme: cosmo
+    css: alteracoes.css   # destaque provisório do texto revisado (.alterado); apagar a regra para tirar a cor
 
 # PDF output via a custom class (Thesis_Template/repUERJ.cls) is not yet
 # wired up — that integration is deliberately out of scope until real
