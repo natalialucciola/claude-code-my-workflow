@@ -3,6 +3,7 @@ title: "Os Efeitos da EC 111/2021"
 subtitle: "Candidaturas, Recursos, Votos e Sucesso Eleitoral de Mulheres e Pessoas Negras"
 author: "Natália Lucciola"
 date: last-modified
+date-format: "DD-MM-YYYY"
 lang: pt
 bibliography: ../../Bibliography_base.bib
 tbl-cap-location: bottom
