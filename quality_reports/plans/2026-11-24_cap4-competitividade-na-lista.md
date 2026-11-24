@@ -1,6 +1,6 @@
 # Plano: competitividade e eleição medidas na lista (Cap. 4, EC 111)
 
-**Status:** APROVADO (24/11). Passos 1–3 feitos (rodada final BITERS=25000 WILD=1999, linhas antigas idênticas); Passo 4 (texto) aguarda a autora. Desvio: estimar_ponderado() ficou no R/10, não em funcoes_estimacao.R
+**Status:** CONCLUÍDO (24/11). Passos 1–4 feitos; texto em azul (.alterado) aguardando revisão da autora. Desvio: estimar_ponderado() ficou no R/10, não em funcoes_estimacao.R
 **Data:** 2026-11-24
 **Capítulo:** `Quarto/thesis/chapters/03-ec111-competitividade-eleitoral.qmd` (exibido como Cap. 4)
 **Exploração:** `explorations/ec111-did-2026/` (R/10, R/11)

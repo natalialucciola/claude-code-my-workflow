@@ -1,6 +1,6 @@
 # Plano de implementação: item 1, viabilidade *ex ante* (Cap. 4, EC 111)
 
-**Status:** APROVADO (D1–D4 em 24/11). Passos 1, 3 e 4 feitos; Passo 2 (R/10 usar funcoes_estimacao.R) adiado por coordenação com a sessão das categorias de receita; Passo 5 aguarda a autora
+**Status:** CONCLUÍDO (24/11). Passos 1–5 feitos; Passo 2: R/10 usa funcoes_estimacao.R (rodada final com saídas idênticas); Passo 5: texto em azul (.alterado) aguardando revisão da autora
 **Data:** 2026-11-24
 **Plano-mãe:** `quality_reports/plans/2026-11-24_cap4-cacaniquel-viabilidade-concentracao.md` (item 1: 1a e 1b; as Etapas 0–3 daquele plano, restritas ao item 1)
 **Exploração:** `explorations/ec111-did-2026/`
