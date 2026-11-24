@@ -228,3 +228,33 @@ Plano: `quality_reports/plans/2026-11-24_cap4-cacaniquel-item1-implementacao.md`
 **Leitura.** O acréscimo das transferências às mulheres foi inteiro para candidatas que não eram viáveis antes da eleição. A parte das viáveis não se move, quando a divisão de 2018 previa cerca de +2,7. O padrão se repete no gasto e nos votos, nas duas robustezes da classificação e em 2026. Para pessoas negras há realocação, com o dinheiro saindo das viáveis. A matriz viável × competitiva (`output/viabilidade_matriz_2x2.csv`) mostra que a célula "viável que fracassou" é pequena e não cresce (federal, mulheres: 9,2 → 7,5% das transferências). A célula "não viável e não competitiva" sobe de 44,5 para 65,5% no federal, contra 63,3 → 67,8% no estadual. A leitura ex post do capítulo, portanto, não confundia intenção com ineficácia.
 
 **Cuidados.** Não há pré-teste: as transferências começam em 2018, e a viabilidade de 2014 exigiria 2010. O federal de 2018 já era mais concentrado nas viáveis que o estadual (36% contra 19% das transferências às mulheres, totais nacionais). A fatia da coluna "esperado" é média de listas (0,21 para mulheres), não total nacional. Os votos decompostos aqui usam o painel de 2018–2026, e não o de 2014–2026 do R/10.
+
+## Competitividade, eleição e investimento relativo na lista (2026-11-24)
+
+Plano: `quality_reports/plans/2026-11-24_cap4-competitividade-na-lista.md`. **Decisão da autora:** a hipótese é de estratégia partidária, então a unidade é a lista (partido × UF × cargo), onde o partido decide, e não a disputa (UF × cargo), que mistura todos os partidos. As variáveis da disputa continuam no R/10 (para comparação, `output/competitividade_lista_vs_disputa.csv`) e saem do capítulo.
+
+**Medidas (R/10, seção 1b; linhas no fim da grade, de modo que as 364 linhas anteriores ficaram idênticas à rodada de 24/11).**
+
+- *Principal:* diferença de taxas dentro da lista, `ltcv` (competitiva pelo voto), `ltcg` (pelo gasto) e `ltel` (eleita), dada pela taxa do grupo menos a do complemento, com `_br` e `_hb` como comparações adicionais. Só exige os dois grupos na lista (617 listas para mulheres, 483 para pessoas negras e 381 para mulheres negras, em 2014–2026). Não seleciona pelo resultado.
+- *Investimento relativo:* `lexcesso` = % das transferências − % das candidaturas do grupo na lista (substitui a razão `inv`, indefinida quando um grupo recebe zero).
+- *Mecanismo* (seção 2b, `output/competitividade_lista_ponderada.csv`): `lpcv`, `lpcg` e `lcadeira`, a proporção do grupo entre as competitivas e entre os eleitos da lista. São estimadas por TWFE ponderado pelo denominador, em painel desbalanceado (a lista sem competitivas não entra naquele ano).
+- *Robustez:* as taxas ponderadas pelo número de candidaturas da lista em 2018.
+
+**Resultados** (p.p.; * IC 95% exclui zero, EP por UF; p do wild entre parênteses):
+
+| Taxa do grupo − complemento | 2014 | 2022 | 2026 |
+|---|---|---|---|
+| Competitiva pelo voto, mulheres | +2,5 | +6,7 (0,057) | +7,3* (0,023) |
+| Competitiva pelo voto, pessoas negras | +3,8 | +5,6 (0,12) | +8,2* (0,018) |
+| Eleita, mulheres | −1,4 | +3,6 (0,24) | +5,7* (0,057) |
+| Competitiva pelo gasto, mulheres negras | — | +8,8* (0,003) | +8,7* (0,027) |
+| Investimento relativo, mulheres | — | +9,7* (0,000) | +9,2* (0,001) |
+
+**Leitura.**
+
+1. Na lista, os pré-testes de 2014 ficam próximos de zero para todos os grupos. Na disputa, falhavam para pessoas negras (−5,7* e −4,4*).
+2. As taxas na lista dão o dobro da disputa e são significativas em 2026. Mas, ponderadas pelo tamanho da lista, caem para +1 a +4 e nenhuma é significativa: a melhora relativa se concentra nas listas pequenas, onde uma candidata a mais muda muito a taxa.
+3. A proporção do grupo entre as competitivas e entre os eleitos da lista não muda (mulheres: +1,4 e +1,0 em 2022). Ou seja, a taxa melhora, mas os lugares competitivos não passam para as mulheres.
+4. O investimento relativo das mulheres (+9,7*, contra +17,0* na disputa) vem da queda no estadual (o excesso médio das listas cai de +18,9 para +10,0), com o federal perto de zero. É a realocação entre cargos já descrita no capítulo.
+
+**Tabelas (R/11):** `principal.md` e `sucesso.md` passam às medidas de lista, com a coluna "Listas"; nova `composicao_lista.md` (`tbl-composicao-lista-ec111`, ainda não incluída no `.qmd`). O texto do capítulo (H4, H5, Variáveis, Métodos) ainda descreve a disputa e precisa ser refeito.

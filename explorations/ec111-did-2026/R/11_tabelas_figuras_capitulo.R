@@ -69,27 +69,35 @@ escrever <- function(df, alinh, legenda, rotulo, arquivo) {
 # ------------------------------------------------------------------------------
 rot_princ <- c(cand = "Proporção de candidaturas",
                rec_partido = "Proporção das transferências do partido",
+               lexcesso = "Transferências − candidaturas (investimento relativo)",
                gasto = "Proporção do gasto", voto = "Proporção dos votos nominais",
-               pcv = "Proporção entre as competitivas pelo voto",
-               pcg = "Proporção entre as competitivas pelo gasto",
-               cadeira = "Proporção das cadeiras")
+               ltcv = "Competitiva pelo voto (taxa do grupo − taxa do complemento)",
+               ltcg = "Competitiva pelo gasto (idem)",
+               ltel = "Eleita (idem)")
+n_listas <- res |> distinct(medida, grupo, n_unidades)
 t1 <- linhas_efeito(names(rot_princ), rot_princ) |>
-  transmute(Variável, Grupo, `Pré-teste 2014` = replace_na(`2014`, "—"), `2022`, `2026`,
+  left_join(n_listas, by = c("medida", "grupo")) |>
+  transmute(Variável, Grupo, Listas = as.character(n_unidades),
+            `Pré-teste 2014` = replace_na(`2014`, "—"), `2022`, `2026`,
             `Diferença 2026 − 2022` = `Dif. 2026 − 2022`, `Federal × Pós`)
-escrever(t1, c(":---", ":---", rep("---:", 5)),
-  paste("Efeito do voto em dobro sobre a proporção de mulheres, pessoas negras e mulheres negras",
-        "em cada etapa da candidatura, federal × estadual, base 2018 (pontos percentuais).",
-        "Candidaturas, transferências, gasto e votos: listas partido × UF; competitivas e",
-        "cadeiras: disputas UF × cargo. Painel balanceado, sem ponderação. O pré-teste é a mesma",
-        "conta entre 2014 e 2018; transferências, gasto e competitivas pelo gasto começam em 2018.",
-        "Federal × Pós: termo único da @eq-reg-ec111. \\* IC de 95% exclui zero, com erros",
-        "agrupados por UF.", fonte, "(explorations/ec111-did-2026/R/10 e R/11)."),
+escrever(t1, c(":---", ":---", rep("---:", 6)),
+  paste("Efeito do voto em dobro em cada etapa da candidatura, mulheres, pessoas negras e",
+        "mulheres negras, federal × estadual, base 2018 (pontos percentuais). Listas partido × UF,",
+        "painel balanceado, sem ponderação. Proporções: parte do grupo no total da lista.",
+        "Investimento relativo: proporção das transferências menos proporção das candidaturas do",
+        "grupo na lista. Competitiva e eleita: taxa de candidaturas do grupo que terminam",
+        "competitivas (eleitas ou a menos de 0,1 QE do limiar, pela margem de votos ou de gasto)",
+        "ou eleitas, menos a taxa do complemento, na mesma lista; entram as listas com os dois",
+        "grupos em todos os anos (coluna Listas). O pré-teste é a mesma conta entre 2014 e 2018;",
+        "transferências, gasto e competitivas pelo gasto começam em 2018. Federal × Pós: termo",
+        "único da @eq-reg-ec111. \\* IC de 95% exclui zero, com erros agrupados por UF.", fonte,
+        "(explorations/ec111-did-2026/R/10 e R/11)."),
   "tbl-principal-ec111", "principal.md")
 
 # ------------------------------------------------------------------------------
 # 2. Sucesso relativo: diferença de taxas entre o grupo e o de comparação
 # ------------------------------------------------------------------------------
-rot_taxa <- c(tcv = "Competitiva pelo voto", tcg = "Competitiva pelo gasto", tel = "Eleita")
+rot_taxa <- c(ltcv = "Competitiva pelo voto", ltcg = "Competitiva pelo gasto", ltel = "Eleita")
 comp <- tribble(~grupo, ~sufixo, ~rotulo,
   "mulher", "", "Mulheres − homens",
   "negra", "", "Pessoas negras − demais",
@@ -113,11 +121,43 @@ escrever(t2, c(":---", rep("---:", 5)),
   paste("Efeito do voto em dobro sobre o sucesso relativo: diferença entre a taxa do grupo e a do",
         "grupo de comparação (% das candidaturas que terminam competitivas ou eleitas), federal ×",
         "estadual, base 2018 (pontos percentuais). Competitiva = eleita ou a menos de 0,1 QE do",
-        "limiar, pela margem de votos ou de gasto. Disputas UF × cargo, sem ponderação. As linhas",
+        "limiar, pela margem de votos ou de gasto. Listas partido × UF com os dois grupos em todos",
+        "os anos, painel balanceado, sem ponderação. As linhas",
         "com pessoas brancas e homens brancos são comparações adicionais. No gasto, não há",
         "pré-teste (doação empresarial em 2014). \\* IC de 95% exclui zero, com erros agrupados por",
         "UF.", fonte, "(explorations/ec111-did-2026/R/10 e R/11)."),
   "tbl-sucesso-ec111", "sucesso.md")
+
+# ------------------------------------------------------------------------------
+# 2b. Quem fica com os lugares competitivos e as cadeiras da lista (mecanismo; TWFE
+#     ponderado pelo denominador, painel desbalanceado; plano 2026-11-24)
+# ------------------------------------------------------------------------------
+pond <- le("competitividade_lista_ponderada.csv") |>
+  filter(papel == "mecanismo: peso = denominador") |>
+  mutate(sig = sign(ic_inf) == sign(ic_sup))
+rot_comp <- c(lpcv = "Proporção entre as competitivas pelo voto",
+              lpcg = "Proporção entre as competitivas pelo gasto",
+              lcadeira = "Proporção entre os eleitos")
+t2b <- pond |>
+  filter(periodo %in% c("2014", "2022", "2026", "Federal × Pós")) |>
+  mutate(cel = celula(att, sig)) |>
+  select(medida, grupo, periodo, cel, n_listas) |>
+  pivot_wider(names_from = periodo, values_from = cel) |>
+  mutate(medida = factor(medida, names(rot_comp)), grupo = factor(grupo, names(nome_grupo))) |>
+  arrange(medida, grupo) |>
+  mutate(Variável = if_else(row_number() == 1, rot_comp[as.character(medida)], ""), .by = medida) |>
+  transmute(Variável, Grupo = unname(nome_grupo[as.character(grupo)]),
+            Listas = as.character(n_listas),
+            `Pré-teste 2014` = replace_na(`2014`, "—"), `2022`, `2026`, `Federal × Pós`)
+escrever(t2b, c(":---", ":---", rep("---:", 5)),
+  paste("Efeito do voto em dobro sobre a proporção do grupo entre as candidaturas competitivas e",
+        "entre os eleitos da lista, federal × estadual, base 2018 (pontos percentuais). Listas",
+        "partido × UF, regressão de estudo de evento com efeitos fixos de lista e de ano,",
+        "ponderada pelo número de competitivas (ou de eleitos) da lista no ano. A lista sem",
+        "competitivas (ou sem eleitos) não entra naquele ano; Listas = listas com ao menos uma",
+        "observação. \\* IC de 95% exclui zero, com erros agrupados por UF.", fonte,
+        "(explorations/ec111-did-2026/R/10 e R/11)."),
+  "tbl-composicao-lista-ec111", "composicao_lista.md")
 
 # ------------------------------------------------------------------------------
 # 3. Transferências por cargo e nos dois cargos somados (realocação, H2)
@@ -217,9 +257,14 @@ tema <- theme_minimal(base_size = 10) +
         axis.text = element_text(colour = "grey25"))
 
 # 6a. Efeitos por etapa (2022 e 2026), um painel por grupo
+# rótulos curtos para a figura (as taxas são do grupo − complemento, na lista)
+rot_fig <- c(cand = "Candidaturas", rec_partido = "Transferências do partido",
+             lexcesso = "Transferências − candidaturas", gasto = "Gasto", voto = "Votos",
+             ltcv = "Taxa de competitivas (voto)", ltcg = "Taxa de competitivas (gasto)",
+             ltel = "Taxa de eleitas")
 f1 <- res |>
-  filter(medida %in% names(rot_princ), periodo %in% c("2022", "2026")) |>
-  mutate(Variável = factor(rot_princ[medida], rev(rot_princ)),
+  filter(medida %in% names(rot_fig), periodo %in% c("2022", "2026")) |>
+  mutate(Variável = factor(rot_fig[medida], rev(rot_fig)),
          Grupo = factor(nome_grupo[grupo], names(cores_gr)), Ano = periodo)
 g1 <- ggplot(f1, aes(att, Variável, colour = Grupo, shape = Ano)) +
   geom_vline(xintercept = 0, colour = "grey55", linewidth = 0.4) +
@@ -234,7 +279,7 @@ g1 <- ggplot(f1, aes(att, Variável, colour = Grupo, shape = Ano)) +
   facet_wrap(~Grupo, nrow = 1) +
   labs(x = "Efeito, federal × estadual, base 2018 (pontos percentuais)", y = NULL) +
   tema + theme(panel.spacing.x = unit(1.4, "lines"))
-ggsave(file.path(fig_dir, "efeitos_etapas.png"), g1, width = 8, height = 3.8, dpi = 300,
+ggsave(file.path(fig_dir, "efeitos_etapas.png"), g1, width = 8, height = 4.2, dpi = 300,
        bg = "white")
 
 # 6b. Proporção das transferências por cargo e nos dois cargos somados
