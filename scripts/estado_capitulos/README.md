@@ -5,7 +5,7 @@ Página privada no claude.ai que resume cada capítulo da tese (pergunta, estrut
 - **Ler (HTML):** o capítulo renderizado pelo Quarto, publicado junto com a página.
 - **Fonte (.qmd):** o arquivo-fonte, publicado como texto.
 - **GitHub:** o arquivo no repositório privado.
-- **PDF:** a versão avulsa do capítulo, quando existir (campo `pdf` da ficha em `capitulos.json`, com o caminho do arquivo; publicada em `pdf/`).
+- **PDF:** a versão avulsa do capítulo, quando existir (campo `pdf` da ficha em `capitulos.json`, com o caminho do arquivo; publicada em `pdf/`). A página publicada não abre PDF por link simples (o claude.ai mostra "Não é possível abrir este arquivo aqui"); o botão baixa o arquivo pela capacidade `downloads`, que pede confirmação a quem vê. Por isso a página é publicada com `capabilities: {"downloads": true}`.
 
 Endereço e demais dados: `quality_reports/estado-capitulos/capitulos.json` (campo `artifact_url`).
 
@@ -27,6 +27,7 @@ Os dois só avisam se o último commit do `main` que toca os caminhos da tese (l
 3. **Publicar** com a ferramenta Artifact, usando `publicar.json`:
    - em uma sessão que ainda não publicou esta página: primeiro `action: "read"` com o `url`, depois `action: "list"`, `scope: "files"`, com o mesmo `url` (a publicação exige ter visto a página e os arquivos);
    - `action: "publish"`, `url` = `url` do manifesto, `file_path` = `file_path` do manifesto, `files` = `files` do manifesto (entradas `null` removem arquivos que saíram). Sem `icon`.
+   - `capabilities`: omitir mantém a declaração já gravada (`downloads`, para o botão PDF); só passar `{"downloads": true}` se ela tiver sido perdida.
    - `.qmd` vai com `contentType: "text/plain"` exato (sem `charset`), como já está no manifesto.
    - Se a publicação for recusada porque há uma versão mais nova publicada em outro lugar (outra sessão ou edição pela página), levar as mudanças dessa versão para `scripts/estado_capitulos/template.html` (ou para `capitulos.json`, se forem de conteúdo) — nunca só para `_site/`, que é apagado a cada geração —, regenerar e publicar de novo.
 4. **Marcar:** `python scripts/estado_capitulos/gerar.py --marcar-publicado`.

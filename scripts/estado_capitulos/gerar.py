@@ -205,7 +205,10 @@ def build_page(data: dict, order: list[str], has_book: bool, head_desc: str) -> 
         # PDF avulso do capítulo (campo "pdf" em capitulos.json), publicado em pdf/
         pdf = c.get("pdf")
         if pdf and (ROOT / pdf).exists():
-            links.append(f'<a class="btn" href="pdf/{esc(Path(pdf).name)}">PDF</a>')
+            # a página publicada não abre PDF por link simples; o script do template
+            # baixa o arquivo pela capacidade "downloads" (ver README)
+            nome = esc(Path(pdf).name)
+            links.append(f'<a class="btn" href="pdf/{nome}" data-baixar="{nome}">PDF</a>')
         gh = gh_link(base, f"Quarto/thesis/chapters/{fname}")
         if gh:
             links.append(f'<a class="btn" href="{gh}">GitHub</a>')

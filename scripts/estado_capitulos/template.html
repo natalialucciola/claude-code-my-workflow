@@ -213,4 +213,29 @@ span.path[role="link"] { text-decoration: underline; text-decoration-color: var(
   input.addEventListener('input', render);
   render();
 })();
+
+// Botão PDF: a página publicada não abre PDF por link; o arquivo é baixado
+// pela capacidade "downloads" do claude.ai, que pede confirmação a quem vê.
+(function () {
+  var dl = (window.claude && typeof claude.use === 'function')
+    ? claude.use('downloads').catch(function () { return null; }) : Promise.resolve(null);
+  document.querySelectorAll('a[data-baixar]').forEach(function (a) {
+    var rotulo = a.textContent;
+    function aviso(t) { a.textContent = t; setTimeout(function () { a.textContent = rotulo; }, 4000); }
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      a.textContent = 'Preparando…';
+      Promise.all([dl, fetch(a.getAttribute('href')).then(function (r) {
+        if (!r.ok) throw new Error('http'); return r.blob();
+      })]).then(function (res) {
+        var d = res[0];
+        if (!d) { aviso('Download indisponível aqui'); return; }
+        a.textContent = rotulo;
+        return d.save({ filename: a.dataset.baixar, data: res[1] }).then(
+          function () { aviso('PDF salvo'); },
+          function (err) { aviso(err && err.code === 'declined' ? rotulo : 'Não foi possível baixar'); });
+      }, function () { aviso('Não foi possível baixar'); });
+    });
+  });
+})();
 </script>
