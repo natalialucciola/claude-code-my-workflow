@@ -66,11 +66,16 @@ rotulo_y <- c(cand = "1. Candidaturas (% da lista)", gasto = "2. Gasto (% do gas
               recp_c   = "Recursos do partido a competitivas do grupo (% da lista)",
               recp_nc  = "Recursos do partido a não competitivas do grupo (% da lista)",
               rtp    = "Receita total do grupo vinda do partido (% da receita da lista)",
-              rto    = "Receita total do grupo de outras fontes (% da receita da lista)",
+              # categorias de 2026-11-24 (antes: rto = receita total − partido, que
+              # incluía os repasses de outras candidaturas, sobretudo FEFC/FP)
+              rtc_pub  = "Repasses de outras candidaturas, FEFC/FP (% da receita da lista)",
+              rtc_priv = "Repasses de outras candidaturas, outros recursos (% da receita da lista)",
+              rtpriv = "Receita privada do grupo: doações e recursos próprios (% da receita da lista)",
+              rtres  = "Receita residual do grupo (% da receita da lista)",
               rtp_c  = "Receita do partido a competitivas do grupo (% da receita da lista)",
               rtp_nc = "Receita do partido a não competitivas do grupo (% da receita da lista)",
-              rto_c  = "Outras receitas de competitivas do grupo (% da receita da lista)",
-              rto_nc = "Outras receitas de não competitivas do grupo (% da receita da lista)")
+              rtpriv_c  = "Receita privada de competitivas do grupo (% da receita da lista)",
+              rtpriv_nc = "Receita privada de não competitivas do grupo (% da receita da lista)")
 # No nível UF × cargo as parcelas são do grupo no total da disputa
 rotulo_uf <- c(cand = "1. Candidaturas (% das candidaturas da UF)",
                voto = "4a. Votos (% dos votos nominais da UF)",
@@ -169,8 +174,9 @@ grade <- bind_rows(
               balanceado = TRUE),
   expand_grid(dados = "disputa", y = c("gin_c", "gin_nc"), g = gs,
               anos = list(anos_rec), ponderado = FALSE, balanceado = TRUE),
-  # --- de onde vem a receita total do grupo: partido × outras fontes (e c × nc) ---
-  expand_grid(dados = "lista", y = c("rtp", "rto", "rtp_c", "rtp_nc", "rto_c", "rto_nc"),
+  # --- de onde vem a receita total do grupo: partido, repasses, privada (e c × nc) ---
+  expand_grid(dados = "lista", y = c("rtp", "rtc_pub", "rtc_priv", "rtpriv", "rtres",
+                                     "rtp_c", "rtp_nc", "rtpriv_c", "rtpriv_nc"),
               g = gs, anos = list(anos_rec), ponderado = c(FALSE, TRUE), balanceado = TRUE)
 )
 fits <- pmap(grade, function(dados, y, g, anos, ponderado, balanceado) {
@@ -210,9 +216,9 @@ somar <- function(partes, total) {
 }
 somar(c("voto_c", "voto_nc"), "voto")
 somar(c("gasto_c", "gasto_nc"), "gasto")
-somar(c("rtp", "rto"), "rec_total")
+somar(c("rtp", "rtc_pub", "rtc_priv", "rtpriv", "rtres"), "rec_total")
 somar(c("rtp_c", "rtp_nc"), "rtp")
-somar(c("rto_c", "rto_nc"), "rto")
+somar(c("rtpriv_c", "rtpriv_nc"), "rtpriv")
 
 # Replicação da etapa anterior (2018→2022, painel de 2 eleições): votos das mulheres
 rep22 <- estimar(painel, "voto_mulher", c(2018L, 2022L))$res |> filter(periodo == "2022")
@@ -319,13 +325,13 @@ evento(base_m |> filter(nivel == "lista", medida %in% c("voto_c", "voto_nc", "ga
 
 # De onde vem a receita total do grupo: partido × outras fontes (decisão de 2026-11-08)
 base_r <- res |> filter(!ponderado, balanceado, grupo != grupos[["todos"]], nivel == "lista")
-evento(base_r |> filter(medida %in% c("rec_total", "rec_partido", "rtp", "rto")) |>
-         ordem(rotulo_y[c("rec_total", "rec_partido", "rtp", "rto")]),
+evento(base_r |> filter(medida %in% c("rec_total", "rec_partido", "rtp", "rtc_pub", "rtpriv")) |>
+         ordem(rotulo_y[c("rec_total", "rec_partido", "rtp", "rtc_pub", "rtpriv")]),
        "EC 111: receita total e transferências do partido",
-       "Receita total do grupo = parte vinda do partido + parte de outras fontes.",
+       "Receita total do grupo = partido + repasses de outras candidaturas + privada + residual.",
        "did_2026_evento_receita_origem", 2, 7)
-evento(base_r |> filter(medida %in% c("rtp_c", "rtp_nc", "rto_c", "rto_nc")) |>
-         ordem(rotulo_y[c("rtp_c", "rtp_nc", "rto_c", "rto_nc")]),
+evento(base_r |> filter(medida %in% c("rtp_c", "rtp_nc", "rtpriv_c", "rtpriv_nc")) |>
+         ordem(rotulo_y[c("rtp_c", "rtp_nc", "rtpriv_c", "rtpriv_nc")]),
        "EC 111: origem da receita, competitivas × não competitivas",
        "Parcela da receita total da lista; as quatro partes somam o efeito sobre a receita total.",
        "did_2026_evento_receita_origem_margem", 2, 7, fonte = paste0(fonte_lista, nota_margem))

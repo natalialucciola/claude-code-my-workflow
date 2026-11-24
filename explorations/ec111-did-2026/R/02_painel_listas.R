@@ -14,9 +14,19 @@
 #   rec_partido_g % das transferências do partido à lista recebidas por g      2018–2026
 #   rec_publico_g % dos recursos públicos (FEFC + FP) da lista recebidos por g 2018–2026
 #   rec_total_g   % de todas as receitas da lista recebidas por g              2018–2026
-#   rtp_g / rto_g parcela de g na receita total da lista vinda do partido / de
-#                 outras fontes (somam rec_total_g); rtp_c/nc, rto_c/nc idem por
-#                 competitivas × não competitivas (decisão da autora, 2026-11-08)
+#   rec_partido_ampla_g  % das transferências do partido + FEFC/FP repassados por
+#                 outras candidaturas à lista recebidas por g (robustez da H2) 2018–2026
+#   Origem da receita do grupo, como % da receita total da lista (somam rec_total_g;
+#   categorias de categorizar_receita(), regra de 2026-11-24):
+#     rtp_g       vinda do partido
+#     rtc_pub_g   repassada por outras candidaturas, FEFC ou Fundo Partidário
+#     rtc_priv_g  repassada por outras candidaturas, outros recursos
+#     rtpriv_g    privada: pessoas físicas, financiamento coletivo, recursos próprios
+#                 (teste de falsificação: depende da decisão de doadores)
+#     rtres_g     residual (rendimentos, origem não identificada; < 0,1%)
+#   rtp_c/nc e rtpriv_c/nc idem por competitivas × não competitivas.
+#   Até 2026-11-23, "outras fontes" (rto) era receita_total − receita_partido e incluía
+#   os repasses de outras candidaturas, 80-86% deles FEFC ou Fundo Partidário.
 #   Grupos g: mulher, negra e mulher_negra (interseção; decisão de 2026-11-08).
 #   Disputa: cadeira_g = % dos eleitos que são g; cand_g, voto_g idem.
 #
@@ -67,7 +77,9 @@ para_2026 <- function(sigla, ano) {
 # ------------------------------------------------------------------------------
 cols <- c("ANO", "DS_CARGO", "sq_candidato", "uf", "partido", "mulher", "negra",
           "VOTOS_CAND_TOTAL", "compet", "eleito", "gasto", "receita_total", "receita_publica",
-          "receita_partido")
+          "receita_partido", "repasse_cand_pub", "repasse_cand_priv", "receita_privada",
+          "receita_residual")
+cols_cat <- c("repasse_cand_pub", "repasse_cand_priv", "receita_privada", "receita_residual")
 
 # 2014 (sem recursos: 2014 não serve de referência para financiamento)
 votos_fed_14 <- rd("votos_mun_2014_df.rds")
@@ -90,12 +102,19 @@ c14 <- bind_rows(rd("candidatos2014.rds") |> mutate(DS_CARGO = "Deputado Federal
   mutate(ANO = "2014", mulher = genero == "FEMININO", negra = raca2(raca) == "NEGRA",
          compet = competitivo == 1L | eleito == 1L,
          gasto = NA_real_, receita_total = NA_real_, receita_publica = NA_real_,
-         receita_partido = NA_real_) |>
+         receita_partido = NA_real_, !!!setNames(rep(list(NA_real_), length(cols_cat)), cols_cat)) |>
   select(all_of(cols))
 
-# 2018 e 2022 (base da exploração competitividade-gasto; sem DF)
+# 2018 e 2022 (base da exploração competitividade-gasto; sem DF). As categorias de
+# receita de 2026-11-24 vêm direto de receitas_cand_dep.rds (competitividade-gasto/R/04),
+# sem refazer o R/05 daquela exploração; candidaturas sem receita ficam com 0, como as
+# demais colunas de receita no R/05.
+cat1822 <- readRDS("data/processed/receitas_cand_dep.rds") |>
+  select(ANO, DS_CARGO, sq_candidato = SQ_CANDIDATO, all_of(cols_cat))
 c1822 <- readRDS("data/processed/base_did_candidatos.rds") |>
   mutate(compet = compet_voto == 1L, eleito = as.integer(eleito)) |>
+  left_join(cat1822, by = c("ANO", "DS_CARGO", "sq_candidato")) |>
+  mutate(across(all_of(cols_cat), \(x) replace_na(x, 0))) |>
   select(all_of(cols))
 
 # 2026
@@ -109,11 +128,12 @@ cand <- bind_rows(c14, c1822, c26) |>
   filter(uf != "DF") |>
   mutate(partido_h = para_2026(partido, ANO), federal = DS_CARGO == "Deputado Federal",
          mulher_negra = mulher & negra,
-         # receita que não veio do partido (doações de pessoas físicas, recursos próprios,
-         # financiamento coletivo, outras candidaturas…): receita_total − receita_partido
-         receita_outras = receita_total - receita_partido)
+         # robustez da H2: o partido distribui FEFC/FP também por meio de outras candidaturas
+         receita_partido_ampla = receita_partido + repasse_cand_pub)
 chk_rec <- cand |> filter(!is.na(receita_total))
-stopifnot(all(chk_rec$receita_partido <= chk_rec$receita_total + 1e-6))
+# partição exata da receita (R$ 0,01): partido + repasses + privada + residual = total
+stopifnot(all(abs(chk_rec$receita_partido + chk_rec$repasse_cand_pub + chk_rec$repasse_cand_priv +
+                  chk_rec$receita_privada + chk_rec$receita_residual - chk_rec$receita_total) < 0.01))
 stopifnot(!anyDuplicated(cand[c("ANO", "DS_CARGO", "sq_candidato")]))
 
 # Competitividade pela margem de votos (exploração competitividade-eleitoral, script 03):
@@ -179,6 +199,8 @@ painel <- cand |>
               rec_total   = \(g) pp(sum(receita_total[g]), sum(receita_total)),
               rec_publico = \(g) pp(sum(receita_publica[g]), sum(receita_publica)),
               rec_partido = \(g) pp(sum(receita_partido[g]), sum(receita_partido)),
+              rec_partido_ampla = \(g) pp(sum(receita_partido_ampla[g]),
+                                          sum(receita_partido_ampla)),
               # --- separação competitivas (c) × não competitivas (nc), pela margem ---
               # presença: % das competitivas / não competitivas da lista que são g
               cmshare  = \(g) pp(sum(g & compet_m), sum(compet_m)),
@@ -190,15 +212,18 @@ painel <- cand |>
               gasto_nc = \(g) pp(sum(gasto[g & !compet_m]), sum(gasto)),
               recp_c   = \(g) pp(sum(receita_partido[g & compet_m]), sum(receita_partido)),
               recp_nc  = \(g) pp(sum(receita_partido[g & !compet_m]), sum(receita_partido)),
-              # --- de onde vem a receita total do grupo (decisão da autora, 2026-11-08) ---
-              # rtp + rto = rec_total: parcela de g na receita total da lista vinda do
-              # partido (rtp) e de outras fontes (rto); idem separadas em c × nc
-              rtp    = \(g) pp(sum(receita_partido[g]), sum(receita_total)),
-              rto    = \(g) pp(sum(receita_outras[g]), sum(receita_total)),
-              rtp_c  = \(g) pp(sum(receita_partido[g & compet_m]), sum(receita_total)),
-              rtp_nc = \(g) pp(sum(receita_partido[g & !compet_m]), sum(receita_total)),
-              rto_c  = \(g) pp(sum(receita_outras[g & compet_m]), sum(receita_total)),
-              rto_nc = \(g) pp(sum(receita_outras[g & !compet_m]), sum(receita_total))),
+              # --- de onde vem a receita total do grupo (2026-11-08; categorias 2026-11-24) ---
+              # rtp + rtc_pub + rtc_priv + rtpriv + rtres = rec_total, todas como parcela
+              # de g na receita total da lista; rtp e rtpriv também separadas em c × nc
+              rtp       = \(g) pp(sum(receita_partido[g]), sum(receita_total)),
+              rtc_pub   = \(g) pp(sum(repasse_cand_pub[g]), sum(receita_total)),
+              rtc_priv  = \(g) pp(sum(repasse_cand_priv[g]), sum(receita_total)),
+              rtpriv    = \(g) pp(sum(receita_privada[g]), sum(receita_total)),
+              rtres     = \(g) pp(sum(receita_residual[g]), sum(receita_total)),
+              rtp_c     = \(g) pp(sum(receita_partido[g & compet_m]), sum(receita_total)),
+              rtp_nc    = \(g) pp(sum(receita_partido[g & !compet_m]), sum(receita_total)),
+              rtpriv_c  = \(g) pp(sum(receita_privada[g & compet_m]), sum(receita_total)),
+              rtpriv_nc = \(g) pp(sum(receita_privada[g & !compet_m]), sum(receita_total))),
               .names = "{.fn}_{.col}"),
             .by = c(ANO, DS_CARGO, federal, uf, partido_h)) |>
   filter(votos_lista > 0, !is.na(partido_h)) |>          # PHS (extinto) sai

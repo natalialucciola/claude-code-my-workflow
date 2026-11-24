@@ -30,6 +30,56 @@ raca2 <- function(raca) {
                    TRUE ~ "OUTRA")
 }
 
+#' Classifica cada receita em categorias que somam a receita total (regra de 2026-11-24).
+#'
+#' Antes, "outras fontes" era a receita total menos a do partido, e por isso incluía os
+#' repasses de outras candidaturas, dos quais 80-86% são FEFC ou Fundo Partidário:
+#' dinheiro público que o partido distribui e que passa por uma candidatura. A fonte
+#' (DS_FONTE_RECEITA) é preservada no repasse, o que permite separá-lo.
+#'   partido            origem "Recursos de partido político", qualquer fonte
+#'   repasse_cand_pub   origem "Recursos de outros candidatos", fonte FEFC ou Fundo Partidário
+#'   repasse_cand_priv  origem "Recursos de outros candidatos", outras fontes
+#'   privada            pessoas físicas, internet, financiamento coletivo, recursos
+#'                      próprios, comercialização de bens/eventos (decisão de doadores)
+#'   residual           rendimentos de aplicações, origens não identificadas, #NULO
+#' @param origem DS_ORIGEM_RECEITA; @param fonte DS_FONTE_RECEITA
+#' @return vetor de caracteres com a categoria de cada receita
+categorizar_receita <- function(origem, fonte) {
+  o <- tolower(origem); f <- tolower(fonte)
+  publica <- grepl("especial|partid", f)
+  dplyr::case_when(
+    grepl("partido pol", o, fixed = TRUE)                     ~ "partido",
+    grepl("outros candidatos", o, fixed = TRUE) & publica     ~ "repasse_cand_pub",
+    grepl("outros candidatos", o, fixed = TRUE)               ~ "repasse_cand_priv",
+    grepl("pessoas f|internet|financiamento coletivo|pr[oó]prios|comercializa", o) ~ "privada",
+    TRUE                                                      ~ "residual"
+  )
+}
+
+#' Soma as receitas por candidatura em cada categoria de categorizar_receita().
+#' @param x data.table com DS_ORIGEM_RECEITA, DS_FONTE_RECEITA e v (valor numérico)
+#' @param by colunas de agrupamento
+#' @return data.table com receita_total, receita_partido, receita_publica (FEFC + FP de
+#'   qualquer origem), repasse_cand_pub, repasse_cand_priv, receita_privada,
+#'   receita_residual; as cinco categorias somam receita_total
+resumir_receitas <- function(x, by) {
+  x <- data.table::copy(x)
+  x[, cat := categorizar_receita(DS_ORIGEM_RECEITA, DS_FONTE_RECEITA)]
+  out <- x[, .(receita_total     = sum(v, na.rm = TRUE),
+               receita_partido   = sum(v[cat == "partido"], na.rm = TRUE),
+               receita_publica   = sum(v[grepl("(?i)especial|partid", DS_FONTE_RECEITA, perl = TRUE)],
+                                       na.rm = TRUE),
+               repasse_cand_pub  = sum(v[cat == "repasse_cand_pub"], na.rm = TRUE),
+               repasse_cand_priv = sum(v[cat == "repasse_cand_priv"], na.rm = TRUE),
+               receita_privada   = sum(v[cat == "privada"], na.rm = TRUE),
+               receita_residual  = sum(v[cat == "residual"], na.rm = TRUE)),
+           by = by]
+  soma <- out[, receita_partido + repasse_cand_pub + repasse_cand_priv + receita_privada +
+                receita_residual]
+  stopifnot(all(abs(soma - out$receita_total) < 0.01))   # partição exata (R$ 0,01)
+  out
+}
+
 #' Lê despesas contratadas ou receitas da prestação de contas do TSE (deputados) e
 #' remove apenas as linhas idênticas em TODAS as colunas.
 #'

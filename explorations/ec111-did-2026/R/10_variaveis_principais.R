@@ -19,6 +19,14 @@
 #     rec_partido_g  % das transferências do partido à lista que foram para g  2018–2026
 #     gasto_g        % do gasto da lista feito por g                           2018–2026
 #     voto_g         % dos votos nominais da lista dados a g                   2014–2026
+#     rec_partido_ampla_g  idem rec_partido, somando o FEFC/FP repassado por outras
+#                    candidaturas (robustez da H2; plano 2026-11-24)          2018–2026
+#     rtp_g, rtc_pub_g, rtc_priv_g, rtpriv_g, rtres_g  parcela de g na receita total da
+#                    lista vinda do partido / repassada por outras candidaturas (FEFC-FP;
+#                    outros recursos) / privada (pessoas físicas, financiamento coletivo,
+#                    recursos próprios) / residual; somam rec_total_g. rtpriv é o teste de
+#                    falsificação (com wild bootstrap); até 23/11 era rto = total − partido,
+#                    que incluía os repasses de outras candidaturas         2018–2026
 #   Disputa (UF × cargo):
 #     inv_g          100 × média transferida por candidatura de g ÷ média por
 #                    candidatura de c (100 = igualdade)                         2018–2026
@@ -197,11 +205,18 @@ grade <- bind_rows(
          g = c("negra", "negra", "mulher_negra", "mulher_negra"), anos = list(anos_longos)),
   tibble(base = "disputa", v = c("tcg_br", "tcg_hb"), g = c("negra", "mulher_negra"),
          anos = list(anos_rec)),
-  # mecanismo (sem wild bootstrap): partes competitivas × não competitivas e origem da receita
+  # mecanismo (sem wild bootstrap): partes competitivas × não competitivas e origem da receita.
+  # rtpriv (receita privada: falsificação, com wild bootstrap) ocupa a posição do antigo
+  # rto, e as categorias novas de 2026-11-24 vêm depois: como o set.seed é único, as
+  # linhas anteriores reproduzem exatamente as réplicas da rodada de 22/11.
   expand_grid(base = "lista", v = c("voto_c", "voto_nc"), g = gs, anos = list(anos_longos)),
-  expand_grid(base = "lista", v = c("gasto_c", "gasto_nc", "recp_c", "recp_nc", "rtp", "rto"),
+  expand_grid(base = "lista", v = c("gasto_c", "gasto_nc", "recp_c", "recp_nc", "rtp", "rtpriv"),
+              g = gs, anos = list(anos_rec)),
+  # robustez da H2 (transferências do partido + FEFC/FP repassados por outras candidaturas)
+  # e as demais partes da receita total (somam rec_total com rtp e rtpriv)
+  expand_grid(base = "lista", v = c("rec_partido_ampla", "rtc_pub", "rtc_priv", "rtres"),
               g = gs, anos = list(anos_rec))) |>
-  mutate(wild = !str_detect(v, "_c$|_nc$|^rt[po]$") | v %in% c("inv_c", "inv_nc"))
+  mutate(wild = !str_detect(v, "_c$|_nc$|^rt(p|c_pub|c_priv|res)$") | v %in% c("inv_c", "inv_nc"))
 
 t0 <- Sys.time()
 res <- pmap(grade, function(base, v, g, anos, wild) {
@@ -261,7 +276,7 @@ antigo_03 <- le(file.path(out_dir, "did_2026_resultados.csv")) |>
   filter(!ponderado, balanceado,
          (nivel == "lista" & medida %in% c("cand", "voto", "rec_partido", "gasto", "voto_c", "voto_nc",
                                            "gasto_c", "gasto_nc", "recp_c", "recp_nc",
-                                           "rtp", "rto")) |
+                                           "rtp")) |
          (nivel == "disputa" & medida %in% c("cmshare", "cadeira"))) |>
   mutate(medida = if_else(medida == "cmshare", "pcv", medida),
          grupo = str_extract(resultado, "(mulher_negra|mulher|negra)$"),

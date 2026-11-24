@@ -119,18 +119,16 @@ rec <- ler_prestacao(zip_pc, "receitas_candidatos_2026_BRASIL.csv", cargos)
 message("2026: ", attr(rec, "copias_exatas"), " cópias exatas removidas (receitas)")
 rec <- rec[, .(DS_CARGO, SQ_CANDIDATO, DS_ORIGEM_RECEITA, DS_FONTE_RECEITA, VR_RECEITA)][
   , v := num(VR_RECEITA)]
-eh_partido <- \(o) grepl("partido pol", tolower(o), fixed = TRUE)
-rec <- rec[, .(receita_total   = sum(v, na.rm = TRUE),
-               receita_partido = sum(v[eh_partido(DS_ORIGEM_RECEITA)], na.rm = TRUE),
-               receita_publica = sum(v[grepl("(?i)especial|partid", DS_FONTE_RECEITA, perl = TRUE)],
-                                     na.rm = TRUE)),
-           by = .(DS_CARGO, SQ_CANDIDATO)]
+# Categorias que somam a receita total (regra de 2026-11-24; resumir_receitas em
+# competitividade-gasto/R/funcoes_apoio.R, a mesma de 2018/2022)
+rec <- resumir_receitas(rec, by = c("DS_CARGO", "SQ_CANDIDATO"))
+cols_rec <- c("receita_total", "receita_partido", "receita_publica", "repasse_cand_pub",
+              "repasse_cand_priv", "receita_privada", "receita_residual")
 
 cand <- cand |>
   left_join(as_tibble(desp), by = c("DS_CARGO", "sq_candidato" = "SQ_CANDIDATO")) |>
   left_join(as_tibble(rec), by = c("DS_CARGO", "sq_candidato" = "SQ_CANDIDATO")) |>
-  mutate(across(c(gasto_bruto, repasse, gasto, receita_total, receita_partido, receita_publica),
-                \(x) replace_na(x, 0)))
+  mutate(across(c(gasto_bruto, repasse, gasto, all_of(cols_rec)), \(x) replace_na(x, 0)))
 stopifnot(!anyDuplicated(cand[c("DS_CARGO", "sq_candidato")]))
 saveRDS(cand, "data/processed/cand_dep_2026.rds")
 

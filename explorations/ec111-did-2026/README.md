@@ -166,6 +166,48 @@ Depois de R/10, `R/11_tabelas_figuras_capitulo.R` escreve as tabelas do capítul
 falsificacao) e as figuras `efeitos_etapas.png` e `transferencias_por_cargo.png`. O PDF avulso
 do capítulo é derivado por `Quarto/capitulo4-pdf/derivar.py`.
 
+## Categorias de receita (24/11/2026)
+
+Plano: `quality_reports/plans/2026-11-24_cap4-categorias-receita-falsificacao.md` (recomendações
+aceitas pela autora). **Problema:** "outras fontes" (`rto`, `receita_outras`) era receita total −
+transferências do partido e incluía os repasses de outras candidaturas, dos quais 80–86% são FEFC ou
+Fundo Partidário (a fonte é preservada no `DS_FONTE_RECEITA` do repasse). A Metodologia descrevia o
+teste de falsificação só com doações e recursos próprios.
+
+**Regra:** `categorizar_receita()` / `resumir_receitas()` em `competitividade-gasto/R/funcoes_apoio.R`,
+usadas em `competitividade-gasto/R/04` (2018/2022) e `R/01` (2026). Cinco partes que somam a receita
+total (assert de R$ 0,01): `receita_partido` (inalterada), `repasse_cand_pub` (outras candidaturas,
+FEFC/FP), `repasse_cand_priv` (outras candidaturas, outros recursos), `receita_privada` (pessoas
+físicas, internet, financiamento coletivo, próprios, comercialização) e `receita_residual`
+(rendimentos, origem não identificada; < 0,1%). Estimáveis mantidos. As categorias de 2018/2022
+entram no `R/02` direto de `receitas_cand_dep.rds` (o `R/05` de competitividade-gasto não foi
+refeito). Medidas do painel: `rtp`, `rtc_pub`, `rtc_priv`, `rtpriv` (falsificação, com wild
+bootstrap), `rtres` e `rec_partido_ampla` (partido + repasses públicos; robustez da H2).
+
+| FEFC + FP repassados por outras candidaturas (R$ mi) | 2018 | 2022 | 2026 |
+|---|---:|---:|---:|
+| A candidaturas estaduais | 115 | 128 | 96 |
+| A candidaturas federais | 26 | 26 | 18 |
+
+**Conferências:** colunas antigas de `receitas_cand_dep.rds`, `cand_dep_2026.rds`, painéis e base por
+candidatura idênticas às anteriores; no `R/10` final (BITERS=25000, WILD=1999; `rtpriv` na posição do
+antigo `rto`, novas medidas no fim da grade) as 304 linhas já existentes saíram idênticas, inclusive
+bandas e p do wild.
+
+**Resultados (p.p.; * IC 95% exclui zero, EP por UF):**
+
+- Falsificação (`rtpriv`): mulheres +1,7 (p wild 0,06) e −0,4; mulheres negras +0,5 e +0,1; pessoas
+  negras +1,7* em 2022 (p wild 0,05) e −1,1. O antigo +3,0* das pessoas negras em 2022 era +1,0
+  (repasses públicos) + 0,3 (repasses privados) + 1,7 (privada).
+- Repasses públicos a pessoas negras: +1,0 (2022) e +2,4* (2026), compatível com a EC 133/2024.
+- H2 ampla: mulheres +8,7* e +7,3* (contra +12,4 e +12,2); mulheres negras +6,7* e +5,9*; pessoas
+  negras +4,9* (p wild 0,055) e +4,3. Totais nacionais, mulheres estaduais: 44,1% → 38,8% na medida
+  ampla, contra 51,2% → 40,3% na direta; dois cargos: 31,9 / 33,9 / 36,0. Em 2018, os repasses de
+  FEFC/FP às estaduais foram pouco para mulheres (15,8%).
+
+`R/03` e `R/07` (fase anterior; nenhuma saída no capítulo) foram atualizados para as novas medidas,
+mas não rodados de novo: `did_2026_resultados.csv` ainda traz `rto`.
+
 ## Viabilidade ex ante: para quem foi o acréscimo das transferências (2026-11-24)
 
 Plano: `quality_reports/plans/2026-11-24_cap4-cacaniquel-item1-implementacao.md` (item 1 do teste caça-níquel). Scripts: `R/12_viabilidade_ex_ante.R` (classificação), `R/13_cacaniquel_viabilidade.R` (decomposição e estimação; usa `R/funcoes_estimacao.R`, cópia idêntica de `estimar()`/`wild_p()` do R/10) e a seção 6 do `R/11`.

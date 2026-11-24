@@ -150,7 +150,8 @@ rotulos <- c(
   rec_total   = "Receita total (% da receita da lista)",
   rec_partido = "Transferências do partido (% das transferências da lista)",
   rtp         = "Receita vinda do partido (% da receita da lista)",
-  rto         = "Receita de outras fontes (% da receita da lista)",
+  rtc_pub     = "Repasses de outras candidaturas, FEFC/FP (% da receita da lista)",
+  rtpriv      = "Doações e recursos próprios (% da receita da lista)",
   voto_c      = "Votos de competitivas do grupo (% dos votos da lista)",
   voto_nc     = "Votos de não competitivas do grupo (% dos votos da lista)",
   gasto_c     = "Gasto de competitivas do grupo (% do gasto da lista)",
@@ -188,7 +189,7 @@ evento <- function(medidas, nome, h, nota = "") {
     tema
   salvar(p, nome, 10, h)
 }
-evento(c("rec_total", "rec_partido", "rtp", "rto"), "did_2026_evento_receita_origem", 7,
+evento(c("rec_total", "rec_partido", "rtp", "rtc_pub", "rtpriv"), "did_2026_evento_receita_origem", 7,
        " Recursos sem pré-teste (doação empresarial em 2014).")
 evento(c("voto_c", "voto_nc", "gasto_c", "gasto_nc", "recp_c", "recp_nc"),
        "did_2026_evento_margem_decomposicao", 9.5,
