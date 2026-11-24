@@ -165,3 +165,24 @@ Depois de R/10, `R/11_tabelas_figuras_capitulo.R` escreve as tabelas do capítul
 `Quarto/thesis/chapters/_tabelas-cap3/` (principal, sucesso, transferencias_cargo, decomposicao,
 falsificacao) e as figuras `efeitos_etapas.png` e `transferencias_por_cargo.png`. O PDF avulso
 do capítulo é derivado por `Quarto/capitulo4-pdf/derivar.py`.
+
+## Viabilidade ex ante: para quem foi o acréscimo das transferências (2026-11-24)
+
+Plano: `quality_reports/plans/2026-11-24_cap4-cacaniquel-item1-implementacao.md` (item 1 do teste caça-níquel). Scripts: `R/12_viabilidade_ex_ante.R` (classificação), `R/13_cacaniquel_viabilidade.R` (decomposição e estimação; usa `R/funcoes_estimacao.R`, cópia idêntica de `estimar()`/`wild_p()` do R/10) e a seção 6 do `R/11`.
+
+**Classificação.** Uma candidatura é viável ex ante se, na eleição anterior (*t − 4*), foi eleita deputada no mesmo cargo (V1), no outro cargo (V2) ou terminou a menos de 0,1 QE do limiar em qualquer dos dois cargos (V3). A pessoa é ligada entre eleições pelo CPF do `consulta_cand` (título eleitoral na falta dele). Cobertura: 99,8% a 100%, e CPF 100% igual ao das bases da tese. Reeleitos federais: 239, 279 e 292. Robustez: só V1; V3 só no mesmo cargo. Decisões da autora (24/11): medir na lista; 2022 e 2026 medidos da mesma forma.
+
+**Tamanhos.** Mulheres viáveis federais: 71 (2018), 129 (2022), 136 (2026). O aumento de 2022 vem de deputadas estaduais que passaram ao federal (V2: 5 → 23) e de quem ficou perto do limiar (V3: 24 → 52). Mulheres negras viáveis federais: 18, 43 e 44 (0,7 a 1,7 por UF). Por isso as medidas ficam na lista, como decomposição aditiva, sem dividir pelo número de viáveis.
+
+**Resultado** (p.p., transferências do partido, listas balanceadas 2018–2026; \* IC 95% exclui zero, EP por UF):
+
+| | Mulheres 2022 / 2026 | Pessoas negras 2022 / 2026 | Mulheres negras 2022 / 2026 |
+|---|---|---|---|
+| Total | +12,4\* / +12,2\* | +3,4 / +4,1 | +8,1\* / +8,4\* |
+| Viáveis ex ante (observado) | −0,8 / −0,8 | −7,0\* / −6,0\* | −0,5 / −0,6 |
+| Viáveis ex ante (esperado pela divisão federal de 2018) | +2,7 / +2,6 | +1,3 / +1,6 | +1,2 / +1,3 |
+| Não viáveis ex ante | +13,2\* / +13,0\* | +10,4\* / +10,1\* | +8,5\* / +9,0\* |
+
+**Leitura.** O acréscimo das transferências às mulheres foi inteiro para candidatas que não eram viáveis antes da eleição. A parte das viáveis não se move, quando a divisão de 2018 previa cerca de +2,7. O padrão se repete no gasto e nos votos, nas duas robustezes da classificação e em 2026. Para pessoas negras há realocação, com o dinheiro saindo das viáveis. A matriz viável × competitiva (`output/viabilidade_matriz_2x2.csv`) mostra que a célula "viável que fracassou" é pequena e não cresce (federal, mulheres: 9,2 → 7,5% das transferências). A célula "não viável e não competitiva" sobe de 44,5 para 65,5% no federal, contra 63,3 → 67,8% no estadual. A leitura ex post do capítulo, portanto, não confundia intenção com ineficácia.
+
+**Cuidados.** Não há pré-teste: as transferências começam em 2018, e a viabilidade de 2014 exigiria 2010. O federal de 2018 já era mais concentrado nas viáveis que o estadual (36% contra 19% das transferências às mulheres, totais nacionais). A fatia da coluna "esperado" é média de listas (0,21 para mulheres), não total nacional. Os votos decompostos aqui usam o painel de 2018–2026, e não o de 2014–2026 do R/10.

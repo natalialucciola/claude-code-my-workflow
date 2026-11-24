@@ -1,6 +1,6 @@
 # Plano de implementação: item 1, viabilidade *ex ante* (Cap. 4, EC 111)
 
-**Status:** DRAFT (aguarda as decisões D1–D4 da autora)
+**Status:** APROVADO (D1–D4 em 24/11). Passos 1, 3 e 4 feitos; Passo 2 (R/10 usar funcoes_estimacao.R) adiado por coordenação com a sessão das categorias de receita; Passo 5 aguarda a autora
 **Data:** 2026-11-24
 **Plano-mãe:** `quality_reports/plans/2026-11-24_cap4-cacaniquel-viabilidade-concentracao.md` (item 1: 1a e 1b; as Etapas 0–3 daquele plano, restritas ao item 1)
 **Exploração:** `explorations/ec111-did-2026/`
@@ -45,26 +45,21 @@ Matriz 2 × 2 das transferências às mulheres (% do total delas, por ano e carg
 
 **O que a Etapa 0 diz:**
 
-1. **A regra de parada do plano-mãe dispara**: mulheres federais têm 2,7 viáveis por disputa em 2018 (limiar de ~5), e mulheres negras têm 0,7, com 16 UFs zeradas. Daí a decisão D1.
+1. **A regra de parada do plano-mãe dispara**: mulheres federais têm 2,7 viáveis por disputa em 2018 (limiar de ~5), e mulheres negras têm 0,7, com 16 UFs zeradas. Resolvido pela D1 (medir na lista, sem divisão pelo número de viáveis).
 2. **O sinal é forte e não vem da composição.** A fatia das mulheres viáveis cai cerca de 12 p.p. no federal em relação ao estadual (DiD bruto: −11,8 em 2022, −12,4 em 2026), enquanto o número de mulheres viáveis federais *sobe* (71 → 129). Por candidatura, a razão viável/não viável das transferências cai de 18,4 para 7,6 no federal e de 8,8 para 6,4 no estadual.
 3. **A célula caça-níquel cresce 21 p.p. no federal** (44,5 → 65,5) e 4,5 p.p. no estadual. A célula "investimento que falhou" é pequena e cai, de modo que a leitura ex post não estava confundindo intenção com ineficácia.
 4. **Ressalva sobre o ponto de partida:** o federal de 2018 é muito mais concentrado nas viáveis que o estadual (36 contra 19). Sem pré-teste para as transferências, não se distingue um 2018 atípico de um efeito. Isso precisa constar do texto.
 
 ---
 
-## Decisões para a autora
+## Decisões da autora (24/11)
 
-**D1. Unidade das medidas, dada a escassez de viáveis.** *Recomendação:*
-
-- **Principal, no nível da lista, decomposição aditiva** `recp_v_g + recp_nv_g = rec_partido_g` (idem gasto e votos). Não divide pelo número de viáveis, então zero viáveis numa lista dá parte zero, não ausência. Vale para os três grupos, no mesmo painel balanceado de 799 listas do R/10.
-- **Principal, no nível da disputa, fatia** `fv_g` = transferências às viáveis do grupo ÷ transferências ao grupo. Zero viáveis dá 0, que é um valor legítimo. Fica ausente só se o grupo não recebeu nada, o que não deve ocorrer em 52 disputas. Vale para os três grupos, mas a fatia das mulheres negras federais em 2018 é zero por construção em 16 UFs. **Recomendo reportar mulheres negras só na decomposição por lista e no descritivo nacional.**
-- **Razão por candidatura (viável/não viável dentro do grupo): descritiva**, por ano e cargo no total nacional, que é a resposta à ressalva de composição. Não estimar DiD com ela no nível da disputa, porque o painel balanceado perderia de 5 a 16 UFs, com amostras diferentes por grupo.
-
-**D2. 2026 é classificado com resultados de 2022, que já são pós-tratamento.** A viabilidade de 2026 depende de quem a EC ajudou a ficar competitiva em 2022. *Recomendação:* 2022 é o teste ex ante limpo. 2026 entra na tabela com nota e não sustenta conclusões sozinho.
-
-**D3. V3 em qualquer cargo de deputado** (uma estadual que ficou perto do limiar e agora concorre a federal conta como viável). Foi o que a contagem usou. *Recomendação:* manter. A margem já está em unidades de QE do próprio distrito. A alternativa, só no mesmo cargo, entra como robustez junto com "só V1".
-
-**D4. Coluna "esperado se o acréscimo seguisse 2018" (1a).** $s_{2018}$ = média federal de 2018 de `recp_c_g` ÷ média federal de 2018 de `rec_partido_g`, as mesmas médias de lista que o DiD usa. Esperado = $s_{2018} \times \text{ATT}_{\text{total}}$, ao lado do ATT observado de `recp_c_g`. *Recomendação:* essa definição, sem erro-padrão, por ser um contrafactual contábil. A mesma coluna entra para viáveis ex ante (`recp_v_g`).
+| # | Decisão |
+|---|---|
+| D1 | **Medir na lista.** Decomposição aditiva `recp_v_g + recp_nv_g = rec_partido_g` (idem gasto e votos), três grupos, mesmo painel balanceado do R/10. Sem medidas na disputa (fatias `fc`/`fv` e razão por candidatura saem do DiD). O 1a usa a decomposição já existente (`recp_c_g`) com a coluna "esperado". A razão viável/não viável por candidatura fica só como descritivo nacional (ressalva de composição) |
+| D2 | **2022 e 2026 medidos da mesma forma**, como as demais medidas do capítulo (2026 classificado com os resultados de 2022) |
+| D3 | V3 em qualquer cargo de deputado (principal); "mesmo cargo" e "só V1" como robustez |
+| D4 | Esperado = $s_{2018} 	imes 	ext{ATT}_{	ext{total}}$, com $s_{2018}$ = média federal de 2018 de `recp_c_g` (ou `recp_v_g`) ÷ média federal de 2018 de `rec_partido_g`, nas listas balanceadas; sem erro-padrão |
 
 ---
 
@@ -107,30 +102,22 @@ Entradas: `painel_listas_2014_2026.rds`, `cand_ec111_2014_2026.rds` e `viabilida
 | `voto_v_g`, `voto_nv_g` | idem, votos | 2018–2026 (sem 2014: exigiria 2010) |
 | `recp_v1_g`, `recp_nv1_g` | robustez: viável = só V1 | 2018–2026 |
 
-**Disputa** (UF × cargo, 52 unidades):
-
-| Variável | Definição |
-|---|---|
-| `fc_g` (1a) | transferências às competitivas ex post do grupo ÷ transferências ao grupo × 100 |
-| `fv_g` (1b) | idem, viáveis ex ante |
-| `fv1_g`, `fvmc_g` | robustez: só V1; V3 no mesmo cargo |
-
-**Estimação:** `estimar()` com `anos_rec`, base 2018, erros por UF. Wild bootstrap em `fc_g` e `fv_g`, que são os testes principais. As partes da decomposição ficam sem wild, como `recp_c`/`recp_nc` no R/10.
+**Estimação:** `estimar()` com `anos_rec`, base 2018, erros por UF. Wild bootstrap em `recp_v_g` e `recp_nv_g` (testes principais do item 1); as demais partes (gasto, votos, robustez) sem wild, como `recp_c`/`recp_nc` no R/10.
 
 **Checagens no código:**
 
 - `recp_v_g + recp_nv_g == rec_partido_g` em cada lista e ano (tolerância 1e-8), e o mesmo para gasto e votos.
 - ATT(`recp_v_g`) + ATT(`recp_nv_g`) = ATT(`rec_partido_g`), e este ATT bate com o de `variaveis_principais_resultados.csv`.
 - ATT de `recp_c_g` recalculado bate com o R/10. Isso confere que a junção ao painel não mudou a amostra.
-- Níveis por cargo de `fc_mulher` e `fv_mulher`, agregados nacionalmente, ficam próximos dos da Etapa 0. A igualdade não é exata, porque a média de disputas não é o total nacional.
+- Níveis por cargo de `recp_v_mulher` conferem com a diferença das variações médias (mesma conferência do R/10).
 - Coluna "esperado" (D4) calculada com os níveis federais de 2018 das mesmas listas balanceadas.
 
 **Saídas:** `output/cacaniquel_viabilidade.csv` (ATTs) e `output/cacaniquel_viabilidade_niveis.csv` (níveis por cargo e "esperado").
 
 ### Passo 4: tabelas para o capítulo (`R/11`, novo bloco)
 
-- **`tbl-viabilidade-ec111`**, com linhas para mulheres, pessoas negras e mulheres negras (estas só com a decomposição) e colunas: nível federal de 2018, ATT 2022, ATT 2026 e esperado pela divisão de 2018. Dois blocos: (a) competitivas ex post, que é a base de comparação para a `tbl-decomposicao-ec111` atual; (b) viáveis ex ante.
-- **`tbl-matriz-viabilidade-ec111`**: a matriz 2 × 2 descritiva de mulheres, federal e estadual, 2018 e 2022 (2026 em nota, D2).
+- **`tbl-viabilidade-ec111`**, com linhas para mulheres, pessoas negras e mulheres negras e colunas: nível federal de 2018, ATT 2022, ATT 2026 e esperado pela divisão de 2018. Dois blocos: (a) competitivas ex post, que é a base de comparação para a `tbl-decomposicao-ec111` atual; (b) viáveis ex ante.
+- **`tbl-matriz-viabilidade-ec111`**: a matriz 2 × 2 descritiva de mulheres, federal e estadual, 2018, 2022 e 2026 (D2).
 - Arquivos `chapters/_tabelas-cap3/viabilidade.md` e `matriz_viabilidade.md`. Render do capítulo para conferir.
 
 ### Passo 5: texto (só depois de a autora ver os números)
