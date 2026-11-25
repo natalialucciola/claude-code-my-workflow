@@ -19,6 +19,14 @@
 #     rec_partido_g  % das transferências do partido à lista que foram para g  2018–2026
 #     gasto_g        % do gasto da lista feito por g                           2018–2026
 #     voto_g         % dos votos nominais da lista dados a g                   2014–2026
+#     rec_partido_ampla_g  idem rec_partido, somando o FEFC/FP repassado por outras
+#                    candidaturas (robustez da H2; plano 2026-11-24)          2018–2026
+#     rtp_g, rtc_pub_g, rtc_priv_g, rtpriv_g, rtres_g  parcela de g na receita total da
+#                    lista vinda do partido / repassada por outras candidaturas (FEFC-FP;
+#                    outros recursos) / privada (pessoas físicas, financiamento coletivo,
+#                    recursos próprios) / residual; somam rec_total_g. rtpriv é o teste de
+#                    falsificação (com wild bootstrap); até 23/11 era rto = total − partido,
+#                    que incluía os repasses de outras candidaturas         2018–2026
 #   Disputa (UF × cargo):
 #     inv_g          100 × média transferida por candidatura de g ÷ média por
 #                    candidatura de c (100 = igualdade)                         2018–2026
@@ -45,12 +53,10 @@
 
 .libPaths(c(Sys.getenv("R_LIBS_USER"), .libPaths()))
 suppressPackageStartupMessages({library(tidyverse); library(did); library(fixest)})
-source("explorations/ec111-did-2026/R/funcoes_persistencia.R")
+source("explorations/ec111-did-2026/R/funcoes_estimacao.R")   # carrega funcoes_persistencia.R
 
 set.seed(20261122)
 out_dir <- "explorations/ec111-did-2026/output"
-biters  <- as.integer(Sys.getenv("BITERS", "25000"))
-n_wild  <- as.integer(Sys.getenv("WILD", "9999"))
 anos_longos <- c(2014L, 2018L, 2022L, 2026L)
 anos_rec    <- c(2018L, 2022L, 2026L)
 gs <- c("mulher", "negra", "mulher_negra")
@@ -124,67 +130,80 @@ disputas <- disputas |> mutate(across(starts_with(c("inv_", "excesso_")),
                                       \(x) if_else(ano < 2018L, NA_real_, x)))
 
 # ------------------------------------------------------------------------------
+# 1b. Competitividade, eleição e investimento relativo NA LISTA (plano 2026-11-24,
+#     quality_reports/plans/2026-11-24_cap4-competitividade-na-lista.md)
+#   ltcv_g, ltel_g, ltcg_g  taxa de competitivas pelo voto / de eleitas / de competitivas
+#                           pelo gasto de g − a do complemento, entre as candidaturas da
+#                           lista (p.p.); _br e _hb como na disputa. Principal (H4, H5).
+#   lexcesso_g              % das transferências da lista para g − % das candidaturas da
+#                           lista que são g (investimento relativo; substitui inv_g)
+#   lpcv_g, lpcg_g, lcadeira_g  % das competitivas (voto, gasto) / dos eleitos da lista que
+#                           são g; mecanismo, por TWFE ponderado pelo denominador (n_cv,
+#                           n_cg, n_el), painel desbalanceado (seção 2b)
+# As candidaturas de margem_resultado e margem_gasto_medidas recebem a lista harmonizada
+# (partido_h) pela base por candidatura do R/02.
+# ------------------------------------------------------------------------------
+lig <- cand |> transmute(ano, sq_candidato = as.character(sq_candidato),
+                         lista = paste(partido_h, uf, DS_CARGO))
+mr_l <- mr |> mutate(sq_candidato = as.character(sq_candidato)) |>
+  left_join(lig, by = c("ano", "sq_candidato"))
+mg_l <- mg |> mutate(sq_candidato = as.character(sq_candidato)) |>
+  left_join(lig, by = c("ano", "sq_candidato"))
+lig_pct <- c(voto = 100 * mean(!is.na(mr_l$lista)), gasto = 100 * mean(!is.na(mg_l$lista)))
+message("Candidaturas com margem ligadas a uma lista (%): ",
+        paste(names(lig_pct), round(lig_pct, 2), collapse = "; "))
+stopifnot(all(lig_pct >= 99))
+
+lista_mr <- mr_l |> filter(!is.na(lista)) |>
+  summarise(ltcv_mulher = dif_taxa(cv, mulher, !mulher),
+            ltcv_negra = dif_taxa(cv, negra, !negra),
+            ltcv_mulher_negra = dif_taxa(cv, mulher_negra, !mulher_negra),
+            ltcv_br_negra = dif_taxa(cv, negra, branca),
+            ltcv_hb_mulher_negra = dif_taxa(cv, mulher_negra, !mulher & branca),
+            ltel_mulher = dif_taxa(el, mulher, !mulher),
+            ltel_negra = dif_taxa(el, negra, !negra),
+            ltel_mulher_negra = dif_taxa(el, mulher_negra, !mulher_negra),
+            ltel_br_negra = dif_taxa(el, negra, branca),
+            ltel_hb_mulher_negra = dif_taxa(el, mulher_negra, !mulher & branca),
+            lpcv_mulher = pp(sum(mulher & cv), sum(cv)),
+            lpcv_negra = pp(sum(negra & cv), sum(cv)),
+            lpcv_mulher_negra = pp(sum(mulher_negra & cv), sum(cv)),
+            lcadeira_mulher = pp(sum(mulher & el), sum(el)),
+            lcadeira_negra = pp(sum(negra & el), sum(el)),
+            lcadeira_mulher_negra = pp(sum(mulher_negra & el), sum(el)),
+            n_cv = sum(cv), n_el = sum(el), .by = c(ano, lista))
+lista_mg <- mg_l |> filter(!is.na(lista)) |>
+  summarise(ltcg_mulher = dif_taxa(cg, mulher, !mulher),
+            ltcg_negra = dif_taxa(cg, negra, !negra),
+            ltcg_mulher_negra = dif_taxa(cg, mulher_negra, !mulher_negra),
+            ltcg_br_negra = dif_taxa(cg, negra, branca),
+            ltcg_hb_mulher_negra = dif_taxa(cg, mulher_negra, !mulher & branca),
+            lpcg_mulher = pp(sum(mulher & cg), sum(cg)),
+            lpcg_negra = pp(sum(negra & cg), sum(cg)),
+            lpcg_mulher_negra = pp(sum(mulher_negra & cg), sum(cg)),
+            n_cg = sum(cg), .by = c(ano, lista))
+lista_rp <- cand |> filter(ano >= 2018L) |>
+  mutate(lista = paste(partido_h, uf, DS_CARGO)) |>
+  summarise(across(c(mulher, negra, mulher_negra),
+                   \(g) pp(sum(rp[g]), sum(rp)) - 100 * mean(g), .names = "lexcesso_{.col}"),
+            .by = c(ano, lista))
+
+n_antes <- nrow(listas)
+listas <- listas |>
+  left_join(lista_mr, by = c("ano", "lista")) |>
+  left_join(lista_mg, by = c("ano", "lista")) |>
+  left_join(lista_rp, by = c("ano", "lista")) |>
+  # peso da robustez das taxas: candidaturas da lista em 2018 (fixo no tempo)
+  mutate(n_cand_2018 = sum(n_cand[ano == 2018L]), .by = id)
+stopifnot(nrow(listas) == n_antes)
+taxas_l <- select(listas, starts_with(c("ltcv_", "ltel_", "ltcg_", "lexcesso_")))
+stopifnot(all(abs(as.matrix(taxas_l)) <= 100 + 1e-8, na.rm = TRUE))
+
+# ------------------------------------------------------------------------------
 # 2. Estimação (CS = TWFE com um só grupo tratado; EP agrupado por UF)
 # ------------------------------------------------------------------------------
-webb <- c(-sqrt(1.5), -1, -sqrt(0.5), sqrt(0.5), 1, sqrt(1.5))
-
-#' Wild cluster bootstrap restrito (WCR, pesos de Webb, cluster = UF) para o termo
-#' Federal × Pós da regressão com efeitos fixos de unidade e de ano
-wild_p <- function(d, y, anos_sub) {
-  dd <- d |> filter(ano %in% anos_sub) |> mutate(D = as.numeric(federal & ano >= 2022L))
-  f <- dd[c("id", "ano")]
-  X <- fixest::demean(cbind(Y = dd[[y]], D = dd$D), f = f)
-  yt <- X[, "Y"]; Dt <- X[, "D"]; sDD <- sum(Dt^2)
-  idx <- match(dd$uf_id, sort(unique(dd$uf_id))); G <- max(idx)
-  ep <- \(e) sqrt(G / (G - 1) * sum(rowsum(Dt * e, idx)^2)) / sDD
-  b0 <- sum(Dt * yt) / sDD
-  t0 <- b0 / ep(yt - b0 * Dt)
-  # sob H0 (δ = 0) o resíduo restrito é o próprio Y sem os efeitos fixos (yt)
-  tstar <- vapply(seq_len(n_wild), \(i) {
-    ys <- fixest::demean(yt * webb[sample.int(6, G, TRUE)][idx], f = f)[, 1]
-    bs <- sum(Dt * ys) / sDD
-    bs / ep(ys - bs * Dt)
-  }, numeric(1))
-  mean(abs(tstar) >= abs(t0))
-}
-
-estimar <- function(dados, y, anos, nivel, wild = TRUE) {
-  d <- dados |> filter(ano %in% anos, !is.na(.data[[y]])) |>
-    filter(n() == length(anos), .by = id) |>
-    mutate(t = match(ano, anos), g = if_else(federal, match(2022L, anos), 0L))
-  a <- suppressMessages(att_gt(yname = y, tname = "t", idname = "id", gname = "g", data = as.data.frame(d),
-              panel = TRUE, control_group = "nevertreated", base_period = "universal",
-              est_method = "dr", bstrap = TRUE, cband = TRUE, biters = biters,
-              clustervars = c("id", "uf_id"), print_details = FALSE))
-  es <- aggte(a, type = "dynamic", bstrap = TRUE, cband = TRUE, biters = biters)
-  gr <- aggte(a, type = "group", bstrap = TRUE, cband = TRUE, biters = biters)
-  ano_e <- anos[match(2022L, anos) + es$egt]
-  pers <- dif_att(a, t1 = match(2022L, anos), t2 = match(2026L, anos),
-                  cluster = cluster_de(a, "uf_id"))
-  res <- bind_rows(
-    tibble(periodo = as.character(ano_e), att = es$att.egt, ep = es$se.egt,
-           crit = es$crit.val.egt) |> filter(periodo != "2018"),
-    tibble(periodo = "Federal × Pós", att = gr$overall.att, ep = gr$overall.se,
-           crit = qnorm(.975)),
-    tibble(periodo = "Dif. 2026 − 2022", att = pers$att, ep = pers$ep, crit = qnorm(.975))) |>
-    mutate(ic_inf = att - qnorm(.975) * ep, ic_sup = att + qnorm(.975) * ep,
-           banda_inf = att - crit * ep, banda_sup = att + crit * ep,
-           # um teste por linha (case_when avaliaria wild_p com o vetor inteiro de períodos)
-           p_wild = map_dbl(periodo, \(p) if (!wild) NA_real_ else switch(p,
-             "Federal × Pós" = wild_p(d, y, setdiff(anos, 2014L)),
-             "2022" = wild_p(d, y, c(2018L, 2022L)),
-             "2026" = wild_p(d, y, c(2018L, 2026L)),
-             NA_real_)))
-  # TWFE (estudo de evento) reproduz o did: confere o código
-  tw <- feols(as.formula(paste(y, "~ i(ano, federal, ref = 2018) | id + ano")), data = d,
-              cluster = ~uf_id)
-  cf <- coef(tw); nm <- str_extract(names(cf), "\\d{4}")
-  chk <- res |> mutate(twfe = unname(cf[match(periodo, nm)])) |> filter(!is.na(twfe))
-  stopifnot(all(abs(chk$att - chk$twfe) < 1e-6))
-  b <- d |> filter(federal, ano == 2018L)
-  res |> mutate(variavel = y, nivel = nivel, n_unidades = n_distinct(d$id),
-                n_ufs = n_distinct(d$uf_id), base_federal_2018 = mean(b[[y]]), .before = 1)
-}
+# estimar() e wild_p(): explorations/ec111-did-2026/R/funcoes_estimacao.R (extraídas em
+# 2026-11-24 sem mudança de resultado; réplicas lidas de BITERS e WILD)
 
 grade <- bind_rows(
   expand_grid(base = "lista", v = c("cand", "voto"), g = gs, anos = list(anos_longos)),
@@ -197,11 +216,26 @@ grade <- bind_rows(
          g = c("negra", "negra", "mulher_negra", "mulher_negra"), anos = list(anos_longos)),
   tibble(base = "disputa", v = c("tcg_br", "tcg_hb"), g = c("negra", "mulher_negra"),
          anos = list(anos_rec)),
-  # mecanismo (sem wild bootstrap): partes competitivas × não competitivas e origem da receita
+  # mecanismo (sem wild bootstrap): partes competitivas × não competitivas e origem da receita.
+  # rtpriv (receita privada: falsificação, com wild bootstrap) ocupa a posição do antigo
+  # rto, e as categorias novas de 2026-11-24 vêm depois: como o set.seed é único, as
+  # linhas anteriores reproduzem exatamente as réplicas da rodada de 22/11.
   expand_grid(base = "lista", v = c("voto_c", "voto_nc"), g = gs, anos = list(anos_longos)),
-  expand_grid(base = "lista", v = c("gasto_c", "gasto_nc", "recp_c", "recp_nc", "rtp", "rto"),
-              g = gs, anos = list(anos_rec))) |>
-  mutate(wild = !str_detect(v, "_c$|_nc$|^rt[po]$") | v %in% c("inv_c", "inv_nc"))
+  expand_grid(base = "lista", v = c("gasto_c", "gasto_nc", "recp_c", "recp_nc", "rtp", "rtpriv"),
+              g = gs, anos = list(anos_rec)),
+  # robustez da H2 (transferências do partido + FEFC/FP repassados por outras candidaturas)
+  # e as demais partes da receita total (somam rec_total com rtp e rtpriv)
+  expand_grid(base = "lista", v = c("rec_partido_ampla", "rtc_pub", "rtc_priv", "rtres"),
+              g = gs, anos = list(anos_rec)),
+  # competitividade, eleição e investimento relativo na lista (plano 2026-11-24): no fim
+  # da grade, para que as linhas anteriores reproduzam as réplicas da rodada de 24/11
+  expand_grid(base = "lista", v = c("ltcv", "ltel"), g = gs, anos = list(anos_longos)),
+  tibble(base = "lista", v = c("ltcv_br", "ltel_br", "ltcv_hb", "ltel_hb"),
+         g = c("negra", "negra", "mulher_negra", "mulher_negra"), anos = list(anos_longos)),
+  expand_grid(base = "lista", v = c("ltcg", "lexcesso"), g = gs, anos = list(anos_rec)),
+  tibble(base = "lista", v = c("ltcg_br", "ltcg_hb"), g = c("negra", "mulher_negra"),
+         anos = list(anos_rec))) |>
+  mutate(wild = !str_detect(v, "_c$|_nc$|^rt(p|c_pub|c_priv|res)$") | v %in% c("inv_c", "inv_nc"))
 
 t0 <- Sys.time()
 res <- pmap(grade, function(base, v, g, anos, wild) {
@@ -210,6 +244,62 @@ res <- pmap(grade, function(base, v, g, anos, wild) {
 }) |> list_rbind()
 message("Estimação: ", round(difftime(Sys.time(), t0, units = "mins"), 1), " min")
 write_excel_csv2(res, file.path(out_dir, "variaveis_principais_resultados.csv"))
+
+# ------------------------------------------------------------------------------
+# 2b. Na lista: mecanismo ponderado e robustez das taxas (plano 2026-11-24)
+#   (i)  lpcv, lpcg, lcadeira: TWFE de estudo de evento ponderado pelo denominador da
+#        proporção (n de competitivas / de eleitos da lista no ano), painel desbalanceado;
+#        lista sem competitivas (eleitos) no ano não entra naquele ano
+#   (ii) ltcv, ltel, ltcg: mesmo painel balanceado do CS, ponderado pelo n de candidaturas
+#        da lista em 2018 (as taxas das listas pequenas valem quase sempre 0 ou 100)
+#   EP agrupados por UF; sem wild bootstrap (mecanismo e robustez).
+# ------------------------------------------------------------------------------
+estimar_ponderado <- function(dados, y, w, anos, balancear) {
+  d <- dados |> filter(ano %in% anos, !is.na(.data[[y]]), !is.na(.data[[w]]), .data[[w]] > 0)
+  if (balancear) d <- d |> filter(n() == length(anos), .by = id)
+  fml <- as.formula(paste(y, "~ i(ano, federal, ref = 2018) | id + ano"))
+  ev <- feols(fml, data = d, weights = as.formula(paste0("~", w)), cluster = ~uf_id)
+  dp <- d |> filter(ano != 2014L) |> mutate(D = as.numeric(federal & ano >= 2022L))
+  po <- feols(as.formula(paste(y, "~ D | id + ano")), data = dp,
+              weights = as.formula(paste0("~", w)), cluster = ~uf_id)
+  ct <- coeftable(ev)
+  bind_rows(
+    tibble(periodo = str_extract(rownames(ct), "\\d{4}"), att = ct[, 1], ep = ct[, 2]),
+    tibble(periodo = "Federal × Pós", att = coef(po)[["D"]], ep = se(po)[["D"]])) |>
+    mutate(ic_inf = att - qnorm(.975) * ep, ic_sup = att + qnorm(.975) * ep,
+           variavel = y, peso = w, n_listas = n_distinct(d$id), n_obs = nrow(d), .before = 1)
+}
+grade_pond <- bind_rows(
+  expand_grid(v = "lpcv", g = gs, w = "n_cv", anos = list(anos_longos), balancear = FALSE),
+  expand_grid(v = "lcadeira", g = gs, w = "n_el", anos = list(anos_longos), balancear = FALSE),
+  expand_grid(v = "lpcg", g = gs, w = "n_cg", anos = list(anos_rec), balancear = FALSE),
+  grade |> filter(str_detect(v, "^ltc[vg]|^ltel")) |>
+    transmute(v, g, w = "n_cand_2018", anos, balancear = TRUE))
+res_pond <- pmap(grade_pond, function(v, g, w, anos, balancear) {
+  estimar_ponderado(listas, paste0(v, "_", g), w, anos, balancear) |>
+    mutate(medida = v, grupo = g, .after = 1)
+}) |> list_rbind() |>
+  mutate(papel = if_else(peso == "n_cand_2018", "robustez: peso = candidaturas em 2018",
+                         "mecanismo: peso = denominador"), .after = peso)
+write_excel_csv2(res_pond, file.path(out_dir, "competitividade_lista_ponderada.csv"))
+
+# Lista × disputa, lado a lado (mesma medida, unidades diferentes)
+par_ld <- c(ltcv = "tcv", ltel = "tel", ltcg = "tcg", ltcv_br = "tcv_br", ltel_br = "tel_br",
+            ltcg_br = "tcg_br", ltcv_hb = "tcv_hb", ltel_hb = "tel_hb", ltcg_hb = "tcg_hb",
+            lexcesso = "excesso", lpcv = "pcv", lpcg = "pcg", lcadeira = "cadeira")
+sel <- \(x) select(x, medida, grupo, periodo, att, ic_inf, ic_sup, n_unidades = any_of(c("n_unidades", "n_listas")))
+lista_vs_disputa <- bind_rows(
+    res |> filter(medida %in% names(par_ld)) |> sel(),
+    res_pond |> filter(papel != "robustez: peso = candidaturas em 2018") |> sel()) |>
+  mutate(medida_disputa = unname(par_ld[medida])) |>
+  rename_with(\(x) paste0(x, "_lista"), c(att, ic_inf, ic_sup, n_unidades)) |>
+  left_join(res |> filter(nivel == "disputa") |>
+              select(medida_disputa = medida, grupo, periodo, att_disputa = att,
+                     ic_inf_disputa = ic_inf, ic_sup_disputa = ic_sup),
+            by = c("medida_disputa", "grupo", "periodo")) |>
+  mutate(sig_lista = sign(ic_inf_lista) == sign(ic_sup_lista),
+         sig_disputa = sign(ic_inf_disputa) == sign(ic_sup_disputa))
+write_excel_csv2(lista_vs_disputa, file.path(out_dir, "competitividade_lista_vs_disputa.csv"))
 
 # ------------------------------------------------------------------------------
 # 3. Níveis por cargo (mesmas unidades balanceadas da estimação)
@@ -261,7 +351,7 @@ antigo_03 <- le(file.path(out_dir, "did_2026_resultados.csv")) |>
   filter(!ponderado, balanceado,
          (nivel == "lista" & medida %in% c("cand", "voto", "rec_partido", "gasto", "voto_c", "voto_nc",
                                            "gasto_c", "gasto_nc", "recp_c", "recp_nc",
-                                           "rtp", "rto")) |
+                                           "rtp")) |
          (nivel == "disputa" & medida %in% c("cmshare", "cadeira"))) |>
   mutate(medida = if_else(medida == "cmshare", "pcv", medida),
          grupo = str_extract(resultado, "(mulher_negra|mulher|negra)$"),

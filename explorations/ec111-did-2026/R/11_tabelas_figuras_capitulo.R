@@ -69,27 +69,35 @@ escrever <- function(df, alinh, legenda, rotulo, arquivo) {
 # ------------------------------------------------------------------------------
 rot_princ <- c(cand = "Proporção de candidaturas",
                rec_partido = "Proporção das transferências do partido",
+               lexcesso = "Transferências − candidaturas (investimento relativo)",
                gasto = "Proporção do gasto", voto = "Proporção dos votos nominais",
-               pcv = "Proporção entre as competitivas pelo voto",
-               pcg = "Proporção entre as competitivas pelo gasto",
-               cadeira = "Proporção das cadeiras")
+               ltcv = "Competitiva pelo voto (taxa do grupo − taxa do complemento)",
+               ltcg = "Competitiva pelo gasto (idem)",
+               ltel = "Eleita (idem)")
+n_listas <- res |> distinct(medida, grupo, n_unidades)
 t1 <- linhas_efeito(names(rot_princ), rot_princ) |>
-  transmute(Variável, Grupo, `Pré-teste 2014` = replace_na(`2014`, "—"), `2022`, `2026`,
+  left_join(n_listas, by = c("medida", "grupo")) |>
+  transmute(Variável, Grupo, Listas = as.character(n_unidades),
+            `Pré-teste 2014` = replace_na(`2014`, "—"), `2022`, `2026`,
             `Diferença 2026 − 2022` = `Dif. 2026 − 2022`, `Federal × Pós`)
-escrever(t1, c(":---", ":---", rep("---:", 5)),
-  paste("Efeito do voto em dobro sobre a proporção de mulheres, pessoas negras e mulheres negras",
-        "em cada etapa da candidatura, federal × estadual, base 2018 (pontos percentuais).",
-        "Candidaturas, transferências, gasto e votos: listas partido × UF; competitivas e",
-        "cadeiras: disputas UF × cargo. Painel balanceado, sem ponderação. O pré-teste é a mesma",
-        "conta entre 2014 e 2018; transferências, gasto e competitivas pelo gasto começam em 2018.",
-        "Federal × Pós: termo único da @eq-reg-ec111. \\* IC de 95% exclui zero, com erros",
-        "agrupados por UF.", fonte, "(explorations/ec111-did-2026/R/10 e R/11)."),
+escrever(t1, c(":---", ":---", rep("---:", 6)),
+  paste("Efeito do voto em dobro em cada etapa da candidatura, mulheres, pessoas negras e",
+        "mulheres negras, federal × estadual, base 2018 (pontos percentuais). Listas partido × UF,",
+        "painel balanceado, sem ponderação. Proporções: parte do grupo no total da lista.",
+        "Investimento relativo: proporção das transferências menos proporção das candidaturas do",
+        "grupo na lista. Competitiva e eleita: taxa de candidaturas do grupo que terminam",
+        "competitivas (eleitas ou a menos de 0,1 QE do limiar, pela margem de votos ou de gasto)",
+        "ou eleitas, menos a taxa do complemento, na mesma lista; entram as listas com os dois",
+        "grupos em todos os anos (coluna Listas). O pré-teste é a mesma conta entre 2014 e 2018;",
+        "transferências, gasto e competitivas pelo gasto começam em 2018. Federal × Pós: termo",
+        "único da @eq-reg-ec111. \\* IC de 95% exclui zero, com erros agrupados por UF.", fonte,
+        "(explorations/ec111-did-2026/R/10 e R/11)."),
   "tbl-principal-ec111", "principal.md")
 
 # ------------------------------------------------------------------------------
 # 2. Sucesso relativo: diferença de taxas entre o grupo e o de comparação
 # ------------------------------------------------------------------------------
-rot_taxa <- c(tcv = "Competitiva pelo voto", tcg = "Competitiva pelo gasto", tel = "Eleita")
+rot_taxa <- c(ltcv = "Competitiva pelo voto", ltcg = "Competitiva pelo gasto", ltel = "Eleita")
 comp <- tribble(~grupo, ~sufixo, ~rotulo,
   "mulher", "", "Mulheres − homens",
   "negra", "", "Pessoas negras − demais",
@@ -113,11 +121,43 @@ escrever(t2, c(":---", rep("---:", 5)),
   paste("Efeito do voto em dobro sobre o sucesso relativo: diferença entre a taxa do grupo e a do",
         "grupo de comparação (% das candidaturas que terminam competitivas ou eleitas), federal ×",
         "estadual, base 2018 (pontos percentuais). Competitiva = eleita ou a menos de 0,1 QE do",
-        "limiar, pela margem de votos ou de gasto. Disputas UF × cargo, sem ponderação. As linhas",
+        "limiar, pela margem de votos ou de gasto. Listas partido × UF com os dois grupos em todos",
+        "os anos, painel balanceado, sem ponderação. As linhas",
         "com pessoas brancas e homens brancos são comparações adicionais. No gasto, não há",
         "pré-teste (doação empresarial em 2014). \\* IC de 95% exclui zero, com erros agrupados por",
         "UF.", fonte, "(explorations/ec111-did-2026/R/10 e R/11)."),
   "tbl-sucesso-ec111", "sucesso.md")
+
+# ------------------------------------------------------------------------------
+# 2b. Quem fica com os lugares competitivos e as cadeiras da lista (mecanismo; TWFE
+#     ponderado pelo denominador, painel desbalanceado; plano 2026-11-24)
+# ------------------------------------------------------------------------------
+pond <- le("competitividade_lista_ponderada.csv") |>
+  filter(papel == "mecanismo: peso = denominador") |>
+  mutate(sig = sign(ic_inf) == sign(ic_sup))
+rot_comp <- c(lpcv = "Proporção entre as competitivas pelo voto",
+              lpcg = "Proporção entre as competitivas pelo gasto",
+              lcadeira = "Proporção entre os eleitos")
+t2b <- pond |>
+  filter(periodo %in% c("2014", "2022", "2026", "Federal × Pós")) |>
+  mutate(cel = celula(att, sig)) |>
+  select(medida, grupo, periodo, cel, n_listas) |>
+  pivot_wider(names_from = periodo, values_from = cel) |>
+  mutate(medida = factor(medida, names(rot_comp)), grupo = factor(grupo, names(nome_grupo))) |>
+  arrange(medida, grupo) |>
+  mutate(Variável = if_else(row_number() == 1, rot_comp[as.character(medida)], ""), .by = medida) |>
+  transmute(Variável, Grupo = unname(nome_grupo[as.character(grupo)]),
+            Listas = as.character(n_listas),
+            `Pré-teste 2014` = replace_na(`2014`, "—"), `2022`, `2026`, `Federal × Pós`)
+escrever(t2b, c(":---", ":---", rep("---:", 5)),
+  paste("Efeito do voto em dobro sobre a proporção do grupo entre as candidaturas competitivas e",
+        "entre os eleitos da lista, federal × estadual, base 2018 (pontos percentuais). Listas",
+        "partido × UF, regressão de estudo de evento com efeitos fixos de lista e de ano,",
+        "ponderada pelo número de competitivas (ou de eleitos) da lista no ano. A lista sem",
+        "competitivas (ou sem eleitos) não entra naquele ano; Listas = listas com ao menos uma",
+        "observação. \\* IC de 95% exclui zero, com erros agrupados por UF.", fonte,
+        "(explorations/ec111-did-2026/R/10 e R/11)."),
+  "tbl-composicao-lista-ec111", "composicao_lista.md")
 
 # ------------------------------------------------------------------------------
 # 3. Transferências por cargo e nos dois cargos somados (realocação, H2)
@@ -181,19 +221,27 @@ escrever(t4, c(":---", rep("---:", 4)),
   "tbl-decomposicao-ec111", "decomposicao.md")
 
 # ------------------------------------------------------------------------------
-# 5. Teste de falsificação: receita de outras fontes
+# 5. Teste de falsificação: receita por origem (categorias de 2026-11-24)
 # ------------------------------------------------------------------------------
-rot_fals <- c(rtp = "Vinda do partido", rto = "De outras fontes")
+# A parte residual (rendimentos, origem não identificada; < 0,1% da receita) fica fora da
+# tabela; as quatro partes mostradas + a residual somam a receita total do grupo.
+rot_fals <- c(rtp = "Vinda do partido",
+              rtc_pub = "Repassada por outras candidaturas: FEFC e Fundo Partidário",
+              rtc_priv = "Repassada por outras candidaturas: outros recursos",
+              rtpriv = "Doações e recursos próprios")
 t5 <- linhas_efeito(names(rot_fals), rot_fals,
                     periodos = c("2022", "2026", "Dif. 2026 − 2022", "Federal × Pós")) |>
   transmute(`Parte da receita total` = Variável, Grupo, `2022`, `2026`,
             `Diferença 2026 − 2022` = `Dif. 2026 − 2022`, `Federal × Pós`)
 escrever(t5, c(":---", ":---", rep("---:", 4)),
   paste("Teste de falsificação: efeito do voto em dobro sobre a parte da receita total da lista",
-        "recebida pelo grupo, separada entre a que veio do partido e a de outras fontes (doações de",
-        "pessoas físicas, recursos próprios, financiamento coletivo, outras candidaturas), federal",
-        "× estadual, base 2018 (pontos percentuais). O voto em dobro não muda o incentivo dos",
-        "doadores, e um efeito sobre as outras fontes indicaria uma mudança mais ampla. Listas",
+        "recebida pelo grupo, por origem, federal × estadual, base 2018 (pontos percentuais). O",
+        "teste é a última parte, doações de pessoas físicas, financiamento coletivo e recursos",
+        "próprios: o voto em dobro não muda o incentivo dos doadores, e um efeito sobre ela",
+        "indicaria uma mudança mais ampla. Os repasses de outras candidaturas são separados pela",
+        "fonte declarada; o FEFC e o Fundo Partidário chegam às candidaturas pelos partidos. As",
+        "partes somam o efeito sobre a proporção da receita total, com uma parte residual",
+        "(rendimentos e origem não identificada, menos de 0,1% da receita) omitida. Listas",
         "partido × UF, painel balanceado, sem ponderação. \\* IC de 95% exclui zero, com erros",
         "agrupados por UF.", fonte, "(explorations/ec111-did-2026/R/10 e R/11)."),
   "tbl-falsificacao-ec111", "falsificacao.md")
@@ -209,9 +257,14 @@ tema <- theme_minimal(base_size = 10) +
         axis.text = element_text(colour = "grey25"))
 
 # 6a. Efeitos por etapa (2022 e 2026), um painel por grupo
+# rótulos curtos para a figura (as taxas são do grupo − complemento, na lista)
+rot_fig <- c(cand = "Candidaturas", rec_partido = "Transferências do partido",
+             lexcesso = "Transferências − candidaturas", gasto = "Gasto", voto = "Votos",
+             ltcv = "Taxa de competitivas (voto)", ltcg = "Taxa de competitivas (gasto)",
+             ltel = "Taxa de eleitas")
 f1 <- res |>
-  filter(medida %in% names(rot_princ), periodo %in% c("2022", "2026")) |>
-  mutate(Variável = factor(rot_princ[medida], rev(rot_princ)),
+  filter(medida %in% names(rot_fig), periodo %in% c("2022", "2026")) |>
+  mutate(Variável = factor(rot_fig[medida], rev(rot_fig)),
          Grupo = factor(nome_grupo[grupo], names(cores_gr)), Ano = periodo)
 g1 <- ggplot(f1, aes(att, Variável, colour = Grupo, shape = Ano)) +
   geom_vline(xintercept = 0, colour = "grey55", linewidth = 0.4) +
@@ -226,7 +279,7 @@ g1 <- ggplot(f1, aes(att, Variável, colour = Grupo, shape = Ano)) +
   facet_wrap(~Grupo, nrow = 1) +
   labs(x = "Efeito, federal × estadual, base 2018 (pontos percentuais)", y = NULL) +
   tema + theme(panel.spacing.x = unit(1.4, "lines"))
-ggsave(file.path(fig_dir, "efeitos_etapas.png"), g1, width = 8, height = 3.8, dpi = 300,
+ggsave(file.path(fig_dir, "efeitos_etapas.png"), g1, width = 8, height = 4.2, dpi = 300,
        bg = "white")
 
 # 6b. Proporção das transferências por cargo e nos dois cargos somados
@@ -259,6 +312,63 @@ g2 <- ggplot(f2, aes(ano, transf)) +
                panel.spacing.x = unit(5.5, "lines"), plot.margin = margin(5, 70, 5, 5))
 ggsave(file.path(fig_dir, "transferencias_por_cargo.png"), g2, width = 8, height = 3.3,
        dpi = 300, bg = "white")
+
+# ------------------------------------------------------------------------------
+# 6. Para quem foi o acréscimo: competitivas ex post e viáveis ex ante (R/12 e R/13;
+#    plano 2026-11-24_cap4-cacaniquel-item1-implementacao.md)
+# ------------------------------------------------------------------------------
+esp <- le("cacaniquel_viabilidade_esperado.csv") |>
+  filter(parte %in% c("recp_c", "recp_v"), periodo %in% c("2022", "2026")) |>
+  mutate(sig = sign(ic_inf) == sign(ic_sup))
+rot_part <- c(recp_c = "Competitivas ex post", recp_v = "Viáveis ex ante")
+t6 <- map(names(nome_grupo), \(g) {
+  x <- esp |> filter(grupo == g) |>
+    mutate(obs = celula(att_parte, sig), espd = num(esperado), tot = num(att_total)) |>
+    select(parte, periodo, s_2018, tot, obs, espd) |>
+    pivot_wider(names_from = periodo, values_from = c(tot, obs, espd)) |>
+    mutate(parte = factor(parte, names(rot_part))) |> arrange(parte)
+  bind_rows(tibble(Parte = paste0("*", nome_grupo[g], "*")),
+            x |> transmute(Parte = rot_part[as.character(parte)],
+                           `Fatia federal 2018 (%)` = num(100 * s_2018, sinal = FALSE),
+                           `2022: total` = tot_2022, `2022: observado` = obs_2022,
+                           `2022: esperado` = espd_2022, `2026: total` = tot_2026,
+                           `2026: observado` = obs_2026, `2026: esperado` = espd_2026))
+}) |> list_rbind()
+escrever(t6, c(":---", rep("---:", 7)),
+  paste("Para quem foi o acréscimo das transferências: efeito do voto em dobro sobre a proporção",
+        "das transferências do partido à lista que vai para candidaturas do grupo (total) e para",
+        "a parte do grupo que terminou competitiva (eleita ou a menos de 0,1 QE do limiar) ou que",
+        "era viável antes da eleição (eleita deputada, em qualquer dos dois cargos, ou a menos de",
+        "0,1 QE do limiar na eleição anterior), observado e esperado se o acréscimo seguisse a",
+        "divisão do cargo federal em 2018 (fatia × efeito total), federal × estadual, base 2018",
+        "(pontos percentuais). Listas partido × UF, painel balanceado, sem ponderação. \\* IC de",
+        "95% exclui zero, com erros agrupados por UF.", fonte,
+        "(explorations/ec111-did-2026/R/12, R/13 e R/11)."),
+  "tbl-viabilidade-ec111", "viabilidade.md")
+
+mat <- le("viabilidade_matriz_2x2.csv") |> filter(grupo == "mulher")
+razao <- le("viabilidade_tamanhos.csv") |> filter(grupo == "mulher")
+ordem_cel <- c("Viável → competitiva", "Viável → não competitiva", "Não viável → competitiva",
+               "Não viável → não competitiva")
+cols_mat <- paste(rep(c("Estadual", "Federal"), each = 3), rep(c(2018, 2022, 2026), 2))
+t7 <- bind_rows(
+  mat |> mutate(col = paste(cargo, ano), v = num(transf, sinal = FALSE)) |>
+    select(celula, col, v),
+  razao |> mutate(celula = "Transferência média: viáveis ÷ não viáveis",
+                  col = paste(cargo, ano), v = num(razao_v_nv, sinal = FALSE)) |>
+    select(celula, col, v)) |>
+  pivot_wider(names_from = col, values_from = v) |>
+  mutate(celula = factor(celula, c(ordem_cel, "Transferência média: viáveis ÷ não viáveis"))) |>
+  arrange(celula) |>
+  transmute(`Viável antes → competitiva depois` = as.character(celula), !!!syms(cols_mat))
+escrever(t7, c(":---", rep("---:", 6)),
+  paste("Transferências do partido às mulheres segundo a viabilidade antes da eleição e a",
+        "competitividade no resultado (% das transferências às candidatas do cargo no ano) e razão",
+        "entre a transferência média às viáveis e às não viáveis. Viável: eleita deputada, em",
+        "qualquer dos dois cargos, ou a menos de 0,1 QE do limiar na eleição anterior.",
+        "Competitiva: eleita ou a menos de 0,1 QE do limiar. Totais nacionais, sem o DF.", fonte,
+        "(explorations/ec111-did-2026/R/12 e R/11)."),
+  "tbl-matriz-viabilidade-ec111", "matriz_viabilidade.md")
 
 message("Tabelas: ", paste(list.files(tab_dir), collapse = ", "))
 message("Figuras: efeitos_etapas.png, transferencias_por_cargo.png")

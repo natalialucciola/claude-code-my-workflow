@@ -41,6 +41,10 @@ format:
       text: |
         \\usepackage{etoolbox}
         \\AtBeginEnvironment{longtable}{\\footnotesize}
+        \\usepackage{xcolor}
+        \\definecolor{alterado}{HTML}{1D4ED8}
+filters:
+  - alterado.lua
 ---
 
 <!-- Este arquivo é derivado do capítulo do livro (Quarto/thesis/chapters/03-ec111-competitividade-eleitoral.qmd) por Quarto/capitulo4-pdf/derivar.py. Não editar à mão: editar o capítulo e rodar o script. -->

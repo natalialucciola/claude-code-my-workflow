@@ -1,0 +1,7 @@
+/* Destaque provisório do texto revisado pelo Claude, para a autora conferir.
+   No .qmd: ::: {.alterado} ... ::: (parágrafos) e [trecho]{.alterado} (trechos).
+   Para tirar a cor sem mexer no texto, apague a regra abaixo; para tirar as marcas,
+   remova os ::: {.alterado} / {.alterado} do capítulo. */
+.alterado {
+  color: #1d4ed8;
+}

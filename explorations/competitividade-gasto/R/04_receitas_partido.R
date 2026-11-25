@@ -62,7 +62,25 @@ por_cand <- rec |>
             # recursos públicos: FEFC + Fundo Partidário de qualquer origem (partido ou outros candidatos)
             receita_publica = sum(VR_RECEITA[str_detect(DS_FONTE_RECEITA, "(?i)especial|partid")], na.rm = TRUE),
             .by = c(ANO, DS_CARGO, SG_UF, SQ_CANDIDATO))
+
+# Categorias que somam a receita total (regra de 2026-11-24, categorizar_receita em
+# funcoes_apoio.R): separa os repasses de outras candidaturas em públicos (FEFC/FP) e
+# privados, e isola a receita privada (decisão de doadores), usada na falsificação.
+chaves <- c("ANO", "DS_CARGO", "SG_UF", "SQ_CANDIDATO")
+cats <- resumir_receitas(as.data.table(rec)[, v := VR_RECEITA], by = chaves)
+conf <- as_tibble(cats) |> inner_join(por_cand, by = chaves, suffix = c("", ".antiga"))
+stopifnot(nrow(conf) == nrow(por_cand),
+          isTRUE(all.equal(conf$receita_total, conf$receita_total.antiga)),
+          isTRUE(all.equal(conf$receita_partido, conf$receita_partido.antiga)),
+          isTRUE(all.equal(conf$receita_publica, conf$receita_publica.antiga)))
+por_cand <- por_cand |>
+  left_join(as_tibble(cats) |> select(all_of(chaves), repasse_cand_pub, repasse_cand_priv,
+                                      receita_privada, receita_residual), by = chaves)
 saveRDS(por_cand, file.path(proc_dir, "receitas_cand_dep.rds"))
+print(por_cand |>
+        summarise(across(c(receita_total, receita_partido, repasse_cand_pub, repasse_cand_priv,
+                           receita_privada, receita_residual), \(x) round(sum(x) / 1e6, 1)),
+                  .by = c(ANO, DS_CARGO)) |> as.data.frame())
 
 print(origens |> mutate(valor_mi = round(valor_mi, 1)) |> as.data.frame(), right = FALSE)
 message("Receitas: ", nrow(por_cand), " candidaturas com receita")
