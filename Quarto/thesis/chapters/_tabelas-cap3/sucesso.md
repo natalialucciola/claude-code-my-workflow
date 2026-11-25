@@ -1,24 +1,28 @@
-| Taxa | Pré-teste 2014 | 2022 | 2026 | Diferença 2026 − 2022 | Federal × Pós |
-|:---|---:|---:|---:|---:|---:|
-| *Mulheres − homens* |  |  |  |  |  |
-| Competitiva pelo voto | +2,5 | +6,7 | +7,3\* | +0,6 | +7,0\* |
-| Competitiva pelo gasto | — | +6,7\* | +5,0 | −1,6 | +5,9\* |
-| Eleita | −1,4 | +3,6 | +5,7\* | +2,1 | +4,6 |
-| *Pessoas negras − demais* |  |  |  |  |  |
-| Competitiva pelo voto | +3,8 | +5,6 | +8,2\* | +2,6 | +6,9\* |
-| Competitiva pelo gasto | — | +4,5 | +6,0\* | +1,4 | +5,2 |
-| Eleita | +0,8 | +0,9 | +5,8 | +4,8\* | +3,4 |
-| *Pessoas negras − pessoas brancas* |  |  |  |  |  |
-| Competitiva pelo voto | +3,9 | +5,9 | +8,2\* | +2,3 | +7,0\* |
-| Competitiva pelo gasto | — | +4,4 | +6,2\* | +1,8 | +5,3 |
-| Eleita | +1,1 | +1,1 | +6,0 | +4,9\* | +3,5 |
-| *Mulheres negras − demais* |  |  |  |  |  |
-| Competitiva pelo voto | +1,7 | +5,0 | +7,6\* | +2,6 | +6,3 |
-| Competitiva pelo gasto | — | +8,8\* | +8,7\* | −0,1 | +8,7\* |
-| Eleita | −1,4 | +2,3 | +5,9 | +3,6 | +4,1 |
-| *Mulheres negras − homens brancos* |  |  |  |  |  |
-| Competitiva pelo voto | +4,0 | +7,0 | +9,2 | +2,2 | +8,1 |
-| Competitiva pelo gasto | — | +5,7 | +4,7 | −1,0 | +5,2 |
-| Eleita | −0,9 | +1,8 | +5,6 | +3,8 | +3,7 |
+| Termo | (1) Competitiva pelo voto | (2) Competitiva pelo gasto | (3) Eleita |
+|:---|---:|---:|---:|
+| *Pessoas negras − pessoas brancas* |  |  |  |
+| Federal × 2014 (pré-teste) | +3,9 | — | +1,1 |
+|  | (3,4) |  | (2,4) |
+| Federal × 2022 | +5,9 | +4,4 | +1,1 |
+|  | (3,6) [0,11] | (2,9) [0,13] | (2,6) [0,68] |
+| Federal × 2026 | +8,2\* | +6,2\* | +6,0 |
+|  | (3,3) [0,02] | (3,1) [0,05] | (3,3) [0,08] |
+| Diferença 2026 − 2022 | +2,3 | +1,8 | +4,9\* |
+|  | (2,7) | (2,2) | (2,4) |
+| Federal × Pós | +7,0\* | +5,3 | +3,5 |
+|  | (3,2) [0,03] | (2,8) [0,05] | (2,7) [0,20] |
+| Listas | 478 | 587 | 478 |
+| *Mulheres negras − homens brancos* |  |  |  |
+| Federal × 2014 (pré-teste) | +4,0 | — | −0,9 |
+|  | (5,0) |  | (3,8) |
+| Federal × 2022 | +7,0 | +5,7 | +1,8 |
+|  | (4,9) [0,15] | (3,9) [0,14] | (3,7) [0,64] |
+| Federal × 2026 | +9,2 | +4,7 | +5,6 |
+|  | (5,1) [0,07] | (4,6) [0,32] | (4,8) [0,27] |
+| Diferença 2026 − 2022 | +2,2 | −1,0 | +3,8 |
+|  | (3,0) | (3,7) | (2,2) |
+| Federal × Pós | +8,1 | +5,2 | +3,7 |
+|  | (4,8) [0,08] | (3,7) [0,17] | (4,1) [0,40] |
+| Listas | 297 | 402 | 297 |
 
-: Efeito do voto em dobro sobre o sucesso relativo: diferença entre a taxa do grupo e a do grupo de comparação (% das candidaturas que terminam competitivas ou eleitas), federal × estadual, base 2018 (pontos percentuais). Competitiva = eleita ou a menos de 0,1 QE do limiar, pela margem de votos ou de gasto. Listas partido × UF com os dois grupos em todos os anos, painel balanceado, sem ponderação. As linhas com pessoas brancas e homens brancos são comparações adicionais. No gasto, não há pré-teste (doação empresarial em 2014). \* IC de 95% exclui zero, com erros agrupados por UF. Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/10 e R/11). {#tbl-sucesso-ec111}
+: [Efeito do voto em dobro sobre o sucesso relativo nas comparações adicionais, medido pela diferença entre a taxa do grupo e a de pessoas brancas ou de homens brancos na mesma lista, federal × estadual, base 2018, em pontos percentuais. A taxa é a proporção das candidaturas que terminam competitivas, isto é, eleitas ou a menos de 0,1 QE do limiar pela margem de votos ou de gasto, ou que se elegem. Entram as listas com os dois grupos em todos os anos, no painel balanceado, sem ponderação e com efeitos fixos de lista e de ano, e a competitividade pelo gasto não tem pré-teste. O erro-padrão agrupado por UF está entre parênteses e o p-valor do *wild cluster bootstrap*, entre colchetes. \* IC de 95% exclui zero.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/10 e R/11). {#tbl-sucesso-ec111}

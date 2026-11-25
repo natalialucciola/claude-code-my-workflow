@@ -8,6 +8,8 @@ PDF avulso, para o orientador, é derivado dele). Ajustes só do PDF, os mesmos 
   - caminhos das figuras e das tabelas incluídas relativos a esta pasta;
   - tabelas de colunas estreitas copiadas com \\hspace{0pt} no cabeçalho (hifenização);
   - remissões a outros capítulos do livro em texto (o PDF não tem os outros capítulos);
+  - apêndice do capítulo (Quarto/thesis/chapters/A1-apendice-ec111.qmd, desde 25/11) no fim,
+    depois de \\appendix, com os títulos um nível abaixo (seção A);
   - seção de Referências no fim.
 
     python Quarto/capitulo4-pdf/derivar.py
@@ -18,6 +20,7 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parents[2]
 FONTE = RAIZ / "Quarto/thesis/chapters/03-ec111-competitividade-eleitoral.qmd"
+APENDICE = RAIZ / "Quarto/thesis/chapters/A1-apendice-ec111.qmd"
 TABELAS = RAIZ / "Quarto/thesis/chapters/_tabelas-cap3"
 DESTINO = Path(__file__).resolve().parent / "capitulo4.qmd"
 
@@ -43,8 +46,17 @@ format:
         \\AtBeginEnvironment{longtable}{\\footnotesize}
         \\usepackage{xcolor}
         \\definecolor{alterado}{HTML}{1D4ED8}
+        % marca "25/11" na margem (rodada .revisao); omitida onde \\marginpar não é permitido
+        % (legendas, tabelas, flutuantes), pelos mesmos testes que o LaTeX faz
+        \\makeatletter
+        \\newcommand{\\revmarca}{\\ifhmode\\ifinner\\else\\ifnum\\@floatpenalty<\\z@\\else
+          \\marginpar{\\raggedright\\scriptsize\\sffamily\\color{alterado}25/11}\\fi\\fi\\fi}
+        \\makeatother
 filters:
-  - alterado.lua
+  # pre-ast: o filtro vê as tabelas e figuras como elementos do Pandoc, antes de o Quarto
+  # transformá-las em flutuantes, e consegue tirar a marca de margem das legendas
+  - path: alterado.lua
+    at: pre-ast
 ---
 
 <!-- Este arquivo é derivado do capítulo do livro (Quarto/thesis/chapters/03-ec111-competitividade-eleitoral.qmd) por Quarto/capitulo4-pdf/derivar.py. Não editar à mão: editar o capítulo e rodar o script. -->
@@ -54,13 +66,21 @@ filters:
 # Remissões a outros capítulos do livro, escritas por extenso no PDF
 REMISSOES = {"@sec-revisao-literatura": "Capítulo 2"}
 # Tabelas copiadas com hifenização no cabeçalho
-HIFENIZAR = ["amostra.md", "transferencias_cargo.md"]
+HIFENIZAR = ["amostra.md", "transferencias_cargo.md", "descritivo_competitividade.md",
+             "reg_mulheres.md", "reg_negras.md", "reg_mulheres_negras.md", "viabilidade.md",
+             "falsificacao.md", "composicao_lista.md", "sucesso.md", "decomposicao.md",
+             "matriz_viabilidade.md"]
 
 
 def main() -> None:
     texto = FONTE.read_text(encoding="utf-8").replace("\r\n", "\n")
     # título do capítulo (primeira linha) sai; o título vai no YAML
     texto = texto.split("\n", 1)[1]
+    # apêndice: título do apêndice vira seção (##) e as seções dele, subseções (###)
+    apendice = APENDICE.read_text(encoding="utf-8").replace("\r\n", "\n")
+    apendice = re.sub(r"^(#+) ", lambda m: "#" + m.group(1) + " ", apendice, flags=re.M)
+    apendice = apendice.replace("Capítulo [-@sec-ec111-competitividade]", "texto")
+    texto = texto.rstrip() + "\n\n```{=latex}\n\\appendix\n```\n\n" + apendice
     # blocos HTML do livro (comentários de trabalho)
     texto = re.sub(r"```\{=html\}\n.*?\n```\n?", "", texto, flags=re.S)
     texto = texto.replace("](../Figures/", "](../thesis/Figures/")
