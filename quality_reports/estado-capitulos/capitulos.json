@@ -90,6 +90,18 @@
       "proxima_acao": "Deixar para o fim.",
       "acao_curta": "Deixar para o fim",
       "fontes": []
+    },
+    "A1-apendice-ec111.qmd": {
+      "titulo": "Apêndice metodológico: os efeitos da EC 111/2021",
+      "pergunta": "Apêndice do capítulo da EC 111: como as candidaturas se distribuem pela margem de votos e por que a banda de 0,1 QE.",
+      "status": {"estrutura": "ok", "codigo": "ok", "prosa": "ok", "plano": "ok"},
+      "o_que_existe": "Criado em 25/11 com a distribuição das candidaturas pela margem de votos (duas figuras) e a justificativa da banda de 0,1 QE, que saíram da seção de Dados do capítulo. Incluído também no PDF avulso do capítulo.",
+      "pendencias": "Receber o material de robustez (chapters/_apendice-cap3/robustez.md) depois de refeito com erros por UF.",
+      "proxima_acao": "Autora confere o texto (marcado de 25/11).",
+      "acao_curta": "Autora confere o texto de 25/11",
+      "fontes": [
+        {"rotulo": "Plano", "caminho": "quality_reports/plans/2026-11-25_cap4-ec111-dados-resultados.md"}
+      ]
     }
   },
   "transversais": [
