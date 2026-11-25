@@ -5,3 +5,11 @@
 .alterado {
   color: #1d4ed8;
 }
+
+/* Rodada de 2026-11-25 (revisão de redação de Dados e Resultados do capítulo da EC 111):
+   azul com fundo claro, para distinguir das marcas .alterado das rodadas anteriores.
+   No .qmd: ::: {.revisao} ... ::: e [trecho]{.revisao}. */
+.revisao {
+  color: #1d4ed8;
+  background-color: #dbeafe;
+}

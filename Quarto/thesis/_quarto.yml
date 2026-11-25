@@ -16,6 +16,8 @@ book:
         - chapters/04-sobreposicao-territorial-voto.qmd
         - chapters/05-sobreposicao-territorial-partido.qmd
     - chapters/99-conclusao.qmd
+  appendices:
+    - chapters/A1-apendice-ec111.qmd
 
 lang: pt-BR   # referências cruzadas ("Capítulo", "Figura", "Tabela"), sumário, busca e citações em português
 

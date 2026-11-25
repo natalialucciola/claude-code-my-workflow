@@ -13,7 +13,8 @@
 #
 # Rodar da raiz, depois de 01_bases_2026.R e 02_painel_listas.R:
 #   Rscript explorations/ec111-did-2026/R/05_tabela_amostra.R
-# Saída: output/tabela_amostra.csv e Quarto/thesis/chapters/_tabelas-cap3/{amostra,cobertura}.md
+# Saída: output/tabela_amostra.csv e Quarto/thesis/chapters/_tabelas-cap3/amostra.md
+# (depende de output/cobertura_painel.csv, gerado pelo R/14)
 # ==============================================================================
 
 library(tidyverse)
@@ -105,38 +106,38 @@ write_excel_csv2(tab, file.path(out_dir, "tabela_amostra.csv"))
 # ------------------------------------------------------------------------------
 f1 <- \(x) if_else(is.na(x), "—", formatC(x, format = "f", digits = 1, decimal.mark = ","))
 f0 <- \(x) if_else(is.na(x), "—", formatC(x, format = "d", big.mark = "."))
-# Duas tabelas (decisão da autora, 17/11): composição da amostra e cobertura financeira
-cabecalho_nota <- paste0("Sem o DF (26 disputas por cargo e ano). ")
+# Uma só tabela (plano 2026-11-25, item 2): composição da amostra, listas, cobertura do
+# painel balanceado (de output/cobertura_painel.csv, R/14) e cobertura financeira. A cobertura
+# financeira por grupo fica no CSV e numa frase do texto.
+cob_painel <- read_csv2(file.path(out_dir, "cobertura_painel.csv"), show_col_types = FALSE,
+                        locale = locale(decimal_mark = ",")) |>
+  transmute(ANO = as.character(ano), cargo, pct_cand_painel, pct_votos_painel)
+tab <- tab |> mutate(cargo = as.character(cargo)) |>
+  left_join(cob_painel, by = c("ANO", "cargo")) |>
+  mutate(cargo = factor(cargo, c("Federal", "Estadual"))) |> arrange(cargo, ANO)
+stopifnot(!anyNA(tab$pct_cand_painel))
 linhas_comp <- tab |>
-  transmute(l = paste("|", cargo, "|", ANO, "|", f0(candidaturas), "|", f1(pct_mulheres), "|",
+  mutate(cg = if_else(ANO == min(ANO), as.character(cargo), ""), .by = cargo) |>
+  transmute(l = paste("|", cg, "|", ANO, "|", f0(candidaturas), "|", f1(pct_mulheres), "|",
                       f1(pct_negras), "|", f1(pct_mulheres_negras), "|",
-                      f0(listas), "|", f0(listas_balanceado), "|")) |>
+                      f0(listas), "|", f0(listas_balanceado), "|", f1(pct_votos_painel), "|",
+                      f1(pct_receita), "|", f1(pct_gasto), "|")) |>
   pull(l)
 md_comp <- c(
-  "| Cargo | Ano | Candidaturas aptas | % mulheres | % pessoas negras | % mulheres negras | Listas | Listas no painel balanceado |",
-  "|:---|:---|---:|---:|---:|---:|---:|---:|",
+  paste("| Cargo | Ano | Candidaturas aptas | % mulheres | % pessoas negras | % mulheres negras |",
+        "Listas | Listas no painel | % dos votos no painel | % com receita | % com gasto |"),
+  "|:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
   linhas_comp,
   "",
-  paste0(": Amostra por cargo e eleição: candidaturas aptas a deputado federal e estadual e listas. ",
-         cabecalho_nota,
-         "Listas = partido (sigla vigente em 2026) × UF; painel balanceado = listas presentes nas quatro eleições. ",
-         "Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/05_tabela_amostra.R). {#tbl-amostra-ec111}")
-)
-linhas_cob <- tab |>
-  filter(ANO != "2014") |>
-  transmute(l = paste("|", cargo, "|", ANO, "|", f1(pct_receita), "|", f1(pct_gasto), "|",
-                      f1(pct_gasto_mulheres), "|", f1(pct_gasto_negras), "|",
-                      f1(pct_gasto_mulheres_negras), "|")) |>
-  pull(l)
-md_cob <- c(
-  "| Cargo | Ano | % com receita | % com gasto | % com gasto: mulheres | % com gasto: pessoas negras | % com gasto: mulheres negras |",
-  "|:---|:---|---:|---:|---:|---:|---:|",
-  linhas_cob,
-  "",
-  paste0(": Cobertura dos dados financeiros, 2018–2026: candidaturas com receita e com gasto maiores que zero na ",
-         "prestação de contas, em % das candidaturas aptas (nas colunas por grupo, em % das candidaturas do grupo). ",
-         cabecalho_nota, "Recursos de 2014 fora da análise (doação empresarial). ",
-         "Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/05_tabela_amostra.R). {#tbl-cobertura-ec111}")
+  # legenda revisada em 25/11 e marcada com .revisao (ver R/11)
+  paste0(": [Amostra por cargo e eleição, com as candidaturas aptas a deputado federal e estadual ",
+         "nas 26 UFs, sem o DF. A lista reúne as candidaturas de um partido, pela sigla vigente em ",
+         "2026, a um cargo numa UF, e as listas no painel são as presentes nas quatro eleições, que ",
+         "formam o painel balanceado das candidaturas e dos votos. A coluna % dos votos no painel ",
+         "indica a parte dos votos nominais do cargo obtida pelas candidaturas dessas listas, e as ",
+         "colunas % com receita e % com gasto, as candidaturas com receita e com gasto maiores que ",
+         "zero na prestação de contas, que ficam fora da análise em 2014, ano de doação empresarial.]{.revisao} ",
+         "Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/05 e R/14). {#tbl-amostra-ec111}")
 )
 # UTF-8 explícito: no Windows, writeLines grava na codificação local e corrompe "—" e acentos
 gravar_md <- function(linhas, arquivo) {
@@ -145,5 +146,6 @@ gravar_md <- function(linhas, arquivo) {
   close(con)
 }
 gravar_md(md_comp, "amostra.md")
-gravar_md(md_cob, "cobertura.md")
+# cobertura.md deixou de existir (fundida em amostra.md em 25/11)
+if (file.exists(file.path(tab_dir, "cobertura.md"))) file.remove(file.path(tab_dir, "cobertura.md"))
 print(tab, width = 200)

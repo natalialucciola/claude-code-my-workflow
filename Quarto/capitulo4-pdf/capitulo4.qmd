@@ -20,8 +20,17 @@ format:
         \AtBeginEnvironment{longtable}{\footnotesize}
         \usepackage{xcolor}
         \definecolor{alterado}{HTML}{1D4ED8}
+        % marca "25/11" na margem (rodada .revisao); omitida onde \marginpar não é permitido
+        % (legendas, tabelas, flutuantes), pelos mesmos testes que o LaTeX faz
+        \makeatletter
+        \newcommand{\revmarca}{\ifhmode\ifinner\else\ifnum\@floatpenalty<\z@\else
+          \marginpar{\raggedright\scriptsize\sffamily\color{alterado}25/11}\fi\fi\fi}
+        \makeatother
 filters:
-  - alterado.lua
+  # pre-ast: o filtro vê as tabelas e figuras como elementos do Pandoc, antes de o Quarto
+  # transformá-las em flutuantes, e consegue tirar a marca de margem das legendas
+  - path: alterado.lua
+    at: pre-ast
 ---
 
 <!-- Este arquivo é derivado do capítulo do livro (Quarto/thesis/chapters/03-ec111-competitividade-eleitoral.qmd) por Quarto/capitulo4-pdf/derivar.py. Não editar à mão: editar o capítulo e rodar o script. -->
@@ -130,6 +139,7 @@ Na competitividade e na eleição, a medida principal é o *sucesso relativo*, q
 |:--------------|:--------------|:--------------|:--------------|:--------------|
 | Lançamento | Proporção de candidaturas | \% das candidaturas aptas da lista que são do grupo | lista | 2014–2026 |
 | Investimento do partido | Proporção das transferências do partido | \% dos recursos transferidos pela direção partidária às candidaturas da lista que foram para o grupo | lista | 2018–2026 |
+|  | [Proporção dos recursos públicos (conferência)]{.revisao} | [% do FEFC e do Fundo Partidário recebidos pelas candidaturas da lista, do partido ou de outras candidaturas, que foram para o grupo]{.revisao} | [lista]{.revisao} | [2018–2026]{.revisao} |
 |  | [Investimento relativo]{.alterado} | [% das transferências da lista para o grupo menos % das candidaturas da lista que são do grupo (pontos percentuais)]{.alterado} | [lista]{.alterado} | [2018–2026]{.alterado} |
 | Gasto | Proporção do gasto | \% da despesa contratada pelas candidaturas da lista que foi feita pelo grupo, sem doações a outras candidaturas e partidos | lista | 2018–2026 |
 | Votos | Proporção dos votos nominais | \% dos votos nominais da lista dados ao grupo | lista | 2014–2026 |
@@ -146,10 +156,10 @@ Na competitividade e na eleição, a medida principal é o *sucesso relativo*, q
 Todas as variáveis são medidas na *lista*, isto é, no conjunto de candidaturas de um partido a um cargo num distrito eleitoral. É nela que o partido decide quem lançar e para quem enviar dinheiro, e a hipótese do capítulo é justamente sobre essa decisão. Medir na *disputa*, isto é, em cada cargo de cada UF, somaria todos os partidos, e uma mudança poderia vir tanto de partidos que mudaram de comportamento quanto do peso relativo entre eles. A lista impõe, porém, uma restrição às variáveis de competitividade e de eleição. Candidaturas competitivas e eleitas são raras dentro de uma lista. De um terço a metade das listas federais não têm nenhuma candidatura competitiva, conforme o ano, e quase metade não elege ninguém. A proporção do grupo entre as competitivas não existe nessas listas, e excluí-las selecionaria a amostra pelo próprio resultado. Por isso, o sucesso relativo, medida principal, é a diferença entre as taxas do grupo e do grupo de comparação na lista $u$, $Y_{ut} = \text{taxa}^{\,\text{grupo}}_{ut} - \text{taxa}^{\,\text{comparação}}_{ut}$, que exige apenas que a lista tenha candidaturas dos dois grupos em todos os anos. O modelo aplicado a essa diferença equivale a uma tripla diferença (grupo × cargo × período). A proporção do grupo entre as competitivas e entre os eleitos da lista entra como medida complementar, estimada pelo mesmo modelo com cada lista ponderada pelo número de competitivas (ou de eleitos) que teve no ano, de modo que a lista sem nenhuma não entra naquele ano. O *investimento relativo* é a proporção das transferências da lista destinada ao grupo menos a proporção das candidaturas da lista que são do grupo, positiva quando o grupo recebe mais do que a sua parte nas candidaturas.
 :::
 
-A proporção de candidaturas mede quem o partido decide lançar. A proporção das transferências do partido mede para quem ele decide enviar dinheiro, e é a medida mais direta do investimento partidário, porque exclui as doações de pessoas físicas, os recursos próprios e os repasses de outras candidaturas. Como o partido também distribui FEFC e Fundo Partidário por meio de outras candidaturas, uma versão ampla das transferências, que soma esses repasses, serve de conferência. [O investimento relativo mostra se o grupo recebe das transferências mais ou menos do que a sua parte nas candidaturas da lista.]{.alterado} A proporção do gasto mede quanto do dinheiro efetivamente empregado nas campanhas da lista coube ao grupo, qualquer que seja a origem. A proporção dos votos mede o que o partido recebe em troca no cálculo do bônus. As variáveis de competitividade e de eleição medem se esse investimento chegou a candidaturas em condição de disputar uma cadeira. Para examinar para onde foi o dinheiro, os resultados usam ainda [três divisões dessas proporções, entre candidaturas competitivas e não competitivas no resultado, entre candidaturas viáveis e não viáveis antes da eleição]{.alterado} e, na receita, entre as suas origens, o partido, os repasses de outras candidaturas e as doações e os recursos próprios. As partes somam o total, e nenhuma candidatura é excluída.
+A proporção de candidaturas mede quem o partido decide lançar. A proporção das transferências do partido mede para quem ele decide enviar dinheiro, e é a medida mais direta do investimento partidário, porque exclui as doações de pessoas físicas, os recursos próprios e os repasses de outras candidaturas. [Como o partido também distribui FEFC e Fundo Partidário por meio de outras candidaturas, a proporção dos *recursos públicos*, que soma o FEFC e o Fundo Partidário recebidos pelas candidaturas da lista por qualquer via, serve de conferência.]{.revisao} [O investimento relativo mostra se o grupo recebe das transferências mais ou menos do que a sua parte nas candidaturas da lista.]{.alterado} A proporção do gasto mede quanto do dinheiro efetivamente empregado nas campanhas da lista coube ao grupo, qualquer que seja a origem. A proporção dos votos mede o que o partido recebe em troca no cálculo do bônus. As variáveis de competitividade e de eleição medem se esse investimento chegou a candidaturas em condição de disputar uma cadeira. Para examinar para onde foi o dinheiro, os resultados usam ainda [três divisões dessas proporções, entre candidaturas competitivas e não competitivas no resultado, entre candidaturas viáveis e não viáveis antes da eleição]{.alterado} e, na receita, entre as suas origens, o partido, os repasses de outras candidaturas e as doações e os recursos próprios. As partes somam o total, e nenhuma candidatura é excluída.
 
 ::: alterado
-As transferências do partido são uma das partes da receita total das candidaturas. A receita total se divide em partes que somam o todo, segundo a origem declarada: a que veio do partido, os repasses de outras candidaturas e a *receita privada*, isto é, doações de pessoas físicas, financiamento coletivo e recursos próprios. Uma parte residual, de rendimentos de aplicações e de origem não identificada, fica abaixo de 0,1% da receita. Os repasses de outras candidaturas preservam a fonte do recurso, e de 80% a 86% do seu valor, conforme o ano, é FEFC ou Fundo Partidário, dinheiro público que só chega às candidaturas pelos partidos. Eles vão sobretudo para candidaturas estaduais, de R\$ 96 milhões a R\$ 128 milhões em FEFC e Fundo Partidário por eleição, contra R\$ 18 milhões a R\$ 26 milhões para as federais. Por isso, os repasses ficam fora das transferências do partido e entram só na versão ampla, e a receita privada é a base do teste de falsificação (@sec-limites-ec111).
+As transferências do partido são uma das partes da receita total das candidaturas. A receita total se divide em partes que somam o todo, segundo a origem declarada: a que veio do partido, os repasses de outras candidaturas e a *receita privada*, isto é, doações de pessoas físicas, financiamento coletivo e recursos próprios. Uma parte residual, de rendimentos de aplicações e de origem não identificada, fica abaixo de 0,1% da receita. Os repasses de outras candidaturas preservam a fonte do recurso, e de 80% a 86% do seu valor, conforme o ano, é FEFC ou Fundo Partidário, dinheiro público que só chega às candidaturas pelos partidos. Eles vão sobretudo para candidaturas estaduais, de R\$ 96 milhões a R\$ 128 milhões em FEFC e Fundo Partidário por eleição, contra R\$ 18 milhões a R\$ 26 milhões para as federais. [Por isso, os repasses ficam fora das transferências do partido, mas entram nos recursos públicos, e a receita privada é a base do teste de falsificação (@sec-limites-ec111). As duas medidas de investimento se sobrepõem sem coincidir, já que as transferências do partido são definidas pela origem imediata do dinheiro, a direção partidária, e incluem os recursos privados que o partido repassa, enquanto os recursos públicos são definidos pela fonte e incluem o FEFC e o Fundo Partidário que chegam por outras candidaturas. Como de 96% a 99% do que o partido transferiu em 2018 e 2022 era FEFC ou Fundo Partidário, conforme o cargo, as duas medidas diferem sobretudo no cargo estadual, para onde vai a maior parte dos repasses entre candidaturas.]{.revisao}
 :::
 
 ::: alterado
@@ -162,7 +172,7 @@ A *margem de votos* resolve esse problema. Ela responde a uma pergunta contrafac
 
 [^03-ec111-competitividade-eleitoral-1]: A rotina de distribuição de cadeiras reproduz 100% dos eleitos registrados pelo TSE nos 216 distritos (UF × cargo × ano) de 2014 a 2026. Em 2022, a base do TSE já traz os eleitos recalculados após as ADIs 7228, 7263 e 7325, que abriram a terceira fase das sobras a todas as listas. Para deputado federal em 2014, 5.796 das 6.165 candidaturas da base de replicação de @AvelinoBidermanDesposato2022_incumbency foram pareadas, e o resultado eleito ou não eleito coincide em 99,98% dos casos. Entre os eleitos, a diferença mediana na medida é de 0,009, e, perto do limiar (margem menor que 0,1 QE em valor absoluto), 66% das candidaturas coincidem até a segunda casa decimal.
 
-A margem é dividida pelo QE do distrito, o que dá uma escala comum entre os dois cargos da mesma UF. *Competitiva* é a candidatura eleita ou a menos de 0,1 QE do limiar de eleição. Bandas mais largas não servem como medida principal porque, numa lista grande, a distância de uma candidatura fraca até o limiar passa a ser determinada mais pelos colegas de lista do que pelos votos dela (@sec-distribuicao-competitividade-ec111). [Com bandas de 0,25 ou 0,5 QE, candidaturas quase sem votos passam a ser classificadas como próximas do limiar quando a lista tem colegas fortes. Entre as candidaturas com menos de 0,5% do QE, 27,6% ficam a menos de 0,25 QE do limiar, mas só 0,8% a menos de 0,1 QE.]{.alterado}
+A margem é dividida pelo QE do distrito, o que dá uma escala comum entre os dois cargos da mesma UF. *Competitiva* é a candidatura eleita ou a menos de 0,1 QE do limiar de eleição. Bandas mais largas não servem como medida principal porque, numa lista grande, a distância de uma candidatura fraca até o limiar passa a ser determinada mais pelos colegas de lista do que pelos votos dela ([@sec-distribuicao-competitividade-ec111, no Apêndice]{.revisao}).
 
 A margem de votos tem uma limitação. É uma medida *ex post*, que depende do resultado, e por isso mede a proximidade do limiar depois da eleição, sem dizer em que posição o partido colocou a candidatura antes dela. Para medir essa posição uso o dinheiro. A *margem de gasto* faz a mesma pergunta da margem de votos num mundo contrafactual em que o gasto faz o papel do voto. Nesse mundo, as listas recebem cadeiras pelo gasto total das suas candidaturas, com a regra do ano aplicada ao "QE de gasto" (gasto do distrito dividido pelas cadeiras), e dentro de cada lista as candidaturas são ordenadas pelo gasto. A margem é quantos reais faltariam ou sobrariam para a candidatura mudar de resultado nesse mundo, dividida pelo QE de gasto. Competitiva pelo gasto é a candidatura que se elegeria pelo gasto ou ficaria a menos de 0,1 QE de gasto do limiar. A medida usa a mesma rotina de distribuição da margem de votos, validada reproduzindo a margem de votos quando os votos substituem o gasto. [As duas margens medem coisas relacionadas, mas distintas. Sozinho, o gasto elege de 50% a 66% dos eleitos reais, conforme o cargo e o ano, e a margem de gasto tem correlação de 0,51 a 0,75 com a margem de votos.]{.alterado}
 
@@ -184,66 +194,166 @@ O caso impõe três limites ao desenho. O primeiro é a *ausência de variação
 
 ## Dados {#sec-medida-ec111}
 
-::: alterado
-A amostra é construída a partir de dados do Tribunal Superior Eleitoral (TSE) e cobre as candidaturas aptas a deputado federal e estadual nas eleições de 2014, 2018, 2022 e 2026, nos 26 estados (o Distrito Federal, que não elege deputados estaduais, fica de fora). Gênero e cor/raça são os autodeclarados no registro de candidaturas. Para 2026, os votos vêm do arquivo de votação republicado pelo TSE em 09/11/2026, o registro de candidaturas do arquivo de 08/11/2026 e as receitas e despesas do arquivo de prestação de contas de 08/11/2026, que já traz a prestação final de mais de 99% das candidaturas. As siglas foram harmonizadas para as vigentes em 2026.
+::: revisao
+A amostra cobre as candidaturas aptas a deputado federal e estadual nas eleições de 2014, 2018, 2022 e 2026 nos 26 estados, sem o Distrito Federal, que não elege deputados estaduais. Os dados vêm do Portal de Dados Abertos do Tribunal Superior Eleitoral [@TSE2026_dados_abertos], que reúne o registro de candidaturas, com gênero e cor/raça autodeclarados, a votação de cada candidatura e a prestação de contas, de onde saem as receitas e o gasto.[^03-ec111-dados] As variáveis de recursos e de gasto começam em 2018, porque em 2014 ainda vigorava a doação empresarial, um regime de financiamento distinto do atual.
 :::
 
-::: alterado
-Os recursos vêm da prestação de contas das candidaturas. Nos arquivos do TSE, cada despesa e cada receita é um item de um documento (nota fiscal, contrato, recibo), e um mesmo documento reúne vários itens. Por isso, todos os itens são somados, e só as linhas idênticas em todas as colunas, cópias do mesmo registro, são descartadas. Recursos e gasto entram de 2018 em diante, porque em 2014 vigorava a doação empresarial, outro regime de financiamento.
-:::
+[^03-ec111-dados]: [Os arquivos de 2026 são o de votação republicado pelo TSE em 09/11/2026 e os de registro de candidaturas e de prestação de contas de 08/11/2026, este último já com a prestação final de mais de 99% das candidaturas. As siglas partidárias foram harmonizadas para as vigentes em 2026. Como, nos arquivos de prestação de contas, cada despesa e cada receita é um item de um documento, como uma nota fiscal, um contrato ou um recibo, que pode reunir vários itens, todos os itens são somados, e apenas as linhas idênticas em todas as colunas, que são cópias do mesmo registro, são descartadas.]{.revisao}
 
-@tbl-amostra-ec111 resume a amostra. Em cada ano há 26 disputas por cargo. O painel de listas usado nas proporções de candidaturas e de votos é balanceado e reúne as 799 listas (413 federais e 386 estaduais) presentes nas quatro eleições. Nas transferências e no gasto, que começam em 2018, o painel balanceado reúne as listas presentes de 2018 a 2026 em que a variável existe nos três anos, isto é, em que a lista teve aquele tipo de recurso, o que dá 770 listas nas transferências do partido e 834 no gasto. [Nas taxas de competitividade e de eleição, entram as listas com candidaturas dos dois grupos em todos os anos, de 381 a 617 listas em 2014–2026, conforme o grupo, porque listas pequenas, com poucas candidaturas, nem sempre têm os dois. Nas proporções entre as competitivas e entre os eleitos, a lista entra em cada ano em que teve ao menos uma.]{.alterado}
+::: revisao
+As estimações usam *painéis balanceados* de listas, ou seja, incluem apenas as listas presentes em todas as eleições usadas por cada variável. Como o modelo compara cada lista consigo mesma ao longo do tempo (@eq-reg-ec111), uma lista que surgisse ou desaparecesse no meio do período, por fusão, federação ou extinção de partido, alteraria a composição da amostra de uma eleição para outra, e essa alteração se confundiria com o efeito da emenda. Nas candidaturas e nos votos, o painel reúne as 799 listas presentes nas quatro eleições, das quais 413 federais e 386 estaduais (@tbl-amostra-ec111). Essas listas concentram de 67% a 84% das candidaturas e de 83% a 95% dos votos nominais de cada cargo e eleição, o que indica que as listas excluídas obtêm, em média, menos votos por candidatura. Nas variáveis de recursos, que começam em 2018, entram as listas presentes de 2018 a 2026 que receberam aquele tipo de recurso nas três eleições, e nas taxas de competitividade e de eleição, as listas com candidaturas do grupo e do restante em todos os anos, de modo que o número de listas varia entre as estimações e é informado em cada tabela de resultados.
+:::
 
 <!-- Cópia de ../thesis/chapters/_tabelas-cap3/amostra.md, com \hspace{0pt} no cabeçalho para permitir a hifenização em coluna estreita no PDF. -->
 
-| `\hspace{0pt}`{=latex}Cargo | `\hspace{0pt}`{=latex}Ano | `\hspace{0pt}`{=latex}Candidaturas aptas | `\hspace{0pt}`{=latex}% mulheres | `\hspace{0pt}`{=latex}% pessoas negras | `\hspace{0pt}`{=latex}% mulheres negras | `\hspace{0pt}`{=latex}Listas | `\hspace{0pt}`{=latex}Listas no painel balanceado |
-|:---|:---|---:|---:|---:|---:|---:|---:|
-| Federal | 2014 | 5.749 | 29,3 | 39,7 | 12,6 | 585 | 413 |
-| Federal | 2018 | 7.466 | 31,7 | 40,7 | 13,6 | 697 | 413 |
-| Federal | 2022 | 9.280 | 35,2 | 47,8 | 18,2 | 605 | 413 |
-| Federal | 2026 | 7.065 | 36,9 | 46,1 | 18,3 | 556 | 413 |
-| Estadual | 2014 | 14.308 | 29,0 | 45,2 | 13,5 | 604 | 386 |
-| Estadual | 2018 | 16.021 | 31,1 | 48,5 | 15,3 | 681 | 386 |
-| Estadual | 2022 | 15.209 | 33,6 | 51,8 | 18,3 | 579 | 386 |
-| Estadual | 2026 | 10.618 | 34,8 | 49,4 | 18,4 | 493 | 386 |
+| `\hspace{0pt}`{=latex}Cargo | `\hspace{0pt}`{=latex}Ano | `\hspace{0pt}`{=latex}Candidaturas aptas | `\hspace{0pt}`{=latex}% mulheres | `\hspace{0pt}`{=latex}% pessoas negras | `\hspace{0pt}`{=latex}% mulheres negras | `\hspace{0pt}`{=latex}Listas | `\hspace{0pt}`{=latex}Listas no painel | `\hspace{0pt}`{=latex}% dos votos no painel | `\hspace{0pt}`{=latex}% com receita | `\hspace{0pt}`{=latex}% com gasto |
+|:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Federal | 2014 | 5.749 | 29,3 | 39,7 | 12,6 | 585 | 413 | 92,2 | — | — |
+|  | 2018 | 7.466 | 31,7 | 40,7 | 13,6 | 697 | 413 | 87,8 | 90,9 | 77,3 |
+|  | 2022 | 9.280 | 35,2 | 47,8 | 18,2 | 605 | 413 | 95,0 | 94,4 | 90,2 |
+|  | 2026 | 7.065 | 36,9 | 46,1 | 18,3 | 556 | 413 | 94,9 | 93,6 | 89,0 |
+| Estadual | 2014 | 14.308 | 29,0 | 45,2 | 13,5 | 604 | 386 | 86,8 | — | — |
+|  | 2018 | 16.021 | 31,1 | 48,5 | 15,3 | 681 | 386 | 82,8 | 90,6 | 71,9 |
+|  | 2022 | 15.209 | 33,6 | 51,8 | 18,3 | 579 | 386 | 91,8 | 91,3 | 84,6 |
+|  | 2026 | 10.618 | 34,8 | 49,4 | 18,4 | 493 | 386 | 94,7 | 92,3 | 84,6 |
 
-: Amostra por cargo e eleição: candidaturas aptas a deputado federal e estadual e listas. Sem o DF (26 disputas por cargo e ano). Listas = partido (sigla vigente em 2026) × UF; painel balanceado = listas presentes nas quatro eleições. Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/05_tabela_amostra.R). {#tbl-amostra-ec111}
+: [Amostra por cargo e eleição, com as candidaturas aptas a deputado federal e estadual nas 26 UFs, sem o DF. A lista reúne as candidaturas de um partido, pela sigla vigente em 2026, a um cargo numa UF, e as listas no painel são as presentes nas quatro eleições, que formam o painel balanceado das candidaturas e dos votos. A coluna % dos votos no painel indica a parte dos votos nominais do cargo obtida pelas candidaturas dessas listas, e as colunas % com receita e % com gasto, as candidaturas com receita e com gasto maiores que zero na prestação de contas, que ficam fora da análise em 2014, ano de doação empresarial.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/05 e R/14). {#tbl-amostra-ec111}
 
 Duas características da amostra importam para a leitura dos resultados. O número de candidaturas caiu em 2026 cerca de 24% no federal e 30% no estadual, depois do pico de 2022 no federal. A proporção de mulheres e de pessoas negras entre as candidaturas cresce nos dois cargos ao longo do período, o que mostra que parte do aumento observado no federal ocorreu também onde não havia voto em dobro.
 
-A cobertura dos dados financeiros (@tbl-cobertura-ec111) é alta, mas não completa. De 90% a 94% das candidaturas têm receita registrada, e a proporção com gasto subiu de 72% a 77% em 2018 para 85% a 90% em 2022 e 2026, com cobertura algo menor entre pessoas negras. Em 2026, cerca de 400 candidaturas ainda constavam só com prestação parcial ou relatórios financeiros no arquivo de 08/11/2026.
+[A cobertura dos dados financeiros é alta, embora incompleta. De 90% a 94% das candidaturas têm receita registrada, e a proporção das que registram gasto subiu de 72% a 77% em 2018 para 85% a 90% em 2022 e 2026, com cobertura um pouco menor entre pessoas negras, que em 2018 era de 66% no cargo estadual e de 72% no federal.]{.revisao}
 
-{{< include ../thesis/chapters/_tabelas-cap3/cobertura.md >}}
+### Competitividade e viabilidade das candidaturas {#sec-descritivo-competitividade-ec111}
 
-### Distribuição das medidas de competitividade {#sec-distribuicao-competitividade-ec111}
+::: revisao
+A @tbl-descritivo-competitividade-ec111 apresenta, para cada grupo e para o restante das candidaturas, a proporção das que terminaram competitivas pelo voto e pelo gasto, das que se elegeram e das que eram viáveis antes da eleição. Em todas as medidas, cargos e anos, mulheres, pessoas negras e mulheres negras ficam abaixo do restante. Em 2018, último ano antes da emenda, 7,1% das candidatas a deputada federal terminaram competitivas pelo voto e 3,0% eram viáveis antes da eleição, contra 15,9% e 10,7% dos candidatos, e entre as mulheres negras essas proporções eram de apenas 4,0% e 1,8%. Como as candidaturas viáveis são poucas em qualquer grupo, com 71 mulheres no cargo federal em 2018 e 129 em 2022, a divisão das transferências entre viáveis e não viáveis (@sec-h4-ganhos-ec111) deve ser lida tendo em conta esse tamanho. De 2018 para 2022, a proporção de competitivas pelo voto caiu no cargo federal em todos os grupos, mas caiu mais entre o restante das candidaturas, movimento examinado em H4 (@sec-h4-denominador-ec111). A distribuição completa das candidaturas pela margem de votos está no Apêndice (@sec-distribuicao-competitividade-ec111).
+:::
 
-@fig-faixas-margem-genero e @fig-faixas-margem-raca mostram a distribuição das candidaturas por faixa de margem de votos. A maior parte das candidaturas termina muito longe do limiar, e as de mulheres e de pessoas negras, mais longe que as demais. Em 2018, último ano antes da emenda, 7,1% das candidatas a deputada federal e 15,9% dos candidatos se elegeram ou ficaram a menos de 0,1 QE do limiar. Entre pessoas negras e brancas, a distância era parecida com a de gênero, de 8,2% contra 16,6%.
+<!-- Cópia de ../thesis/chapters/_tabelas-cap3/descritivo_competitividade.md, com \hspace{0pt} no cabeçalho para permitir a hifenização em coluna estreita no PDF. -->
 
-![Distribuição das candidaturas de mulheres e de homens por faixa de margem de votos (em QE), por cargo e eleição, 2014–2026.](../thesis/Figures/03-ec111-competitividade/faixas_margem_genero.png){#fig-faixas-margem-genero width="100%"}
+| `\hspace{0pt}`{=latex}Grupo | `\hspace{0pt}`{=latex}Cargo | `\hspace{0pt}`{=latex}Ano | `\hspace{0pt}`{=latex}Competitivas pelo voto: grupo | `\hspace{0pt}`{=latex}Competitivas pelo voto: restante | `\hspace{0pt}`{=latex}Competitivas pelo gasto: grupo | `\hspace{0pt}`{=latex}Competitivas pelo gasto: restante | `\hspace{0pt}`{=latex}Eleitas: grupo | `\hspace{0pt}`{=latex}Eleitas: restante | `\hspace{0pt}`{=latex}Viáveis antes da eleição: grupo | `\hspace{0pt}`{=latex}Viáveis antes da eleição: restante |
+|:---|:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Mulheres | Federal | 2014 | 6,1 | 17,1 | — | — | 3,0 | 11,2 | — | — |
+|  |  | 2018 | 7,1 | 15,9 | 5,2 | 11,0 | 3,0 | 8,5 | 3,0 | 10,7 |
+|  |  | 2022 | 4,6 | 10,5 | 8,8 | 12,3 | 2,7 | 7,0 | 3,9 | 11,3 |
+|  |  | 2026 | 6,3 | 13,9 | 10,4 | 15,3 | 4,2 | 9,2 | 5,2 | 12,3 |
+|  | Estadual | 2014 | 6,0 | 17,2 | — | — | 2,7 | 9,1 | — | — |
+|  |  | 2018 | 6,5 | 14,8 | 9,4 | 11,9 | 3,2 | 7,9 | 2,6 | 8,5 |
+|  |  | 2022 | 5,9 | 14,0 | 12,4 | 14,1 | 3,8 | 8,7 | 3,4 | 9,5 |
+|  |  | 2026 | 8,4 | 17,9 | 16,4 | 17,9 | 5,8 | 12,1 | 5,4 | 13,4 |
+| Pessoas negras | Federal | 2014 | 8,1 | 17,7 | — | — | 4,4 | 11,7 | — | — |
+|  |  | 2018 | 8,2 | 16,5 | 5,0 | 12,0 | 4,0 | 8,6 | 5,1 | 10,4 |
+|  |  | 2022 | 4,8 | 11,7 | 7,7 | 14,2 | 3,1 | 7,7 | 5,5 | 11,7 |
+|  |  | 2026 | 6,8 | 14,8 | 9,4 | 17,0 | 4,2 | 10,0 | 5,8 | 13,0 |
+|  | Estadual | 2014 | 9,0 | 18,0 | — | — | 4,2 | 9,7 | — | — |
+|  |  | 2018 | 7,8 | 16,4 | 7,7 | 14,3 | 3,8 | 9,0 | 4,0 | 9,2 |
+|  |  | 2022 | 7,6 | 15,4 | 10,6 | 16,7 | 4,7 | 9,5 | 4,9 | 10,2 |
+|  |  | 2026 | 9,1 | 19,8 | 12,6 | 22,0 | 6,3 | 13,5 | 7,1 | 14,0 |
+| Mulheres negras | Federal | 2014 | 4,0 | 15,3 | — | — | 1,4 | 9,9 | — | — |
+|  |  | 2018 | 4,0 | 14,5 | 2,7 | 10,2 | 1,2 | 7,6 | 1,8 | 9,2 |
+|  |  | 2022 | 3,2 | 9,6 | 7,2 | 11,9 | 1,9 | 6,3 | 2,6 | 10,0 |
+|  |  | 2026 | 4,3 | 12,6 | 8,1 | 14,7 | 2,7 | 8,4 | 3,4 | 11,1 |
+|  | Estadual | 2014 | 3,6 | 15,5 | — | — | 1,8 | 8,1 | — | — |
+|  |  | 2018 | 3,8 | 13,8 | 7,8 | 11,7 | 2,0 | 7,3 | 1,7 | 7,6 |
+|  |  | 2022 | 4,3 | 12,9 | 10,2 | 14,3 | 2,7 | 8,0 | 2,0 | 8,7 |
+|  |  | 2026 | 5,2 | 16,6 | 13,2 | 18,3 | 3,8 | 11,3 | 4,1 | 12,1 |
 
-![Distribuição das candidaturas de pessoas negras e de pessoas brancas por faixa de margem de votos (em QE), por cargo e eleição, 2014–2026.](../thesis/Figures/03-ec111-competitividade/faixas_margem_raca.png){#fig-faixas-margem-raca width="100%"}
+: [Competitividade, eleição e viabilidade das candidaturas do grupo e do restante das candidaturas, por cargo e eleição, em % das candidaturas aptas. Competitiva é a candidatura eleita ou a menos de 0,1 QE do limiar, pela margem de votos ou de gasto, e viável antes da eleição, a que foi eleita deputada, em qualquer dos dois cargos, ou ficou a menos de 0,1 QE do limiar na eleição anterior. O restante corresponde aos homens, no caso das mulheres, e às demais candidaturas, no caso de pessoas negras e de mulheres negras. Gasto e viabilidade começam em 2018 (—). Totais nacionais, sem o DF.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/14 e R/11). {#tbl-descritivo-competitividade-ec111}
 
 ## Resultados {#sec-resultados-ec111}
 
-Antes das estimativas, @fig-niveis-ec111 mostra os dados brutos, com a proporção média de cada grupo nas listas federais e estaduais em cada eleição, como recomenda @Cunningham2021_mixtape. Para as mulheres, as linhas dos dois cargos correm juntas até 2018, nas candidaturas e nos votos, e se afastam depois. Para pessoas negras, já se afastavam nas candidaturas de 2014 para 2018, porque a proporção crescia no estadual e não no federal. Nas transferências do partido, a distância que se abre entre as linhas das mulheres em 2022 vem tanto da alta no federal quanto da queda no estadual, ponto examinado em H2.
-
-![Proporção média de mulheres, pessoas negras e mulheres negras nas listas federais e estaduais, por variável e eleição (dados brutos), 2014–2026.](../thesis/Figures/03-ec111-competitividade/niveis_por_cargo.png){#fig-niveis-ec111 width="100%"}
-
-::: alterado
-@fig-efeitos-etapas-ec111 resume os efeitos de 2022 e de 2026 em todas as etapas, e @tbl-principal-ec111 traz as estimativas, com o número de listas de cada variável. As colunas por ano são os coeficientes da @eq-att-ec111, e a coluna Federal × Pós traz o termo único da @eq-reg-ec111. O sucesso relativo, na competitividade e na eleição, aparece em @tbl-principal-ec111 e, com as comparações adicionais, em @tbl-sucesso-ec111, nos resultados de H4. Os resultados são apresentados na ordem das hipóteses.
+::: revisao
+Antes das estimativas, a @fig-niveis-funil-ec111 e a @fig-niveis-taxas-ec111 apresentam os dados brutos de cada variável dependente, na ordem do percurso da candidatura, como recomenda @Cunningham2021_mixtape. Cada linha corresponde à média das listas federais ou estaduais do painel usado na estimação, em cada eleição. A primeira figura mostra a proporção do grupo na lista, e a segunda, o sucesso relativo, calculado como a taxa do grupo menos a do restante da lista. A viabilidade antes da eleição não aparece nas figuras porque não é uma variável dependente, e sim uma classificação usada para dividir as transferências (@sec-h4-ganhos-ec111).
 :::
+
+Para as mulheres, as linhas dos dois cargos correm juntas até 2018, nas candidaturas e nos votos, e se afastam depois. Para pessoas negras, já se afastavam nas candidaturas de 2014 para 2018, porque a proporção crescia no estadual e não no federal. Nas transferências do partido, a distância que se abre entre as linhas das mulheres em 2022 vem tanto da alta no federal quanto da queda no estadual, ponto examinado em H2. [Nas taxas, as linhas federais sobem mais do que as estaduais depois de 2018, tanto pelo voto e pelo gasto quanto na eleição, movimento examinado em H4 e H5.]{.revisao}
+
+![Proporção média de mulheres, pessoas negras e mulheres negras nas candidaturas, nas transferências do partido, no gasto e nos votos nominais das listas federais e estaduais, por eleição (dados brutos), 2014–2026. [Média das listas do painel balanceado de cada variável, sem o DF. A área cinza indica as eleições sob a EC 111, e recursos e gasto começam em 2018.]{.revisao} Fonte: TSE; elaboração própria.](../thesis/Figures/03-ec111-competitividade/niveis_funil.png){#fig-niveis-funil-ec111 width="100%"}
+
+![[Sucesso relativo de mulheres, pessoas negras e mulheres negras nas listas federais e estaduais, por eleição (dados brutos), 2014–2026, medido pela taxa de candidaturas do grupo competitivas pelo voto, competitivas pelo gasto e eleitas menos a taxa do restante das candidaturas da lista (pontos percentuais). Média das listas com os dois grupos em todos os anos, sem o DF. A área cinza indica as eleições sob a EC 111.]{.revisao} Fonte: TSE; elaboração própria.](../thesis/Figures/03-ec111-competitividade/niveis_taxas.png){#fig-niveis-taxas-ec111 width="100%"}
+
+::: revisao
+As estimativas aparecem na @tbl-reg-mulheres-ec111, na @tbl-reg-negras-ec111 e na @tbl-reg-mulheres-negras-ec111, uma para cada grupo, com uma coluna para cada variável dependente. O painel A de cada tabela traz os coeficientes por ano da @eq-att-ec111, incluindo o pré-teste e a diferença entre 2026 e 2022, e o painel B traz o termo único Federal × Pós da @eq-reg-ec111. Sob cada coeficiente estão o erro-padrão agrupado por UF e, entre colchetes, o p-valor do *wild cluster bootstrap*, e a @fig-efeitos-etapas-ec111 resume os efeitos de 2022 e de 2026. No texto, o pré-teste só é comentado quando altera a leitura de um resultado, e as colunas citadas referem-se às tabelas por grupo. Os resultados são apresentados a seguir na ordem das hipóteses.
+:::
+
+<!-- Cópia de ../thesis/chapters/_tabelas-cap3/reg_mulheres.md, com \hspace{0pt} no cabeçalho para permitir a hifenização em coluna estreita no PDF. -->
+
+| `\hspace{0pt}`{=latex}Termo | `\hspace{0pt}`{=latex}(1) Candidaturas | `\hspace{0pt}`{=latex}(2) Transferências do partido | `\hspace{0pt}`{=latex}(3) Recursos públicos | `\hspace{0pt}`{=latex}(4) Transferências − candidaturas | `\hspace{0pt}`{=latex}(5) Gasto | `\hspace{0pt}`{=latex}(6) Votos | `\hspace{0pt}`{=latex}(7) Competitiva pelo voto | `\hspace{0pt}`{=latex}(8) Competitiva pelo gasto | `\hspace{0pt}`{=latex}(9) Eleita |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| *A. Estudo de evento, base 2018* |  |  |  |  |  |  |  |  |  |
+| Federal × 2014 (pré-teste) | −1,0 | — | — | — | — | −0,4 | +2,5 | — | −1,4 |
+|  | (1,3) |  |  |  |  | (2,3) | (3,0) |  | (3,0) |
+| Federal × 2022 | +3,2\* | +12,4\* | +8,4\* | +9,7\* | +7,1\* | +4,0 | +6,7 | +6,7\* | +3,6 |
+|  | (1,3) [0,02] | (3,0) [< 0,001] | (2,9) [0,004] | (2,6) [< 0,001] | (2,9) [0,02] | (2,6) [0,12] | (3,4) [0,06] | (2,9) [0,03] | (2,8) [0,24] |
+| Federal × 2026 | +2,6\* | +12,2\* | +7,4\* | +9,2\* | +5,0 | +2,1 | +7,3\* | +5,0 | +5,7\* |
+|  | (1,3) [0,04] | (3,1) [< 0,001] | (2,7) [0,01] | (2,6) [< 0,001] | (2,8) [0,09] | (2,4) [0,36] | (3,1) [0,02] | (3,3) [0,14] | (2,8) [0,06] |
+| Diferença 2026 − 2022 | −0,6 | −0,2 | −1,0 | −0,4 | −2,2 | −1,9 | +0,6 | −1,6 | +2,1 |
+|  | (0,9) | (1,4) | (1,5) | (1,1) | (1,8) | (2,0) | (1,9) | (2,3) | (1,9) |
+| *B. Diferença em diferenças, 2018–2026* |  |  |  |  |  |  |  |  |  |
+| Federal × Pós | +2,9\* | +12,3\* | +7,9\* | +9,5\* | +6,1\* | +3,1 | +7,0\* | +5,9\* | +4,6 |
+|  | (1,2) [0,02] | (2,9) [0,001] | (2,7) [0,008] | (2,6) [0,001] | (2,7) [0,04] | (2,2) [0,19] | (3,1) [0,02] | (2,9) [0,05] | (2,7) [0,11] |
+| Média federal em 2018 | 31,7 | 30,2 | 29,5 | −1,4 | 26,0 | 19,1 | −16,8 | −10,0 | −11,5 |
+| Listas | 799 | 770 | 771 | 770 | 834 | 799 | 617 | 748 | 617 |
+| Observações (A) | 3.196 | 2.310 | 2.313 | 2.310 | 2.502 | 3.196 | 2.468 | 2.244 | 2.468 |
+| Observações (B) | 2.397 | 2.310 | 2.313 | 2.310 | 2.502 | 2.397 | 1.851 | 2.244 | 1.851 |
+
+: [Efeito do voto em dobro em cada etapa da candidatura para mulheres, federal × estadual, em pontos percentuais. O painel A traz os coeficientes da @eq-att-ec111, com 2018 como referência e o termo de 2014 como pré-teste, e o painel B, o termo único da @eq-reg-ec111. As colunas (1), (2), (3), (5) e (6) medem a parte do grupo no total da lista, e a coluna (3) soma o FEFC e o Fundo Partidário recebidos do partido e repassados por outras candidaturas. A coluna (4) é a proporção das transferências menos a proporção das candidaturas do grupo, e as colunas (7) a (9) são a taxa de candidaturas do grupo que terminam competitivas, isto é, eleitas ou a menos de 0,1 QE do limiar pela margem de votos ou de gasto, ou que se elegem, menos a taxa do restante das candidaturas da lista, calculada apenas nas listas com os dois grupos em todos os anos. Recursos, gasto e competitividade pelo gasto começam em 2018 e por isso não têm pré-teste (—). As estimações usam as listas do painel balanceado, sem ponderação e com efeitos fixos de lista e de ano. O erro-padrão agrupado por UF (26 UFs) está entre parênteses e o p-valor do *wild cluster bootstrap* restrito, entre colchetes. \* IC de 95% exclui zero.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/10, R/14 e R/11). {#tbl-reg-mulheres-ec111}
+
+<!-- Cópia de ../thesis/chapters/_tabelas-cap3/reg_negras.md, com \hspace{0pt} no cabeçalho para permitir a hifenização em coluna estreita no PDF. -->
+
+| `\hspace{0pt}`{=latex}Termo | `\hspace{0pt}`{=latex}(1) Candidaturas | `\hspace{0pt}`{=latex}(2) Transferências do partido | `\hspace{0pt}`{=latex}(3) Recursos públicos | `\hspace{0pt}`{=latex}(4) Transferências − candidaturas | `\hspace{0pt}`{=latex}(5) Gasto | `\hspace{0pt}`{=latex}(6) Votos | `\hspace{0pt}`{=latex}(7) Competitiva pelo voto | `\hspace{0pt}`{=latex}(8) Competitiva pelo gasto | `\hspace{0pt}`{=latex}(9) Eleita |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| *A. Estudo de evento, base 2018* |  |  |  |  |  |  |  |  |  |
+| Federal × 2014 (pré-teste) | +2,6 | — | — | — | — | −0,5 | +3,8 | — | +0,8 |
+|  | (2,2) |  |  |  |  | (2,8) | (3,5) |  | (2,5) |
+| Federal × 2022 | +5,0\* | +3,4 | +5,1\* | −0,1 | +3,6 | +3,5 | +5,6 | +4,5 | +0,9 |
+|  | (1,7) [0,006] | (2,6) [0,20] | (2,6) [0,06] | (1,7) [0,94] | (2,7) [0,20] | (2,1) [0,12] | (3,6) [0,12] | (2,7) [0,10] | (2,6) [0,72] |
+| Federal × 2026 | +5,5\* | +4,1 | +4,3 | 0,0 | +3,0 | +2,8 | +8,2\* | +6,0\* | +5,8 |
+|  | (1,9) [0,009] | (3,2) [0,21] | (3,1) [0,18] | (2,2) [0,98] | (3,2) [0,35] | (2,9) [0,35] | (3,3) [0,02] | (3,0) [0,05] | (3,2) [0,08] |
+| Diferença 2026 − 2022 | +0,5 | +0,7 | −0,8 | +0,2 | −0,6 | −0,7 | +2,6 | +1,4 | +4,8\* |
+|  | (1,6) | (2,6) | (2,7) | (2,1) | (2,2) | (2,2) | (2,5) | (2,2) | (2,3) |
+| *B. Diferença em diferenças, 2018–2026* |  |  |  |  |  |  |  |  |  |
+| Federal × Pós | +5,3\* | +3,7 | +4,7 | 0,0 | +3,3 | +3,1 | +6,9\* | +5,2 | +3,4 |
+|  | (1,6) [0,004] | (2,6) [0,15] | (2,5) [0,07] | (1,7) [0,98] | (2,7) [0,24] | (2,2) [0,18] | (3,2) [0,04] | (2,7) [0,06] | (2,7) [0,21] |
+| Média federal em 2018 | 42,5 | 34,6 | 34,7 | −7,6 | 33,5 | 35,9 | −13,9 | −13,5 | −10,7 |
+| Listas | 799 | 770 | 771 | 770 | 834 | 799 | 483 | 595 | 483 |
+| Observações (A) | 3.196 | 2.310 | 2.313 | 2.310 | 2.502 | 3.196 | 1.932 | 1.785 | 1.932 |
+| Observações (B) | 2.397 | 2.310 | 2.313 | 2.310 | 2.502 | 2.397 | 1.449 | 1.785 | 1.449 |
+
+: [Efeito do voto em dobro em cada etapa da candidatura para pessoas negras, federal × estadual, em pontos percentuais. O painel A traz os coeficientes da @eq-att-ec111, com 2018 como referência e o termo de 2014 como pré-teste, e o painel B, o termo único da @eq-reg-ec111. As colunas (1), (2), (3), (5) e (6) medem a parte do grupo no total da lista, e a coluna (3) soma o FEFC e o Fundo Partidário recebidos do partido e repassados por outras candidaturas. A coluna (4) é a proporção das transferências menos a proporção das candidaturas do grupo, e as colunas (7) a (9) são a taxa de candidaturas do grupo que terminam competitivas, isto é, eleitas ou a menos de 0,1 QE do limiar pela margem de votos ou de gasto, ou que se elegem, menos a taxa do restante das candidaturas da lista, calculada apenas nas listas com os dois grupos em todos os anos. Recursos, gasto e competitividade pelo gasto começam em 2018 e por isso não têm pré-teste (—). As estimações usam as listas do painel balanceado, sem ponderação e com efeitos fixos de lista e de ano. O erro-padrão agrupado por UF (26 UFs) está entre parênteses e o p-valor do *wild cluster bootstrap* restrito, entre colchetes. \* IC de 95% exclui zero.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/10, R/14 e R/11). {#tbl-reg-negras-ec111}
+
+<!-- Cópia de ../thesis/chapters/_tabelas-cap3/reg_mulheres_negras.md, com \hspace{0pt} no cabeçalho para permitir a hifenização em coluna estreita no PDF. -->
+
+| `\hspace{0pt}`{=latex}Termo | `\hspace{0pt}`{=latex}(1) Candidaturas | `\hspace{0pt}`{=latex}(2) Transferências do partido | `\hspace{0pt}`{=latex}(3) Recursos públicos | `\hspace{0pt}`{=latex}(4) Transferências − candidaturas | `\hspace{0pt}`{=latex}(5) Gasto | `\hspace{0pt}`{=latex}(6) Votos | `\hspace{0pt}`{=latex}(7) Competitiva pelo voto | `\hspace{0pt}`{=latex}(8) Competitiva pelo gasto | `\hspace{0pt}`{=latex}(9) Eleita |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| *A. Estudo de evento, base 2018* |  |  |  |  |  |  |  |  |  |
+| Federal × 2014 (pré-teste) | +0,3 | — | — | — | — | +1,0 | +1,7 | — | −1,4 |
+|  | (1,4) |  |  |  |  | (1,4) | (3,6) |  | (2,0) |
+| Federal × 2022 | +3,8\* | +8,1\* | +6,4\* | +4,6\* | +5,3\* | +3,8\* | +5,0 | +8,8\* | +2,3 |
+|  | (1,1) [0,002] | (2,1) [< 0,001] | (1,9) [0,004] | (1,9) [0,01] | (2,0) [0,009] | (1,5) [0,01] | (4,2) [0,24] | (2,9) [0,003] | (2,7) [0,41] |
+| Federal × 2026 | +4,1\* | +8,4\* | +5,4\* | +4,9\* | +5,2\* | +3,9\* | +7,6\* | +8,7\* | +5,9 |
+|  | (1,2) [0,004] | (2,7) [0,003] | (2,3) [0,02] | (2,3) [0,04] | (2,2) [0,02] | (1,9) [0,03] | (3,7) [0,04] | (3,6) [0,03] | (3,3) [0,10] |
+| Diferença 2026 − 2022 | +0,3 | +0,3 | −0,9 | +0,3 | −0,1 | 0,0 | +2,6 | −0,1 | +3,6 |
+|  | (1,1) | (1,8) | (2,2) | (1,2) | (1,9) | (1,9) | (2,1) | (2,4) | (2,0) |
+| *B. Diferença em diferenças, 2018–2026* |  |  |  |  |  |  |  |  |  |
+| Federal × Pós | +3,9\* | +8,2\* | +5,9\* | +4,8\* | +5,2\* | +3,9\* | +6,3 | +8,7\* | +4,1 |
+|  | (1,0) [< 0,001] | (2,2) [< 0,001] | (1,8) [0,003] | (2,0) [0,02] | (1,9) [0,006] | (1,4) [0,01] | (3,8) [0,10] | (3,0) [0,005] | (2,9) [0,17] |
+| Média federal em 2018 | 14,0 | 11,3 | 11,2 | −2,4 | 9,2 | 6,6 | −15,6 | −13,9 | −12,6 |
+| Listas | 799 | 770 | 771 | 770 | 834 | 799 | 381 | 498 | 381 |
+| Observações (A) | 3.196 | 2.310 | 2.313 | 2.310 | 2.502 | 3.196 | 1.524 | 1.494 | 1.524 |
+| Observações (B) | 2.397 | 2.310 | 2.313 | 2.310 | 2.502 | 2.397 | 1.143 | 1.494 | 1.143 |
+
+: [Efeito do voto em dobro em cada etapa da candidatura para mulheres negras, federal × estadual, em pontos percentuais. O painel A traz os coeficientes da @eq-att-ec111, com 2018 como referência e o termo de 2014 como pré-teste, e o painel B, o termo único da @eq-reg-ec111. As colunas (1), (2), (3), (5) e (6) medem a parte do grupo no total da lista, e a coluna (3) soma o FEFC e o Fundo Partidário recebidos do partido e repassados por outras candidaturas. A coluna (4) é a proporção das transferências menos a proporção das candidaturas do grupo, e as colunas (7) a (9) são a taxa de candidaturas do grupo que terminam competitivas, isto é, eleitas ou a menos de 0,1 QE do limiar pela margem de votos ou de gasto, ou que se elegem, menos a taxa do restante das candidaturas da lista, calculada apenas nas listas com os dois grupos em todos os anos. Recursos, gasto e competitividade pelo gasto começam em 2018 e por isso não têm pré-teste (—). As estimações usam as listas do painel balanceado, sem ponderação e com efeitos fixos de lista e de ano. O erro-padrão agrupado por UF (26 UFs) está entre parênteses e o p-valor do *wild cluster bootstrap* restrito, entre colchetes. \* IC de 95% exclui zero.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/10, R/14 e R/11). {#tbl-reg-mulheres-negras-ec111}
 
 ![Efeito do voto em dobro [em cada etapa da candidatura, para mulheres, pessoas negras e mulheres negras (proporções e investimento relativo na lista; nas taxas, grupo menos complemento na mesma lista)]{.alterado}, em 2022 e em 2026, federal × estadual, base 2018. Barra grossa: IC de 95%; barra fina: banda uniforme de 95% para os anos. Erros agrupados por UF. Fonte: TSE; elaboração própria.](../thesis/Figures/03-ec111-competitividade/efeitos_etapas.png){#fig-efeitos-etapas-ec111 width="100%"}
 
-{{< include ../thesis/chapters/_tabelas-cap3/principal.md >}}
-
 ### H1 · Candidaturas {#sec-candidaturas-ec111}
 
-H1 é confirmada para os três grupos (@tbl-principal-ec111). A proporção de mulheres nas listas federais sobe cerca de 3 pontos em relação às estaduais, em 2022 e em 2026, com pré-teste próximo de zero. Partindo de 31,7% em 2018, é um aumento modesto. A proporção de pessoas negras sobe cerca de 5 pontos, e a de mulheres negras, cerca de 4 pontos, sobre uma base de 14,0% em 2018. No termo único, os efeitos são de 2,9, 5,3 e 3,9 pontos para mulheres, pessoas negras e mulheres negras.
+H1 é confirmada para os três grupos [(coluna 1)]{.revisao}. A proporção de mulheres nas listas federais sobe cerca de 3 pontos em relação às estaduais, em 2022 e em 2026. Partindo de 31,7% em 2018, é um aumento modesto. A proporção de pessoas negras sobe cerca de 5 pontos, e a de mulheres negras, cerca de 4 pontos, sobre uma base de 14,0% em 2018. No termo único, os efeitos são de 2,9, 5,3 e 3,9 pontos para mulheres, pessoas negras e mulheres negras.
 
 ### H2 · Transferências e gasto {#sec-recursos-ec111}
 
-Na comparação entre os cargos, H2 é confirmada para mulheres e mulheres negras e não é confirmada para pessoas negras (@tbl-principal-ec111). No federal, em relação ao estadual, a proporção das transferências partidárias destinada a mulheres sobe 12,4 pontos percentuais em 2022 e 12,2 em 2026, sobre uma base de 30,2% nas listas federais em 2018. Para mulheres negras, a alta é de 8,1 e 8,4 pontos. Para pessoas negras, os efeitos (3,4 e 4,1 pontos) não se distinguem de zero.
+Na comparação entre os cargos, H2 é confirmada para mulheres e mulheres negras e não é confirmada para pessoas negras [(coluna 2)]{.revisao}. No federal, em relação ao estadual, a proporção das transferências partidárias destinada a mulheres sobe 12,4 pontos percentuais em 2022 e 12,2 em 2026, sobre uma base de 30,2% nas listas federais em 2018. Para mulheres negras, a alta é de 8,1 e 8,4 pontos. Para pessoas negras, os efeitos (3,4 e 4,1 pontos) não se distinguem de zero.
 
 Para as mulheres, porém, essa alta não corresponde a dinheiro novo. @tbl-transferencias-cargo-ec111 e @fig-transferencias-cargo-ec111 mostram as transferências de cada cargo e dos dois somados, em totais nacionais. Em 2018, as candidatas estaduais recebiam 51,2% das transferências do partido no seu cargo, e as federais, 25,1%. Em 2022, a proporção das federais subiu para 31,6% e a das estaduais caiu para 40,3%. Somando os dois cargos, a proporção das mulheres nas transferências quase não mudou (33,4%, 34,3% e 36,2% em 2018, 2022 e 2026) e acompanhou, em cada eleição, a proporção de candidatas (31,3%, 34,2% e 35,7%). O valor médio transferido a cada candidata federal passou de 0,72 para 0,85 do transferido a cada candidato, enquanto no estadual caiu de 2,32 para 1,34. O voto em dobro mudou o lugar do dinheiro das mulheres, do cargo estadual para o federal, sem aumentar o total destinado a elas.
 
@@ -261,7 +371,7 @@ Para as mulheres, porém, essa alta não corresponde a dinheiro novo. @tbl-trans
 |  | 2022 | 18,2 | 19,0 | 14,2 | 15,7 | 1,05 | 0,75 |
 |  | 2026 | 18,4 | 19,4 | 14,0 | 15,6 | 1,06 | 0,72 |
 
-: Proporção das candidaturas e das transferências do partido destinadas a cada grupo, por cargo e nos dois cargos somados (%), e razão entre o valor médio transferido por candidatura do grupo e por candidatura das demais (1 = igualdade). Totais nacionais, sem o DF. Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/10 e R/11). {#tbl-transferencias-cargo-ec111}
+: [Proporção das candidaturas e das transferências do partido destinadas a cada grupo, por cargo e nos dois cargos somados (%), e razão entre o valor médio transferido a cada candidatura do grupo e a cada candidatura das demais, em que 1 indica igualdade. Totais nacionais, sem o DF.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/10 e R/11). {#tbl-transferencias-cargo-ec111}
 
 ![Proporção das transferências do partido destinada a mulheres, pessoas negras e mulheres negras no cargo estadual, no federal e nos dois cargos somados, 2018–2026. A linha pontilhada é a proporção das candidaturas do grupo nos dois cargos somados. Totais nacionais, sem o DF. Fonte: TSE; elaboração própria.](../thesis/Figures/03-ec111-competitividade/transferencias_por_cargo.png){#fig-transferencias-cargo-ec111 width="100%"}
 
@@ -270,10 +380,10 @@ A regra da reserva de recursos para mulheres explica por que o deslocamento era 
 O deslocamento tem uma consequência para o desenho. O cargo de controle foi afetado pela emenda, e a diferença em diferenças das transferências às mulheres soma o ganho do federal com a perda do estadual. Ela mede a realocação entre os cargos, e não o investimento adicional nas mulheres. A diferença entre os números da tabela e os da estimação vem da forma de agregar. A estimação usa a média das listas, em que cada lista pesa o mesmo, e nela a queda no estadual é menor (de 50,1% para 45,2% em 2022). Os totais nacionais pesam cada lista pelo dinheiro que recebeu e mostram onde o dinheiro de fato estava.
 
 ::: alterado
-O investimento relativo conta a mesma história por outro ângulo (@tbl-principal-ec111). Nas listas estaduais de 2018, as mulheres recebiam em média 18,9 pontos a mais das transferências do que a sua parte nas candidaturas, e, nas federais, 1,4 ponto a menos. Em 2022, a vantagem nas estaduais caiu para 10,0 pontos, e as federais ficaram perto da igualdade (−0,5). O efeito, de 9,7 pontos em 2022 e 9,2 em 2026, vem quase todo da perda no estadual. No cargo federal, o voto em dobro levou as candidatas a receber, em média, a sua parte nas candidaturas, e não mais do que ela. Para mulheres negras, o efeito é de 4,6 e 4,9 pontos, e, para pessoas negras, nulo.
+O investimento relativo conta a mesma história por outro ângulo [(coluna 4)]{.revisao}. Nas listas estaduais de 2018, as mulheres recebiam em média 18,9 pontos a mais das transferências do que a sua parte nas candidaturas, e, nas federais, 1,4 ponto a menos. Em 2022, a vantagem nas estaduais caiu para 10,0 pontos, e as federais ficaram perto da igualdade (−0,5). O efeito, de 9,7 pontos em 2022 e 9,2 em 2026, vem quase todo da perda no estadual. No cargo federal, o voto em dobro levou as candidatas a receber, em média, a sua parte nas candidaturas, e não mais do que ela. Para mulheres negras, o efeito é de 4,6 e 4,9 pontos, e, para pessoas negras, nulo.
 :::
 
-Parte do dinheiro que o partido distribui chega às candidaturas por meio de outras candidaturas, como o FEFC repassado de um candidato a outro, e não entra nas transferências do partido. Esses repasses vão sobretudo para candidaturas estaduais e, em 2018, pouco para mulheres (15,8% dos repasses de FEFC e Fundo Partidário ao cargo estadual). Somando-os às transferências, o efeito sobre a proporção destinada às mulheres é menor, de 8,7 pontos em 2022 e 7,3 em 2026, ambos com intervalo que exclui o zero, e de 6,7 e 5,9 pontos para as mulheres negras. Em totais nacionais, a proporção das candidatas estaduais cai de 44,1% para 38,8% em 2022, cerca de metade da queda medida só com as transferências diretas, e a proporção nos dois cargos somados continua a acompanhar a proporção de candidatas (31,9%, 33,9% e 36,0%). O deslocamento entre os cargos se mantém, mas é menor do que as transferências diretas sugerem.
+[Parte do dinheiro público que o partido distribui chega às candidaturas por meio de outras candidaturas, como o FEFC repassado de um candidato a outro, e por isso não entra nas transferências do partido. Esses repasses vão sobretudo para candidaturas estaduais e, em 2018, pouco chegava às mulheres, que receberam 15,8% dos repasses de FEFC e Fundo Partidário no cargo estadual. Na proporção dos recursos públicos, que soma o FEFC e o Fundo Partidário recebidos por qualquer via (coluna 3), o efeito para as mulheres é menor, de 8,4 pontos em 2022 e 7,4 em 2026, ambos com intervalo que exclui o zero, e de 6,4 e 5,4 pontos para as mulheres negras. Em totais nacionais, a proporção das candidatas estaduais nos recursos públicos cai de 44,9% para 39,4% em 2022, cerca de metade da queda medida apenas com as transferências, enquanto a proporção nos dois cargos somados continua a acompanhar a proporção de candidatas (32,2%, 34,4% e 36,8%). O deslocamento entre os cargos se mantém, portanto, mas é menor do que as transferências sugerem. Para pessoas negras, os recursos públicos sobem 5,1 pontos em 2022, com intervalo que exclui o zero, ainda que com p = 0,06 pelo *wild cluster bootstrap*, e 4,3 pontos em 2026, sem significância.]{.revisao}
 
 As mulheres negras são a exceção. No estadual, a proporção delas nas transferências ficou estável (18,3%, 19,0% e 19,4%), e no federal mais que dobrou, de 6,7% para 14,2% e 14,0%. Nos dois cargos somados, ela subiu de 10,4% para 15,7%, acima do crescimento da proporção de candidatas (de 14,8% para 18,2%). Para elas, o aumento no federal não saiu do estadual, embora o valor médio por candidata federal continue abaixo do dos demais (0,75 em 2022). Para pessoas negras, as transferências subiram nos dois cargos, o que é compatível com a distribuição proporcional de recursos a candidaturas negras, obrigatória desde 2020 e comum aos dois cargos.
 
@@ -281,11 +391,46 @@ No gasto, o padrão é o mesmo, com magnitude menor. A proporção do gasto das 
 
 O teste de falsificação não encontra efeito onde a emenda não deveria agir (@tbl-falsificacao-ec111). A receita privada, a parte da receita total da lista que chega às candidatas por doações de pessoas físicas, financiamento coletivo e recursos próprios, não muda de forma distinguível de zero nas duas eleições (+1,7 e −0,4 pontos; p = 0,06 em 2022 pelo *wild cluster bootstrap*), e o mesmo vale para mulheres negras (+0,5 e +0,1). Os repasses de outras candidaturas a elas também não mudam. A parte que vem do partido sobe 4,5 pontos em 2022 e 5,8 em 2026 para as mulheres, só a segunda com intervalo que exclui o zero, e 4,0 e 5,3 pontos para as mulheres negras. Para mulheres e mulheres negras, nada indica uma mudança mais ampla na capacidade de arrecadação das candidatas federais. Para pessoas negras, o teste fica no limite em 2022. A receita privada sobe 1,7 ponto, com intervalo que exclui o zero quando os erros são agrupados por UF, mas p = 0,05 pelo *wild cluster bootstrap*, e não sobe em 2026 (−1,1). Os repasses de FEFC e Fundo Partidário de outras candidaturas a pessoas negras sobem 1,0 ponto em 2022, sem significância, e 2,4 em 2026, com intervalo que exclui o zero, o que pode refletir a reserva de recursos a candidaturas negras da EC 133/2024 cumprida também por meio de repasses entre candidaturas. Como as transferências do partido a pessoas negras não mudam de forma distinguível de zero, o resultado não altera as conclusões sobre recursos, mas indica que algo além do voto em dobro pode ter mudado a arrecadação das candidaturas negras federais em 2022.
 
-{{< include ../thesis/chapters/_tabelas-cap3/falsificacao.md >}}
+<!-- Cópia de ../thesis/chapters/_tabelas-cap3/falsificacao.md, com \hspace{0pt} no cabeçalho para permitir a hifenização em coluna estreita no PDF. -->
+
+| `\hspace{0pt}`{=latex}Termo | `\hspace{0pt}`{=latex}(1) Vinda do partido | `\hspace{0pt}`{=latex}(2) Outras candidaturas: FEFC e Fundo Partidário | `\hspace{0pt}`{=latex}(3) Outras candidaturas: outros recursos | `\hspace{0pt}`{=latex}(4) Doações e recursos próprios |
+|:---|---:|---:|---:|---:|
+| *Mulheres* |  |  |  |  |
+| Federal × 2022 | +4,5 | −0,2 | 0,0 | +1,7 |
+|  | (2,3) | (0,5) | (0,2) | (0,9) [0,06] |
+| Federal × 2026 | +5,8\* | 0,0 | +0,1 | −0,4 |
+|  | (2,1) | (0,6) | (0,2) | (0,8) [0,62] |
+| Diferença 2026 − 2022 | +1,3 | +0,2 | +0,1 | −2,1\* |
+|  | (1,4) | (0,4) | (0,1) | (0,8) |
+| Federal × Pós | +5,2\* | −0,1 | +0,1 | +0,7 |
+|  | (2,1) | (0,5) | (0,2) | (0,7) [0,40] |
+| Listas | 850 | 850 | 850 | 850 |
+| *Pessoas negras* |  |  |  |  |
+| Federal × 2022 | +0,2 | +1,0 | +0,3 | +1,7\* |
+|  | (2,1) | (0,8) | (0,2) | (0,8) [0,05] |
+| Federal × 2026 | +2,1 | +2,4\* | +0,3 | −1,1 |
+|  | (2,8) | (0,8) | (0,3) | (1,4) [0,45] |
+| Diferença 2026 − 2022 | +2,0 | +1,4\* | 0,0 | −2,8\* |
+|  | (1,7) | (0,5) | (0,3) | (1,3) |
+| Federal × Pós | +1,2 | +1,7\* | +0,3 | +0,3 |
+|  | (2,3) | (0,7) | (0,2) | (0,9) [0,74] |
+| Listas | 850 | 850 | 850 | 850 |
+| *Mulheres negras* |  |  |  |  |
+| Federal × 2022 | +4,0\* | +0,1 | 0,0 | +0,5 |
+|  | (1,6) | (0,3) | (0,2) | (0,5) [0,33] |
+| Federal × 2026 | +5,3\* | +0,2 | 0,0 | +0,1 |
+|  | (1,9) | (0,3) | (0,2) | (0,7) [0,89] |
+| Diferença 2026 − 2022 | +1,3 | +0,1 | 0,0 | −0,4 |
+|  | (1,6) | (0,3) | (0,1) | (0,6) |
+| Federal × Pós | +4,6\* | +0,2 | 0,0 | +0,3 |
+|  | (1,5) | (0,2) | (0,2) | (0,5) [0,58] |
+| Listas | 850 | 850 | 850 | 850 |
+
+: [Teste de falsificação, com o efeito do voto em dobro sobre a parte da receita total da lista recebida pelo grupo, por origem, federal × estadual, base 2018, em pontos percentuais. O teste é a coluna (4), que reúne doações de pessoas físicas, financiamento coletivo e recursos próprios, porque o voto em dobro não muda o incentivo dos doadores e um efeito sobre essa receita indicaria uma mudança mais ampla na arrecadação. Os repasses de outras candidaturas são separados pela fonte declarada. As colunas somam o efeito sobre a proporção da receita total, exceto por uma parte residual, de rendimentos e de origem não identificada, que fica abaixo de 0,1% da receita e é omitida. As estimações usam o painel balanceado, sem ponderação e com efeitos fixos de lista e de ano. O erro-padrão agrupado por UF está entre parênteses e o p-valor do *wild cluster bootstrap*, calculado apenas para o teste, entre colchetes. \* IC de 95% exclui zero.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/10 e R/11). {#tbl-falsificacao-ec111}
 
 ### H3 · Votos {#sec-votos-ec111}
 
-H3 é confirmada para mulheres negras e não é confirmada para mulheres e pessoas negras (@tbl-principal-ec111). Para mulheres negras, o ganho de votos é de 3,8 pontos em 2022 e 3,9 em 2026, sobre uma base de 6,6%, com pré-teste próximo de zero. Para as mulheres, o efeito de 2022, de 4,0 pontos, é próximo do encontrado por @FonsecaThomeGuedesNeto2026_money_talks (4,4), mas o intervalo de confiança inclui o zero quando os erros são agrupados por UF (p = 0,12 pelo *wild cluster bootstrap*).[^votos-fonseca] Em 2026, o efeito cai para 2,1 pontos. A queda vem sobretudo do cargo de controle. De 2022 para 2026, a proporção dos votos nominais das mulheres passou de 20,3% para 25,5% no estadual e de 20,9% para 24,1% no federal. Para pessoas negras, nenhum dos dois efeitos é distinguível de zero.
+H3 é confirmada para mulheres negras e não é confirmada para mulheres e pessoas negras [(coluna 6)]{.revisao}. Para mulheres negras, o ganho de votos é de 3,8 pontos em 2022 e 3,9 em 2026, sobre uma base de 6,6%. Para as mulheres, o efeito de 2022, de 4,0 pontos, é próximo do encontrado por @FonsecaThomeGuedesNeto2026_money_talks (4,4), mas o intervalo de confiança inclui o zero quando os erros são agrupados por UF (p = 0,12 pelo *wild cluster bootstrap*).[^votos-fonseca] Em 2026, o efeito cai para 2,1 pontos. A queda vem sobretudo do cargo de controle. De 2022 para 2026, a proporção dos votos nominais das mulheres passou de 20,3% para 25,5% no estadual e de 20,9% para 24,1% no federal. Para pessoas negras, nenhum dos dois efeitos é distinguível de zero.
 
 [^votos-fonseca]: A diferença em relação a @FonsecaThomeGuedesNeto2026_money_talks está na inferência, não na estimativa. Com as listas presentes em 2018 e 2022, como no estudo deles, e os erros agrupados por lista, padrão do estimador, o efeito sobre a proporção dos votos das mulheres em 2022 é de 4,7 pontos (erro-padrão 1,8). Com as mesmas listas e os erros agrupados por UF, o erro-padrão sobe para 2,4, e o efeito fica no limite da significância de 5%. No painel deste capítulo, que exige a presença da lista nas quatro eleições, o efeito é de 4,0 pontos, com erro-padrão de 1,9 por lista e de 2,5 por UF.
 
@@ -305,18 +450,87 @@ A proporção de mulheres entre as candidaturas competitivas pelo voto sobe nos 
 Pelo gasto, o resultado é parecido para as mulheres. A proporção de mulheres entre as competitivas pelo gasto das listas sobe 3,0 pontos em 2022 e 4,0 em 2026, com intervalos que incluem o zero. Para pessoas negras, só o efeito de 2026 se distingue de zero (4,9 pontos), e o de 2022 não (2,4). As mulheres negras são a exceção. A proporção delas entre as competitivas pelo gasto sobe 4,3 pontos em 2022, com intervalo que exclui o zero, e 2,7 em 2026, e o termo único, de 3,5 pontos, também se distingue de zero. É o único indício de que o dinheiro adicional levou candidaturas de algum grupo a uma posição de disputa. Ele não se repete pelo voto, em que a proporção de mulheres negras entre as competitivas sobe 1,5 e 1,8 ponto, sem significância em cada eleição.
 :::
 
-{{< include ../thesis/chapters/_tabelas-cap3/composicao_lista.md >}}
+<!-- Cópia de ../thesis/chapters/_tabelas-cap3/composicao_lista.md, com \hspace{0pt} no cabeçalho para permitir a hifenização em coluna estreita no PDF. -->
+
+| `\hspace{0pt}`{=latex}Termo | `\hspace{0pt}`{=latex}(1) Competitivas pelo voto | `\hspace{0pt}`{=latex}(2) Competitivas pelo gasto | `\hspace{0pt}`{=latex}(3) Eleitos |
+|:---|---:|---:|---:|
+| *Mulheres* |  |  |  |
+| Federal × 2014 (pré-teste) | +1,2 | — | +1,0 |
+|  | (2,7) |  | (2,3) |
+| Federal × 2022 | +1,4 | +3,0 | +1,0 |
+|  | (2,1) | (2,4) | (2,6) |
+| Federal × 2026 | +1,2 | +4,0 | +3,3 |
+|  | (2,3) | (3,4) | (2,8) |
+| Federal × Pós | +1,8 | +3,5 | +1,8 |
+|  | (2,0) | (2,6) | (2,6) |
+| Listas | 977 | 887 | 881 |
+| Observações (estudo de evento) | 2.644 | 1.909 | 2.308 |
+| *Pessoas negras* |  |  |  |
+| Federal × 2014 (pré-teste) | 0,0 | — | −0,4 |
+|  | (3,0) |  | (3,2) |
+| Federal × 2022 | 0,0 | +2,4 | −2,5 |
+|  | (2,8) | (2,6) | (2,8) |
+| Federal × 2026 | +3,7 | +4,9\* | +1,4 |
+|  | (3,4) | (2,4) | (4,1) |
+| Federal × Pós | +3,1 | +3,6 | +0,3 |
+|  | (3,0) | (2,1) | (3,1) |
+| Listas | 977 | 887 | 881 |
+| Observações (estudo de evento) | 2.644 | 1.909 | 2.308 |
+| *Mulheres negras* |  |  |  |
+| Federal × 2014 (pré-teste) | +0,8 | — | +1,0 |
+|  | (1,5) |  | (1,2) |
+| Federal × 2022 | +1,5 | +4,3\* | +1,7 |
+|  | (0,9) | (1,6) | (1,3) |
+| Federal × 2026 | +1,8 | +2,7 | +2,8 |
+|  | (1,0) | (2,5) | (1,5) |
+| Federal × Pós | +2,2\* | +3,5\* | +2,5\* |
+|  | (0,7) | (1,7) | (1,2) |
+| Listas | 977 | 887 | 881 |
+| Observações (estudo de evento) | 2.644 | 1.909 | 2.308 |
+
+: [Efeito do voto em dobro sobre a proporção do grupo entre as candidaturas competitivas e entre os eleitos da lista, federal × estadual, base 2018, em pontos percentuais. A regressão tem efeitos fixos de lista e de ano e é ponderada pelo número de competitivas, ou de eleitos, da lista no ano, de modo que a lista sem nenhuma não entra naquele ano e o painel é desbalanceado. A competitividade pelo gasto não tem pré-teste. O erro-padrão agrupado por UF está entre parênteses. \* IC de 95% exclui zero.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/10 e R/11). {#tbl-composicao-lista-ec111}
 
 #### Sucesso relativo {#sec-h4-sucesso-ec111}
 
 ::: alterado
-@tbl-sucesso-ec111 traz o sucesso relativo dentro das listas, a diferença entre a taxa de candidaturas competitivas ou eleitas do grupo e a do grupo de comparação. Para as mulheres, a competitividade pelo voto aumenta em relação à dos homens em 6,7 pontos em 2022 e 7,3 em 2026, ou 7,0 no termo único, com pré-teste de +2,5, sem significância. O efeito de 2026 se distingue de zero (p = 0,02 pelo *wild cluster bootstrap*), e o de 2022 fica no limite (p = 0,06). Em 2018, no federal, a taxa média das listas era de 8,6% entre as mulheres e de 25,5% entre os homens. Em 2022, a das mulheres caiu para 6,4%, e a dos homens, para 14,5%. A aproximação vem, portanto, da queda maior da taxa dos homens, e não de uma subida da das mulheres, ponto examinado adiante (@sec-h4-denominador-ec111). Pelo gasto, o sucesso relativo das mulheres sobe 6,7 pontos em 2022 (p = 0,03) e 5,0 em 2026, este sem significância.
+[As colunas 7 a 9 trazem o sucesso relativo dentro das listas, isto é, a diferença entre a taxa de candidaturas competitivas ou eleitas do grupo e a do grupo de comparação, e a @tbl-sucesso-ec111 traz as comparações adicionais com pessoas brancas e com homens brancos.]{.revisao} Para as mulheres, a competitividade pelo voto aumenta em relação à dos homens em 6,7 pontos em 2022 e 7,3 em 2026, ou 7,0 no termo único, com pré-teste de +2,5, sem significância. O efeito de 2026 se distingue de zero (p = 0,02 pelo *wild cluster bootstrap*), e o de 2022 fica no limite (p = 0,06). Em 2018, no federal, a taxa média das listas era de 8,6% entre as mulheres e de 25,5% entre os homens. Em 2022, a das mulheres caiu para 6,4%, e a dos homens, para 14,5%. A aproximação vem, portanto, da queda maior da taxa dos homens, e não de uma subida da das mulheres, ponto examinado adiante (@sec-h4-denominador-ec111). Pelo gasto, o sucesso relativo das mulheres sobe 6,7 pontos em 2022 (p = 0,03) e 5,0 em 2026, este sem significância.
 :::
 
-{{< include ../thesis/chapters/_tabelas-cap3/sucesso.md >}}
+<!-- Cópia de ../thesis/chapters/_tabelas-cap3/sucesso.md, com \hspace{0pt} no cabeçalho para permitir a hifenização em coluna estreita no PDF. -->
+
+| `\hspace{0pt}`{=latex}Termo | `\hspace{0pt}`{=latex}(1) Competitiva pelo voto | `\hspace{0pt}`{=latex}(2) Competitiva pelo gasto | `\hspace{0pt}`{=latex}(3) Eleita |
+|:---|---:|---:|---:|
+| *Pessoas negras − pessoas brancas* |  |  |  |
+| Federal × 2014 (pré-teste) | +3,9 | — | +1,1 |
+|  | (3,4) |  | (2,4) |
+| Federal × 2022 | +5,9 | +4,4 | +1,1 |
+|  | (3,6) [0,11] | (2,9) [0,13] | (2,6) [0,68] |
+| Federal × 2026 | +8,2\* | +6,2\* | +6,0 |
+|  | (3,3) [0,02] | (3,1) [0,05] | (3,3) [0,08] |
+| Diferença 2026 − 2022 | +2,3 | +1,8 | +4,9\* |
+|  | (2,7) | (2,2) | (2,4) |
+| Federal × Pós | +7,0\* | +5,3 | +3,5 |
+|  | (3,2) [0,03] | (2,8) [0,05] | (2,7) [0,20] |
+| Listas | 478 | 587 | 478 |
+| *Mulheres negras − homens brancos* |  |  |  |
+| Federal × 2014 (pré-teste) | +4,0 | — | −0,9 |
+|  | (5,0) |  | (3,8) |
+| Federal × 2022 | +7,0 | +5,7 | +1,8 |
+|  | (4,9) [0,15] | (3,9) [0,14] | (3,7) [0,64] |
+| Federal × 2026 | +9,2 | +4,7 | +5,6 |
+|  | (5,1) [0,07] | (4,6) [0,32] | (4,8) [0,27] |
+| Diferença 2026 − 2022 | +2,2 | −1,0 | +3,8 |
+|  | (3,0) | (3,7) | (2,2) |
+| Federal × Pós | +8,1 | +5,2 | +3,7 |
+|  | (4,8) [0,08] | (3,7) [0,17] | (4,1) [0,40] |
+| Listas | 297 | 402 | 297 |
+
+: [Efeito do voto em dobro sobre o sucesso relativo nas comparações adicionais, medido pela diferença entre a taxa do grupo e a de pessoas brancas ou de homens brancos na mesma lista, federal × estadual, base 2018, em pontos percentuais. A taxa é a proporção das candidaturas que terminam competitivas, isto é, eleitas ou a menos de 0,1 QE do limiar pela margem de votos ou de gasto, ou que se elegem. Entram as listas com os dois grupos em todos os anos, no painel balanceado, sem ponderação e com efeitos fixos de lista e de ano, e a competitividade pelo gasto não tem pré-teste. O erro-padrão agrupado por UF está entre parênteses e o p-valor do *wild cluster bootstrap*, entre colchetes. \* IC de 95% exclui zero.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/10 e R/11). {#tbl-sucesso-ec111}
+
+[^03-ec111-disputa]: [Quando medida na disputa, isto é, somando os partidos de cada UF, a diferença entre pessoas negras e as demais candidaturas na taxa de competitivas pelo voto era, em 2014, 5,7 pontos menor no federal do que no estadual em relação a 2018, de modo que o pré-teste falhava. Dentro das listas, o pré-teste é de +3,8 e não se distingue de zero, o que sugere que a tendência anterior observada na disputa vinha da mudança no peso relativo dos partidos, e não de uma melhora das candidaturas negras dentro de cada lista. O mesmo vale para o sucesso relativo de pessoas negras e de mulheres negras na eleição.]{.revisao}
 
 ::: alterado
-Para pessoas negras, o pré-teste deixa de falhar quando a medida é tomada dentro das listas. Na disputa, isto é, somando os partidos de cada UF, a diferença entre pessoas negras e as demais na taxa de competitivas pelo voto era, em 2014, 5,7 pontos menor no federal que no estadual, em relação a 2018. Dentro das listas, o pré-teste é de +3,8, sem significância, e o sucesso relativo sobe 5,6 pontos em 2022 e 8,2 em 2026, este com p = 0,02 pelo *wild cluster bootstrap*. Isso sugere que a tendência anterior que aparecia na disputa vinha da mudança no peso relativo dos partidos, e não de uma melhora das candidaturas negras dentro de cada lista. Para mulheres negras, o sucesso relativo pelo voto sobe 5,0 pontos em 2022 e 7,6 em 2026 (p = 0,04), e pelo gasto, 8,8 e 8,7 pontos (p = 0,003 e 0,03). Na comparação com os homens brancos, que reúne 297 listas, os efeitos têm a mesma direção, mas não se distinguem de zero.
+[Para pessoas negras, o sucesso relativo pelo voto sobe 5,6 pontos em 2022 e 8,2 em 2026, este último com p = 0,02 pelo *wild cluster bootstrap*.]{.revisao}[^03-ec111-disputa] Para mulheres negras, o sucesso relativo pelo voto sobe 5,0 pontos em 2022 e 7,6 em 2026 (p = 0,04), e pelo gasto, 8,8 e 8,7 pontos (p = 0,003 e 0,03). Na comparação com os homens brancos, que reúne 297 listas, os efeitos têm a mesma direção, mas não se distinguem de zero.
 :::
 
 ::: alterado
@@ -331,7 +545,33 @@ Pelo gasto, a melhora das mulheres em 2022 não se traduziu em mais candidatas e
 
 Para saber em que candidaturas ficaram os ganhos de transferências, gasto e votos, a proporção do grupo na lista pode ser dividida em duas partes, a das candidaturas do grupo que terminaram competitivas e a das que terminaram não competitivas. As duas partes somam o efeito total, e nenhuma candidatura é excluída. @tbl-decomposicao-ec111 mostra a divisão.
 
-{{< include ../thesis/chapters/_tabelas-cap3/decomposicao.md >}}
+<!-- Cópia de ../thesis/chapters/_tabelas-cap3/decomposicao.md, com \hspace{0pt} no cabeçalho para permitir a hifenização em coluna estreita no PDF. -->
+
+| `\hspace{0pt}`{=latex}Variável | `\hspace{0pt}`{=latex}Pré-teste 2014 | `\hspace{0pt}`{=latex}2022 | `\hspace{0pt}`{=latex}2026 | `\hspace{0pt}`{=latex}Diferença 2026 − 2022 | `\hspace{0pt}`{=latex}Federal × Pós |
+|:---|---:|---:|---:|---:|---:|
+| *Mulheres* |  |  |  |  |  |
+| Transferências do partido: competitivas | — | +0,9 | +2,0 | +1,1 | +1,4 |
+| Transferências do partido: não competitivas | — | +11,5\* | +10,2\* | −1,3 | +10,8\* |
+| Gasto: competitivas | — | −0,1 | 0,0 | +0,2 | −0,1 |
+| Gasto: não competitivas | — | +7,3\* | +4,9 | −2,4 | +6,1\* |
+| Votos nominais: competitivas | −0,6 | −1,1 | −0,3 | +0,8 | −0,7 |
+| Votos nominais: não competitivas | +0,2 | +5,2\* | +2,5 | −2,7 | +3,8\* |
+| *Pessoas negras* |  |  |  |  |  |
+| Transferências do partido: competitivas | — | −8,0\* | −5,0\* | +3,0 | −6,5\* |
+| Transferências do partido: não competitivas | — | +11,4\* | +9,0\* | −2,3 | +10,2\* |
+| Gasto: competitivas | — | −4,3\* | −3,3 | +1,1 | −3,8 |
+| Gasto: não competitivas | — | +7,9\* | +6,3\* | −1,7 | +7,1\* |
+| Votos nominais: competitivas | −3,9 | −4,8\* | −3,0 | +1,7 | −3,9\* |
+| Votos nominais: não competitivas | +3,4 | +8,2\* | +5,8\* | −2,4 | +7,0\* |
+| *Mulheres negras* |  |  |  |  |  |
+| Transferências do partido: competitivas | — | +0,6 | +1,5 | +1,0 | +1,1 |
+| Transferências do partido: não competitivas | — | +7,5\* | +6,9\* | −0,6 | +7,2\* |
+| Gasto: competitivas | — | +0,1 | +1,0 | +0,9 | +0,6 |
+| Gasto: não competitivas | — | +5,2\* | +4,2\* | −1,0 | +4,7\* |
+| Votos nominais: competitivas | +0,1 | −0,5 | +1,0 | +1,5 | +0,2 |
+| Votos nominais: não competitivas | +0,9 | +4,4\* | +2,9\* | −1,5 | +3,6\* |
+
+: [Efeito do voto em dobro sobre a proporção da lista que vai para candidaturas do grupo que terminaram competitivas, isto é, eleitas ou a menos de 0,1 QE do limiar pela margem de votos, e para as que terminaram não competitivas, federal × estadual, base 2018, em pontos percentuais. As duas partes somam o efeito sobre a proporção total, apresentado nas colunas (2), (5) e (6) das tabelas por grupo, e transferências e gasto não têm pré-teste. As estimações usam o painel balanceado, sem ponderação. \* IC de 95% exclui zero, com erros agrupados por UF.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/10 e R/11). {#tbl-decomposicao-ec111}
 
 Para as mulheres, praticamente todo o ganho está nas candidaturas não competitivas. Dos 12,4 pontos a mais de transferências partidárias em 2022, 11,5 foram para candidatas que terminaram a mais de 0,1 QE do limiar, e todo o aumento de 7,1 pontos no gasto ficou com elas. O mesmo vale para os votos. O efeito de 4,0 pontos em 2022 divide-se em −1,1 de competitivas e +5,2 de não competitivas. O padrão se repete em 2026 e, com magnitudes menores, para mulheres negras. Para pessoas negras, há uma realocação, em que as transferências, o gasto e os votos de candidaturas negras competitivas caem e os das não competitivas sobem. Nos votos, porém, o pré-teste de 2014 já aponta na mesma direção (−3,9 nas competitivas e +3,4 nas não competitivas), o que sugere a continuação de uma tendência anterior.
 
@@ -340,7 +580,24 @@ A classificação pela viabilidade antes da eleição confirma essa leitura sem 
 :::
 
 ::: alterado
-{{< include ../thesis/chapters/_tabelas-cap3/viabilidade.md >}}
+<!-- Cópia de ../thesis/chapters/_tabelas-cap3/viabilidade.md, com \hspace{0pt} no cabeçalho para permitir a hifenização em coluna estreita no PDF. -->
+
+| `\hspace{0pt}`{=latex}Termo | `\hspace{0pt}`{=latex}Efeito total | `\hspace{0pt}`{=latex}Competitivas ex post: fatia 2018 (%) | `\hspace{0pt}`{=latex}Competitivas ex post: observado | `\hspace{0pt}`{=latex}Competitivas ex post: esperado | `\hspace{0pt}`{=latex}Viáveis ex ante: fatia 2018 (%) | `\hspace{0pt}`{=latex}Viáveis ex ante: observado | `\hspace{0pt}`{=latex}Viáveis ex ante: esperado |
+|:---|---:|---:|---:|---:|---:|---:|---:|
+| *Mulheres* |  |  |  |  |  |  |  |
+| Federal × 2022 | +12,4 | 28,1 | +0,9 | +3,5 | 21,5 | −0,8 | +2,7 |
+| Federal × 2026 | +12,2 |  | +2,0 | +3,4 |  | −0,8 | +2,6 |
+| Federal × Pós | +12,3 |  | +1,4 | +3,5 |  | −0,8 | +2,6 |
+| *Pessoas negras* |  |  |  |  |  |  |  |
+| Federal × 2022 | +3,4 | 41,0 | −8,0\* | +1,4 | 38,9 | −7,0\* | +1,3 |
+| Federal × 2026 | +4,1 |  | −5,0\* | +1,7 |  | −6,0\* | +1,6 |
+| Federal × Pós | +3,7 |  | −6,5\* | +1,5 |  | −6,5\* | +1,4 |
+| *Mulheres negras* |  |  |  |  |  |  |  |
+| Federal × 2022 | +8,1 | 16,8 | +0,6 | +1,4 | 15,2 | −0,5 | +1,2 |
+| Federal × 2026 | +8,4 |  | +1,5 | +1,4 |  | −0,6 | +1,3 |
+| Federal × Pós | +8,2 |  | +1,1 | +1,4 |  | −0,5 | +1,3 |
+
+: [Efeito do voto em dobro sobre a proporção das transferências do partido à lista que vai para candidaturas do grupo, no total e na parte do grupo que terminou competitiva ou que era viável antes da eleição, observado e esperado caso o acréscimo seguisse a divisão do cargo federal em 2018, federal × estadual, base 2018, em pontos percentuais. Competitiva é a candidatura eleita ou a menos de 0,1 QE do limiar, e viável, a candidatura cuja pessoa foi eleita deputada, em qualquer dos dois cargos, ou ficou a menos de 0,1 QE do limiar na eleição anterior. O valor esperado é a fatia de 2018 multiplicada pelo efeito total. As estimações usam o painel balanceado, sem ponderação. \* IC de 95% exclui zero, com erros agrupados por UF.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/12, R/13 e R/11). {#tbl-viabilidade-ec111}
 :::
 
 ::: alterado
@@ -348,7 +605,17 @@ A queda da parte das viáveis não vem de haver menos candidatas viáveis. O nú
 :::
 
 ::: alterado
-{{< include ../thesis/chapters/_tabelas-cap3/matriz_viabilidade.md >}}
+<!-- Cópia de ../thesis/chapters/_tabelas-cap3/matriz_viabilidade.md, com \hspace{0pt} no cabeçalho para permitir a hifenização em coluna estreita no PDF. -->
+
+| `\hspace{0pt}`{=latex}Viável antes → competitiva depois | `\hspace{0pt}`{=latex}Estadual 2018 | `\hspace{0pt}`{=latex}Estadual 2022 | `\hspace{0pt}`{=latex}Estadual 2026 | `\hspace{0pt}`{=latex}Federal 2018 | `\hspace{0pt}`{=latex}Federal 2022 | `\hspace{0pt}`{=latex}Federal 2026 |
+|:---|---:|---:|---:|---:|---:|---:|
+| Viável → competitiva | 16,7 | 15,4 | 20,5 | 27,1 | 16,2 | 21,4 |
+| Viável → não competitiva | 2,4 | 2,9 | 3,3 | 9,2 | 7,5 | 7,2 |
+| Não viável → competitiva | 17,6 | 13,9 | 11,6 | 19,2 | 10,8 | 10,0 |
+| Não viável → não competitiva | 63,3 | 67,8 | 64,6 | 44,5 | 65,5 | 61,4 |
+| Transferência média: viáveis ÷ não viáveis | 8,8 | 6,4 | 5,5 | 18,4 | 7,6 | 7,3 |
+
+: [Transferências do partido às mulheres segundo a viabilidade antes da eleição e a competitividade no resultado, em % das transferências às candidatas do cargo no ano, e razão entre a transferência média às viáveis e às não viáveis. Viável é a candidata eleita deputada, em qualquer dos dois cargos, ou a menos de 0,1 QE do limiar na eleição anterior, e competitiva, a eleita ou a menos de 0,1 QE do limiar. Totais nacionais, sem o DF.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/12 e R/11). {#tbl-matriz-viabilidade-ec111}
 :::
 
 #### Por que a taxa das mulheres subiu {#sec-h4-denominador-ec111}
@@ -370,26 +637,22 @@ A expansão de candidaturas, por outro lado, já existia antes da emenda. De 201
 ### H5 · Eleição {#sec-resultado-ec111}
 
 ::: alterado
-H5 não é confirmada para as mulheres e para pessoas negras. Para mulheres negras, há um indício. A proporção de mulheres e de pessoas negras entre os eleitos das listas não muda de forma distinguível de zero em nenhuma das duas eleições (@tbl-composicao-lista-ec111). Para as mulheres, o efeito é de 1,0 ponto em 2022 e 3,3 em 2026. O sucesso relativo das mulheres na eleição, dentro das listas, sobe 3,6 pontos em 2022, sem significância, e 5,7 em 2026 (@tbl-sucesso-ec111), este com intervalo que exclui o zero quando os erros são agrupados por UF, mas p = 0,06 pelo *wild cluster bootstrap*. Como a taxa de competitivas, ele melhora porque a taxa de eleitos entre os homens das listas federais caiu mais (de 16,3% em 2018 para 10,3% em 2022) do que a das mulheres (de 4,8% para 4,2%), e não é acompanhado pela proporção de eleitas. Deve, por isso, ser lido com cautela, à luz das comparações múltiplas.
+H5 não é confirmada para as mulheres e para pessoas negras. Para mulheres negras, há um indício. A proporção de mulheres e de pessoas negras entre os eleitos das listas não muda de forma distinguível de zero em nenhuma das duas eleições (@tbl-composicao-lista-ec111). Para as mulheres, o efeito é de 1,0 ponto em 2022 e 3,3 em 2026. O sucesso relativo das mulheres na eleição, dentro das listas, sobe 3,6 pontos em 2022, sem significância, e 5,7 em 2026 [(coluna 9)]{.revisao}, este com intervalo que exclui o zero quando os erros são agrupados por UF, mas p = 0,06 pelo *wild cluster bootstrap*. Como a taxa de competitivas, ele melhora porque a taxa de eleitos entre os homens das listas federais caiu mais (de 16,3% em 2018 para 10,3% em 2022) do que a das mulheres (de 4,8% para 4,2%), e não é acompanhado pela proporção de eleitas. Deve, por isso, ser lido com cautela, à luz das comparações múltiplas.
 :::
 
 ::: alterado
-Para pessoas negras e mulheres negras, o sucesso relativo na eleição sobe em 2026 (5,8 e 5,9 pontos), sem se distinguir de zero e, dentro das listas, sem sinal de tendência anterior (pré-testes de +0,8 e −1,4). Na disputa, os pré-testes falhavam, o que indicava uma melhora anterior à emenda. Para pessoas negras, a diferença entre 2026 e 2022 (+4,8 pontos) se distingue de zero, mas o efeito de cada eleição não se distingue.
+Para pessoas negras e mulheres negras, o sucesso relativo na eleição sobe em 2026 (5,8 e 5,9 pontos), sem se distinguir de zero. Para pessoas negras, a diferença entre 2026 e 2022 (+4,8 pontos) se distingue de zero, mas o efeito de cada eleição não se distingue.
 :::
 
 ::: alterado
-A proporção de mulheres negras entre os eleitos das listas sobe 1,7 ponto em 2022 e 2,8 em 2026, sem significância em cada eleição, e o termo único, de 2,5 pontos, se distingue de zero. O pré-teste é de +1,0, sem sinal de tendência anterior. Com muitas variáveis testadas, o resultado deve ser lido como indício a confirmar nas próximas eleições. Em 2026, além disso, a cota de 30% dos recursos para candidaturas negras da EC 133/2024 dificulta separar o efeito do voto em dobro do efeito da nova reserva.
+A proporção de mulheres negras entre os eleitos das listas sobe 1,7 ponto em 2022 e 2,8 em 2026, sem significância em cada eleição, e o termo único, de 2,5 pontos, se distingue de zero. Com muitas variáveis testadas, o resultado deve ser lido como indício a confirmar nas próximas eleições. Em 2026, além disso, a cota de 30% dos recursos para candidaturas negras da EC 133/2024 dificulta separar o efeito do voto em dobro do efeito da nova reserva.
 :::
 
 ### H6 · Persistência {#sec-persistencia-ec111}
 
-H6 é confirmada para candidaturas e transferências. A coluna "Diferença 2026 − 2022" de @tbl-principal-ec111 e de @tbl-sucesso-ec111 mostra a diferença entre os efeitos de 2026 e de 2022. Nas candidaturas, nas transferências, no gasto e nos votos, nenhuma diferença se distingue de zero. Em 2026, partidos que já conheciam a regra lançaram mais mulheres e pessoas negras e mantiveram as transferências às mulheres no cargo federal em medida parecida com a de 2022 (+12,4 e +12,2 pontos), de novo sem aumento no total dos dois cargos. Diferenças não significativas não provam que os efeitos sejam iguais. Os intervalos das diferenças têm meia largura de 2 a 3 pontos nas candidaturas e de 3 a 5 pontos nas transferências, no gasto e nos votos, e mudanças dessa ordem passariam despercebidas. O que os dados mostram é que os efeitos de 2026 têm a mesma direção e magnitude parecida com os de 2022.
-
-::: alterado
-Persistiram também as ausências. A presença das mulheres entre as competitivas das listas não mudou em 2026, e o sucesso relativo delas pelo voto ficou no mesmo patamar (diferença de +0,6 ponto). O sucesso relativo das mulheres na eleição aumenta de uma eleição para a outra (+2,1 pontos), sem que a proporção de eleitas acompanhe. Para pessoas negras, o sucesso relativo na eleição sobe 4,8 pontos de 2022 para 2026, com intervalo que exclui o zero, mas sem efeito distinguível de zero em nenhuma das duas eleições, e um aumento isolado não basta para indicar aprendizado dos partidos.
+::: revisao
+H6 é confirmada para candidaturas e recursos. A linha "Diferença 2026 − 2022" das tabelas por grupo testa diretamente a diferença entre os efeitos das duas eleições, algo que a comparação visual dos intervalos na @fig-efeitos-etapas-ec111 não permite, porque o erro-padrão da diferença depende da covariância entre as duas estimativas. Nas candidaturas, nas transferências, no gasto e nos votos, nenhuma diferença se distingue de zero, o que não prova que os efeitos sejam iguais, já que os intervalos das diferenças têm meia largura de 2 a 3 pontos nas candidaturas e de 3 a 5 pontos nas transferências, no gasto e nos votos, e mudanças dessa ordem passariam despercebidas. Também as ausências persistiram, pois a presença das mulheres entre as competitivas das listas não mudou em 2026, e o sucesso relativo delas pelo voto ficou no mesmo patamar (+0,6 ponto). A única diferença que se distingue de zero é a do sucesso relativo de pessoas negras na eleição (+4,8 pontos), que não vem acompanhada de efeito distinguível de zero em nenhuma das duas eleições e, isolada, não basta para indicar aprendizado dos partidos. Essa estabilidade ocorreu apesar das mudanças entre as duas eleições, como a redução de cerca de 24% no número de candidaturas no federal e de 30% no estadual (@tbl-amostra-ec111), o aumento da cláusula de desempenho de 2% para 2,5% dos votos para a Câmara e a reserva de recursos a candidaturas negras nos dois cargos, instituída pela EC 133/2024.
 :::
-
-O que mudou entre as duas eleições ajuda a qualificar essa leitura. Em 2026 houve cerca de 24% menos candidaturas no federal e 30% menos no estadual (@tbl-amostra-ec111), a cláusula de desempenho subiu de 2% para 2,5% dos votos para a Câmara e a EC 133/2024 passou a reservar recursos a candidaturas negras nos dois cargos. Nenhuma dessas mudanças alterou a resposta dos partidos ao incentivo no caso das mulheres. Eles continuaram a lançar mais candidatas no federal e a concentrar ali o dinheiro destinado a elas, sobretudo nas que não disputam a cadeira.
 
 ## Discussão {#sec-discussao-ec111}
 
@@ -420,14 +683,14 @@ Esses resultados têm limites que decorrem do caso.
 :::
 
 ::: alterado
-**Pré-teste.** Medidas dentro das listas, as taxas de competitividade e de eleição de pessoas negras e de mulheres negras não mostram tendência anterior à emenda, ao contrário do que ocorria na disputa. Com 2014 como único período anterior, porém, a hipótese de tendências paralelas por oito anos não pode ser examinada em detalhe. Para transferências e gasto não há pré-teste, porque 2014 ocorreu sob outro regime de financiamento, e o cargo federal de 2018 já concentrava nas candidatas viáveis uma parte maior das transferências às mulheres que o estadual (36% contra 19%, em totais nacionais), sem que se possa saber se isso já vinha mudando.
+**Pré-teste.** [Como 2014 é o único período anterior disponível, a hipótese de tendências paralelas ao longo de oito anos não pode ser examinada em detalhe.]{.revisao} Para transferências e gasto não há pré-teste, porque 2014 ocorreu sob outro regime de financiamento, e o cargo federal de 2018 já concentrava nas candidatas viáveis uma parte maior das transferências às mulheres que o estadual (36% contra 19%, em totais nacionais), sem que se possa saber se isso já vinha mudando.
 :::
 
 ::: alterado
 **Medidas de competitividade.** A margem de votos mede proximidade do limiar no resultado. A viabilidade antes da eleição não depende dele, mas só reconhece quem já teve mandato ou chegou perto de uma cadeira, e não candidatas novas com chances reais. A decomposição pelas duas classificações é válida, mas comparações dentro de cada categoria são descritivas. A margem de gasto não depende do resultado, mas supõe um mundo em que o dinheiro distribui as cadeiras, uma simplificação, já que o gasto, sozinho, elege de metade a dois terços dos eleitos reais.
 :::
 
-**Dados de 2026.** As receitas e o gasto de 2026 vêm da prestação de contas final, mas cerca de 400 candidaturas ainda constavam só com prestação parcial ou relatórios financeiros no arquivo de 08/11/2026. Os votos são os do arquivo republicado pelo TSE em 09/11/2026, com a distribuição de cadeiras validada em todos os distritos. O TSE ainda republica esses arquivos. Em relação à versão de 13/10/2026, os eleitos não mudaram, três candidaturas mudaram de votação e 88 deixaram de constar como aptas, o que alterou estimativas em no máximo alguns décimos.
+**Dados de 2026.** [Cerca de 400 candidaturas ainda constavam apenas com prestação de contas parcial, e o TSE continua a republicar os arquivos de votação, embora, entre as duas últimas versões, os eleitos não tenham mudado e as estimativas tenham variado no máximo alguns décimos.]{.revisao}
 
 **Comparações múltiplas.** O capítulo estima muitas variáveis para três grupos e duas eleições. Os resultados que sustentam a conclusão, o aumento das candidaturas, a realocação das transferências e a concentração dos ganhos em candidaturas não competitivas, são os de maior magnitude e se repetem nas duas eleições. Os efeitos isolados e marginais, como o sucesso relativo das mulheres na eleição em 2026, devem ser lidos com cautela.
 
@@ -440,5 +703,33 @@ Em síntese, a evidência se divide em três grupos. Os resultados mais estávei
 A EC 111/2021 mudou o comportamento dos partidos no que ela remunera, e essa mudança persistiu. Em 2022 e em 2026, os partidos lançaram mais mulheres e mais pessoas negras na disputa para a Câmara dos Deputados e passaram a destinar às candidatas federais uma parte maior das suas transferências. Mas, no caso das mulheres, esse dinheiro não era novo. Saiu das candidatas estaduais, e o total destinado a elas nos dois cargos continuou a seguir a proporção de candidatas, o patamar que a reserva de recursos já exigia. O incentivo também não tornou as candidatas mais competitivas. [Os recursos e os votos adicionais ficaram com candidaturas que terminaram longe do limiar de eleição e com candidatas que não eram viáveis antes dela, e a presença de mulheres e de pessoas negras entre as candidaturas competitivas e entre os eleitos das listas não mudou de forma detectável. A melhora do sucesso relativo das mulheres dentro das listas é explicada pela expansão de candidaturas masculinas sem chance no cargo federal, um movimento que já existia antes da emenda, e se concentra nas listas pequenas. As mulheres negras são a exceção parcial, com ganhos de transferências e de votos que não saíram do estadual e um aumento da proporção de eleitas que precisa ser confirmado nas próximas eleições.]{.alterado}
 
 O resultado reforça um argumento central desta tese, o de que políticas que incentivam os partidos sem condicionar o benefício à eleição tendem a ser absorvidas pela estratégia partidária de menor custo, que preserva as candidaturas competitivas existentes. Um incentivo baseado em votos produz votos e o dinheiro necessário para obtê-los, e, quando se soma a uma reserva de recursos, pode ser atendido apenas redistribuindo o dinheiro que a reserva já garantia. Para produzir representação, o desenho teria de premiar cadeiras ou proximidade da cadeira, exigir que o dinheiro reservado às candidatas crescesse no total e não só no cargo premiado, ou restringir a pulverização de recursos entre candidaturas sem viabilidade.
+
+
+```{=latex}
+\appendix
+```
+
+## Apêndice metodológico: os efeitos da EC 111/2021 {#sec-apendice-ec111}
+
+
+::: revisao
+Este apêndice complementa a Metodologia do texto com a distribuição das candidaturas pela margem de votos e com a justificativa da banda de 0,1 quociente eleitoral (QE) usada para classificar uma candidatura como competitiva.
+:::
+
+### Distribuição das candidaturas pela margem de votos {#sec-distribuicao-competitividade-ec111}
+
+::: revisao
+A @fig-faixas-margem-genero e a @fig-faixas-margem-raca mostram a distribuição das candidaturas por faixa de margem de votos, em QE, por cargo e eleição. A maior parte das candidaturas termina muito longe do limiar, e as de mulheres e de pessoas negras ficam, em geral, mais longe do que as demais. Em 2018, último ano antes da emenda, 7,1% das candidatas a deputada federal e 15,9% dos candidatos se elegeram ou ficaram a menos de 0,1 QE do limiar, e a distância entre pessoas negras e brancas era parecida com a de gênero, de 8,2% contra 16,6%.
+:::
+
+![Distribuição das candidaturas de mulheres e de homens por faixa de margem de votos (em QE), por cargo e eleição, 2014–2026. Fonte: TSE; elaboração própria.](../thesis/Figures/03-ec111-competitividade/faixas_margem_genero.png){#fig-faixas-margem-genero width="100%"}
+
+![Distribuição das candidaturas de pessoas negras e de pessoas brancas por faixa de margem de votos (em QE), por cargo e eleição, 2014–2026. Fonte: TSE; elaboração própria.](../thesis/Figures/03-ec111-competitividade/faixas_margem_raca.png){#fig-faixas-margem-raca width="100%"}
+
+### A escolha da banda de 0,1 QE
+
+::: revisao
+A margem de votos de uma candidatura depende dos votos dela, dos votos dos colegas de lista e da distribuição de cadeiras entre as listas. Numa lista grande, a distância de uma candidatura fraca até o limiar passa a ser determinada mais pelos colegas de lista do que pelos seus próprios votos, e o peso dessa situação cresce à medida que a banda se alarga. Com bandas de 0,25 ou 0,5 QE, candidaturas quase sem votos passam a ser classificadas como próximas do limiar sempre que a lista tem colegas fortes. Entre as candidaturas com menos de 0,5% do QE, 27,6% ficam a menos de 0,25 QE do limiar, mas apenas 0,8% ficam a menos de 0,1 QE, de modo que, com a banda adotada, a classificação de uma candidatura quase sem votos como competitiva se torna rara.
+:::
 
 ## Referências {#refs .unnumbered}
