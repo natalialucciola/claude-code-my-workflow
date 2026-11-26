@@ -129,14 +129,14 @@ md_comp <- c(
   "|:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
   linhas_comp,
   "",
-  # legenda revisada em 25/11 e marcada com .revisao (ver R/11)
-  paste0(": [Amostra por cargo e eleição, com as candidaturas aptas a deputado federal e estadual ",
+  # legenda revisada em 25/11; marca .revisao retirada em 26/11
+  paste0(": Amostra por cargo e eleição, com as candidaturas aptas a deputado federal e estadual ",
          "nas 26 UFs, sem o DF. A lista reúne as candidaturas de um partido, pela sigla vigente em ",
          "2026, a um cargo numa UF, e as listas no painel são as presentes nas quatro eleições, que ",
          "formam o painel balanceado das candidaturas e dos votos. A coluna % dos votos no painel ",
          "indica a parte dos votos nominais do cargo obtida pelas candidaturas dessas listas, e as ",
          "colunas % com receita e % com gasto, as candidaturas com receita e com gasto maiores que ",
-         "zero na prestação de contas, que ficam fora da análise em 2014, ano de doação empresarial.]{.revisao} ",
+         "zero na prestação de contas, que ficam fora da análise em 2014, ano de doação empresarial. ",
          "Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/05 e R/14). {#tbl-amostra-ec111}")
 )
 # UTF-8 explícito: no Windows, writeLines grava na codificação local e corrompe "—" e acentos

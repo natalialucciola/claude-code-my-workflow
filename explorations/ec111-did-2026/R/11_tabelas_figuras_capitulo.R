@@ -392,7 +392,7 @@ t9 <- desc |>
             `Viáveis antes da eleição: grupo` = f1(pct_viavel_grupo),
             `Viáveis antes da eleição: restante` = f1(pct_viavel_complemento))
 escrever(t9, c(":---", ":---", ":---", rep("---:", 8)),
-  paste(rev(paste(
+  paste(identity(paste(  # marca .revisao retirada em 26/11 (texto antes de Resultados)
         "Competitividade, eleição e viabilidade das candidaturas do grupo e do restante das",
         "candidaturas, por cargo e eleição, em % das candidaturas aptas. Competitiva é a",
         "candidatura eleita ou a menos de 0,1 QE do limiar, pela margem de votos ou de gasto, e",
