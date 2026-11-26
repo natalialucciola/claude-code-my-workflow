@@ -32,8 +32,9 @@ dir.create(fig_dir, showWarnings = FALSE, recursive = TRUE)
 fonte <- "Fonte: TSE; elaboração própria"
 # Legendas revisadas em 25/11 (redação), marcadas para a autora com a classe .revisao
 # (Quarto/thesis/alteracoes.css; no PDF, Quarto/capitulo4-pdf/alterado.lua). Para tirar a
-# marca, trocar rev() por identity.
-rev <- \(x) paste0("[", x, "]{.revisao}")
+# marca, trocar marca() por identity. (Até 26/11 se chamava rev(), o que mascarava base::rev e
+# deixava sem rótulos o eixo da figura efeitos_etapas.png.)
+marca <- \(x) paste0("[", x, "]{.revisao}")
 
 le <- \(f) read_csv2(file.path(out_dir, f), show_col_types = FALSE,
                      locale = locale(decimal_mark = ","))
@@ -52,7 +53,16 @@ num <- function(x, d = 1, sinal = TRUE) {
   pre <- if_else(x < 0 & round(abs(x), d) > 0, "−", if_else(sinal & round(x, d) > 0, "+", ""))
   if_else(is.na(x), "—", paste0(pre, s))
 }
-celula <- \(att, sig) if_else(is.na(att), "—", paste0(num(att), if_else(sig %in% TRUE, "\\*", "")))
+#' p bilateral com o erro agrupado por UF, pela aproximação normal (a mesma do IC de 95%)
+p_uf <- \(att, ep) 2 * pnorm(-abs(att / ep))
+#' Códigos de significância no padrão do APSR (26/11): ***, **, *, + (p < 0,1)
+estrelas <- \(p) case_when(is.na(p) ~ "", p < 0.001 ~ "\\*\\*\\*", p < 0.01 ~ "\\*\\*",
+                           p < 0.05 ~ "\\*", p < 0.1 ~ "+", .default = "")
+#' Coeficiente das tabelas de efeito: positivos sem sinal (o "+" é o código de p < 0,1)
+celula <- \(att, ep) if_else(is.na(att), "—",
+                             paste0(num(att, sinal = FALSE), estrelas(p_uf(att, ep))))
+nota_sig <- paste("Níveis de significância, com o erro agrupado por UF: \\*\\*\\*p < 0,001,",
+                  "\\*\\*p < 0,01, \\*p < 0,05, +p < 0,1.")
 #' p-valor: duas casas, três abaixo de 0,01, "< 0,001" abaixo disso
 fmt_p <- \(p) case_when(is.na(p) ~ NA_character_,
                         p < 0.001 ~ "< 0,001",
@@ -64,13 +74,19 @@ celula_ep <- \(ep, p) if_else(is.na(ep), "",
                                      if_else(is.na(p), "", paste0(" [", fmt_p(p), "]"))))
 inteiro <- \(x) formatC(x, format = "d", big.mark = ".", decimal.mark = ",")
 
-#' Escreve uma tabela Markdown com legenda e rótulo (UTF-8 explícito no Windows)
-escrever <- function(df, alinh, legenda, rotulo, arquivo) {
+#' Escreve uma tabela Markdown com legenda e rótulo (UTF-8 explícito no Windows). Com `nota`,
+#' a legenda é só o título (acima da tabela, como no APSR) e a nota vem num parágrafo abaixo.
+escrever <- function(df, alinh, legenda, rotulo, arquivo, nota = NULL) {
   cab <- paste0("| ", paste(names(df), collapse = " | "), " |")
   sep <- paste0("|", paste(alinh, collapse = "|"), "|")
   corpo <- apply(df, 1, \(r) paste0("| ", paste(replace_na(r, ""), collapse = " | "), " |"))
+  depois <- if (is.null(nota)) character() else
+    c("", "::: {.nota-tabela}", paste0("*Nota:* ", nota), ":::")
+  # classe .apsr: filetes só no topo, sob o cabeçalho e no fim (Quarto/thesis/alteracoes.css)
+  classe <- if (is.null(nota)) "" else " .apsr"
   con <- file(file.path(tab_dir, arquivo), open = "w", encoding = "UTF-8")
-  writeLines(enc2utf8(c(cab, sep, corpo, "", paste0(": ", legenda, " {#", rotulo, "}"))), con)
+  writeLines(enc2utf8(c(cab, sep, corpo, "",
+                        paste0(": ", legenda, " {#", rotulo, classe, "}"), depois)), con)
   close(con)
 }
 
@@ -85,7 +101,7 @@ bloco_reg <- function(est, colunas, periodos) {
     x <- est |> filter(periodo == p)
     coef <- set_names(map_chr(colunas, \(cl) {
       y <- x |> filter(coluna == cl)
-      if (nrow(y) == 0) "—" else celula(y$att, y$sig)
+      if (nrow(y) == 0) "—" else celula(y$att, y$ep)
     }), colunas)
     ep <- set_names(map_chr(colunas, \(cl) {
       y <- x |> filter(coluna == cl)
@@ -97,86 +113,121 @@ bloco_reg <- function(est, colunas, periodos) {
 linha <- \(rotulo, valores, colunas) as_tibble_row(c(Termo = rotulo, set_names(valores, colunas)))
 titulo <- \(txt, colunas) linha(paste0("*", txt, "*"), rep("", length(colunas)), colunas)
 
+#' Tabela de regressão no formato do APSR (26/11): a primeira coluna do cabeçalho diz
+#' "Variável dependente" e as demais trazem o nome de cada variável; a primeira linha numera
+#' os modelos; os termos vêm em blocos com título (estudo de evento / diferença em diferenças,
+#' ou um bloco por grupo), seguidos dos efeitos fixos e das estatísticas. `cols`: nomes das
+#' variáveis dependentes; `nums`: números dos modelos; `blocos`: lista de list(titulo, est,
+#' periodos), com est já com a coluna `coluna`; `estat`: lista nomeada rótulo -> valores.
+tabela_apsr <- function(cols, nums, blocos, estat) {
+  cl <- unname(cols)
+  linhas <- c(
+    list(linha("Modelo", paste0("(", nums, ")"), cl)),
+    map(blocos, \(b) bind_rows(titulo(b$titulo, cl), bloco_reg(b$est, cl, b$periodos))),
+    list(titulo("Efeitos fixos", cl),
+         linha("Lista", rep("Sim", length(cl)), cl),
+         linha("Ano", rep("Sim", length(cl)), cl),
+         titulo("Estatísticas", cl)),
+    imap(estat, \(v, r) linha(r, v, cl)))
+  bind_rows(linhas) |> rename(`Variável dependente:` = Termo)
+}
+
 # ------------------------------------------------------------------------------
 # 1. Tabelas de regressão por grupo: uma coluna por variável do funil (itens 8 e 9)
 # ------------------------------------------------------------------------------
-cols_funil <- c(cand = "(1) Candidaturas", rec_partido = "(2) Transferências do partido",
-                rec_publico = "(3) Recursos públicos",
-                lexcesso = "(4) Transferências − candidaturas", gasto = "(5) Gasto",
-                voto = "(6) Votos", ltcv = "(7) Competitiva pelo voto",
-                ltcg = "(8) Competitiva pelo gasto", ltel = "(9) Eleita")
+# Formato do APSR (26/11): duas tabelas por grupo, (1)–(5) candidaturas e recursos e (6)–(9)
+# votos, competitividade e eleição, com a numeração dos modelos contínua entre as duas (o
+# texto remete a "coluna 6" etc.).
+cols_funil <- c(cand = "Candidaturas", rec_partido = "Transferências do partido",
+                rec_publico = "Recursos públicos",
+                lexcesso = "Transferências − candidaturas", gasto = "Gasto",
+                voto = "Votos", ltcv = "Competitiva pelo voto",
+                ltcg = "Competitiva pelo gasto", ltel = "Eleita")
 anos_med <- c(cand = 4L, voto = 4L, ltcv = 4L, ltel = 4L)   # demais: 2018–2026
+slug_grupo <- c(mulher = "mulheres", negra = "negras", mulher_negra = "mulheres-negras")
 
-tabela_grupo <- function(g, rotulo, arquivo) {
-  est <- res |> filter(grupo == g, medida %in% names(cols_funil)) |>
-    mutate(coluna = cols_funil[medida])
-  cl <- unname(cols_funil)
-  info <- est |> distinct(medida, coluna, n_unidades, base_federal_2018) |>
+nota_comum <- paste(
+  "Diferença em diferenças federal × estadual, em pontos percentuais, no painel balanceado de",
+  "listas, sem ponderação. O estudo de evento traz os coeficientes da @eq-att-ec111, com 2018",
+  "como referência e o termo de 2014 como pré-teste, e a diferença em diferenças, o termo único",
+  "da @eq-reg-ec111.")
+nota_erro <- paste("Erro-padrão agrupado por UF entre parênteses e p-valor do *wild cluster",
+                   "bootstrap* restrito entre colchetes.", nota_sig)
+partes_funil <- list(
+  list(sufixo = "recursos", medidas = c("cand", "rec_partido", "rec_publico", "lexcesso", "gasto"),
+       nums = 1:5, assunto = "candidaturas e recursos",
+       def = paste(
+         "Os modelos (1), (2), (3) e (5) medem a parte do grupo no total da lista, e o modelo (3)",
+         "soma o FEFC e o Fundo Partidário recebidos do partido e repassados por outras",
+         "candidaturas. O modelo (4) é a proporção das transferências menos a proporção das",
+         "candidaturas do grupo. Recursos e gasto começam em 2018 e por isso não têm pré-teste",
+         "(—).")),
+  list(sufixo = "votos", medidas = c("voto", "ltcv", "ltcg", "ltel"),
+       nums = 6:9, assunto = "votos, competitividade e eleição",
+       def = paste(
+         "O modelo (6) mede a parte do grupo nos votos nominais da lista, e os modelos (7) a (9),",
+         "a taxa de candidaturas do grupo que terminam competitivas (eleitas ou a menos de 0,1 QE",
+         "do limiar, pela margem de votos ou de gasto) ou eleitas, menos a taxa do restante das",
+         "candidaturas da lista, apenas nas listas com os dois grupos em todos os anos. A",
+         "competitividade pelo gasto começa em 2018 e por isso não tem pré-teste (—).")))
+
+tabela_grupo <- function(g, parte) {
+  cols <- cols_funil[parte$medidas]
+  est <- res |> filter(grupo == g, medida %in% parte$medidas) |>
+    mutate(coluna = cols[medida])
+  info <- est |> distinct(medida, n_unidades, n_ufs, base_federal_2018) |>
     mutate(n_anos = coalesce(anos_med[medida], 3L)) |>
-    arrange(match(coluna, cl))
-  stopifnot(nrow(info) == length(cl))
-  df <- bind_rows(
-    titulo("A. Estudo de evento, base 2018", cl),
-    bloco_reg(est, cl, c("2014", "2022", "2026", "Dif. 2026 − 2022")),
-    titulo("B. Diferença em diferenças, 2018–2026", cl),
-    bloco_reg(est, cl, "Federal × Pós"),
-    linha("Média federal em 2018",num(info$base_federal_2018, sinal = FALSE), cl),
-    linha("Listas", inteiro(info$n_unidades), cl),
-    linha("Observações (A)", inteiro(info$n_unidades * info$n_anos), cl),
-    linha("Observações (B)", inteiro(info$n_unidades * 3L), cl))
-  escrever(df, c(":---", rep("---:", length(cl))),
-    paste0(rev(paste0(
-           "Efeito do voto em dobro em cada etapa da candidatura para ", tolower(nome_grupo[g]),
-           ", federal × estadual, em pontos percentuais. O painel A traz os coeficientes da ",
-           "@eq-att-ec111, com 2018 como referência e o termo de 2014 como pré-teste, e o painel ",
-           "B, o termo único da @eq-reg-ec111. As colunas (1), (2), (3), (5) e (6) medem a parte do ",
-           "grupo no total da lista, e a coluna (3) soma o FEFC e o Fundo Partidário recebidos do ",
-           "partido e repassados por outras candidaturas. A coluna (4) é a proporção das ",
-           "transferências menos a proporção das candidaturas do grupo, e as colunas (7) a (9) ",
-           "são a taxa de candidaturas do grupo que terminam competitivas (eleitas ou a menos de ",
-           "0,1 QE do limiar, pela margem de votos ou de gasto) ou eleitas, menos a taxa do ",
-           "restante das candidaturas da lista, calculada apenas nas listas com os dois ",
-           "grupos em todos os anos. Recursos, gasto e competitividade pelo gasto começam em 2018 ",
-           "e por isso não têm pré-teste (—). As estimações usam as listas do painel balanceado, ",
-           "sem ponderação e com efeitos fixos de lista e de ano. O erro-padrão agrupado por UF ",
-           "(26 UFs) está entre parênteses e o p-valor do *wild cluster bootstrap* restrito, entre ",
-           "colchetes. \\* IC de 95% exclui zero.")), " ", fonte,
-           " (explorations/ec111-did-2026/R/10, R/14 e R/11)."),
-    rotulo, arquivo)
+    arrange(match(medida, parte$medidas))
+  stopifnot(nrow(info) == length(cols), all(info$medida == parte$medidas))
+  df <- tabela_apsr(cols, parte$nums,
+    blocos = list(
+      list(titulo = "Estudo de evento, base 2018", est = est,
+           periodos = c("2014", "2022", "2026", "Dif. 2026 − 2022")),
+      list(titulo = "Diferença em diferenças, 2018–2026", est = est, periodos = "Federal × Pós")),
+    estat = list(
+      "Média federal em 2018" = num(info$base_federal_2018, sinal = FALSE),
+      "UFs (clusters)" = inteiro(info$n_ufs),
+      "Listas" = inteiro(info$n_unidades),
+      "Observações (estudo de evento)" = inteiro(info$n_unidades * info$n_anos),
+      "Observações (diferença em diferenças)" = inteiro(info$n_unidades * 3L)))
+  escrever(df, c(":---", rep("---:", length(cols))),
+    marca(paste0("Efeito do voto em dobro sobre ", parte$assunto, ": ",
+                 tolower(nome_grupo[g]))),
+    paste0("tbl-reg-", slug_grupo[g], "-", parte$sufixo, "-ec111"),
+    paste0("reg_", str_replace_all(slug_grupo[g], "-", "_"), "_", parte$sufixo, ".md"),
+    nota = paste(marca(paste(nota_comum, parte$def, nota_erro)), fonte,
+                 "(explorations/ec111-did-2026/R/10, R/14 e R/11)."))
 }
-tabela_grupo("mulher", "tbl-reg-mulheres-ec111", "reg_mulheres.md")
-tabela_grupo("negra", "tbl-reg-negras-ec111", "reg_negras.md")
-tabela_grupo("mulher_negra", "tbl-reg-mulheres-negras-ec111", "reg_mulheres_negras.md")
+for (g in names(nome_grupo)) for (parte in partes_funil) tabela_grupo(g, parte)
 
 # ------------------------------------------------------------------------------
 # 2. Comparações adicionais do sucesso relativo (pessoas brancas, homens brancos)
 # ------------------------------------------------------------------------------
-cols_taxa <- c(ltcv = "(1) Competitiva pelo voto", ltcg = "(2) Competitiva pelo gasto",
-               ltel = "(3) Eleita")
+cols_taxa <- c(ltcv = "Competitiva pelo voto", ltcg = "Competitiva pelo gasto", ltel = "Eleita")
 comp <- tribble(~g, ~sufixo, ~rotulo,
   "negra", "_br", "Pessoas negras − pessoas brancas",
   "mulher_negra", "_hb", "Mulheres negras − homens brancos")
-cl <- unname(cols_taxa)
-t2 <- pmap(comp, \(g, sufixo, rotulo) {
+est_comp <- pmap(comp, \(g, sufixo, rotulo) {
   est <- res |> filter(grupo == g, medida %in% paste0(names(cols_taxa), sufixo)) |>
-    mutate(coluna = cols_taxa[str_remove(medida, sufixo)])
-  n <- est |> distinct(coluna, n_unidades) |> arrange(match(coluna, cl))
-  bind_rows(titulo(rotulo, cl),
-            bloco_reg(est, cl, names(termos)),
-            linha("Listas", inteiro(n$n_unidades), cl))
-}) |> list_rbind()
+    mutate(medida = str_remove(medida, sufixo), coluna = cols_taxa[medida]) |>
+    arrange(match(medida, names(cols_taxa)))
+  list(titulo = rotulo, est = est, periodos = names(termos),
+       listas = est |> distinct(medida, n_unidades) |> pull(n_unidades) |> inteiro())
+})
+t2 <- tabela_apsr(cols_taxa, 1:3, est_comp,
+  estat = c(list("UFs (clusters)" = rep("26", 3)),
+            set_names(map(est_comp, "listas"),
+                      paste0("Listas, ", str_to_lower(comp$rotulo)))))
 escrever(t2, c(":---", rep("---:", 3)),
-  paste(rev(paste(
-        "Efeito do voto em dobro sobre o sucesso relativo nas comparações adicionais, medido pela",
-        "diferença entre a taxa do grupo e a de pessoas brancas ou de homens brancos na mesma",
-        "lista, federal × estadual, base 2018, em pontos percentuais. A taxa é a proporção das",
-        "candidaturas que terminam competitivas, isto é, eleitas ou a menos de 0,1 QE do limiar",
-        "pela margem de votos ou de gasto, ou que se elegem. Entram as listas com os dois grupos",
-        "em todos os anos, no painel balanceado, sem ponderação e com efeitos fixos de lista e de",
-        "ano, e a competitividade pelo gasto não tem pré-teste. O erro-padrão agrupado por UF está",
-        "entre parênteses e o p-valor do *wild cluster bootstrap*, entre colchetes. \\* IC de 95%",
-        "exclui zero.")), fonte, "(explorations/ec111-did-2026/R/10 e R/11)."),
-  "tbl-sucesso-ec111", "sucesso.md")
+  marca("Sucesso relativo nas comparações adicionais"), "tbl-sucesso-ec111", "sucesso.md",
+  nota = paste(marca(paste(
+        "Diferença em diferenças federal × estadual, base 2018, em pontos percentuais. A variável",
+        "dependente é a taxa de candidaturas do grupo que terminam competitivas (eleitas ou a",
+        "menos de 0,1 QE do limiar, pela margem de votos ou de gasto) ou eleitas, menos a de",
+        "pessoas brancas ou de homens brancos na mesma lista. Entram as listas com os dois grupos",
+        "em todos os anos, no painel balanceado, sem ponderação. A competitividade pelo gasto",
+        "começa em 2018 e por isso não tem pré-teste (—).", nota_erro)),
+        fonte, "(explorations/ec111-did-2026/R/10 e R/11)."))
 
 # ------------------------------------------------------------------------------
 # 3. Quem fica com os lugares competitivos e as cadeiras da lista (mecanismo; TWFE
@@ -185,61 +236,68 @@ escrever(t2, c(":---", rep("---:", 3)),
 pond <- le("competitividade_lista_ponderada.csv") |>
   filter(papel == "mecanismo: peso = denominador") |>
   mutate(sig = sign(ic_inf) == sign(ic_sup), p_wild = NA_real_)
-cols_comp <- c(lpcv = "(1) Competitivas pelo voto", lpcg = "(2) Competitivas pelo gasto",
-               lcadeira = "(3) Eleitos")
-cl <- unname(cols_comp)
-t3 <- map(names(nome_grupo), \(g) {
-  est <- pond |> filter(grupo == g) |> mutate(coluna = cols_comp[medida])
-  n <- est |> distinct(coluna, n_listas, n_obs) |> arrange(match(coluna, cl))
-  bind_rows(titulo(nome_grupo[g], cl),
-            bloco_reg(est, cl, c("2014", "2022", "2026", "Federal × Pós")),
-            linha("Listas", inteiro(n$n_listas), cl),
-            linha("Observações (estudo de evento)", inteiro(n$n_obs), cl))
-}) |> list_rbind()
+cols_comp <- c(lpcv = "Competitivas pelo voto", lpcg = "Competitivas pelo gasto",
+               lcadeira = "Eleitos")
+blocos_comp <- map(names(nome_grupo), \(g) {
+  list(titulo = unname(nome_grupo[g]),
+       est = pond |> filter(grupo == g) |> mutate(coluna = cols_comp[medida]),
+       periodos = c("2014", "2022", "2026", "Federal × Pós"))
+})
+# listas e observações são as mesmas nos três grupos (ponderação pelo total da lista)
+n_comp <- pond |> distinct(medida, n_listas, n_obs) |>
+  arrange(match(medida, names(cols_comp)))
+stopifnot(nrow(n_comp) == length(cols_comp))
+t3 <- tabela_apsr(cols_comp, 1:3, blocos_comp,
+  estat = list("UFs (clusters)" = rep("26", 3), "Listas" = inteiro(n_comp$n_listas),
+               "Observações (estudo de evento)" = inteiro(n_comp$n_obs)))
 escrever(t3, c(":---", rep("---:", 3)),
-  paste(rev(paste(
-        "Efeito do voto em dobro sobre a proporção do grupo entre as candidaturas competitivas e",
-        "entre os eleitos da lista, federal × estadual, base 2018, em pontos percentuais. A",
-        "regressão tem efeitos fixos de lista e de ano e é ponderada pelo número de competitivas,",
-        "ou de eleitos, da lista no ano, de modo que a lista sem nenhuma não entra naquele ano e o",
-        "painel é desbalanceado. A competitividade pelo gasto não tem pré-teste. O erro-padrão",
-        "agrupado por UF está entre parênteses. \\* IC de 95% exclui zero.")), fonte,
-        "(explorations/ec111-did-2026/R/10 e R/11)."),
-  "tbl-composicao-lista-ec111", "composicao_lista.md")
+  marca("Presença do grupo entre as candidaturas competitivas e os eleitos da lista"),
+  "tbl-composicao-lista-ec111", "composicao_lista.md",
+  nota = paste(marca(paste(
+        "Diferença em diferenças federal × estadual, base 2018, em pontos percentuais. A variável",
+        "dependente é a proporção do grupo entre as candidaturas competitivas e entre os eleitos",
+        "da lista. A regressão é ponderada pelo número de competitivas, ou de eleitos, da lista",
+        "no ano, de modo que a lista sem nenhuma não entra naquele ano e o painel é",
+        "desbalanceado. A competitividade pelo gasto começa em 2018 e por isso não tem",
+        "pré-teste (—). Erro-padrão agrupado por UF entre parênteses.", nota_sig)), fonte,
+        "(explorations/ec111-did-2026/R/10 e R/11)."))
 
 # ------------------------------------------------------------------------------
 # 4. Teste de falsificação: receita por origem (categorias de 2026-11-24)
 # ------------------------------------------------------------------------------
 # A parte residual (rendimentos, origem não identificada; < 0,1% da receita) fica fora da
 # tabela; as quatro partes mostradas + a residual somam a receita total do grupo.
-cols_fals <- c(rtp = "(1) Vinda do partido",
-               rtc_pub = "(2) Outras candidaturas: FEFC e Fundo Partidário",
-               rtc_priv = "(3) Outras candidaturas: outros recursos",
-               rtpriv = "(4) Doações e recursos próprios")
-cl <- unname(cols_fals)
-t4 <- map(names(nome_grupo), \(g) {
-  est <- res |> filter(grupo == g, medida %in% names(cols_fals)) |>
-    mutate(coluna = cols_fals[medida])
-  n <- est |> distinct(coluna, n_unidades) |> arrange(match(coluna, cl))
-  bind_rows(titulo(nome_grupo[g], cl),
-            bloco_reg(est, cl, c("2022", "2026", "Dif. 2026 − 2022", "Federal × Pós")),
-            linha("Listas", inteiro(n$n_unidades), cl))
-}) |> list_rbind()
+cols_fals <- c(rtp = "Vinda do partido",
+               rtc_pub = "Outras candidaturas: FEFC e Fundo Partidário",
+               rtc_priv = "Outras candidaturas: outros recursos",
+               rtpriv = "Doações e recursos próprios")
+blocos_fals <- map(names(nome_grupo), \(g) {
+  list(titulo = unname(nome_grupo[g]),
+       est = res |> filter(grupo == g, medida %in% names(cols_fals)) |>
+         mutate(coluna = cols_fals[medida]),
+       periodos = c("2022", "2026", "Dif. 2026 − 2022", "Federal × Pós"))
+})
+n_fals <- res |> filter(medida %in% names(cols_fals)) |> distinct(n_unidades) |> pull()
+stopifnot(length(n_fals) == 1L)
+t4 <- tabela_apsr(cols_fals, 1:4, blocos_fals,
+  estat = list("UFs (clusters)" = rep("26", 4), "Listas" = rep(inteiro(n_fals), 4),
+               "Observações" = rep(inteiro(n_fals * 3L), 4)))
 escrever(t4, c(":---", rep("---:", 4)),
-  paste(rev(paste(
-        "Teste de falsificação, com o efeito do voto em dobro sobre a parte da receita total da",
-        "lista recebida pelo grupo, por origem, federal × estadual, base 2018, em pontos",
-        "percentuais. O teste é a coluna (4), que reúne doações de pessoas físicas, financiamento",
-        "coletivo e recursos próprios, porque o voto em dobro não muda o incentivo dos doadores e",
-        "um efeito sobre essa receita indicaria uma mudança mais ampla na arrecadação. Os repasses",
-        "de outras candidaturas são separados pela fonte declarada. As colunas somam o efeito sobre",
-        "a proporção da receita total, exceto por uma parte residual, de rendimentos e de origem",
-        "não identificada, que fica abaixo de 0,1% da receita e é omitida. As estimações usam o",
-        "painel balanceado, sem ponderação e com efeitos fixos de lista e de ano. O erro-padrão",
-        "agrupado por UF está entre parênteses e o p-valor do *wild cluster bootstrap*, calculado",
-        "apenas para o teste, entre colchetes. \\* IC de 95% exclui zero.")), fonte,
-        "(explorations/ec111-did-2026/R/10 e R/11)."),
-  "tbl-falsificacao-ec111", "falsificacao.md")
+  marca("Teste de falsificação: receita do grupo por origem"),
+  "tbl-falsificacao-ec111", "falsificacao.md",
+  nota = paste(marca(paste(
+        "Diferença em diferenças federal × estadual, base 2018, em pontos percentuais, no painel",
+        "balanceado de listas, sem ponderação. A variável dependente é a parte da receita total",
+        "da lista recebida pelo grupo, por origem. O teste é o modelo (4), que reúne doações de",
+        "pessoas físicas, financiamento coletivo e recursos próprios, porque o voto em dobro não",
+        "muda o incentivo dos doadores e um efeito sobre essa receita indicaria uma mudança mais",
+        "ampla na arrecadação. Os repasses de outras candidaturas são separados pela fonte",
+        "declarada. Os modelos somam o efeito sobre a proporção da receita total, exceto por uma",
+        "parte residual, de rendimentos e de origem não identificada, que fica abaixo de 0,1% da",
+        "receita e é omitida. Receitas começam em 2018 e por isso não têm pré-teste. Erro-padrão",
+        "agrupado por UF entre parênteses e p-valor do *wild cluster bootstrap* restrito,",
+        "calculado apenas para o teste, entre colchetes.", nota_sig)), fonte,
+        "(explorations/ec111-did-2026/R/10 e R/11)."))
 
 # ------------------------------------------------------------------------------
 # 5. Transferências por cargo e nos dois cargos somados (realocação, H2; descritiva)
@@ -269,12 +327,13 @@ t5 <- transf |>
             `Razão por candidatura, estadual` = num(razao_Estadual, 2, sinal = FALSE),
             `Razão por candidatura, federal` = num(razao_Federal, 2, sinal = FALSE))
 escrever(t5, c(":---", ":---", rep("---:", 6)),
-  paste(rev(paste(
+  marca("Transferências do partido por cargo e nos dois cargos somados"),
+  "tbl-transferencias-cargo-ec111", "transferencias_cargo.md",
+  nota = paste(marca(paste(
         "Proporção das candidaturas e das transferências do partido destinadas a cada grupo, por",
         "cargo e nos dois cargos somados (%), e razão entre o valor médio transferido a cada",
         "candidatura do grupo e a cada candidatura das demais, em que 1 indica igualdade. Totais",
-        "nacionais, sem o DF.")), fonte, "(explorations/ec111-did-2026/R/10 e R/11)."),
-  "tbl-transferencias-cargo-ec111", "transferencias_cargo.md")
+        "nacionais, sem o DF.")), fonte, "(explorations/ec111-did-2026/R/10 e R/11)."))
 
 # ------------------------------------------------------------------------------
 # 6. Onde ficaram os ganhos: competitivas × não competitivas (mesmas colunas de termos)
@@ -286,7 +345,7 @@ t6 <- map(names(nome_grupo), \(g) {
     filter(grupo == g, medida %in% c(paste0(names(rot_dec), "_c"), paste0(names(rot_dec), "_nc")),
            periodo %in% names(termos)) |>
     mutate(base = str_remove(medida, "_n?c$"), pt = str_extract(medida, "n?c$"),
-           cel = celula(att, sig)) |>
+           cel = celula(att, ep)) |>
     select(base, pt, periodo, cel) |>
     pivot_wider(names_from = periodo, values_from = cel) |>
     mutate(base = factor(base, names(rot_dec)), pt = factor(pt, names(parte))) |>
@@ -298,25 +357,29 @@ t6 <- map(names(nome_grupo), \(g) {
                            `Diferença 2026 − 2022` = `Dif. 2026 − 2022`, `Federal × Pós`))
 }) |> list_rbind()
 escrever(t6, c(":---", rep("---:", 5)),
-  paste(rev(paste(
+  marca("Onde ficaram os ganhos: candidaturas competitivas e não competitivas"),
+  "tbl-decomposicao-ec111", "decomposicao.md",
+  nota = paste(marca(paste(
         "Efeito do voto em dobro sobre a proporção da lista que vai para candidaturas do grupo",
         "que terminaram competitivas, isto é, eleitas ou a menos de 0,1 QE do limiar pela margem",
         "de votos, e para as que terminaram não competitivas, federal × estadual, base 2018, em",
         "pontos percentuais. As duas partes somam o efeito sobre a proporção total, apresentado",
-        "nas colunas (2), (5) e (6) das tabelas por grupo, e transferências e gasto não têm",
-        "pré-teste. As estimações usam o painel balanceado, sem ponderação. \\* IC de 95% exclui",
-        "zero, com erros agrupados por UF.")), fonte, "(explorations/ec111-did-2026/R/10 e R/11)."),
-  "tbl-decomposicao-ec111", "decomposicao.md")
+        "nos modelos (2), (5) e (6) das tabelas por grupo, e transferências e gasto não têm",
+        "pré-teste. As estimações usam o painel balanceado, sem ponderação.", nota_sig)), fonte,
+        "(explorations/ec111-did-2026/R/10 e R/11)."))
 
 # ------------------------------------------------------------------------------
 # 7. Para quem foi o acréscimo: competitivas ex post e viáveis ex ante (R/12 e R/13)
 # ------------------------------------------------------------------------------
 esp <- le("cacaniquel_viabilidade_esperado.csv") |>
   filter(parte %in% c("recp_c", "recp_v"), periodo %in% c("2022", "2026", "Federal × Pós")) |>
-  mutate(sig = sign(ic_inf) == sign(ic_sup))
+  # o CSV traz só o IC de 95% (normal, simétrico em torno de att_parte): recupera o erro
+  mutate(ep = (ic_sup - ic_inf) / (2 * qnorm(0.975)))
+stopifnot(all(abs((esp$ic_sup + esp$ic_inf) / 2 - esp$att_parte) < 1e-6))
 t7 <- map(names(nome_grupo), \(g) {
   x <- esp |> filter(grupo == g) |>
-    mutate(obs = celula(att_parte, sig), espd = num(esperado), tot = num(att_total),
+    mutate(obs = celula(att_parte, ep), espd = num(esperado, sinal = FALSE),
+           tot = num(att_total, sinal = FALSE),
            fatia = num(100 * s_2018, sinal = FALSE)) |>
     select(parte, periodo, tot, obs, espd, fatia) |>
     pivot_wider(names_from = parte, values_from = c(obs, espd, fatia)) |>
@@ -333,7 +396,9 @@ t7 <- map(names(nome_grupo), \(g) {
                            `Viáveis ex ante: esperado` = espd_recp_v))
 }) |> list_rbind()
 escrever(t7, c(":---", rep("---:", 7)),
-  paste(rev(paste(
+  marca("Para quem foi o acréscimo das transferências: observado e esperado"),
+  "tbl-viabilidade-ec111", "viabilidade.md",
+  nota = paste(marca(paste(
         "Efeito do voto em dobro sobre a proporção das transferências do partido à lista que vai",
         "para candidaturas do grupo, no total e na parte do grupo que terminou competitiva ou que",
         "era viável antes da eleição, observado e esperado caso o acréscimo seguisse a divisão do",
@@ -341,9 +406,8 @@ escrever(t7, c(":---", rep("---:", 7)),
         "é a candidatura eleita ou a menos de 0,1 QE do limiar, e viável, a candidatura cuja",
         "pessoa foi eleita deputada, em qualquer dos dois cargos, ou ficou a menos de 0,1 QE do",
         "limiar na eleição anterior. O valor esperado é a fatia de 2018 multiplicada pelo efeito",
-        "total. As estimações usam o painel balanceado, sem ponderação. \\* IC de 95% exclui zero,",
-        "com erros agrupados por UF.")), fonte, "(explorations/ec111-did-2026/R/12, R/13 e R/11)."),
-  "tbl-viabilidade-ec111", "viabilidade.md")
+        "total. As estimações usam o painel balanceado, sem ponderação.", nota_sig)), fonte,
+        "(explorations/ec111-did-2026/R/12, R/13 e R/11)."))
 
 mat <- le("viabilidade_matriz_2x2.csv") |> filter(grupo == "mulher")
 razao <- le("viabilidade_tamanhos.csv") |> filter(grupo == "mulher")
@@ -361,14 +425,15 @@ t8 <- bind_rows(
   arrange(celula) |>
   transmute(`Viável antes → competitiva depois` = as.character(celula), !!!syms(cols_mat))
 escrever(t8, c(":---", rep("---:", 6)),
-  paste(rev(paste(
+  marca("Transferências às mulheres por viabilidade antes da eleição e competitividade no resultado"),
+  "tbl-matriz-viabilidade-ec111", "matriz_viabilidade.md",
+  nota = paste(marca(paste(
         "Transferências do partido às mulheres segundo a viabilidade antes da eleição e a",
         "competitividade no resultado, em % das transferências às candidatas do cargo no ano, e",
         "razão entre a transferência média às viáveis e às não viáveis. Viável é a candidata",
         "eleita deputada, em qualquer dos dois cargos, ou a menos de 0,1 QE do limiar na eleição",
         "anterior, e competitiva, a eleita ou a menos de 0,1 QE do limiar. Totais nacionais, sem o",
-        "DF.")), fonte, "(explorations/ec111-did-2026/R/12 e R/11)."),
-  "tbl-matriz-viabilidade-ec111", "matriz_viabilidade.md")
+        "DF.")), fonte, "(explorations/ec111-did-2026/R/12 e R/11)."))
 
 # ------------------------------------------------------------------------------
 # 8. Descritiva: competitividade, eleição e viabilidade, grupo × restante (item 5)
@@ -392,7 +457,9 @@ t9 <- desc |>
             `Viáveis antes da eleição: grupo` = f1(pct_viavel_grupo),
             `Viáveis antes da eleição: restante` = f1(pct_viavel_complemento))
 escrever(t9, c(":---", ":---", ":---", rep("---:", 8)),
-  paste(identity(paste(  # marca .revisao retirada em 26/11 (texto antes de Resultados)
+  marca("Competitividade, eleição e viabilidade das candidaturas, por grupo, cargo e eleição"),
+  "tbl-descritivo-competitividade-ec111", "descritivo_competitividade.md",
+  nota = paste(identity(paste(  # marca .revisao retirada em 26/11 (texto antes de Resultados)
         "Competitividade, eleição e viabilidade das candidaturas do grupo e do restante das",
         "candidaturas, por cargo e eleição, em % das candidaturas aptas. Competitiva é a",
         "candidatura eleita ou a menos de 0,1 QE do limiar, pela margem de votos ou de gasto, e",
@@ -400,8 +467,7 @@ escrever(t9, c(":---", ":---", ":---", rep("---:", 8)),
         "a menos de 0,1 QE do limiar na eleição anterior. O restante corresponde aos homens, no",
         "caso das mulheres, e às demais candidaturas, no caso de pessoas negras e de mulheres",
         "negras. Gasto e viabilidade começam em 2018 (—). Totais nacionais, sem o DF.")),
-        fonte, "(explorations/ec111-did-2026/R/14 e R/11)."),
-  "tbl-descritivo-competitividade-ec111", "descritivo_competitividade.md")
+        fonte, "(explorations/ec111-did-2026/R/14 e R/11)."))
 
 # ------------------------------------------------------------------------------
 # 9. Figuras
@@ -415,7 +481,7 @@ tema <- theme_minimal(base_size = 10) +
 
 # 9a. Efeitos por etapa (2022 e 2026), um painel por grupo
 rot_fig <- c(cand = "Candidaturas", rec_partido = "Transferências do partido",
-             lexcesso = "Transferências − candidaturas", gasto = "Gasto", voto = "Votos",
+             rec_publico = "Recursos públicos", lexcesso ="Transferências − candidaturas", gasto = "Gasto", voto = "Votos",
              ltcv = "Taxa de competitivas (voto)", ltcg = "Taxa de competitivas (gasto)",
              ltel = "Taxa de eleitas")
 f1d <- res |>

@@ -13,3 +13,35 @@
   color: #1d4ed8;
   background-color: #dbeafe;
 }
+
+/* Nota das tabelas no formato do APSR (capítulo da EC 111, desde 26/11): parágrafo
+   "Nota:" logo abaixo da tabela, em fonte menor. */
+.nota-tabela {
+  font-size: 0.85em;
+  margin-top: -0.5em;
+  margin-bottom: 1.5em;
+}
+
+/* Tabelas no formato do APSR (classe .apsr na legenda): sem as linhas do Bootstrap entre as
+   linhas da tabela; filetes só no topo, sob o cabeçalho e no fim; linhas compactas, para o
+   erro-padrão ficar junto do coeficiente. */
+table.apsr {
+  font-size: 0.85em;
+  border-top: 1.5px solid #222;
+  border-bottom: 1.5px solid #222;
+}
+table.apsr > :not(caption) > * > * {
+  border-bottom-width: 0;
+  padding: 0.1rem 0.5rem;
+}
+table.apsr > thead > tr > th {
+  border-bottom: 1px solid #222;
+  vertical-align: bottom;
+}
+/* números e "(erro) [p]" numa linha só; a primeira coluna (rótulos) é a que quebra */
+table.apsr > tbody > tr > td:not(:first-child) {
+  white-space: nowrap;
+}
+table.apsr > tbody > tr > td:first-child {
+  min-width: 11em;
+}

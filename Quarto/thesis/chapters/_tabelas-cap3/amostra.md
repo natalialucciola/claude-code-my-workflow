@@ -9,4 +9,8 @@
 |  | 2022 | 15.209 | 33,6 | 51,8 | 18,3 | 579 | 386 | 91,8 | 91,3 | 84,6 |
 |  | 2026 | 10.618 | 34,8 | 49,4 | 18,4 | 493 | 386 | 94,7 | 92,3 | 84,6 |
 
-: Amostra por cargo e eleição, com as candidaturas aptas a deputado federal e estadual nas 26 UFs, sem o DF. A lista reúne as candidaturas de um partido, pela sigla vigente em 2026, a um cargo numa UF, e as listas no painel são as presentes nas quatro eleições, que formam o painel balanceado das candidaturas e dos votos. A coluna % dos votos no painel indica a parte dos votos nominais do cargo obtida pelas candidaturas dessas listas, e as colunas % com receita e % com gasto, as candidaturas com receita e com gasto maiores que zero na prestação de contas, que ficam fora da análise em 2014, ano de doação empresarial. Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/05 e R/14). {#tbl-amostra-ec111}
+: [Amostra por cargo e eleição]{.revisao} {#tbl-amostra-ec111 .apsr}
+
+::: {.nota-tabela}
+*Nota:* Candidaturas aptas a deputado federal e estadual nas 26 UFs, sem o DF. A lista reúne as candidaturas de um partido, pela sigla vigente em 2026, a um cargo numa UF, e as listas no painel são as presentes nas quatro eleições, que formam o painel balanceado das candidaturas e dos votos. A coluna % dos votos no painel indica a parte dos votos nominais do cargo obtida pelas candidaturas dessas listas, e as colunas % com receita e % com gasto, as candidaturas com receita e com gasto maiores que zero na prestação de contas, que ficam fora da análise em 2014, ano de doação empresarial. Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/05 e R/14).
+:::

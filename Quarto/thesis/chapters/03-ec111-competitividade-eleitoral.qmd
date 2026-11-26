@@ -1,3 +1,9 @@
+---
+# Tabelas no formato do APSR (26/11): título acima e nota abaixo. Só neste capítulo por ora;
+# o livro (_quarto.yml) mantém tbl-cap-location: bottom.
+tbl-cap-location: top
+---
+
 # Os Efeitos da EC 111/2021 sobre Candidaturas, Recursos, Votos e Sucesso Eleitoral de Mulheres e Pessoas Negras {#sec-ec111-competitividade}
 
 ```{=html}
@@ -187,16 +193,16 @@ Para as mulheres, as linhas dos dois cargos correm juntas até 2018, nas candida
 ![[Sucesso relativo de mulheres, pessoas negras e mulheres negras nas listas federais e estaduais, por eleição (dados brutos), 2014–2026, medido pela taxa de candidaturas do grupo competitivas pelo voto, competitivas pelo gasto e eleitas, menos a taxa do restante das candidaturas da lista (pontos percentuais). A área cinza indica as eleições sob a EC 111.]{.revisao} Fonte: TSE; elaboração própria.](../Figures/03-ec111-competitividade/niveis_taxas.png){#fig-niveis-taxas-ec111 width="100%"}
 
 ::: revisao
-As estimativas, calculadas a partir do modelo apresentado anteriormente, aparecem na @tbl-reg-mulheres-ec111, na @tbl-reg-negras-ec111 e na @tbl-reg-mulheres-negras-ec111, uma para cada grupo, com uma coluna para cada variável dependente. O painel A de cada tabela traz os coeficientes por ano da @eq-att-ec111, incluindo o pré-teste e a diferença entre 2026 e 2022, e o painel B traz o termo único Federal × Pós da @eq-reg-ec111. Sob cada coeficiente estão o erro-padrão agrupado por UF e, entre colchetes, o p-valor do *wild cluster bootstrap*. A @fig-efeitos-etapas-ec111 resume os efeitos de 2022 e de 2026. No texto, o pré-teste só é comentado quando altera a leitura de um resultado, e as colunas citadas referem-se às tabelas por grupo. Os resultados são apresentados a seguir na ordem das hipóteses.
+A @fig-efeitos-etapas-ec111 resume os efeitos de 2022 e de 2026, calculados a partir do modelo apresentado anteriormente. As estimativas completas estão em duas tabelas para cada grupo, com um modelo para cada variável dependente. Os modelos (1) a (5), de candidaturas e recursos, estão na @tbl-reg-mulheres-recursos-ec111, na @tbl-reg-negras-recursos-ec111 e na @tbl-reg-mulheres-negras-recursos-ec111, e os modelos (6) a (9), de votos, competitividade e eleição, na @tbl-reg-mulheres-votos-ec111, na @tbl-reg-negras-votos-ec111 e na @tbl-reg-mulheres-negras-votos-ec111, apresentadas em H3. Em cada tabela, o bloco do estudo de evento traz os coeficientes por ano da @eq-att-ec111, incluindo o pré-teste e a diferença entre 2026 e 2022, e o bloco da diferença em diferenças traz o termo único Federal × Pós da @eq-reg-ec111. Sob cada coeficiente estão o erro-padrão agrupado por UF e, entre colchetes, o p-valor do *wild cluster bootstrap*. No texto, o pré-teste só é comentado quando altera a leitura de um resultado, e as colunas citadas referem-se à numeração dos modelos. Os resultados são apresentados a seguir na ordem das hipóteses.
 :::
 
-{{< include _tabelas-cap3/reg_mulheres.md >}}
+{{< include _tabelas-cap3/reg_mulheres_recursos.md >}}
 
-{{< include _tabelas-cap3/reg_negras.md >}}
+{{< include _tabelas-cap3/reg_negras_recursos.md >}}
 
-{{< include _tabelas-cap3/reg_mulheres_negras.md >}}
+{{< include _tabelas-cap3/reg_mulheres_negras_recursos.md >}}
 
-![Efeito do voto em dobro [em cada etapa da candidatura, para mulheres, pessoas negras e mulheres negras, medido pelas proporções e pelo investimento relativo na lista e, nas taxas, pela taxa do grupo menos a do restante das candidaturas da lista]{.revisao}, em 2022 e em 2026, federal × estadual, base 2018. [A barra grossa indica o IC de 95% e a barra fina, a banda uniforme de 95% para os anos, com erros agrupados por UF.]{.revisao} Fonte: TSE; elaboração própria.](../Figures/03-ec111-competitividade/efeitos_etapas.png){#fig-efeitos-etapas-ec111 width="100%"}
+![Efeito do voto em dobro [em cada etapa da candidatura, para mulheres, pessoas negras e mulheres negras, medido pelas proporções (incluindo a dos recursos públicos) e pelo investimento relativo na lista e, nas taxas, pela taxa do grupo menos a do restante das candidaturas da lista]{.revisao}, em 2022 e em 2026, federal × estadual, base 2018. [A barra grossa indica o IC de 95% e a barra fina, a banda uniforme de 95% para os anos, com erros agrupados por UF.]{.revisao} Fonte: TSE; elaboração própria.](../Figures/03-ec111-competitividade/efeitos_etapas.png){#fig-efeitos-etapas-ec111 width="100%"}
 
 ### H1 · Candidaturas {#sec-candidaturas-ec111}
 
@@ -235,6 +241,12 @@ Para pessoas negras, o teste fica no limite em 2022. A receita privada sobe 1,7 
 ### H3 · Votos {#sec-votos-ec111}
 
 H3 é confirmada para mulheres negras e não é confirmada para mulheres e pessoas negras [(coluna 6)]{.revisao}. Para mulheres negras, o ganho de votos é de 3,8 pontos em 2022 e 3,9 em 2026, sobre uma base de 6,6%. Para as mulheres, o efeito de 2022, de 4,0 pontos, é próximo do encontrado por @FonsecaThomeGuedesNeto2026_money_talks (4,4), mas o intervalo de confiança inclui o zero quando os erros são agrupados por UF (p = 0,12 pelo *wild cluster bootstrap*).[^votos-fonseca] Em 2026, o efeito cai para 2,1 pontos. A queda vem sobretudo do cargo de controle. De 2022 para 2026, a proporção dos votos nominais das mulheres passou de 20,3% para 25,5% no estadual e de 20,9% para 24,1% no federal. Para pessoas negras, nenhum dos dois efeitos é distinguível de zero.
+
+{{< include _tabelas-cap3/reg_mulheres_votos.md >}}
+
+{{< include _tabelas-cap3/reg_negras_votos.md >}}
+
+{{< include _tabelas-cap3/reg_mulheres_negras_votos.md >}}
 
 [^votos-fonseca]: A diferença em relação a @FonsecaThomeGuedesNeto2026_money_talks está na inferência, não na estimativa. Com as listas presentes em 2018 e 2022, como no estudo deles, e os erros agrupados por lista, padrão do estimador, o efeito sobre a proporção dos votos das mulheres em 2022 é de 4,7 pontos (erro-padrão 1,8). Com as mesmas listas e os erros agrupados por UF, o erro-padrão sobe para 2,4, e o efeito fica no limite da significância de 5%. No painel deste capítulo, que exige a presença da lista nas quatro eleições, o efeito é de 4,0 pontos, com erro-padrão de 1,9 por lista e de 2,5 por UF.
 

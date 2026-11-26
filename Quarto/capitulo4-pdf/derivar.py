@@ -32,7 +32,7 @@ date: last-modified
 date-format: "DD/MM/YYYY"
 lang: pt
 bibliography: ../../Bibliography_base.bib
-tbl-cap-location: bottom
+tbl-cap-location: top
 format:
   pdf:
     documentclass: article
@@ -67,13 +67,17 @@ filters:
 REMISSOES = {"@sec-revisao-literatura": "Capítulo 2"}
 # Tabelas copiadas com hifenização no cabeçalho
 HIFENIZAR = ["amostra.md", "transferencias_cargo.md", "descritivo_competitividade.md",
-             "reg_mulheres.md", "reg_negras.md", "reg_mulheres_negras.md", "viabilidade.md",
+             "reg_mulheres_recursos.md", "reg_mulheres_votos.md", "reg_negras_recursos.md",
+             "reg_negras_votos.md", "reg_mulheres_negras_recursos.md",
+             "reg_mulheres_negras_votos.md", "viabilidade.md",
              "falsificacao.md", "composicao_lista.md", "sucesso.md", "decomposicao.md",
              "matriz_viabilidade.md"]
 
 
 def main() -> None:
     texto = FONTE.read_text(encoding="utf-8").replace("\r\n", "\n")
+    # YAML do capítulo (tbl-cap-location, desde 26/11) sai; o do PDF está em YAML acima
+    texto = re.sub(r"\A---\n.*?\n---\n+", "", texto, flags=re.S)
     # título do capítulo (primeira linha) sai; o título vai no YAML
     texto = texto.split("\n", 1)[1]
     # apêndice: título do apêndice vira seção (##) e as seções dele, subseções (###)

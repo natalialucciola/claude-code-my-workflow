@@ -10,4 +10,8 @@
 |  | 2022 | 18,2 | 19,0 | 14,2 | 15,7 | 1,05 | 0,75 |
 |  | 2026 | 18,4 | 19,4 | 14,0 | 15,6 | 1,06 | 0,72 |
 
-: [Proporção das candidaturas e das transferências do partido destinadas a cada grupo, por cargo e nos dois cargos somados (%), e razão entre o valor médio transferido a cada candidatura do grupo e a cada candidatura das demais, em que 1 indica igualdade. Totais nacionais, sem o DF.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/10 e R/11). {#tbl-transferencias-cargo-ec111}
+: [Transferências do partido por cargo e nos dois cargos somados]{.revisao} {#tbl-transferencias-cargo-ec111 .apsr}
+
+::: {.nota-tabela}
+*Nota:* [Proporção das candidaturas e das transferências do partido destinadas a cada grupo, por cargo e nos dois cargos somados (%), e razão entre o valor médio transferido a cada candidatura do grupo e a cada candidatura das demais, em que 1 indica igualdade. Totais nacionais, sem o DF.]{.revisao} Fonte: TSE; elaboração própria (explorations/ec111-did-2026/R/10 e R/11).
+:::
