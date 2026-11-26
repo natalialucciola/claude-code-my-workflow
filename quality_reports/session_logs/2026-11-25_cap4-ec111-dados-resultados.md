@@ -37,6 +37,12 @@ Responder às 11 perguntas da autora sobre Dados e Resultados e implementar os e
   `alteracoes.css`), distinta de `.alterado` (rodadas anteriores). Supressões não têm marca.
 - Legendas das tabelas geradas pelo R/11 não foram revisadas nesta rodada.
 
+## Proofread de Dados e Resultados (25/11, noite)
+- Relatório: `quality_reports/03-ec111-competitividade-eleitoral_dados-resultados_qmd_report.md`
+  (17 itens). Autora aprovou todos; aplicados e marcados com `.revisao` (C1 e C2 corrigem
+  conteúdo: tendência de pessoas negras até 2022; termo único de mulheres negras entre as
+  competitivas pelo voto). L1 aplicado no R/11. Livro e PDF avulso regenerados sem erros.
+
 ## Pendências
 - Sem commit (aguarda a autora).
 - `R/07` ainda gera `niveis_por_cargo.png` (não usada no livro).
